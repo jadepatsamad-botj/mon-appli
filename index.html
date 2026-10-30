@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon appli - Connexion</title>
+<style>
+  :root {
+    --bg: #f6f4f1; --card: #ffffff; --fg: #1d2330; --muted: #5d6677;
+    --line: #dcd8d1; --accent: #b8324f; --accent-fg: #ffffff; --ok: #1f7a4d; --err: #b3261e;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14161c; --card: #1d2029; --fg: #eceff5; --muted: #a2aabb;
+      --line: #343949; --accent: #e5627f; --accent-fg: #14161c; --ok: #5fd39a; --err: #ff8a80; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+  main { width: 100%; max-width: 420px; }
+  h1 { font-size: 1.9rem; margin: 0 0 4px; letter-spacing: -0.02em; text-wrap: balance; }
+  .sub { color: var(--muted); margin: 0 0 24px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 20px;
+    background: var(--bg); padding: 4px; border-radius: 10px; }
+  .tabs button { border: 0; background: transparent; color: var(--muted); padding: 10px;
+    border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--card); color: var(--fg);
+    box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+  label { display: block; font-size: .85rem; font-weight: 600; margin: 14px 0 6px; }
+  input[type=email], input[type=password], input[type=date] {
+    width: 100%; padding: 12px; font: inherit; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; }
+  input:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .check { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: .9rem; color: var(--muted); }
+  .check input { margin-top: 4px; }
+  .primary { width: 100%; margin-top: 20px; padding: 13px; border: 0; border-radius: 10px;
+    background: var(--accent); color: var(--accent-fg); font: inherit; font-weight: 700; cursor: pointer; }
+  .primary:disabled { opacity: .6; cursor: wait; }
+  .msg { margin-top: 16px; font-size: .92rem; min-height: 1.4em; }
+  .msg.ok { color: var(--ok); } .msg.err { color: var(--err); }
+  .hint { font-size: .8rem; color: var(--muted); margin-top: 18px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mon appli</h1>
+  <p class="sub">Rencontrez des personnes qui vous ressemblent.</p>
+
+  <section class="card" id="auth">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-signup" aria-selected="true" type="button">Créer un compte</button>
+      <button role="tab" id="tab-login" aria-selected="false" type="button">Se connecter</button>
+    </div>
+
+    <form id="form" novalidate>
+      <label for="email">E-mail</label>
+      <input id="email" type="email" autocomplete="email" required>
+
+      <label for="password">Mot de passe (8 caractères minimum)</label>
+      <input id="password" type="password" autocomplete="new-password" minlength="8" required>
+
+      <div id="signup-only">
+        <label for="birth">Date de naissance</label>
+        <input id="birth" type="date">
+        <label class="check" for="adult">
+          <input id="adult" type="checkbox">
+          <span>Je confirme avoir 18 ans ou plus et j'accepte les conditions d'utilisation.</span>
+        </label>
+      </div>
+
+      <button class="primary" id="submit" type="submit">Créer mon compte</button>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section class="card" id="home" hidden>
+    <h2 style="margin:0 0 8px">Bienvenue</h2>
+    <p id="who" class="sub" style="margin-bottom:16px"></p>
+    <p>Votre compte fonctionne. La prochaine étape sera le profil avec photo.</p>
+    <button class="primary" id="logout" type="button">Se déconnecter</button>
+  </section>
+
+  <p class="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+  // Clé publique : elle est faite pour être visible dans l'appli.
+  var SUPABASE_URL = "https://yvjmcaknsdpdxilenbku.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_OZixI26YHQ6zO3nijJpTCA_olbwJl-w";
+  var db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  var mode = "signup";
+  var $ = function (id) { return document.getElementById(id); };
+
+  function setMode(m) {
+    mode = m;
+    $("tab-signup").setAttribute("aria-selected", m === "signup");
+    $("tab-login").setAttribute("aria-selected", m === "login");
+    $("signup-only").hidden = m !== "signup";
+    $("submit").textContent = m === "signup" ? "Créer mon compte" : "Me connecter";
+    $("password").autocomplete = m === "signup" ? "new-password" : "current-password";
+    say("", "");
+  }
+  function say(text, kind) { var el = $("msg"); el.textContent = text; el.className = "msg " + (kind || ""); }
+
+  function ageFrom(iso) {
+    var b = new Date(iso), n = new Date();
+    var a = n.getFullYear() - b.getFullYear();
+    var m = n.getMonth() - b.getMonth();
+    if (m < 0 || (m === 0 && n.getDate() < b.getDate())) a--;
+    return a;
+  }
+
+  function show(user) {
+    $("auth").hidden = !!user; $("home").hidden = !user;
+    if (user) $("who").textContent = "Connecté : " + user.email;
+  }
+
+  $("tab-signup").onclick = function () { setMode("signup"); };
+  $("tab-login").onclick = function () { setMode("login"); };
+
+  $("form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var email = $("email").value.trim(), password = $("password").value;
+    if (!email || password.length < 8) return say("Entrez un e-mail et un mot de passe de 8 caractères minimum.", "err");
+    $("submit").disabled = true; say("Un instant…", "");
+    try {
+      if (mode === "signup") {
+        var birth = $("birth").value;
+        if (!birth) throw new Error("Indiquez votre date de naissance.");
+        if (ageFrom(birth) < 18) throw new Error("Vous devez avoir 18 ans ou plus.");
+        if (!$("adult").checked) throw new Error("Cochez la case pour confirmer votre âge.");
+        var r = await db.auth.signUp({ email: email, password: password, options: { data: { birthdate: birth } } });
+        if (r.error) throw r.error;
+        if (r.data.session) show(r.data.user);
+        else say("Compte créé. Ouvrez l'e-mail de confirmation, puis revenez vous connecter.", "ok");
+      } else {
+        var l = await db.auth.signInWithPassword({ email: email, password: password });
+        if (l.error) throw l.error;
+        show(l.data.user);
+      }
+    } catch (err) { say(err.message || "Une erreur est survenue.", "err"); }
+    $("submit").disabled = false;
+  });
+
+  $("logout").onclick = async function () { await db.auth.signOut(); show(null); setMode("login"); };
+
+  db.auth.getSession().then(function (r) { show(r.data.session ? r.data.session.user : null); });
+</script>
+</body>
+</html>
