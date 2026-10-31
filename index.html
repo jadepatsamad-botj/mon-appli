@@ -53,6 +53,17 @@
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
   .bio { white-space: pre-wrap; margin: 12px 0 0; }
   .count { font-size: .78rem; color: var(--muted); text-align: right; margin-top: 4px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row .primary, .row .secondary { margin-top: 12px; }
+  .back { background: none; border: 0; color: var(--muted); font: inherit; cursor: pointer; padding: 0 0 12px; }
+  .empty { color: var(--muted); text-align: center; padding: 16px 0; }
+  .match-banner { background: var(--accent); color: var(--accent-fg); border-radius: 12px; padding: 14px;
+    text-align: center; font-weight: 700; margin-bottom: 14px; }
+  .mrow { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .mrow:first-of-type { border-top: 0; }
+  .mrow img, .mrow .mph { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; background: var(--bg); flex: none; }
+  .mrow .mph { display: grid; place-items: center; color: var(--muted); font-weight: 700; }
+  .mrow small { color: var(--muted); display: block; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -145,8 +156,36 @@
     <div id="view-tags"></div>
     <p class="bio" id="view-bio"></p>
     <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
+    <button class="primary" id="go-discover" type="button">Découvrir des profils</button>
+    <button class="secondary" id="go-matches" type="button">Mes matchs</button>
     <button class="secondary" id="edit" type="button">Modifier mon profil</button>
     <button class="secondary" id="logout" type="button">Se déconnecter</button>
+  </section>
+
+  <!-- Découverte -->
+  <section class="card" id="discover" hidden>
+    <button class="back" id="discover-back" type="button">← Retour</button>
+    <div class="match-banner" id="match-banner" hidden></div>
+    <div id="cand" hidden>
+      <img id="cand-photo" class="view-photo" alt="Photo du profil" hidden>
+      <h2 id="cand-name"></h2>
+      <div id="cand-tags"></div>
+      <p class="bio" id="cand-bio"></p>
+      <div class="row">
+        <button class="secondary" id="pass" type="button">Passer</button>
+        <button class="primary" id="like" type="button">J'aime ❤</button>
+      </div>
+    </div>
+    <p class="empty" id="cand-empty" hidden>Plus de profils pour le moment. Revenez plus tard !</p>
+    <div class="msg" id="dmsg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Matchs -->
+  <section class="card" id="matches" hidden>
+    <button class="back" id="matches-back" type="button">← Retour</button>
+    <h2>Mes matchs</h2>
+    <div id="matches-list"></div>
+    <p class="empty" id="matches-empty" hidden>Pas encore de match. Continuez à découvrir des profils !</p>
   </section>
 
   <p class="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
@@ -191,9 +230,7 @@
   }
 
   function showSection(name) {
-    $("auth").hidden = name !== "auth";
-    $("profile").hidden = name !== "profile";
-    $("home").hidden = name !== "home";
+    ["auth", "profile", "home", "discover", "matches"].forEach(function (id) { $(id).hidden = id !== name; });
   }
 
   function labelFor(kind, v) {
@@ -326,6 +363,89 @@
     } catch (err) { say(msg, err.message || "Une erreur est survenue.", "err"); }
     $("psave").disabled = false;
   });
+
+  // ---------- Découverte ----------
+  var candidate = null;
+
+  function tagsInto(el, p) {
+    el.textContent = "";
+    [p.country, labelFor("gender", p.gender), labelFor("looking_for", p.looking_for)].forEach(function (t) {
+      if (!t) return;
+      var s = document.createElement("span"); s.className = "tag"; s.textContent = t; el.appendChild(s);
+    });
+  }
+
+  async function nextCandidate() {
+    var dmsg = $("dmsg"); say(dmsg, "Recherche de profils…", "");
+    $("cand").hidden = true; $("cand-empty").hidden = true;
+    var s = await db.from("swipes").select("to_id").eq("from_id", currentUser.id);
+    if (s.error) return say(dmsg, s.error.message, "err");
+    var seen = (s.data || []).map(function (x) { return x.to_id; });
+    seen.push(currentUser.id);
+    var q = db.from("profiles").select("*")
+      .not("id", "in", "(" + seen.join(",") + ")")
+      .in("looking_for", [currentProfile.gender, "tous"])
+      .order("created_at", { ascending: false }).limit(1);
+    if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
+    var r = await q;
+    if (r.error) return say(dmsg, r.error.message, "err");
+    say(dmsg, "", "");
+    candidate = r.data && r.data[0];
+    if (!candidate) { $("cand-empty").hidden = false; return; }
+    $("cand-name").textContent = candidate.first_name;
+    tagsInto($("cand-tags"), candidate);
+    $("cand-bio").textContent = candidate.bio || "";
+    var url = photoUrl(candidate), img = $("cand-photo");
+    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
+    $("cand").hidden = false;
+  }
+
+  async function swipe(liked) {
+    if (!candidate) return;
+    $("like").disabled = $("pass").disabled = true;
+    var dmsg = $("dmsg"), banner = $("match-banner");
+    banner.hidden = true;
+    try {
+      var ins = await db.from("swipes").insert({ from_id: currentUser.id, to_id: candidate.id, liked: liked });
+      if (ins.error) throw ins.error;
+      if (liked) {
+        var back = await db.from("swipes").select("liked")
+          .eq("from_id", candidate.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
+        if (back.data) { banner.textContent = "C'est un match avec " + candidate.first_name + " ! 🎉"; banner.hidden = false; }
+      }
+      await nextCandidate();
+    } catch (err) { say(dmsg, err.message || "Une erreur est survenue.", "err"); }
+    $("like").disabled = $("pass").disabled = false;
+  }
+
+  async function loadMatches() {
+    var list = $("matches-list"); list.textContent = ""; $("matches-empty").hidden = true;
+    var a = await db.from("swipes").select("to_id").eq("from_id", currentUser.id).eq("liked", true);
+    var b = await db.from("swipes").select("from_id").eq("to_id", currentUser.id).eq("liked", true);
+    if (a.error || b.error) { $("matches-empty").textContent = "Impossible de charger les matchs."; $("matches-empty").hidden = false; return; }
+    var mine = (a.data || []).map(function (x) { return x.to_id; });
+    var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return mine.indexOf(id) !== -1; });
+    if (!ids.length) { $("matches-empty").textContent = "Pas encore de match. Continuez à découvrir des profils !"; $("matches-empty").hidden = false; return; }
+    var r = await db.from("profiles").select("*").in("id", ids);
+    (r.data || []).forEach(function (p) {
+      var row = document.createElement("div"); row.className = "mrow";
+      var url = photoUrl(p), pic;
+      if (url) { pic = document.createElement("img"); pic.src = url; pic.alt = ""; }
+      else { pic = document.createElement("div"); pic.className = "mph"; pic.textContent = p.first_name.charAt(0).toUpperCase(); }
+      var info = document.createElement("div");
+      var strong = document.createElement("strong"); strong.textContent = p.first_name;
+      var small = document.createElement("small"); small.textContent = p.country || "";
+      info.appendChild(strong); info.appendChild(small);
+      row.appendChild(pic); row.appendChild(info); list.appendChild(row);
+    });
+  }
+
+  $("go-discover").onclick = function () { $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
+  $("go-matches").onclick = function () { showSection("matches"); loadMatches(); };
+  $("discover-back").onclick = function () { showSection("home"); };
+  $("matches-back").onclick = function () { showSection("home"); };
+  $("like").onclick = function () { swipe(true); };
+  $("pass").onclick = function () { swipe(false); };
 
   $("logout").onclick = async function () { await db.auth.signOut(); show(null); setMode("login"); };
 
