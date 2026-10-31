@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mon appli - Connexion</title>
+<title>Mon appli</title>
 <style>
   :root {
     --bg: #f6f4f1; --card: #ffffff; --fg: #1d2330; --muted: #5d6677;
@@ -20,6 +20,7 @@
     min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
   main { width: 100%; max-width: 420px; }
   h1 { font-size: 1.9rem; margin: 0 0 4px; letter-spacing: -0.02em; text-wrap: balance; }
+  h2 { margin: 0 0 8px; }
   .sub { color: var(--muted); margin: 0 0 24px; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
   .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 20px;
@@ -29,18 +30,29 @@
   .tabs button[aria-selected="true"] { background: var(--card); color: var(--fg);
     box-shadow: 0 1px 2px rgba(0,0,0,.15); }
   label { display: block; font-size: .85rem; font-weight: 600; margin: 14px 0 6px; }
-  input[type=email], input[type=password], input[type=date] {
+  input[type=email], input[type=password], input[type=date], input[type=text], select, textarea {
     width: 100%; padding: 12px; font: inherit; color: var(--fg); background: var(--bg);
     border: 1px solid var(--line); border-radius: 10px; }
-  input:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .check { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: .9rem; color: var(--muted); }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .check { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: .9rem; color: var(--muted); font-weight: 400; }
   .check input { margin-top: 4px; }
   .primary { width: 100%; margin-top: 20px; padding: 13px; border: 0; border-radius: 10px;
     background: var(--accent); color: var(--accent-fg); font: inherit; font-weight: 700; cursor: pointer; }
   .primary:disabled { opacity: .6; cursor: wait; }
+  .secondary { width: 100%; margin-top: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 10px;
+    background: transparent; color: var(--fg); font: inherit; font-weight: 600; cursor: pointer; }
   .msg { margin-top: 16px; font-size: .92rem; min-height: 1.4em; }
   .msg.ok { color: var(--ok); } .msg.err { color: var(--err); }
   .hint { font-size: .8rem; color: var(--muted); margin-top: 18px; }
+  .photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; background: var(--bg);
+    border: 1px solid var(--line); display: block; margin: 0 auto 8px; }
+  .photo-ph { display: grid; place-items: center; color: var(--muted); font-size: .8rem; text-align: center; }
+  .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
+  .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
+    border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
+  .bio { white-space: pre-wrap; margin: 12px 0 0; }
+  .count { font-size: .78rem; color: var(--muted); text-align: right; margin-top: 4px; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -49,19 +61,17 @@
   <h1>Mon appli</h1>
   <p class="sub">Rencontrez des personnes qui vous ressemblent.</p>
 
+  <!-- Connexion / inscription -->
   <section class="card" id="auth">
     <div class="tabs" role="tablist">
       <button role="tab" id="tab-signup" aria-selected="true" type="button">Créer un compte</button>
       <button role="tab" id="tab-login" aria-selected="false" type="button">Se connecter</button>
     </div>
-
     <form id="form" novalidate>
       <label for="email">E-mail</label>
       <input id="email" type="email" autocomplete="email" required>
-
       <label for="password">Mot de passe (8 caractères minimum)</label>
       <input id="password" type="password" autocomplete="new-password" minlength="8" required>
-
       <div id="signup-only">
         <label for="birth">Date de naissance</label>
         <input id="birth" type="date">
@@ -70,17 +80,73 @@
           <span>Je confirme avoir 18 ans ou plus et j'accepte les conditions d'utilisation.</span>
         </label>
       </div>
-
       <button class="primary" id="submit" type="submit">Créer mon compte</button>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
     </form>
   </section>
 
+  <!-- Formulaire de profil -->
+  <section class="card" id="profile" hidden>
+    <h2>Mon profil</h2>
+    <p class="sub" id="profile-sub" style="margin-bottom:8px">Quelques informations pour commencer.</p>
+    <form id="pform" novalidate>
+      <img id="photo-prev" class="photo photo-ph" alt="Aperçu de la photo" hidden>
+      <div id="photo-empty" class="photo photo-ph">Pas encore<br>de photo</div>
+      <label for="photo">Photo (JPG, PNG ou WebP, 5 Mo max)</label>
+      <input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+
+      <label for="first_name">Prénom</label>
+      <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
+
+      <label for="country">Pays</label>
+      <select id="country">
+        <option value="">Choisir…</option>
+        <option>Thaïlande</option>
+        <option>Vietnam</option>
+        <option>États-Unis</option>
+        <option>France</option>
+        <option>Allemagne</option>
+        <option>Royaume-Uni</option>
+        <option>Italie</option>
+        <option>Espagne</option>
+        <option>Autre</option>
+      </select>
+
+      <label for="gender">Je suis</label>
+      <select id="gender">
+        <option value="">Choisir…</option>
+        <option value="homme">Un homme</option>
+        <option value="femme">Une femme</option>
+        <option value="autre">Autre</option>
+      </select>
+
+      <label for="looking_for">Je cherche</label>
+      <select id="looking_for">
+        <option value="">Choisir…</option>
+        <option value="homme">Un homme</option>
+        <option value="femme">Une femme</option>
+        <option value="tous">Peu importe</option>
+      </select>
+
+      <label for="bio">Présentation</label>
+      <textarea id="bio" maxlength="500" placeholder="Parlez un peu de vous…"></textarea>
+      <div class="count"><span id="bio-count">0</span> / 500</div>
+
+      <button class="primary" id="psave" type="submit">Enregistrer mon profil</button>
+      <button class="secondary" id="pcancel" type="button" hidden>Annuler</button>
+      <div class="msg" id="pmsg" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- Affichage du profil -->
   <section class="card" id="home" hidden>
-    <h2 style="margin:0 0 8px">Bienvenue</h2>
-    <p id="who" class="sub" style="margin-bottom:16px"></p>
-    <p>Votre compte fonctionne. La prochaine étape sera le profil avec photo.</p>
-    <button class="primary" id="logout" type="button">Se déconnecter</button>
+    <img id="view-photo" class="view-photo" alt="Ma photo" hidden>
+    <h2 id="view-name"></h2>
+    <div id="view-tags"></div>
+    <p class="bio" id="view-bio"></p>
+    <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
+    <button class="secondary" id="edit" type="button">Modifier mon profil</button>
+    <button class="secondary" id="logout" type="button">Se déconnecter</button>
   </section>
 
   <p class="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
@@ -94,7 +160,11 @@
   var db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   var mode = "signup";
+  var currentUser = null;
+  var currentProfile = null;
   var $ = function (id) { return document.getElementById(id); };
+
+  function say(el, text, kind) { el.textContent = text; el.className = "msg " + (kind || ""); }
 
   function setMode(m) {
     mode = m;
@@ -103,9 +173,8 @@
     $("signup-only").hidden = m !== "signup";
     $("submit").textContent = m === "signup" ? "Créer mon compte" : "Me connecter";
     $("password").autocomplete = m === "signup" ? "new-password" : "current-password";
-    say("", "");
+    say($("msg"), "", "");
   }
-  function say(text, kind) { var el = $("msg"); el.textContent = text; el.className = "msg " + (kind || ""); }
 
   function ageFrom(iso) {
     var b = new Date(iso), n = new Date();
@@ -115,9 +184,72 @@
     return a;
   }
 
+  function photoUrl(p) {
+    if (!p || !p.photo_path) return null;
+    var r = db.storage.from("photos").getPublicUrl(p.photo_path);
+    return r.data.publicUrl + "?v=" + encodeURIComponent(p.updated_at || "");
+  }
+
+  function showSection(name) {
+    $("auth").hidden = name !== "auth";
+    $("profile").hidden = name !== "profile";
+    $("home").hidden = name !== "home";
+  }
+
+  function labelFor(kind, v) {
+    var t = {
+      gender: { homme: "Homme", femme: "Femme", autre: "Autre" },
+      looking_for: { homme: "Cherche un homme", femme: "Cherche une femme", tous: "Cherche : peu importe" }
+    };
+    return (t[kind] && t[kind][v]) || "";
+  }
+
+  function renderView(user, p) {
+    $("view-name").textContent = p.first_name;
+    var tags = $("view-tags"); tags.textContent = "";
+    [p.country, labelFor("gender", p.gender), labelFor("looking_for", p.looking_for)].forEach(function (t) {
+      if (!t) return;
+      var s = document.createElement("span"); s.className = "tag"; s.textContent = t; tags.appendChild(s);
+    });
+    $("view-bio").textContent = p.bio || "";
+    var url = photoUrl(p), img = $("view-photo");
+    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
+    $("who").textContent = "Connecté : " + user.email;
+    showSection("home");
+  }
+
+  function fillForm(p) {
+    $("first_name").value = (p && p.first_name) || "";
+    $("country").value = (p && p.country) || "";
+    $("gender").value = (p && p.gender) || "";
+    $("looking_for").value = (p && p.looking_for) || "";
+    $("bio").value = (p && p.bio) || "";
+    $("bio-count").textContent = $("bio").value.length;
+    $("photo").value = "";
+    var url = p ? photoUrl(p) : null;
+    setPreview(url);
+    $("pcancel").hidden = !p;
+    say($("pmsg"), "", "");
+  }
+
+  function setPreview(url) {
+    var prev = $("photo-prev"), empty = $("photo-empty");
+    if (url) { prev.src = url; prev.hidden = false; empty.hidden = true; }
+    else { prev.hidden = true; prev.removeAttribute("src"); empty.hidden = false; }
+  }
+
+  async function loadProfile(user) {
+    currentUser = user;
+    var r = await db.from("profiles").select("*").eq("id", user.id).maybeSingle();
+    if (r.error) { showSection("auth"); return say($("msg"), "Impossible de charger le profil : " + r.error.message, "err"); }
+    currentProfile = r.data;
+    if (r.data) renderView(user, r.data);
+    else { fillForm(null); showSection("profile"); }
+  }
+
   function show(user) {
-    $("auth").hidden = !!user; $("home").hidden = !user;
-    if (user) $("who").textContent = "Connecté : " + user.email;
+    if (!user) { currentUser = null; currentProfile = null; showSection("auth"); return; }
+    loadProfile(user);
   }
 
   $("tab-signup").onclick = function () { setMode("signup"); };
@@ -125,9 +257,10 @@
 
   $("form").addEventListener("submit", async function (e) {
     e.preventDefault();
+    var msg = $("msg");
     var email = $("email").value.trim(), password = $("password").value;
-    if (!email || password.length < 8) return say("Entrez un e-mail et un mot de passe de 8 caractères minimum.", "err");
-    $("submit").disabled = true; say("Un instant…", "");
+    if (!email || password.length < 8) return say(msg, "Entrez un e-mail et un mot de passe de 8 caractères minimum.", "err");
+    $("submit").disabled = true; say(msg, "Un instant…", "");
     try {
       if (mode === "signup") {
         var birth = $("birth").value;
@@ -137,14 +270,61 @@
         var r = await db.auth.signUp({ email: email, password: password, options: { data: { birthdate: birth } } });
         if (r.error) throw r.error;
         if (r.data.session) show(r.data.user);
-        else say("Compte créé. Ouvrez l'e-mail de confirmation, puis revenez vous connecter.", "ok");
+        else say(msg, "Compte créé. Ouvrez l'e-mail de confirmation, puis revenez vous connecter.", "ok");
       } else {
         var l = await db.auth.signInWithPassword({ email: email, password: password });
         if (l.error) throw l.error;
         show(l.data.user);
       }
-    } catch (err) { say(err.message || "Une erreur est survenue.", "err"); }
+    } catch (err) { say(msg, err.message || "Une erreur est survenue.", "err"); }
     $("submit").disabled = false;
+  });
+
+  $("bio").addEventListener("input", function () { $("bio-count").textContent = $("bio").value.length; });
+
+  $("photo").addEventListener("change", function () {
+    var f = $("photo").files[0];
+    if (!f) return setPreview(currentProfile ? photoUrl(currentProfile) : null);
+    setPreview(URL.createObjectURL(f));
+  });
+
+  $("edit").onclick = function () { fillForm(currentProfile); showSection("profile"); };
+  $("pcancel").onclick = function () { renderView(currentUser, currentProfile); };
+
+  $("pform").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var msg = $("pmsg");
+    var name = $("first_name").value.trim();
+    if (!name) return say(msg, "Indiquez votre prénom.", "err");
+    if (!$("gender").value || !$("looking_for").value) return say(msg, "Indiquez qui vous êtes et ce que vous cherchez.", "err");
+    $("psave").disabled = true; say(msg, "Enregistrement…", "");
+    try {
+      var photoPath = currentProfile ? currentProfile.photo_path : null;
+      var f = $("photo").files[0];
+      if (f) {
+        if (!/^image\/(jpeg|png|webp)$/.test(f.type)) throw new Error("La photo doit être au format JPG, PNG ou WebP.");
+        if (f.size > 5 * 1024 * 1024) throw new Error("La photo est trop lourde (5 Mo maximum).");
+        var path = currentUser.id + "/avatar";
+        var up = await db.storage.from("photos").upload(path, f, { upsert: true, contentType: f.type });
+        if (up.error) throw up.error;
+        photoPath = path;
+      }
+      var row = {
+        id: currentUser.id,
+        first_name: name,
+        country: $("country").value || null,
+        gender: $("gender").value,
+        looking_for: $("looking_for").value,
+        bio: $("bio").value.trim() || null,
+        photo_path: photoPath,
+        updated_at: new Date().toISOString()
+      };
+      var s = await db.from("profiles").upsert(row).select().single();
+      if (s.error) throw s.error;
+      currentProfile = s.data;
+      renderView(currentUser, s.data);
+    } catch (err) { say(msg, err.message || "Une erreur est survenue.", "err"); }
+    $("psave").disabled = false;
   });
 
   $("logout").onclick = async function () { await db.auth.signOut(); show(null); setMode("login"); };
