@@ -53,6 +53,19 @@
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
   .bio { white-space: pre-wrap; margin: 12px 0 0; }
   .count { font-size: .78rem; color: var(--muted); text-align: right; margin-top: 4px; }
+  .chat-box { height: 340px; overflow-y: auto; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .bubble { max-width: 80%; padding: 8px 12px; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .bubble.me { align-self: flex-end; background: var(--accent); color: var(--accent-fg); border-bottom-right-radius: 4px; }
+  .bubble.them { align-self: flex-start; background: var(--card); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .chat-form { display: flex; gap: 8px; margin-top: 12px; }
+  .chat-form input { flex: 1; min-width: 0; padding: 12px; font: inherit; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; }
+  .chat-form button { padding: 0 18px; border: 0; border-radius: 10px; background: var(--accent); color: var(--accent-fg);
+    font: inherit; font-weight: 700; cursor: pointer; }
+  .chat-form button:disabled { opacity: .6; }
+  .mrow.link { cursor: pointer; }
+  .mrow .go { margin-left: auto; color: var(--accent); font-weight: 600; font-size: .9rem; }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .row .primary, .row .secondary { margin-top: 12px; }
   .back { background: none; border: 0; color: var(--muted); font: inherit; cursor: pointer; padding: 0 0 12px; }
@@ -188,6 +201,18 @@
     <p class="empty" id="matches-empty" hidden>Pas encore de match. Continuez à découvrir des profils !</p>
   </section>
 
+  <!-- Discussion -->
+  <section class="card" id="chat" hidden>
+    <button class="back" id="chat-back" type="button">← Mes matchs</button>
+    <h2 id="chat-name"></h2>
+    <div class="chat-box" id="chat-box" aria-live="polite"></div>
+    <form class="chat-form" id="chat-form">
+      <input id="chat-input" type="text" maxlength="1000" placeholder="Votre message…" autocomplete="off" aria-label="Votre message">
+      <button id="chat-send" type="submit">Envoyer</button>
+    </form>
+    <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
+  </section>
+
   <p class="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
 </main>
 
@@ -230,7 +255,8 @@
   }
 
   function showSection(name) {
-    ["auth", "profile", "home", "discover", "matches"].forEach(function (id) { $(id).hidden = id !== name; });
+    if (name !== "chat") stopChat();
+    ["auth", "profile", "home", "discover", "matches", "chat"].forEach(function (id) { $(id).hidden = id !== name; });
   }
 
   function labelFor(kind, v) {
@@ -304,7 +330,8 @@
         if (!birth) throw new Error("Indiquez votre date de naissance.");
         if (ageFrom(birth) < 18) throw new Error("Vous devez avoir 18 ans ou plus.");
         if (!$("adult").checked) throw new Error("Cochez la case pour confirmer votre âge.");
-        var r = await db.auth.signUp({ email: email, password: password, options: { data: { birthdate: birth } } });
+        var back = window.location.origin + window.location.pathname;
+        var r = await db.auth.signUp({ email: email, password: password, options: { data: { birthdate: birth }, emailRedirectTo: back } });
         if (r.error) throw r.error;
         if (r.data.session) show(r.data.user);
         else say(msg, "Compte créé. Ouvrez l'e-mail de confirmation, puis revenez vous connecter.", "ok");
@@ -436,9 +463,61 @@
       var strong = document.createElement("strong"); strong.textContent = p.first_name;
       var small = document.createElement("small"); small.textContent = p.country || "";
       info.appendChild(strong); info.appendChild(small);
-      row.appendChild(pic); row.appendChild(info); list.appendChild(row);
+      var go = document.createElement("span"); go.className = "go"; go.textContent = "Écrire →";
+      row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
+      row.onclick = function () { openChat(p); };
+      row.onkeydown = function (e) { if (e.key === "Enter") openChat(p); };
+      row.appendChild(pic); row.appendChild(info); row.appendChild(go); list.appendChild(row);
     });
   }
+
+  // ---------- Messagerie ----------
+  var chatWith = null, chatTimer = null, lastCount = -1;
+
+  function stopChat() { if (chatTimer) { clearInterval(chatTimer); chatTimer = null; } }
+
+  async function refreshChat() {
+    if (!chatWith || !currentUser) return;
+    var me = currentUser.id, other = chatWith.id;
+    var r = await db.from("messages").select("*")
+      .or("and(from_id.eq." + me + ",to_id.eq." + other + "),and(from_id.eq." + other + ",to_id.eq." + me + ")")
+      .order("created_at", { ascending: true }).limit(200);
+    if (r.error) return say($("cmsg"), r.error.message, "err");
+    var box = $("chat-box");
+    var stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
+    box.textContent = "";
+    (r.data || []).forEach(function (m) {
+      var d = document.createElement("div");
+      d.className = "bubble " + (m.from_id === me ? "me" : "them");
+      d.textContent = m.body;
+      box.appendChild(d);
+    });
+    if (stick || lastCount !== (r.data || []).length) box.scrollTop = box.scrollHeight;
+    lastCount = (r.data || []).length;
+  }
+
+  function openChat(p) {
+    chatWith = p; lastCount = -1;
+    $("chat-name").textContent = p.first_name;
+    $("chat-box").textContent = ""; $("chat-input").value = "";
+    say($("cmsg"), "", "");
+    showSection("chat");
+    refreshChat();
+    stopChat();
+    chatTimer = setInterval(refreshChat, 4000);
+  }
+
+  $("chat-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var text = $("chat-input").value.trim();
+    if (!text || !chatWith) return;
+    $("chat-send").disabled = true;
+    var r = await db.from("messages").insert({ from_id: currentUser.id, to_id: chatWith.id, body: text });
+    if (r.error) say($("cmsg"), "Envoi impossible : " + r.error.message, "err");
+    else { $("chat-input").value = ""; say($("cmsg"), "", ""); await refreshChat(); }
+    $("chat-send").disabled = false;
+  });
+  $("chat-back").onclick = function () { showSection("matches"); loadMatches(); };
 
   $("go-discover").onclick = function () { $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
   $("go-matches").onclick = function () { showSection("matches"); loadMatches(); };
