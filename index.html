@@ -2,7 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#b8324f">
 <title>Mon appli</title>
 <style>
   :root {
@@ -16,9 +19,11 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Noto Sans Thai", "Noto Sans", sans-serif;
     min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
   main { width: 100%; max-width: 420px; }
+  .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .topbar select { width: auto; padding: 6px 8px; font-size: .85rem; margin-top: 6px; }
   h1 { font-size: 1.9rem; margin: 0 0 4px; letter-spacing: -0.02em; text-wrap: balance; }
   h2 { margin: 0 0 8px; }
   .sub { color: var(--muted); margin: 0 0 24px; }
@@ -54,6 +59,7 @@
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
+  .tag.verified { color: var(--ok); border-color: var(--ok); font-weight: 600; }
   .bio { white-space: pre-wrap; margin: 12px 0 0; overflow-wrap: anywhere; }
   .count { font-size: .78rem; color: var(--muted); text-align: right; margin-top: 4px; }
   .chat-box { height: 340px; overflow-y: auto; background: var(--bg); border: 1px solid var(--line);
@@ -79,9 +85,10 @@
   .mrow:first-of-type { border-top: 0; }
   .mrow img, .mrow .mph { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; background: var(--bg); flex: none; }
   .mrow .mph { display: grid; place-items: center; color: var(--muted); font-weight: 700; }
-  .mrow small { color: var(--muted); display: block; }
+  .mrow .mi { min-width: 0; flex: 1; }
+  .mrow small { color: var(--muted); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mrow.link { cursor: pointer; }
-  .mrow .go { margin-left: auto; color: var(--accent); font-weight: 600; font-size: .9rem; }
+  .badge { background: var(--accent); color: var(--accent-fg); border-radius: 999px; padding: 2px 9px; font-size: .75rem; font-weight: 700; flex: none; }
   details.filters { margin-bottom: 14px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
   details.filters summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -92,195 +99,520 @@
 </head>
 <body>
 <main>
-  <h1 id="app-name">Mon appli</h1>
-  <p class="sub">Rencontrez des personnes qui vous ressemblent.</p>
+  <div class="topbar">
+    <div>
+      <h1 id="app-name">Mon appli</h1>
+      <p class="sub" data-i18n="tagline"></p>
+    </div>
+    <select id="lang" aria-label="Langue / Language / ภาษา / Ngôn ngữ">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
 
   <!-- Connexion / inscription -->
   <section class="card" id="auth">
     <div class="tabs" role="tablist">
-      <button role="tab" id="tab-signup" aria-selected="true" type="button">Créer un compte</button>
-      <button role="tab" id="tab-login" aria-selected="false" type="button">Se connecter</button>
+      <button role="tab" id="tab-signup" aria-selected="true" type="button" data-i18n="tab_signup"></button>
+      <button role="tab" id="tab-login" aria-selected="false" type="button" data-i18n="tab_login"></button>
     </div>
     <form id="form" novalidate>
-      <label for="email">E-mail</label>
+      <label for="email" data-i18n="email"></label>
       <input id="email" type="email" autocomplete="email" required>
-      <label for="password">Mot de passe (8 caractères minimum)</label>
+      <label for="password" data-i18n="password"></label>
       <input id="password" type="password" autocomplete="new-password" minlength="8" required>
       <div id="signup-only">
-        <label for="birth">Date de naissance</label>
+        <label for="birth" data-i18n="birth"></label>
         <input id="birth" type="date">
         <label class="check" for="adult">
           <input id="adult" type="checkbox">
-          <span>Je confirme avoir 18 ans ou plus et j'accepte les conditions d'utilisation.</span>
+          <span data-i18n="adult"></span>
         </label>
       </div>
-      <button class="primary" id="submit" type="submit">Créer mon compte</button>
+      <button class="primary" id="submit" type="submit"></button>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
     </form>
   </section>
 
   <!-- Formulaire de profil -->
   <section class="card" id="profile" hidden>
-    <h2>Mon profil</h2>
-    <p class="sub" style="margin-bottom:8px">Quelques informations pour commencer.</p>
+    <h2 data-i18n="profile_title"></h2>
+    <p class="sub" style="margin-bottom:8px" data-i18n="profile_sub"></p>
     <form id="pform" novalidate>
-      <img id="photo-prev" class="photo photo-ph" alt="Aperçu de la photo" hidden>
-      <div id="photo-empty" class="photo photo-ph">Pas encore<br>de photo</div>
-      <label for="photo">Photo (JPG, PNG ou WebP, 5 Mo max)</label>
+      <img id="photo-prev" class="photo photo-ph" alt="" hidden>
+      <div id="photo-empty" class="photo photo-ph" data-i18n="no_photo"></div>
+      <label for="photo" data-i18n="photo_label"></label>
       <input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
 
-      <label for="first_name">Prénom</label>
+      <label for="first_name" data-i18n="first_name"></label>
       <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
 
-      <label for="country">Pays</label>
+      <label for="country" data-i18n="country"></label>
       <select id="country"></select>
 
-      <label for="gender">Je suis</label>
+      <label for="gender" data-i18n="i_am"></label>
       <select id="gender">
-        <option value="">Choisir…</option>
-        <option value="homme">Un homme</option>
-        <option value="femme">Une femme</option>
-        <option value="autre">Autre</option>
+        <option value="" data-i18n="choose"></option>
+        <option value="homme" data-i18n="opt_man"></option>
+        <option value="femme" data-i18n="opt_woman"></option>
+        <option value="autre" data-i18n="opt_other"></option>
       </select>
 
-      <label for="looking_for">Je cherche</label>
+      <label for="looking_for" data-i18n="looking"></label>
       <select id="looking_for">
-        <option value="">Choisir…</option>
-        <option value="homme">Un homme</option>
-        <option value="femme">Une femme</option>
-        <option value="tous">Peu importe</option>
+        <option value="" data-i18n="choose"></option>
+        <option value="homme" data-i18n="opt_man"></option>
+        <option value="femme" data-i18n="opt_woman"></option>
+        <option value="tous" data-i18n="opt_any"></option>
       </select>
 
-      <label for="bio">Présentation</label>
-      <textarea id="bio" maxlength="500" placeholder="Parlez un peu de vous…"></textarea>
+      <label for="bio" data-i18n="bio"></label>
+      <textarea id="bio" maxlength="500" data-i18n-ph="bio_ph"></textarea>
       <div class="count"><span id="bio-count">0</span> / 500</div>
 
-      <button class="primary" id="psave" type="submit">Enregistrer mon profil</button>
-      <button class="secondary" id="pcancel" type="button" hidden>Annuler</button>
+      <button class="primary" id="psave" type="submit" data-i18n="save_profile"></button>
+      <button class="secondary" id="pcancel" type="button" hidden data-i18n="cancel"></button>
       <div class="msg" id="pmsg" role="status" aria-live="polite"></div>
     </form>
   </section>
 
   <!-- Accueil / mon profil -->
   <section class="card" id="home" hidden>
-    <img id="view-photo" class="view-photo" alt="Ma photo" hidden>
+    <img id="view-photo" class="view-photo" alt="" hidden>
     <h2 id="view-name"></h2>
     <div id="view-tags"></div>
     <p class="bio" id="view-bio"></p>
     <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
-    <button class="primary" id="go-discover" type="button">Découvrir des profils</button>
-    <button class="secondary" id="go-matches" type="button">Mes matchs</button>
-    <button class="secondary" id="edit" type="button">Modifier mon profil</button>
-    <button class="secondary" id="go-safety" type="button">Conseils de sécurité</button>
-    <button class="secondary" id="logout" type="button">Se déconnecter</button>
+    <button class="primary" id="go-discover" type="button" data-i18n="discover"></button>
+    <button class="secondary" id="go-matches" type="button" data-i18n="matches"></button>
+    <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
+    <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
+    <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
+    <button class="secondary" id="logout" type="button" data-i18n="logout"></button>
     <div style="text-align:center;margin-top:8px">
-      <button class="linkbtn danger" id="delete-account" type="button">Supprimer mon compte</button>
+      <button class="linkbtn danger" id="delete-account" type="button" data-i18n="delete"></button>
     </div>
     <div class="msg" id="hmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Découverte -->
   <section class="card" id="discover" hidden>
-    <button class="back" id="discover-back" type="button">← Retour</button>
+    <button class="back" id="discover-back" type="button" data-i18n="back"></button>
     <details class="filters" id="filters">
-      <summary>Filtres</summary>
+      <summary data-i18n="filters"></summary>
       <div class="two">
-        <div><label for="f-min">Âge min.</label><input id="f-min" type="number" min="18" max="99" value="18"></div>
-        <div><label for="f-max">Âge max.</label><input id="f-max" type="number" min="18" max="99" value="99"></div>
+        <div><label for="f-min" data-i18n="age_min"></label><input id="f-min" type="number" min="18" max="99" value="18"></div>
+        <div><label for="f-max" data-i18n="age_max"></label><input id="f-max" type="number" min="18" max="99" value="99"></div>
       </div>
-      <label for="f-country">Pays</label>
+      <label for="f-country" data-i18n="country"></label>
       <select id="f-country"></select>
-      <button class="secondary" id="f-apply" type="button">Appliquer</button>
+      <button class="secondary" id="f-apply" type="button" data-i18n="apply"></button>
     </details>
     <div class="match-banner" id="match-banner" hidden></div>
     <div id="cand" hidden>
-      <img id="cand-photo" class="view-photo" alt="Photo du profil" hidden>
+      <img id="cand-photo" class="view-photo" alt="" hidden>
       <h2 id="cand-name"></h2>
       <div id="cand-tags"></div>
       <p class="bio" id="cand-bio"></p>
       <div class="row">
-        <button class="secondary" id="pass" type="button">Passer</button>
-        <button class="primary" id="like" type="button">J'aime ❤</button>
+        <button class="secondary" id="pass" type="button" data-i18n="pass"></button>
+        <button class="primary" id="like" type="button" data-i18n="like"></button>
       </div>
       <div style="text-align:center;margin-top:8px">
-        <button class="linkbtn" id="cand-report" type="button">Signaler ce profil</button>
+        <button class="linkbtn" id="cand-report" type="button" data-i18n="report_profile"></button>
       </div>
     </div>
-    <p class="empty" id="cand-empty" hidden>Plus de profils pour le moment. Revenez plus tard !</p>
+    <p class="empty" id="cand-empty" hidden data-i18n="no_more"></p>
     <div class="msg" id="dmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Matchs -->
   <section class="card" id="matches" hidden>
-    <button class="back" id="matches-back" type="button">← Retour</button>
-    <h2>Mes matchs</h2>
+    <button class="back" id="matches-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="matches_title"></h2>
     <div id="matches-list"></div>
-    <p class="empty" id="matches-empty" hidden>Pas encore de match. Continuez à découvrir des profils !</p>
+    <p class="empty" id="matches-empty" hidden></p>
   </section>
 
   <!-- Discussion -->
   <section class="card" id="chat" hidden>
-    <button class="back" id="chat-back" type="button">← Mes matchs</button>
+    <button class="back" id="chat-back" type="button" data-i18n="back_matches"></button>
     <div class="head">
       <h2 id="chat-name" style="margin:0"></h2>
       <div class="head-actions">
-        <button class="linkbtn" id="chat-report" type="button">Signaler</button>
-        <button class="linkbtn danger" id="chat-block" type="button">Bloquer</button>
+        <button class="linkbtn" id="chat-report" type="button" data-i18n="report"></button>
+        <button class="linkbtn danger" id="chat-block" type="button" data-i18n="block"></button>
       </div>
     </div>
     <div class="chat-box" id="chat-box" aria-live="polite" style="margin-top:12px"></div>
     <form class="chat-form" id="chat-form">
-      <input id="chat-input" type="text" maxlength="1000" placeholder="Votre message…" autocomplete="off" aria-label="Votre message">
-      <button id="chat-send" type="submit">Envoyer</button>
+      <input id="chat-input" type="text" maxlength="1000" data-i18n-ph="msg_ph" autocomplete="off">
+      <button id="chat-send" type="submit" data-i18n="send"></button>
     </form>
     <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Signalement -->
   <section class="card" id="report" hidden>
-    <button class="back" id="report-back" type="button">← Retour</button>
-    <h2>Signaler <span id="report-name"></span></h2>
-    <p class="sub" style="margin-bottom:0">Votre signalement est confidentiel. Il est examiné par l'équipe.</p>
+    <button class="back" id="report-back" type="button" data-i18n="back"></button>
+    <h2><span data-i18n="report_title"></span> <span id="report-name"></span></h2>
+    <p class="sub" style="margin-bottom:0" data-i18n="report_sub"></p>
     <form id="report-form" novalidate>
-      <label for="report-reason">Motif</label>
+      <label for="report-reason" data-i18n="reason"></label>
       <select id="report-reason">
-        <option value="">Choisir…</option>
-        <option value="faux_profil">Faux profil / photos volées</option>
-        <option value="arnaque">Demande d'argent ou arnaque</option>
-        <option value="harcelement">Harcèlement ou menaces</option>
-        <option value="contenu_inapproprie">Contenu inapproprié</option>
-        <option value="mineur">Personne qui semble mineure</option>
-        <option value="autre">Autre</option>
+        <option value="" data-i18n="choose"></option>
+        <option value="faux_profil" data-i18n="r_fake"></option>
+        <option value="arnaque" data-i18n="r_scam"></option>
+        <option value="harcelement" data-i18n="r_harass"></option>
+        <option value="contenu_inapproprie" data-i18n="r_content"></option>
+        <option value="mineur" data-i18n="r_minor"></option>
+        <option value="autre" data-i18n="r_other"></option>
       </select>
-      <label for="report-details">Détails (facultatif)</label>
+      <label for="report-details" data-i18n="details"></label>
       <textarea id="report-details" maxlength="1000"></textarea>
-      <button class="primary" id="report-send" type="submit">Envoyer le signalement</button>
+      <button class="primary" id="report-send" type="submit" data-i18n="send_report"></button>
       <div class="msg" id="rmsg" role="status" aria-live="polite"></div>
     </form>
   </section>
 
+  <!-- Vérification -->
+  <section class="card" id="verify" hidden>
+    <button class="back" id="verify-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="verify_title"></h2>
+    <p class="sub" style="margin-bottom:8px" data-i18n="verify_text"></p>
+    <p id="verify-status" style="font-weight:600"></p>
+    <form id="verify-form" novalidate>
+      <label for="verify-file" data-i18n="verify_file"></label>
+      <input id="verify-file" type="file" accept="image/jpeg,image/png,image/webp">
+      <button class="primary" id="verify-send" type="submit" data-i18n="verify_send"></button>
+    </form>
+    <div class="msg" id="vmsg" role="status" aria-live="polite"></div>
+  </section>
+
   <!-- Sécurité -->
   <section class="card" id="safety" hidden>
-    <button class="back" id="safety-back" type="button">← Retour</button>
-    <h2>Conseils de sécurité</h2>
+    <button class="back" id="safety-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="safety_title"></h2>
     <ul class="tips">
-      <li><strong>N'envoyez jamais d'argent</strong>, de cartes cadeaux ou de cryptomonnaie à quelqu'un rencontré en ligne, même après des semaines de discussion.</li>
-      <li>Méfiez-vous de quelqu'un qui veut très vite quitter l'appli (WhatsApp, Telegram…) ou qui déclare son amour après quelques jours.</li>
-      <li>Demandez un <strong>appel vidéo</strong> avant toute rencontre. Une personne qui refuse toujours est un signal d'alerte.</li>
-      <li>Ne partagez jamais vos papiers d'identité, codes bancaires ou codes reçus par SMS.</li>
-      <li>Pour un premier rendez-vous, choisissez un <strong>lieu public</strong> et prévenez un proche.</li>
-      <li>Un comportement suspect ? <strong>Signalez</strong> le profil et <strong>bloquez</strong> la personne.</li>
+      <li data-i18n-rich="s1"></li>
+      <li data-i18n-rich="s2"></li>
+      <li data-i18n-rich="s3"></li>
+      <li data-i18n-rich="s4"></li>
+      <li data-i18n-rich="s5"></li>
+      <li data-i18n-rich="s6"></li>
     </ul>
   </section>
 
-  <p class="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
+  <p class="hint" data-i18n="hint"></p>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
   // ===== Réglages faciles à changer =====
   var APP_NAME = "Mon appli";
-  var COUNTRIES = ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Autre"];
+  var COUNTRY_KEYS = ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Autre"];
+
+  // ===== Textes dans les 4 langues =====
+  var I18N = {
+    fr: {
+      tagline: "Rencontrez des personnes qui vous ressemblent.",
+      tab_signup: "Créer un compte", tab_login: "Se connecter",
+      email: "E-mail", password: "Mot de passe (8 caractères minimum)", birth: "Date de naissance",
+      adult: "Je confirme avoir 18 ans ou plus et j'accepte les conditions d'utilisation.",
+      btn_signup: "Créer mon compte", btn_login: "Me connecter", wait: "Un instant…",
+      e_creds: "Entrez un e-mail et un mot de passe de 8 caractères minimum.",
+      e_birth: "Indiquez votre date de naissance.", e_under18: "Vous devez avoir 18 ans ou plus.",
+      e_adult: "Cochez la case pour confirmer votre âge.",
+      ok_created: "Compte créé. Ouvrez l'e-mail de confirmation, puis revenez vous connecter.",
+      e_generic: "Une erreur est survenue.", e_profile_load: "Impossible de charger le profil : ",
+      profile_title: "Mon profil", profile_sub: "Quelques informations pour commencer.",
+      no_photo: "Pas encore de photo", photo_label: "Photo (JPG, PNG ou WebP, 5 Mo max)",
+      first_name: "Prénom", country: "Pays", choose: "Choisir…", i_am: "Je suis", looking: "Je cherche",
+      opt_man: "Un homme", opt_woman: "Une femme", opt_other: "Autre", opt_any: "Peu importe",
+      bio: "Présentation", bio_ph: "Parlez un peu de vous…",
+      save_profile: "Enregistrer mon profil", cancel: "Annuler", saving: "Enregistrement…",
+      e_name: "Indiquez votre prénom.", e_gender: "Indiquez qui vous êtes et ce que vous cherchez.",
+      e_photo_type: "La photo doit être au format JPG, PNG ou WebP.", e_photo_size: "La photo est trop lourde (5 Mo maximum).",
+      g_homme: "Homme", g_femme: "Femme", g_autre: "Autre",
+      l_homme: "Cherche un homme", l_femme: "Cherche une femme", l_tous: "Cherche : peu importe",
+      connected: "Connecté : ", discover: "Découvrir des profils", matches: "Mes matchs", edit: "Modifier mon profil",
+      safety_btn: "Conseils de sécurité", verify_btn: "Faire vérifier mon profil", logout: "Se déconnecter",
+      delete: "Supprimer mon compte", back: "← Retour", back_matches: "← Mes matchs",
+      filters: "Filtres", age_min: "Âge min.", age_max: "Âge max.", all_countries: "Tous les pays", apply: "Appliquer",
+      pass: "Passer", like: "J'aime ❤", report_profile: "Signaler ce profil",
+      no_more: "Plus de profils pour le moment. Revenez plus tard !", searching: "Recherche de profils…",
+      match_with: "C'est un match avec {name} ! 🎉",
+      matches_title: "Mes matchs", matches_empty: "Pas encore de match. Continuez à découvrir des profils !",
+      matches_err: "Impossible de charger les matchs.", new_badge: "Nouveau", you: "Vous : ",
+      msg_ph: "Votre message…", send: "Envoyer", e_send: "Envoi impossible : ",
+      report: "Signaler", block: "Bloquer", report_title: "Signaler",
+      report_sub: "Votre signalement est confidentiel. Il est examiné par l'équipe.",
+      reason: "Motif", r_fake: "Faux profil / photos volées", r_scam: "Demande d'argent ou arnaque",
+      r_harass: "Harcèlement ou menaces", r_content: "Contenu inapproprié", r_minor: "Personne qui semble mineure", r_other: "Autre",
+      details: "Détails (facultatif)", send_report: "Envoyer le signalement", e_reason: "Choisissez un motif.",
+      ok_report: "Merci, votre signalement a bien été envoyé. Vous pouvez aussi bloquer cette personne.",
+      block_confirm: "Bloquer {name} ? Vous ne vous verrez plus et ne pourrez plus vous écrire.", e_block: "Blocage impossible : ",
+      safety_title: "Conseils de sécurité",
+      s1: "**N'envoyez jamais d'argent**, de cartes cadeaux ou de cryptomonnaie à quelqu'un rencontré en ligne, même après des semaines de discussion.",
+      s2: "Méfiez-vous de quelqu'un qui veut très vite quitter l'appli (WhatsApp, Telegram…) ou qui déclare son amour après quelques jours.",
+      s3: "Demandez un **appel vidéo** avant toute rencontre. Une personne qui refuse toujours est un signal d'alerte.",
+      s4: "Ne partagez jamais vos papiers d'identité, codes bancaires ou codes reçus par SMS.",
+      s5: "Pour un premier rendez-vous, choisissez un **lieu public** et prévenez un proche.",
+      s6: "Un comportement suspect ? **Signalez** le profil et **bloquez** la personne.",
+      delete_confirm: "Supprimer définitivement votre compte, votre profil, vos photos et vos messages ? Cette action est irréversible.",
+      deleting: "Suppression en cours…", e_delete: "Suppression impossible : ", deleted: "Votre compte a été supprimé.",
+      verify_title: "Vérifier mon profil",
+      verify_text: "Un profil vérifié rassure les autres. Envoyez un selfie où l'on voit clairement votre visage et une feuille sur laquelle vous avez écrit le nom de l'appli et la date du jour. L'équipe le compare à vos photos. Le selfie reste privé et n'est jamais montré aux autres.",
+      verify_file: "Votre selfie", verify_send: "Envoyer pour vérification",
+      verify_status_ok: "✓ Votre profil est vérifié.", verify_status_pending: "Demande envoyée : en cours d'examen.",
+      verify_sent: "Merci ! Votre demande a été envoyée.", e_verify_file: "Choisissez une photo.", verified_tag: "✓ Vérifié",
+      hint: "Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.",
+      countries: ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Autre"]
+    },
+    en: {
+      tagline: "Meet people who are right for you.",
+      tab_signup: "Create account", tab_login: "Log in",
+      email: "Email", password: "Password (8 characters minimum)", birth: "Date of birth",
+      adult: "I confirm that I am 18 or older and I accept the terms of use.",
+      btn_signup: "Create my account", btn_login: "Log in", wait: "One moment…",
+      e_creds: "Enter an email and a password of at least 8 characters.",
+      e_birth: "Please enter your date of birth.", e_under18: "You must be 18 or older.",
+      e_adult: "Tick the box to confirm your age.",
+      ok_created: "Account created. Open the confirmation email, then come back to log in.",
+      e_generic: "Something went wrong.", e_profile_load: "Could not load the profile: ",
+      profile_title: "My profile", profile_sub: "A few details to get started.",
+      no_photo: "No photo yet", photo_label: "Photo (JPG, PNG or WebP, 5 MB max)",
+      first_name: "First name", country: "Country", choose: "Choose…", i_am: "I am", looking: "I'm looking for",
+      opt_man: "A man", opt_woman: "A woman", opt_other: "Other", opt_any: "Anyone",
+      bio: "About me", bio_ph: "Tell us a little about yourself…",
+      save_profile: "Save my profile", cancel: "Cancel", saving: "Saving…",
+      e_name: "Please enter your first name.", e_gender: "Please say who you are and who you are looking for.",
+      e_photo_type: "The photo must be a JPG, PNG or WebP file.", e_photo_size: "The photo is too large (5 MB maximum).",
+      g_homme: "Man", g_femme: "Woman", g_autre: "Other",
+      l_homme: "Looking for a man", l_femme: "Looking for a woman", l_tous: "Looking for: anyone",
+      connected: "Logged in: ", discover: "Discover profiles", matches: "My matches", edit: "Edit my profile",
+      safety_btn: "Safety tips", verify_btn: "Get my profile verified", logout: "Log out",
+      delete: "Delete my account", back: "← Back", back_matches: "← My matches",
+      filters: "Filters", age_min: "Min. age", age_max: "Max. age", all_countries: "All countries", apply: "Apply",
+      pass: "Pass", like: "Like ❤", report_profile: "Report this profile",
+      no_more: "No more profiles for now. Come back later!", searching: "Looking for profiles…",
+      match_with: "It's a match with {name}! 🎉",
+      matches_title: "My matches", matches_empty: "No matches yet. Keep discovering profiles!",
+      matches_err: "Could not load matches.", new_badge: "New", you: "You: ",
+      msg_ph: "Your message…", send: "Send", e_send: "Could not send: ",
+      report: "Report", block: "Block", report_title: "Report",
+      report_sub: "Your report is confidential. It is reviewed by the team.",
+      reason: "Reason", r_fake: "Fake profile / stolen photos", r_scam: "Asking for money or scam",
+      r_harass: "Harassment or threats", r_content: "Inappropriate content", r_minor: "Person who seems underage", r_other: "Other",
+      details: "Details (optional)", send_report: "Send report", e_reason: "Please choose a reason.",
+      ok_report: "Thank you, your report has been sent. You can also block this person.",
+      block_confirm: "Block {name}? You will no longer see each other or be able to message.", e_block: "Could not block: ",
+      safety_title: "Safety tips",
+      s1: "**Never send money**, gift cards or cryptocurrency to someone you met online, even after weeks of chatting.",
+      s2: "Be wary of anyone who quickly wants to move to another app (WhatsApp, Telegram…) or declares love after a few days.",
+      s3: "Ask for a **video call** before meeting. Someone who always refuses is a warning sign.",
+      s4: "Never share your ID documents, banking codes or codes received by SMS.",
+      s5: "For a first date, choose a **public place** and tell a friend or relative.",
+      s6: "Suspicious behaviour? **Report** the profile and **block** the person.",
+      delete_confirm: "Permanently delete your account, profile, photos and messages? This cannot be undone.",
+      deleting: "Deleting…", e_delete: "Could not delete: ", deleted: "Your account has been deleted.",
+      verify_title: "Verify my profile",
+      verify_text: "A verified profile reassures others. Send a selfie where your face is clearly visible, holding a sheet of paper on which you wrote the app name and today's date. The team compares it with your photos. The selfie stays private and is never shown to others.",
+      verify_file: "Your selfie", verify_send: "Send for verification",
+      verify_status_ok: "✓ Your profile is verified.", verify_status_pending: "Request sent: under review.",
+      verify_sent: "Thank you! Your request has been sent.", e_verify_file: "Please choose a photo.", verified_tag: "✓ Verified",
+      hint: "Prototype. The age check above is only a first step: identity verification will be required before any public launch.",
+      countries: ["Thailand", "Vietnam", "United States", "France", "Germany", "United Kingdom", "Italy", "Spain", "Other"]
+    },
+    th: {
+      tagline: "พบกับคนที่เข้ากับคุณ",
+      tab_signup: "สมัครสมาชิก", tab_login: "เข้าสู่ระบบ",
+      email: "อีเมล", password: "รหัสผ่าน (อย่างน้อย 8 ตัวอักษร)", birth: "วันเกิด",
+      adult: "ฉันยืนยันว่ามีอายุ 18 ปีขึ้นไปและยอมรับเงื่อนไขการใช้งาน",
+      btn_signup: "สร้างบัญชี", btn_login: "เข้าสู่ระบบ", wait: "กรุณารอสักครู่…",
+      e_creds: "กรอกอีเมลและรหัสผ่านอย่างน้อย 8 ตัวอักษร",
+      e_birth: "กรุณาระบุวันเกิด", e_under18: "คุณต้องมีอายุ 18 ปีขึ้นไป",
+      e_adult: "ติ๊กช่องเพื่อยืนยันอายุของคุณ",
+      ok_created: "สร้างบัญชีแล้ว กรุณาเปิดอีเมลยืนยัน แล้วกลับมาเข้าสู่ระบบ",
+      e_generic: "เกิดข้อผิดพลาด", e_profile_load: "โหลดโปรไฟล์ไม่ได้: ",
+      profile_title: "โปรไฟล์ของฉัน", profile_sub: "ข้อมูลเล็กน้อยเพื่อเริ่มต้น",
+      no_photo: "ยังไม่มีรูป", photo_label: "รูปภาพ (JPG, PNG หรือ WebP ไม่เกิน 5 MB)",
+      first_name: "ชื่อ", country: "ประเทศ", choose: "เลือก…", i_am: "ฉันคือ", looking: "ฉันกำลังมองหา",
+      opt_man: "ผู้ชาย", opt_woman: "ผู้หญิง", opt_other: "อื่น ๆ", opt_any: "ใครก็ได้",
+      bio: "แนะนำตัว", bio_ph: "เล่าเกี่ยวกับตัวคุณสักหน่อย…",
+      save_profile: "บันทึกโปรไฟล์", cancel: "ยกเลิก", saving: "กำลังบันทึก…",
+      e_name: "กรุณาระบุชื่อ", e_gender: "กรุณาระบุว่าคุณเป็นใครและกำลังมองหาใคร",
+      e_photo_type: "รูปต้องเป็นไฟล์ JPG, PNG หรือ WebP", e_photo_size: "ไฟล์รูปใหญ่เกินไป (สูงสุด 5 MB)",
+      g_homme: "ชาย", g_femme: "หญิง", g_autre: "อื่น ๆ",
+      l_homme: "มองหาผู้ชาย", l_femme: "มองหาผู้หญิง", l_tous: "มองหา: ใครก็ได้",
+      connected: "เข้าสู่ระบบแล้ว: ", discover: "ค้นหาโปรไฟล์", matches: "แมตช์ของฉัน", edit: "แก้ไขโปรไฟล์",
+      safety_btn: "คำแนะนำด้านความปลอดภัย", verify_btn: "ยืนยันโปรไฟล์ของฉัน", logout: "ออกจากระบบ",
+      delete: "ลบบัญชีของฉัน", back: "← กลับ", back_matches: "← แมตช์ของฉัน",
+      filters: "ตัวกรอง", age_min: "อายุต่ำสุด", age_max: "อายุสูงสุด", all_countries: "ทุกประเทศ", apply: "ใช้ตัวกรอง",
+      pass: "ข้าม", like: "ถูกใจ ❤", report_profile: "รายงานโปรไฟล์นี้",
+      no_more: "ตอนนี้ไม่มีโปรไฟล์เพิ่มแล้ว กลับมาใหม่ภายหลังนะ!", searching: "กำลังค้นหาโปรไฟล์…",
+      match_with: "คุณแมตช์กับ {name} แล้ว! 🎉",
+      matches_title: "แมตช์ของฉัน", matches_empty: "ยังไม่มีแมตช์ ลองค้นหาโปรไฟล์ต่อไปนะ!",
+      matches_err: "โหลดแมตช์ไม่ได้", new_badge: "ใหม่", you: "คุณ: ",
+      msg_ph: "พิมพ์ข้อความ…", send: "ส่ง", e_send: "ส่งไม่ได้: ",
+      report: "รายงาน", block: "บล็อก", report_title: "รายงาน",
+      report_sub: "การรายงานของคุณเป็นความลับ และจะถูกตรวจสอบโดยทีมงาน",
+      reason: "เหตุผล", r_fake: "โปรไฟล์ปลอม / ใช้รูปขโมย", r_scam: "ขอเงินหรือหลอกลวง",
+      r_harass: "คุกคามหรือข่มขู่", r_content: "เนื้อหาไม่เหมาะสม", r_minor: "ดูเหมือนผู้เยาว์", r_other: "อื่น ๆ",
+      details: "รายละเอียด (ไม่บังคับ)", send_report: "ส่งรายงาน", e_reason: "กรุณาเลือกเหตุผล",
+      ok_report: "ขอบคุณ ส่งรายงานของคุณแล้ว คุณสามารถบล็อกบุคคลนี้ได้ด้วย",
+      block_confirm: "บล็อก {name} หรือไม่? คุณทั้งสองจะมองไม่เห็นกันและส่งข้อความหากันไม่ได้", e_block: "บล็อกไม่สำเร็จ: ",
+      safety_title: "คำแนะนำด้านความปลอดภัย",
+      s1: "**ห้ามโอนเงิน** ส่งบัตรของขวัญ หรือสกุลเงินดิจิทัลให้คนที่รู้จักทางออนไลน์ แม้จะคุยกันมาหลายสัปดาห์แล้วก็ตาม",
+      s2: "ระวังคนที่รีบชวนไปคุยแอปอื่น (WhatsApp, Telegram…) หรือบอกรักหลังคุยกันเพียงไม่กี่วัน",
+      s3: "ขอ **วิดีโอคอล** ก่อนนัดพบ คนที่ปฏิเสธเสมอเป็นสัญญาณเตือน",
+      s4: "อย่าแชร์เอกสารประจำตัว รหัสธนาคาร หรือรหัสที่ได้รับทาง SMS",
+      s5: "นัดพบครั้งแรกใน **ที่สาธารณะ** และบอกคนใกล้ชิดไว้",
+      s6: "พบพฤติกรรมน่าสงสัย? **รายงาน** โปรไฟล์และ **บล็อก** บุคคลนั้น",
+      delete_confirm: "ลบบัญชี โปรไฟล์ รูปภาพ และข้อความของคุณอย่างถาวรหรือไม่? ไม่สามารถย้อนกลับได้",
+      deleting: "กำลังลบ…", e_delete: "ลบไม่สำเร็จ: ", deleted: "ลบบัญชีของคุณแล้ว",
+      verify_title: "ยืนยันโปรไฟล์ของฉัน",
+      verify_text: "โปรไฟล์ที่ยืนยันแล้วทำให้คนอื่นมั่นใจมากขึ้น ส่งเซลฟี่ที่เห็นใบหน้าชัดเจน พร้อมถือกระดาษที่เขียนชื่อแอปและวันที่ปัจจุบัน ทีมงานจะเทียบกับรูปโปรไฟล์ของคุณ เซลฟี่นี้เป็นส่วนตัวและจะไม่แสดงให้ผู้อื่นเห็น",
+      verify_file: "เซลฟี่ของคุณ", verify_send: "ส่งเพื่อตรวจสอบ",
+      verify_status_ok: "✓ โปรไฟล์ของคุณได้รับการยืนยันแล้ว", verify_status_pending: "ส่งคำขอแล้ว: กำลังตรวจสอบ",
+      verify_sent: "ขอบคุณ! ส่งคำขอของคุณแล้ว", e_verify_file: "กรุณาเลือกรูป", verified_tag: "✓ ยืนยันแล้ว",
+      hint: "ต้นแบบ การตรวจสอบอายุข้างต้นเป็นเพียงขั้นแรก ต้องมีการยืนยันตัวตนก่อนเปิดให้ใช้งานจริง",
+      countries: ["ไทย", "เวียดนาม", "สหรัฐอเมริกา", "ฝรั่งเศส", "เยอรมนี", "สหราชอาณาจักร", "อิตาลี", "สเปน", "อื่น ๆ"]
+    },
+    vi: {
+      tagline: "Gặp gỡ những người phù hợp với bạn.",
+      tab_signup: "Tạo tài khoản", tab_login: "Đăng nhập",
+      email: "Email", password: "Mật khẩu (tối thiểu 8 ký tự)", birth: "Ngày sinh",
+      adult: "Tôi xác nhận mình từ 18 tuổi trở lên và đồng ý với điều khoản sử dụng.",
+      btn_signup: "Tạo tài khoản", btn_login: "Đăng nhập", wait: "Vui lòng chờ…",
+      e_creds: "Nhập email và mật khẩu tối thiểu 8 ký tự.",
+      e_birth: "Vui lòng nhập ngày sinh.", e_under18: "Bạn phải từ 18 tuổi trở lên.",
+      e_adult: "Hãy đánh dấu ô để xác nhận độ tuổi.",
+      ok_created: "Đã tạo tài khoản. Hãy mở email xác nhận rồi quay lại đăng nhập.",
+      e_generic: "Đã xảy ra lỗi.", e_profile_load: "Không tải được hồ sơ: ",
+      profile_title: "Hồ sơ của tôi", profile_sub: "Vài thông tin để bắt đầu.",
+      no_photo: "Chưa có ảnh", photo_label: "Ảnh (JPG, PNG hoặc WebP, tối đa 5 MB)",
+      first_name: "Tên", country: "Quốc gia", choose: "Chọn…", i_am: "Tôi là", looking: "Tôi đang tìm",
+      opt_man: "Một người đàn ông", opt_woman: "Một người phụ nữ", opt_other: "Khác", opt_any: "Ai cũng được",
+      bio: "Giới thiệu", bio_ph: "Hãy nói đôi điều về bạn…",
+      save_profile: "Lưu hồ sơ", cancel: "Hủy", saving: "Đang lưu…",
+      e_name: "Vui lòng nhập tên.", e_gender: "Vui lòng cho biết bạn là ai và bạn tìm ai.",
+      e_photo_type: "Ảnh phải ở định dạng JPG, PNG hoặc WebP.", e_photo_size: "Ảnh quá nặng (tối đa 5 MB).",
+      g_homme: "Nam", g_femme: "Nữ", g_autre: "Khác",
+      l_homme: "Tìm một người đàn ông", l_femme: "Tìm một người phụ nữ", l_tous: "Tìm: ai cũng được",
+      connected: "Đã đăng nhập: ", discover: "Khám phá hồ sơ", matches: "Các cặp đôi của tôi", edit: "Sửa hồ sơ",
+      safety_btn: "Lời khuyên an toàn", verify_btn: "Xác minh hồ sơ của tôi", logout: "Đăng xuất",
+      delete: "Xóa tài khoản", back: "← Quay lại", back_matches: "← Các cặp đôi",
+      filters: "Bộ lọc", age_min: "Tuổi tối thiểu", age_max: "Tuổi tối đa", all_countries: "Tất cả quốc gia", apply: "Áp dụng",
+      pass: "Bỏ qua", like: "Thích ❤", report_profile: "Báo cáo hồ sơ này",
+      no_more: "Hiện chưa còn hồ sơ nào. Hãy quay lại sau!", searching: "Đang tìm hồ sơ…",
+      match_with: "Bạn đã ghép đôi với {name}! 🎉",
+      matches_title: "Các cặp đôi của tôi", matches_empty: "Chưa có cặp đôi nào. Hãy tiếp tục khám phá hồ sơ!",
+      matches_err: "Không tải được danh sách.", new_badge: "Mới", you: "Bạn: ",
+      msg_ph: "Tin nhắn của bạn…", send: "Gửi", e_send: "Không gửi được: ",
+      report: "Báo cáo", block: "Chặn", report_title: "Báo cáo",
+      report_sub: "Báo cáo của bạn được giữ bí mật và sẽ được đội ngũ xem xét.",
+      reason: "Lý do", r_fake: "Hồ sơ giả / ảnh lấy cắp", r_scam: "Xin tiền hoặc lừa đảo",
+      r_harass: "Quấy rối hoặc đe dọa", r_content: "Nội dung không phù hợp", r_minor: "Người có vẻ chưa đủ tuổi", r_other: "Khác",
+      details: "Chi tiết (không bắt buộc)", send_report: "Gửi báo cáo", e_reason: "Vui lòng chọn lý do.",
+      ok_report: "Cảm ơn, báo cáo của bạn đã được gửi. Bạn cũng có thể chặn người này.",
+      block_confirm: "Chặn {name}? Hai bên sẽ không còn thấy nhau và không thể nhắn tin.", e_block: "Không chặn được: ",
+      safety_title: "Lời khuyên an toàn",
+      s1: "**Tuyệt đối không chuyển tiền**, gửi thẻ quà tặng hay tiền mã hóa cho người quen qua mạng, dù đã trò chuyện nhiều tuần.",
+      s2: "Cẩn thận với người muốn nhanh chóng chuyển sang ứng dụng khác (WhatsApp, Telegram…) hoặc nói yêu bạn chỉ sau vài ngày.",
+      s3: "Hãy yêu cầu **gọi video** trước khi gặp. Người luôn từ chối là dấu hiệu đáng ngờ.",
+      s4: "Không chia sẻ giấy tờ tùy thân, mã ngân hàng hay mã nhận qua SMS.",
+      s5: "Buổi hẹn đầu tiên nên ở **nơi công cộng** và báo cho người thân.",
+      s6: "Thấy hành vi đáng ngờ? Hãy **báo cáo** hồ sơ và **chặn** người đó.",
+      delete_confirm: "Xóa vĩnh viễn tài khoản, hồ sơ, ảnh và tin nhắn của bạn? Không thể hoàn tác.",
+      deleting: "Đang xóa…", e_delete: "Không xóa được: ", deleted: "Tài khoản của bạn đã được xóa.",
+      verify_title: "Xác minh hồ sơ của tôi",
+      verify_text: "Hồ sơ đã xác minh tạo thêm sự tin tưởng. Hãy gửi ảnh selfie thấy rõ khuôn mặt, cầm tờ giấy ghi tên ứng dụng và ngày hôm nay. Đội ngũ sẽ đối chiếu với ảnh hồ sơ của bạn. Ảnh selfie được giữ riêng tư và không bao giờ hiển thị cho người khác.",
+      verify_file: "Ảnh selfie của bạn", verify_send: "Gửi để xác minh",
+      verify_status_ok: "✓ Hồ sơ của bạn đã được xác minh.", verify_status_pending: "Đã gửi yêu cầu: đang được xem xét.",
+      verify_sent: "Cảm ơn! Yêu cầu của bạn đã được gửi.", e_verify_file: "Vui lòng chọn một ảnh.", verified_tag: "✓ Đã xác minh",
+      hint: "Bản thử nghiệm. Việc kiểm tra tuổi ở trên chỉ là bước đầu: cần xác minh danh tính trước khi ra mắt công khai.",
+      countries: ["Thái Lan", "Việt Nam", "Hoa Kỳ", "Pháp", "Đức", "Vương quốc Anh", "Ý", "Tây Ban Nha", "Khác"]
+    },
+    zh: {
+      tagline: "遇见适合你的人。",
+      tab_signup: "注册账号", tab_login: "登录",
+      email: "邮箱", password: "密码（至少 8 个字符）", birth: "出生日期",
+      adult: "我确认我已年满 18 周岁，并同意使用条款。",
+      btn_signup: "创建账号", btn_login: "登录", wait: "请稍候…",
+      e_creds: "请输入邮箱和至少 8 个字符的密码。",
+      e_birth: "请填写出生日期。", e_under18: "您必须年满 18 周岁。",
+      e_adult: "请勾选以确认您的年龄。",
+      ok_created: "账号已创建。请打开确认邮件，然后返回登录。",
+      e_generic: "出了点问题。", e_profile_load: "无法加载资料：",
+      profile_title: "我的资料", profile_sub: "填写几项信息即可开始。",
+      no_photo: "暂无照片", photo_label: "照片（JPG、PNG 或 WebP，最大 5 MB）",
+      first_name: "名字", country: "国家/地区", choose: "请选择…", i_am: "我是", looking: "我在寻找",
+      opt_man: "男士", opt_woman: "女士", opt_other: "其他", opt_any: "不限",
+      bio: "自我介绍", bio_ph: "简单介绍一下你自己…",
+      save_profile: "保存资料", cancel: "取消", saving: "保存中…",
+      e_name: "请填写名字。", e_gender: "请选择你的性别和你在寻找的对象。",
+      e_photo_type: "照片必须是 JPG、PNG 或 WebP 格式。", e_photo_size: "照片太大（最大 5 MB）。",
+      g_homme: "男", g_femme: "女", g_autre: "其他",
+      l_homme: "寻找男士", l_femme: "寻找女士", l_tous: "寻找：不限",
+      connected: "已登录：", discover: "发现新朋友", matches: "我的配对", edit: "编辑资料",
+      safety_btn: "安全提示", verify_btn: "验证我的资料", logout: "退出登录",
+      delete: "删除我的账号", back: "← 返回", back_matches: "← 我的配对",
+      filters: "筛选", age_min: "最小年龄", age_max: "最大年龄", all_countries: "所有国家/地区", apply: "应用",
+      pass: "跳过", like: "喜欢 ❤", report_profile: "举报此资料",
+      no_more: "暂时没有更多资料了，稍后再来看看吧！", searching: "正在寻找资料…",
+      match_with: "你和 {name} 配对成功了！🎉",
+      matches_title: "我的配对", matches_empty: "还没有配对。继续发现新朋友吧！",
+      matches_err: "无法加载配对。", new_badge: "新", you: "你：",
+      msg_ph: "输入消息…", send: "发送", e_send: "发送失败：",
+      report: "举报", block: "拉黑", report_title: "举报",
+      report_sub: "您的举报将被保密，并由团队审核。",
+      reason: "原因", r_fake: "虚假资料 / 盗用照片", r_scam: "索要钱财或诈骗",
+      r_harass: "骚扰或威胁", r_content: "不当内容", r_minor: "疑似未成年人", r_other: "其他",
+      details: "详细说明（选填）", send_report: "提交举报", e_reason: "请选择原因。",
+      ok_report: "谢谢，您的举报已提交。您也可以拉黑此人。",
+      block_confirm: "拉黑 {name}？你们将互相看不到，也无法发消息。", e_block: "拉黑失败：",
+      safety_title: "安全提示",
+      s1: "**切勿汇款**，也不要给网上认识的人发送礼品卡或加密货币，即使已经聊了好几周。",
+      s2: "警惕很快想转到其他应用（WhatsApp、Telegram 等）聊天，或才聊几天就表白的人。",
+      s3: "见面前请先要求**视频通话**。一直拒绝的人是危险信号。",
+      s4: "切勿分享身份证件、银行密码或短信验证码。",
+      s5: "第一次见面请选择**公共场所**，并告诉亲友。",
+      s6: "发现可疑行为？请**举报**该资料并**拉黑**对方。",
+      delete_confirm: "要永久删除您的账号、资料、照片和消息吗？此操作无法撤销。",
+      deleting: "正在删除…", e_delete: "删除失败：", deleted: "您的账号已删除。",
+      verify_title: "验证我的资料",
+      verify_text: "经过验证的资料更让人放心。请上传一张自拍，要求清楚露出面部，并手持一张写有应用名称和今天日期的纸。团队会将其与您的照片比对。自拍会保密，绝不会展示给其他人。",
+      verify_file: "您的自拍", verify_send: "提交验证",
+      verify_status_ok: "✓ 您的资料已通过验证。", verify_status_pending: "申请已提交：审核中。",
+      verify_sent: "谢谢！您的申请已提交。", e_verify_file: "请选择一张照片。", verified_tag: "✓ 已验证",
+      hint: "原型版本。上述年龄检查只是第一步：正式公开上线前需要进行身份验证。",
+      countries: ["泰国", "越南", "美国", "法国", "德国", "英国", "意大利", "西班牙", "其他"]
+    }
+  };
+
+  var LANGS = ["fr", "en", "th", "vi", "zh"];
+  var lang = "fr";
+  try { var saved = localStorage.getItem("lang"); if (LANGS.indexOf(saved) !== -1) lang = saved; else throw 0; }
+  catch (e) {
+    var nav = ((navigator.language || "en") + "").slice(0, 2).toLowerCase();
+    lang = LANGS.indexOf(nav) !== -1 ? nav : "en";
+  }
+
+  function t(key, vars) {
+    var s = (I18N[lang] && I18N[lang][key]);
+    if (s === undefined) s = I18N.fr[key];
+    if (s === undefined) return key;
+    if (vars) Object.keys(vars).forEach(function (k) { s = s.split("{" + k + "}").join(vars[k]); });
+    return s;
+  }
+  function countryLabel(v) {
+    var i = COUNTRY_KEYS.indexOf(v);
+    return i === -1 ? v : (I18N[lang].countries[i] || v);
+  }
 
   // Clé publique : elle est faite pour être visible dans l'appli.
   var SUPABASE_URL = "https://yvjmcaknsdpdxilenbku.supabase.co";
@@ -292,16 +624,35 @@
   var currentProfile = null;
   var $ = function (id) { return document.getElementById(id); };
 
-  document.title = APP_NAME;
   $("app-name").textContent = APP_NAME;
 
-  function fillCountries(sel, firstLabel) {
-    sel.textContent = "";
-    var o = document.createElement("option"); o.value = ""; o.textContent = firstLabel; sel.appendChild(o);
-    COUNTRIES.forEach(function (c) { var x = document.createElement("option"); x.value = c; x.textContent = c; sel.appendChild(x); });
+  function setRich(el, text) {
+    el.textContent = "";
+    text.split("**").forEach(function (part, i) {
+      if (i % 2) { var s = document.createElement("strong"); s.textContent = part; el.appendChild(s); }
+      else el.appendChild(document.createTextNode(part));
+    });
   }
-  fillCountries($("country"), "Choisir…");
-  fillCountries($("f-country"), "Tous les pays");
+
+  function fillCountries(sel, firstKey) {
+    var keep = sel.value;
+    sel.textContent = "";
+    var o = document.createElement("option"); o.value = ""; o.textContent = t(firstKey); sel.appendChild(o);
+    COUNTRY_KEYS.forEach(function (c) { var x = document.createElement("option"); x.value = c; x.textContent = countryLabel(c); sel.appendChild(x); });
+    sel.value = keep;
+  }
+
+  function applyI18n() {
+    document.documentElement.lang = lang;
+    document.title = APP_NAME;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-ph]"), function (el) { el.placeholder = t(el.getAttribute("data-i18n-ph")); });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-rich]"), function (el) { setRich(el, t(el.getAttribute("data-i18n-rich"))); });
+    fillCountries($("country"), "choose");
+    fillCountries($("f-country"), "all_countries");
+    $("submit").textContent = mode === "signup" ? t("btn_signup") : t("btn_login");
+    $("lang").value = lang;
+  }
 
   function say(el, text, kind) { el.textContent = text; el.className = "msg " + (kind || ""); }
 
@@ -310,7 +661,7 @@
     $("tab-signup").setAttribute("aria-selected", m === "signup");
     $("tab-login").setAttribute("aria-selected", m === "login");
     $("signup-only").hidden = m !== "signup";
-    $("submit").textContent = m === "signup" ? "Créer mon compte" : "Me connecter";
+    $("submit").textContent = m === "signup" ? t("btn_signup") : t("btn_login");
     $("password").autocomplete = m === "signup" ? "new-password" : "current-password";
     say($("msg"), "", "");
   }
@@ -331,25 +682,22 @@
     return r.data.publicUrl + "?v=" + encodeURIComponent(p.updated_at || "");
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "chat", "report", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
   }
 
-  function labelFor(kind, v) {
-    var t = {
-      gender: { homme: "Homme", femme: "Femme", autre: "Autre" },
-      looking_for: { homme: "Cherche un homme", femme: "Cherche une femme", tous: "Cherche : peu importe" }
-    };
-    return (t[kind] && t[kind][v]) || "";
-  }
-
   function tagsInto(el, p) {
     el.textContent = "";
-    [p.country, labelFor("gender", p.gender), labelFor("looking_for", p.looking_for)].forEach(function (t) {
-      if (!t) return;
-      var s = document.createElement("span"); s.className = "tag"; s.textContent = t; el.appendChild(s);
+    var items = [];
+    if (p.verified) items.push([t("verified_tag"), true]);
+    items.push([p.country ? countryLabel(p.country) : "", false]);
+    items.push([p.gender ? t("g_" + p.gender) : "", false]);
+    items.push([p.looking_for ? t("l_" + p.looking_for) : "", false]);
+    items.forEach(function (it) {
+      if (!it[0]) return;
+      var s = document.createElement("span"); s.className = "tag" + (it[1] ? " verified" : ""); s.textContent = it[0]; el.appendChild(s);
     });
   }
 
@@ -359,7 +707,7 @@
     $("view-bio").textContent = p.bio || "";
     var url = photoUrl(p), img = $("view-photo");
     if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
-    $("who").textContent = "Connecté : " + user.email;
+    $("who").textContent = t("connected") + user.email;
     say($("hmsg"), "", "");
     showSection("home");
   }
@@ -386,7 +734,7 @@
   async function loadProfile(user) {
     currentUser = user;
     var r = await db.from("profiles").select("*").eq("id", user.id).maybeSingle();
-    if (r.error) { showSection("auth"); return say($("msg"), "Impossible de charger le profil : " + r.error.message, "err"); }
+    if (r.error) { showSection("auth"); return say($("msg"), t("e_profile_load") + r.error.message, "err"); }
     currentProfile = r.data;
     if (r.data) renderView(user, r.data);
     else { fillForm(null); showSection("profile"); }
@@ -397,6 +745,18 @@
     loadProfile(user);
   }
 
+  // ---------- Langue ----------
+  $("lang").onchange = function () {
+    lang = $("lang").value;
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+    applyI18n();
+    ["msg", "pmsg", "hmsg", "dmsg", "cmsg", "rmsg", "vmsg"].forEach(function (id) { say($(id), "", ""); });
+    if (!$("home").hidden && currentProfile) renderView(currentUser, currentProfile);
+    else if (!$("discover").hidden && candidate) renderCandidate();
+    else if (!$("matches").hidden) loadMatches();
+    else if (!$("verify").hidden) renderVerifyStatus();
+  };
+
   // ---------- Connexion ----------
   $("tab-signup").onclick = function () { setMode("signup"); };
   $("tab-login").onclick = function () { setMode("login"); };
@@ -405,25 +765,25 @@
     e.preventDefault();
     var msg = $("msg");
     var email = $("email").value.trim(), password = $("password").value;
-    if (!email || password.length < 8) return say(msg, "Entrez un e-mail et un mot de passe de 8 caractères minimum.", "err");
-    $("submit").disabled = true; say(msg, "Un instant…", "");
+    if (!email || password.length < 8) return say(msg, t("e_creds"), "err");
+    $("submit").disabled = true; say(msg, t("wait"), "");
     try {
       if (mode === "signup") {
         var birth = $("birth").value;
-        if (!birth) throw new Error("Indiquez votre date de naissance.");
-        if (ageFrom(birth) < 18) throw new Error("Vous devez avoir 18 ans ou plus.");
-        if (!$("adult").checked) throw new Error("Cochez la case pour confirmer votre âge.");
+        if (!birth) throw new Error(t("e_birth"));
+        if (ageFrom(birth) < 18) throw new Error(t("e_under18"));
+        if (!$("adult").checked) throw new Error(t("e_adult"));
         var back = window.location.origin + window.location.pathname;
         var r = await db.auth.signUp({ email: email, password: password, options: { data: { birthdate: birth }, emailRedirectTo: back } });
         if (r.error) throw r.error;
         if (r.data.session) show(r.data.user);
-        else say(msg, "Compte créé. Ouvrez l'e-mail de confirmation, puis revenez vous connecter.", "ok");
+        else say(msg, t("ok_created"), "ok");
       } else {
         var l = await db.auth.signInWithPassword({ email: email, password: password });
         if (l.error) throw l.error;
         show(l.data.user);
       }
-    } catch (err) { say(msg, err.message || "Une erreur est survenue.", "err"); }
+    } catch (err) { say(msg, err.message || t("e_generic"), "err"); }
     $("submit").disabled = false;
   });
 
@@ -441,15 +801,15 @@
     e.preventDefault();
     var msg = $("pmsg");
     var name = $("first_name").value.trim();
-    if (!name) return say(msg, "Indiquez votre prénom.", "err");
-    if (!$("gender").value || !$("looking_for").value) return say(msg, "Indiquez qui vous êtes et ce que vous cherchez.", "err");
-    $("psave").disabled = true; say(msg, "Enregistrement…", "");
+    if (!name) return say(msg, t("e_name"), "err");
+    if (!$("gender").value || !$("looking_for").value) return say(msg, t("e_gender"), "err");
+    $("psave").disabled = true; say(msg, t("saving"), "");
     try {
       var photoPath = currentProfile ? currentProfile.photo_path : null;
       var f = $("photo").files[0];
       if (f) {
-        if (!/^image\/(jpeg|png|webp)$/.test(f.type)) throw new Error("La photo doit être au format JPG, PNG ou WebP.");
-        if (f.size > 5 * 1024 * 1024) throw new Error("La photo est trop lourde (5 Mo maximum).");
+        if (!/^image\/(jpeg|png|webp)$/.test(f.type)) throw new Error(t("e_photo_type"));
+        if (f.size > 5 * 1024 * 1024) throw new Error(t("e_photo_size"));
         var path = currentUser.id + "/avatar";
         var up = await db.storage.from("photos").upload(path, f, { upsert: true, contentType: f.type });
         if (up.error) throw up.error;
@@ -471,15 +831,24 @@
       if (s.error) throw s.error;
       currentProfile = s.data;
       renderView(currentUser, s.data);
-    } catch (err) { say(msg, err.message || "Une erreur est survenue.", "err"); }
+    } catch (err) { say(msg, err.message || t("e_generic"), "err"); }
     $("psave").disabled = false;
   });
 
   // ---------- Découverte ----------
   var candidate = null;
 
+  function renderCandidate() {
+    $("cand-name").textContent = nameWithAge(candidate);
+    tagsInto($("cand-tags"), candidate);
+    $("cand-bio").textContent = candidate.bio || "";
+    var url = photoUrl(candidate), img = $("cand-photo");
+    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
+    $("cand").hidden = false;
+  }
+
   async function nextCandidate() {
-    var dmsg = $("dmsg"); say(dmsg, "Recherche de profils…", "");
+    var dmsg = $("dmsg"); say(dmsg, t("searching"), "");
     $("cand").hidden = true; $("cand-empty").hidden = true;
     var s = await db.from("swipes").select("to_id").eq("from_id", currentUser.id);
     if (s.error) return say(dmsg, s.error.message, "err");
@@ -499,12 +868,7 @@
     say(dmsg, "", "");
     candidate = r.data && r.data[0];
     if (!candidate) { $("cand-empty").hidden = false; return; }
-    $("cand-name").textContent = nameWithAge(candidate);
-    tagsInto($("cand-tags"), candidate);
-    $("cand-bio").textContent = candidate.bio || "";
-    var url = photoUrl(candidate), img = $("cand-photo");
-    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
-    $("cand").hidden = false;
+    renderCandidate();
   }
 
   async function swipe(liked) {
@@ -518,10 +882,10 @@
       if (liked) {
         var back = await db.from("swipes").select("liked")
           .eq("from_id", candidate.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
-        if (back.data) { banner.textContent = "C'est un match avec " + candidate.first_name + " ! 🎉"; banner.hidden = false; }
+        if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; }
       }
       await nextCandidate();
-    } catch (err) { say(dmsg, err.message || "Une erreur est survenue.", "err"); }
+    } catch (err) { say(dmsg, err.message || t("e_generic"), "err"); }
     $("like").disabled = $("pass").disabled = false;
   }
 
@@ -531,12 +895,18 @@
   $("like").onclick = function () { swipe(true); };
   $("pass").onclick = function () { swipe(false); };
 
-  // ---------- Matchs ----------
+  // ---------- Matchs (avec aperçu et messages non lus) ----------
+  function readMap() { try { return JSON.parse(localStorage.getItem("lastread:" + currentUser.id) || "{}"); } catch (e) { return {}; } }
+  function markRead(peerId) {
+    try { var m = readMap(); m[peerId] = new Date().toISOString(); localStorage.setItem("lastread:" + currentUser.id, JSON.stringify(m)); } catch (e) {}
+  }
+
   async function loadMatches() {
     var list = $("matches-list"); list.textContent = ""; $("matches-empty").hidden = true;
-    var a = await db.from("swipes").select("to_id").eq("from_id", currentUser.id).eq("liked", true);
-    var b = await db.from("swipes").select("from_id").eq("to_id", currentUser.id).eq("liked", true);
-    if (a.error || b.error) { $("matches-empty").textContent = "Impossible de charger les matchs."; $("matches-empty").hidden = false; return; }
+    var me = currentUser.id;
+    var a = await db.from("swipes").select("to_id").eq("from_id", me).eq("liked", true);
+    var b = await db.from("swipes").select("from_id").eq("to_id", me).eq("liked", true);
+    if (a.error || b.error) { $("matches-empty").textContent = t("matches_err"); $("matches-empty").hidden = false; return; }
     var mine = (a.data || []).map(function (x) { return x.to_id; });
     var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return mine.indexOf(id) !== -1; });
     var people = [];
@@ -544,20 +914,36 @@
       var r = await db.from("profiles").select("*").in("id", ids);   // les personnes bloquées n'apparaissent plus
       people = r.data || [];
     }
-    if (!people.length) { $("matches-empty").textContent = "Pas encore de match. Continuez à découvrir des profils !"; $("matches-empty").hidden = false; return; }
+    if (!people.length) { $("matches-empty").textContent = t("matches_empty"); $("matches-empty").hidden = false; return; }
+
+    var last = {};
+    var mm = await db.from("messages").select("from_id,to_id,body,created_at")
+      .or("from_id.eq." + me + ",to_id.eq." + me).order("created_at", { ascending: false }).limit(300);
+    (mm.data || []).forEach(function (m) { var peer = m.from_id === me ? m.to_id : m.from_id; if (!last[peer]) last[peer] = m; });
+    var seenAt = readMap();
+    people.sort(function (x, y) {
+      var lx = last[x.id] ? last[x.id].created_at : "", ly = last[y.id] ? last[y.id].created_at : "";
+      return lx < ly ? 1 : lx > ly ? -1 : 0;
+    });
+
     people.forEach(function (p) {
       var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
       var url = photoUrl(p), pic;
       if (url) { pic = document.createElement("img"); pic.src = url; pic.alt = ""; }
       else { pic = document.createElement("div"); pic.className = "mph"; pic.textContent = p.first_name.charAt(0).toUpperCase(); }
-      var info = document.createElement("div");
-      var strong = document.createElement("strong"); strong.textContent = nameWithAge(p);
-      var small = document.createElement("small"); small.textContent = p.country || "";
+      var info = document.createElement("div"); info.className = "mi";
+      var strong = document.createElement("strong"); strong.textContent = nameWithAge(p) + (p.verified ? " ✓" : "");
+      var small = document.createElement("small");
+      var lm = last[p.id];
+      small.textContent = lm ? (lm.from_id === me ? t("you") : "") + lm.body : (p.country ? countryLabel(p.country) : "");
       info.appendChild(strong); info.appendChild(small);
-      var go = document.createElement("span"); go.className = "go"; go.textContent = "Écrire →";
+      row.appendChild(pic); row.appendChild(info);
+      if (lm && lm.from_id !== me && (!seenAt[p.id] || lm.created_at > seenAt[p.id])) {
+        var bd = document.createElement("span"); bd.className = "badge"; bd.textContent = t("new_badge"); row.appendChild(bd);
+      }
       row.onclick = function () { openChat(p); };
       row.onkeydown = function (e) { if (e.key === "Enter") openChat(p); };
-      row.appendChild(pic); row.appendChild(info); row.appendChild(go); list.appendChild(row);
+      list.appendChild(row);
     });
   }
   $("go-matches").onclick = function () { showSection("matches"); loadMatches(); };
@@ -586,6 +972,7 @@
     });
     if (stick || lastCount !== (r.data || []).length) box.scrollTop = box.scrollHeight;
     lastCount = (r.data || []).length;
+    markRead(other);
   }
 
   function openChat(p) {
@@ -594,6 +981,7 @@
     $("chat-box").textContent = ""; $("chat-input").value = "";
     say($("cmsg"), "", "");
     showSection("chat");
+    markRead(p.id);
     refreshChat();
     stopChat();
     chatTimer = setInterval(refreshChat, 4000);
@@ -605,7 +993,7 @@
     if (!text || !chatWith) return;
     $("chat-send").disabled = true;
     var r = await db.from("messages").insert({ from_id: currentUser.id, to_id: chatWith.id, body: text });
-    if (r.error) say($("cmsg"), "Envoi impossible : " + r.error.message, "err");
+    if (r.error) say($("cmsg"), t("e_send") + r.error.message, "err");
     else { $("chat-input").value = ""; say($("cmsg"), "", ""); await refreshChat(); }
     $("chat-send").disabled = false;
   });
@@ -627,15 +1015,15 @@
 
   $("report-form").addEventListener("submit", async function (e) {
     e.preventDefault();
-    if (!$("report-reason").value) return say($("rmsg"), "Choisissez un motif.", "err");
+    if (!$("report-reason").value) return say($("rmsg"), t("e_reason"), "err");
     $("report-send").disabled = true;
     var r = await db.from("reports").insert({
       reporter_id: currentUser.id, reported_id: reportTarget.id,
       reason: $("report-reason").value, details: $("report-details").value.trim() || null
     });
-    if (r.error) say($("rmsg"), "Envoi impossible : " + r.error.message, "err");
+    if (r.error) say($("rmsg"), t("e_send") + r.error.message, "err");
     else {
-      say($("rmsg"), "Merci, votre signalement a bien été envoyé. Vous pouvez aussi bloquer cette personne.", "ok");
+      say($("rmsg"), t("ok_report"), "ok");
       setTimeout(function () { if (!$("report").hidden) showSection(reportReturn); }, 2200);
     }
     $("report-send").disabled = false;
@@ -643,12 +1031,40 @@
 
   $("chat-block").onclick = async function () {
     if (!chatWith) return;
-    if (!confirm("Bloquer " + chatWith.first_name + " ? Vous ne vous verrez plus et ne pourrez plus vous écrire.")) return;
+    if (!confirm(t("block_confirm", { name: chatWith.first_name }))) return;
     var r = await db.from("blocks").insert({ blocker_id: currentUser.id, blocked_id: chatWith.id });
-    if (r.error) return say($("cmsg"), "Blocage impossible : " + r.error.message, "err");
+    if (r.error) return say($("cmsg"), t("e_block") + r.error.message, "err");
     chatWith = null;
     showSection("matches"); loadMatches();
   };
+
+  // ---------- Vérification du profil ----------
+  function renderVerifyStatus() {
+    var st = $("verify-status"), form = $("verify-form");
+    if (currentProfile && currentProfile.verified) { st.textContent = t("verify_status_ok"); st.style.color = "var(--ok)"; form.hidden = true; }
+    else if (currentProfile && currentProfile.verification_requested) { st.textContent = t("verify_status_pending"); st.style.color = "var(--muted)"; form.hidden = false; }
+    else { st.textContent = ""; form.hidden = false; }
+  }
+  $("go-verify").onclick = function () { $("verify-file").value = ""; say($("vmsg"), "", ""); renderVerifyStatus(); showSection("verify"); };
+  $("verify-back").onclick = function () { showSection("home"); };
+
+  $("verify-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var f = $("verify-file").files[0], msg = $("vmsg");
+    if (!f) return say(msg, t("e_verify_file"), "err");
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return say(msg, t("e_photo_type"), "err");
+    if (f.size > 5 * 1024 * 1024) return say(msg, t("e_photo_size"), "err");
+    $("verify-send").disabled = true; say(msg, t("wait"), "");
+    try {
+      var up = await db.storage.from("verifications").upload(currentUser.id + "/selfie", f, { upsert: true, contentType: f.type });
+      if (up.error) throw up.error;
+      var u = await db.from("profiles").update({ verification_requested: true }).eq("id", currentUser.id).select().single();
+      if (u.error) throw u.error;
+      currentProfile = u.data;
+      say(msg, t("verify_sent"), "ok"); renderVerifyStatus();
+    } catch (err) { say(msg, err.message || t("e_generic"), "err"); }
+    $("verify-send").disabled = false;
+  });
 
   // ---------- Sécurité, déconnexion, suppression ----------
   $("go-safety").onclick = function () { showSection("safety"); };
@@ -657,21 +1073,26 @@
   $("logout").onclick = async function () { await db.auth.signOut(); show(null); setMode("login"); };
 
   $("delete-account").onclick = async function () {
-    if (!confirm("Supprimer définitivement votre compte, votre profil, vos photos et vos messages ? Cette action est irréversible.")) return;
-    var hmsg = $("hmsg"); say(hmsg, "Suppression en cours…", "");
+    if (!confirm(t("delete_confirm"))) return;
+    var hmsg = $("hmsg"); say(hmsg, t("deleting"), "");
     try {
-      var l = await db.storage.from("photos").list(currentUser.id);
-      if (l.data && l.data.length) {
-        await db.storage.from("photos").remove(l.data.map(function (f) { return currentUser.id + "/" + f.name; }));
+      var uid = currentUser.id, buckets = ["photos", "verifications"];
+      for (var i = 0; i < buckets.length; i++) {
+        var l = await db.storage.from(buckets[i]).list(uid);
+        if (l.data && l.data.length) {
+          await db.storage.from(buckets[i]).remove(l.data.map(function (f) { return uid + "/" + f.name; }));
+        }
       }
       var r = await db.rpc("delete_my_account");
       if (r.error) throw r.error;
       try { await db.auth.signOut({ scope: "local" }); } catch (x) {}
       show(null); setMode("signup");
-      say($("msg"), "Votre compte a été supprimé.", "ok");
-    } catch (err) { say(hmsg, "Suppression impossible : " + (err.message || err), "err"); }
+      say($("msg"), t("deleted"), "ok");
+    } catch (err) { say(hmsg, t("e_delete") + (err.message || err), "err"); }
   };
 
+  applyI18n();
+  setMode("signup");
   db.auth.getSession().then(function (r) { show(r.data.session ? r.data.session.user : null); });
 </script>
 </body>
