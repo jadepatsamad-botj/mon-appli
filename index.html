@@ -6,7 +6,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#b8324f">
-<title>Mon appli</title>
+<link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Mon appli</title>
 <style>
   :root {
     --bg: #f6f4f1; --card: #ffffff; --fg: #1d2330; --muted: #5d6677;
@@ -195,6 +199,7 @@
     <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
     <button class="primary" id="go-discover" type="button" data-i18n="discover"></button>
     <button class="secondary" id="go-matches" type="button" data-i18n="matches"></button>
+    <button class="secondary" id="go-likes" type="button" data-i18n="likes_btn"></button>
     <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
     <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
     <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
@@ -242,6 +247,14 @@
     <h2 data-i18n="matches_title"></h2>
     <div id="matches-list"></div>
     <p class="empty" id="matches-empty" hidden></p>
+  </section>
+
+  <!-- Qui m'a liké -->
+  <section class="card" id="likes" hidden>
+    <button class="back" id="likes-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="likes_title"></h2>
+    <div id="likes-list"></div>
+    <p class="empty" id="likes-empty" hidden></p>
   </section>
 
   <!-- Discussion -->
@@ -325,6 +338,7 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      likes_btn: "Qui m'a liké", likes_title: "Ils t'ont liké", likes_empty: "Personne pour l'instant. Continue à explorer !",
       tagline: "Rencontrez des personnes qui vous ressemblent.",
       tab_signup: "Créer un compte", tab_login: "Se connecter",
       email: "E-mail", password: "Mot de passe (8 caractères minimum)", birth: "Date de naissance",
@@ -380,6 +394,7 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      likes_btn: "Who liked me", likes_title: "Liked you", likes_empty: "No one yet. Keep exploring!",
       tagline: "Meet people who are right for you.",
       tab_signup: "Create account", tab_login: "Log in",
       email: "Email", password: "Password (8 characters minimum)", birth: "Date of birth",
@@ -435,6 +450,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      likes_btn: "ใครถูกใจฉัน", likes_title: "คนที่ถูกใจคุณ", likes_empty: "ยังไม่มีใคร ลองค้นหาต่อไปนะ!",
       tagline: "พบกับคนที่เข้ากับคุณ",
       tab_signup: "สมัครสมาชิก", tab_login: "เข้าสู่ระบบ",
       email: "อีเมล", password: "รหัสผ่าน (อย่างน้อย 8 ตัวอักษร)", birth: "วันเกิด",
@@ -490,6 +506,7 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      likes_btn: "Ai đã thích tôi", likes_title: "Đã thích bạn", likes_empty: "Chưa có ai. Hãy tiếp tục khám phá!",
       tagline: "Gặp gỡ những người phù hợp với bạn.",
       tab_signup: "Tạo tài khoản", tab_login: "Đăng nhập",
       email: "Email", password: "Mật khẩu (tối thiểu 8 ký tự)", birth: "Ngày sinh",
@@ -545,6 +562,7 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      likes_btn: "谁喜欢我", likes_title: "喜欢你的人", likes_empty: "暂时还没有。继续探索吧！",
       tagline: "遇见适合你的人。",
       tab_signup: "注册账号", tab_login: "登录",
       email: "邮箱", password: "密码（至少 8 个字符）", birth: "出生日期",
@@ -600,6 +618,7 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai Anda", likes_empty: "Belum ada. Teruslah menjelajah!",
       tagline: "Temukan orang yang cocok untuk Anda.",
       tab_signup: "Buat akun", tab_login: "Masuk",
       email: "Email", password: "Kata sandi (minimal 8 karakter)", birth: "Tanggal lahir",
@@ -655,6 +674,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      likes_btn: "いいねしてくれた人", likes_title: "あなたにいいね", likes_empty: "まだ誰もいません。探し続けましょう！",
       tagline: "あなたにぴったりの人と出会おう。",
       tab_signup: "新規登録",
       tab_login: "ログイン",
@@ -770,6 +790,7 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      likes_btn: "나를 좋아한 사람", likes_title: "나를 좋아해요", likes_empty: "아직 없어요. 계속 둘러보세요!",
       tagline: "나와 잘 맞는 사람을 만나 보세요.",
       tab_signup: "회원가입",
       tab_login: "로그인",
@@ -885,6 +906,7 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai anda", likes_empty: "Belum ada sesiapa. Teruskan menerokai!",
       tagline: "Temui orang yang sesuai dengan anda.",
       tab_signup: "Daftar akaun",
       tab_login: "Log masuk",
@@ -1000,6 +1022,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      likes_btn: "Sino ang may gusto sa akin", likes_title: "Nagustuhan ka", likes_empty: "Wala pa. Ituloy ang paghahanap!",
       tagline: "Makilala ang mga taong bagay sa iyo.",
       tab_signup: "Gumawa ng account",
       tab_login: "Mag-log in",
@@ -1115,6 +1138,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      likes_btn: "ໃຜມັກຂ້ອຍ", likes_title: "ມັກເຈົ້າ", likes_empty: "ຍັງບໍ່ມີ. ສືບຕໍ່ຄົ້ນຫາຕໍ່ໄປ!",
       tagline: "ພົບກັບຄົນທີ່ເໝາະສົມກັບເຈົ້າ.",
       tab_signup: "ສະໝັກສະມາຊິກ",
       tab_login: "ເຂົ້າສູ່ລະບົບ",
@@ -1230,6 +1254,7 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      likes_btn: "អ្នកណាចូលចិត្តខ្ញុំ", likes_title: "ចូលចិត្តអ្នក", likes_empty: "មិនទាន់មានទេ។ បន្តស្វែងរក!",
       tagline: "ជួបមនុស្សដែលស័ក្តិសមនឹងអ្នក។",
       tab_signup: "បង្កើតគណនី",
       tab_login: "ចូលប្រើ",
@@ -1435,7 +1460,7 @@
     return r.data.publicUrl + "?v=" + encodeURIComponent(p.updated_at || "");
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -1637,14 +1662,15 @@
           .eq("from_id", candidate.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
         if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; }
       }
-      await nextCandidate();
+      if (fromLikes) { fromLikes = false; showSection("likes"); await loadLikes(); }
+      else await nextCandidate();
     } catch (err) { say(dmsg, err.message || t("e_generic"), "err"); }
     $("like").disabled = $("pass").disabled = false;
   }
 
-  $("go-discover").onclick = function () { $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
+  $("go-discover").onclick = function () { fromLikes = false; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
   $("f-apply").onclick = function () { $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
-  $("discover-back").onclick = function () { showSection("home"); };
+  $("discover-back").onclick = function () { if (fromLikes) { fromLikes = false; showSection("likes"); loadLikes(); } else showSection("home"); };
   $("like").onclick = function () { swipe(true); };
   $("pass").onclick = function () { swipe(false); };
 
@@ -1701,6 +1727,36 @@
   }
   $("go-matches").onclick = function () { showSection("matches"); loadMatches(); };
   $("matches-back").onclick = function () { showSection("home"); };
+
+  // ---------- Qui m'a liké ----------
+  var fromLikes = false;
+  async function loadLikes() {
+    var list = $("likes-list"); list.textContent = ""; $("likes-empty").hidden = true;
+    var me = currentUser.id;
+    var a = await db.from("swipes").select("to_id").eq("from_id", me);
+    var b = await db.from("swipes").select("from_id").eq("to_id", me).eq("liked", true);
+    var done = (a.data || []).map(function (x) { return x.to_id; });
+    var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return done.indexOf(id) === -1; });
+    var people = [];
+    if (ids.length) { var r = await db.from("profiles").select("*").in("id", ids); people = r.data || []; }
+    if (!people.length) { $("likes-empty").textContent = t("likes_empty"); $("likes-empty").hidden = false; return; }
+    people.forEach(function (p) {
+      var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
+      var url = photoUrl(p), pic;
+      if (url) { pic = document.createElement("img"); pic.src = url; pic.alt = ""; }
+      else { pic = document.createElement("div"); pic.className = "mph"; pic.textContent = p.first_name.charAt(0).toUpperCase(); }
+      var info = document.createElement("div"); info.className = "mi";
+      var strong = document.createElement("strong"); strong.textContent = nameWithAge(p) + (p.verified ? " ✓" : "");
+      var small = document.createElement("small"); small.textContent = p.country ? countryLabel(p.country) : "";
+      info.appendChild(strong); info.appendChild(small);
+      row.appendChild(pic); row.appendChild(info);
+      var open = function () { fromLikes = true; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; showSection("discover"); renderCandidate(); };
+      row.onclick = open; row.onkeydown = function (e) { if (e.key === "Enter") open(); };
+      list.appendChild(row);
+    });
+  }
+  $("go-likes").onclick = function () { showSection("likes"); loadLikes(); };
+  $("likes-back").onclick = function () { showSection("home"); };
 
   // ---------- Messagerie ----------
   var chatWith = null, chatTimer = null, lastCount = -1;
