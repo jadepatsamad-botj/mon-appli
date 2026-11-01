@@ -60,6 +60,12 @@
   .photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; background: var(--bg);
     border: 1px solid var(--line); display: block; margin: 0 auto 8px; }
   .photo-ph { display: grid; place-items: center; color: var(--muted); font-size: .8rem; text-align: center; }
+  .slots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 12px; }
+  .slot { position: relative; aspect-ratio: 3/4; border: 1.5px dashed var(--line); border-radius: 10px; overflow: hidden; background: var(--bg); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--accent); font-size: 1.6rem; }
+  .slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .slot input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+  .slot .x { position: absolute; top: 2px; right: 2px; width: 24px; height: 24px; padding: 0; border-radius: 50%; border: 0; background: rgba(0,0,0,.65); color: #fff; font-size: .8rem; line-height: 24px; z-index: 2; cursor: pointer; }
+  .gcount { text-align: center; font-size: .8rem; opacity: .7; margin: -10px 0 12px; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -153,10 +159,8 @@
     <h2 data-i18n="profile_title"></h2>
     <p class="sub" style="margin-bottom:8px" data-i18n="profile_sub"></p>
     <form id="pform" novalidate>
-      <img id="photo-prev" class="photo photo-ph" alt="" hidden>
-      <div id="photo-empty" class="photo photo-ph" data-i18n="no_photo"></div>
-      <label for="photo" data-i18n="photo_label"></label>
-      <input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+      <label data-i18n="photos_label"></label>
+      <div id="slots" class="slots"></div>
 
       <label for="first_name" data-i18n="first_name"></label>
       <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
@@ -338,6 +342,7 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      photos_label: "Photos (jusqu'à 5 · JPG, PNG ou WebP · 5 Mo max chacune)", photo_add: "Ajouter", photo_remove: "Supprimer la photo",
       likes_btn: "Qui m'a liké", likes_title: "Ils t'ont liké", likes_empty: "Personne pour l'instant. Continue à explorer !",
       tagline: "Rencontrez des personnes qui vous ressemblent.",
       tab_signup: "Créer un compte", tab_login: "Se connecter",
@@ -394,6 +399,7 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      photos_label: "Photos (up to 5 · JPG, PNG or WebP · 5 MB each)", photo_add: "Add", photo_remove: "Remove photo",
       likes_btn: "Who liked me", likes_title: "Liked you", likes_empty: "No one yet. Keep exploring!",
       tagline: "Meet people who are right for you.",
       tab_signup: "Create account", tab_login: "Log in",
@@ -450,6 +456,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      photos_label: "รูปภาพ (สูงสุด 5 รูป · JPG, PNG หรือ WebP · รูปละไม่เกิน 5 MB)", photo_add: "เพิ่ม", photo_remove: "ลบรูปภาพ",
       likes_btn: "ใครถูกใจฉัน", likes_title: "คนที่ถูกใจคุณ", likes_empty: "ยังไม่มีใคร ลองค้นหาต่อไปนะ!",
       tagline: "พบกับคนที่เข้ากับคุณ",
       tab_signup: "สมัครสมาชิก", tab_login: "เข้าสู่ระบบ",
@@ -506,6 +513,7 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      photos_label: "Ảnh (tối đa 5 · JPG, PNG hoặc WebP · mỗi ảnh tối đa 5 MB)", photo_add: "Thêm", photo_remove: "Xóa ảnh",
       likes_btn: "Ai đã thích tôi", likes_title: "Đã thích bạn", likes_empty: "Chưa có ai. Hãy tiếp tục khám phá!",
       tagline: "Gặp gỡ những người phù hợp với bạn.",
       tab_signup: "Tạo tài khoản", tab_login: "Đăng nhập",
@@ -562,6 +570,7 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      photos_label: "照片（最多5张 · JPG、PNG或WebP · 每张最大5MB）", photo_add: "添加", photo_remove: "删除照片",
       likes_btn: "谁喜欢我", likes_title: "喜欢你的人", likes_empty: "暂时还没有。继续探索吧！",
       tagline: "遇见适合你的人。",
       tab_signup: "注册账号", tab_login: "登录",
@@ -618,6 +627,7 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      photos_label: "Foto (maksimal 5 · JPG, PNG atau WebP · maks. 5 MB per foto)", photo_add: "Tambah", photo_remove: "Hapus foto",
       likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai Anda", likes_empty: "Belum ada. Teruslah menjelajah!",
       tagline: "Temukan orang yang cocok untuk Anda.",
       tab_signup: "Buat akun", tab_login: "Masuk",
@@ -674,6 +684,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      photos_label: "写真（最大5枚・JPG、PNG、WebP・各5MBまで）", photo_add: "追加", photo_remove: "写真を削除",
       likes_btn: "いいねしてくれた人", likes_title: "あなたにいいね", likes_empty: "まだ誰もいません。探し続けましょう！",
       tagline: "あなたにぴったりの人と出会おう。",
       tab_signup: "新規登録",
@@ -790,6 +801,7 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      photos_label: "사진 (최대 5장 · JPG, PNG 또는 WebP · 장당 최대 5MB)", photo_add: "추가", photo_remove: "사진 삭제",
       likes_btn: "나를 좋아한 사람", likes_title: "나를 좋아해요", likes_empty: "아직 없어요. 계속 둘러보세요!",
       tagline: "나와 잘 맞는 사람을 만나 보세요.",
       tab_signup: "회원가입",
@@ -906,6 +918,7 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      photos_label: "Foto (sehingga 5 · JPG, PNG atau WebP · maksimum 5 MB setiap satu)", photo_add: "Tambah", photo_remove: "Buang foto",
       likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai anda", likes_empty: "Belum ada sesiapa. Teruskan menerokai!",
       tagline: "Temui orang yang sesuai dengan anda.",
       tab_signup: "Daftar akaun",
@@ -1022,6 +1035,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      photos_label: "Mga larawan (hanggang 5 · JPG, PNG o WebP · hanggang 5 MB bawat isa)", photo_add: "Idagdag", photo_remove: "Alisin ang larawan",
       likes_btn: "Sino ang may gusto sa akin", likes_title: "Nagustuhan ka", likes_empty: "Wala pa. Ituloy ang paghahanap!",
       tagline: "Makilala ang mga taong bagay sa iyo.",
       tab_signup: "Gumawa ng account",
@@ -1138,6 +1152,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      photos_label: "ຮູບພາບ (ສູງສຸດ 5 ຮູບ · JPG, PNG ຫຼື WebP · ບໍ່ເກີນ 5 MB ຕໍ່ຮູບ)", photo_add: "ເພີ່ມ", photo_remove: "ລຶບຮູບ",
       likes_btn: "ໃຜມັກຂ້ອຍ", likes_title: "ມັກເຈົ້າ", likes_empty: "ຍັງບໍ່ມີ. ສືບຕໍ່ຄົ້ນຫາຕໍ່ໄປ!",
       tagline: "ພົບກັບຄົນທີ່ເໝາະສົມກັບເຈົ້າ.",
       tab_signup: "ສະໝັກສະມາຊິກ",
@@ -1254,6 +1269,7 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      photos_label: "រូបថត (រហូតដល់ ៥ · JPG, PNG ឬ WebP · ធំបំផុត ៥ MB ក្នុងមួយរូប)", photo_add: "បន្ថែម", photo_remove: "លុបរូបថត",
       likes_btn: "អ្នកណាចូលចិត្តខ្ញុំ", likes_title: "ចូលចិត្តអ្នក", likes_empty: "មិនទាន់មានទេ។ បន្តស្វែងរក!",
       tagline: "ជួបមនុស្សដែលស័ក្តិសមនឹងអ្នក។",
       tab_signup: "បង្កើតគណនី",
@@ -1460,6 +1476,31 @@
     return r.data.publicUrl + "?v=" + encodeURIComponent(p.updated_at || "");
   }
 
+  function photoPaths(p) {
+    if (!p) return [];
+    if (p.photos && p.photos.length) return p.photos;
+    return p.photo_path ? [p.photo_path] : [];
+  }
+  function photoUrls(p) {
+    return photoPaths(p).map(function (path) {
+      return db.storage.from("photos").getPublicUrl(path).data.publicUrl + "?v=" + encodeURIComponent(p.updated_at || "");
+    });
+  }
+  function setGallery(img, p) {
+    var urls = photoUrls(p), cnt = img.nextElementSibling;
+    if (!cnt || !cnt.classList.contains("gcount")) { cnt = document.createElement("div"); cnt.className = "gcount"; img.parentNode.insertBefore(cnt, img.nextSibling); }
+    var i = 0;
+    function show() {
+      img.src = urls[i]; img.hidden = false;
+      cnt.textContent = urls.length > 1 ? "● ".repeat(urls.length).split("●").slice(1).map(function (_, k) { return k === i ? "●" : "○"; }).join(" ") : "";
+      cnt.hidden = urls.length < 2;
+    }
+    if (!urls.length) { img.hidden = true; img.removeAttribute("src"); cnt.hidden = true; img.onclick = null; return; }
+    show();
+    img.style.cursor = urls.length > 1 ? "pointer" : "";
+    img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
+  }
+
   var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
@@ -1483,17 +1524,52 @@
     $("view-name").textContent = nameWithAge(p);
     tagsInto($("view-tags"), p);
     $("view-bio").textContent = p.bio || "";
-    var url = photoUrl(p), img = $("view-photo");
-    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
+    setGallery($("view-photo"), p);
     $("who").textContent = t("connected") + user.email;
     say($("hmsg"), "", "");
     showSection("home");
   }
 
-  function setPreview(url) {
-    var prev = $("photo-prev"), empty = $("photo-empty");
-    if (url) { prev.src = url; prev.hidden = false; empty.hidden = true; }
-    else { prev.hidden = true; prev.removeAttribute("src"); empty.hidden = false; }
+  var slots = [];   // 5 emplacements : { path, file, url }
+  var removedPaths = [];
+  function slotPath(i) { return currentUser.id + "/" + (i === 0 ? "avatar" : "p" + i); }
+  function initSlots(p) {
+    slots = []; removedPaths = [];
+    for (var i = 0; i < 5; i++) slots.push({ path: null, file: null, url: null });
+    var urls = p ? photoUrls(p) : [];
+    photoPaths(p).forEach(function (path, k) {
+      var m = /\/(avatar|p([1-4]))$/.exec(path);
+      var idx = m ? (m[1] === "avatar" ? 0 : parseInt(m[2], 10)) : k;
+      if (slots[idx] && !slots[idx].path) slots[idx] = { path: path, file: null, url: urls[k] };
+    });
+    renderSlots();
+  }
+  function renderSlots() {
+    var box = $("slots"); box.textContent = "";
+    slots.forEach(function (s, i) {
+      var d = document.createElement("div"); d.className = "slot";
+      if (s.url) {
+        var im = document.createElement("img"); im.src = s.url; im.alt = ""; d.appendChild(im);
+        var x = document.createElement("button"); x.type = "button"; x.className = "x"; x.textContent = "✕"; x.setAttribute("aria-label", t("photo_remove"));
+        x.onclick = function () { if (s.path) removedPaths.push(s.path); slots[i] = { path: null, file: null, url: null }; renderSlots(); };
+        d.appendChild(x);
+      } else {
+        d.appendChild(document.createTextNode("+"));
+        d.setAttribute("aria-label", t("photo_add"));
+      }
+      var inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/jpeg,image/png,image/webp";
+      inp.onchange = function () {
+        var f = inp.files[0]; if (!f) return;
+        if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return say($("pmsg"), t("e_photo_type"), "err");
+        if (f.size > 5 * 1024 * 1024) return say($("pmsg"), t("e_photo_size"), "err");
+        say($("pmsg"), "", "");
+        slots[i] = { path: s.path || null, file: f, url: URL.createObjectURL(f) };
+        removedPaths = removedPaths.filter(function (p) { return p !== slotPath(i); });
+        renderSlots();
+      };
+      d.appendChild(inp);
+      box.appendChild(d);
+    });
   }
 
   function fillForm(p) {
@@ -1503,8 +1579,7 @@
     $("looking_for").value = (p && p.looking_for) || "";
     $("bio").value = (p && p.bio) || "";
     $("bio-count").textContent = $("bio").value.length;
-    $("photo").value = "";
-    setPreview(p ? photoUrl(p) : null);
+    initSlots(p);
     $("pcancel").hidden = !p;
     say($("pmsg"), "", "");
   }
@@ -1567,11 +1642,6 @@
 
   // ---------- Profil ----------
   $("bio").addEventListener("input", function () { $("bio-count").textContent = $("bio").value.length; });
-  $("photo").addEventListener("change", function () {
-    var f = $("photo").files[0];
-    if (!f) return setPreview(currentProfile ? photoUrl(currentProfile) : null);
-    setPreview(URL.createObjectURL(f));
-  });
   $("edit").onclick = function () { fillForm(currentProfile); showSection("profile"); };
   $("pcancel").onclick = function () { renderView(currentUser, currentProfile); };
 
@@ -1583,16 +1653,17 @@
     if (!$("gender").value || !$("looking_for").value) return say(msg, t("e_gender"), "err");
     $("psave").disabled = true; say(msg, t("saving"), "");
     try {
-      var photoPath = currentProfile ? currentProfile.photo_path : null;
-      var f = $("photo").files[0];
-      if (f) {
-        if (!/^image\/(jpeg|png|webp)$/.test(f.type)) throw new Error(t("e_photo_type"));
-        if (f.size > 5 * 1024 * 1024) throw new Error(t("e_photo_size"));
-        var path = currentUser.id + "/avatar";
-        var up = await db.storage.from("photos").upload(path, f, { upsert: true, contentType: f.type });
-        if (up.error) throw up.error;
-        photoPath = path;
+      for (var i = 0; i < 5; i++) {
+        var s = slots[i];
+        if (s.file) {
+          var path = slotPath(i);
+          var up = await db.storage.from("photos").upload(path, s.file, { upsert: true, contentType: s.file.type });
+          if (up.error) throw up.error;
+          s.path = path;
+        }
       }
+      var paths = slots.filter(function (s) { return s.path; }).map(function (s) { return s.path; });
+      var photoPath = paths[0] || null;
       var bd = (currentProfile && currentProfile.birthdate) || (currentUser.user_metadata || {}).birthdate || null;
       var row = {
         id: currentUser.id,
@@ -1602,11 +1673,13 @@
         looking_for: $("looking_for").value,
         bio: $("bio").value.trim() || null,
         photo_path: photoPath,
+        photos: paths,
         birthdate: bd,
         updated_at: new Date().toISOString()
       };
       var s = await db.from("profiles").upsert(row).select().single();
       if (s.error) throw s.error;
+      if (removedPaths.length) { try { await db.storage.from("photos").remove(removedPaths); } catch (e2) {} }
       currentProfile = s.data;
       renderView(currentUser, s.data);
     } catch (err) { say(msg, err.message || t("e_generic"), "err"); }
@@ -1620,8 +1693,7 @@
     $("cand-name").textContent = nameWithAge(candidate);
     tagsInto($("cand-tags"), candidate);
     $("cand-bio").textContent = candidate.bio || "";
-    var url = photoUrl(candidate), img = $("cand-photo");
-    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
+    setGallery($("cand-photo"), candidate);
     $("cand").hidden = false;
   }
 
