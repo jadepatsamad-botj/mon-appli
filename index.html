@@ -148,6 +148,7 @@
           <input id="adult" type="checkbox">
           <span data-i18n="adult"></span>
         </label>
+        <button class="linkbtn" id="legal-link-auth" type="button" data-i18n="legal_btn"></button>
       </div>
       <button class="primary" id="submit" type="submit"></button>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
@@ -207,6 +208,7 @@
     <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
     <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
     <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
+    <button class="secondary" id="go-legal" type="button" data-i18n="legal_btn"></button>
     <button class="secondary" id="logout" type="button" data-i18n="logout"></button>
     <div style="text-align:center;margin-top:8px">
       <button class="linkbtn danger" id="delete-account" type="button" data-i18n="delete"></button>
@@ -259,6 +261,13 @@
     <h2 data-i18n="likes_title"></h2>
     <div id="likes-list"></div>
     <p class="empty" id="likes-empty" hidden></p>
+  </section>
+
+  <!-- Conditions et confidentialité -->
+  <section class="card" id="legal" hidden>
+    <button class="back" id="legal-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="legal_btn"></h2>
+    <div id="legal-body" class="tips"></div>
   </section>
 
   <!-- Discussion -->
@@ -342,6 +351,7 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      legal_btn: "Conditions et confidentialité",
       photos_label: "Photos (jusqu'à 5 · JPG, PNG ou WebP · 5 Mo max chacune)", photo_add: "Ajouter", photo_remove: "Supprimer la photo",
       likes_btn: "Qui m'a liké", likes_title: "Ils t'ont liké", likes_empty: "Personne pour l'instant. Continue à explorer !",
       tagline: "Rencontrez des personnes qui vous ressemblent.",
@@ -399,6 +409,7 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      legal_btn: "Terms & privacy",
       photos_label: "Photos (up to 5 · JPG, PNG or WebP · 5 MB each)", photo_add: "Add", photo_remove: "Remove photo",
       likes_btn: "Who liked me", likes_title: "Liked you", likes_empty: "No one yet. Keep exploring!",
       tagline: "Meet people who are right for you.",
@@ -456,6 +467,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      legal_btn: "ข้อกำหนดและความเป็นส่วนตัว",
       photos_label: "รูปภาพ (สูงสุด 5 รูป · JPG, PNG หรือ WebP · รูปละไม่เกิน 5 MB)", photo_add: "เพิ่ม", photo_remove: "ลบรูปภาพ",
       likes_btn: "ใครถูกใจฉัน", likes_title: "คนที่ถูกใจคุณ", likes_empty: "ยังไม่มีใคร ลองค้นหาต่อไปนะ!",
       tagline: "พบกับคนที่เข้ากับคุณ",
@@ -513,6 +525,7 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      legal_btn: "Điều khoản & quyền riêng tư",
       photos_label: "Ảnh (tối đa 5 · JPG, PNG hoặc WebP · mỗi ảnh tối đa 5 MB)", photo_add: "Thêm", photo_remove: "Xóa ảnh",
       likes_btn: "Ai đã thích tôi", likes_title: "Đã thích bạn", likes_empty: "Chưa có ai. Hãy tiếp tục khám phá!",
       tagline: "Gặp gỡ những người phù hợp với bạn.",
@@ -570,6 +583,7 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      legal_btn: "条款与隐私",
       photos_label: "照片（最多5张 · JPG、PNG或WebP · 每张最大5MB）", photo_add: "添加", photo_remove: "删除照片",
       likes_btn: "谁喜欢我", likes_title: "喜欢你的人", likes_empty: "暂时还没有。继续探索吧！",
       tagline: "遇见适合你的人。",
@@ -627,6 +641,7 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      legal_btn: "Ketentuan & privasi",
       photos_label: "Foto (maksimal 5 · JPG, PNG atau WebP · maks. 5 MB per foto)", photo_add: "Tambah", photo_remove: "Hapus foto",
       likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai Anda", likes_empty: "Belum ada. Teruslah menjelajah!",
       tagline: "Temukan orang yang cocok untuk Anda.",
@@ -684,6 +699,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      legal_btn: "利用規約とプライバシー",
       photos_label: "写真（最大5枚・JPG、PNG、WebP・各5MBまで）", photo_add: "追加", photo_remove: "写真を削除",
       likes_btn: "いいねしてくれた人", likes_title: "あなたにいいね", likes_empty: "まだ誰もいません。探し続けましょう！",
       tagline: "あなたにぴったりの人と出会おう。",
@@ -801,6 +817,7 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      legal_btn: "이용약관 및 개인정보",
       photos_label: "사진 (최대 5장 · JPG, PNG 또는 WebP · 장당 최대 5MB)", photo_add: "추가", photo_remove: "사진 삭제",
       likes_btn: "나를 좋아한 사람", likes_title: "나를 좋아해요", likes_empty: "아직 없어요. 계속 둘러보세요!",
       tagline: "나와 잘 맞는 사람을 만나 보세요.",
@@ -918,6 +935,7 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      legal_btn: "Terma & privasi",
       photos_label: "Foto (sehingga 5 · JPG, PNG atau WebP · maksimum 5 MB setiap satu)", photo_add: "Tambah", photo_remove: "Buang foto",
       likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai anda", likes_empty: "Belum ada sesiapa. Teruskan menerokai!",
       tagline: "Temui orang yang sesuai dengan anda.",
@@ -1035,6 +1053,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      legal_btn: "Mga tuntunin at privacy",
       photos_label: "Mga larawan (hanggang 5 · JPG, PNG o WebP · hanggang 5 MB bawat isa)", photo_add: "Idagdag", photo_remove: "Alisin ang larawan",
       likes_btn: "Sino ang may gusto sa akin", likes_title: "Nagustuhan ka", likes_empty: "Wala pa. Ituloy ang paghahanap!",
       tagline: "Makilala ang mga taong bagay sa iyo.",
@@ -1152,6 +1171,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      legal_btn: "ເງື່ອນໄຂ ແລະ ຄວາມເປັນສ່ວນຕົວ",
       photos_label: "ຮູບພາບ (ສູງສຸດ 5 ຮູບ · JPG, PNG ຫຼື WebP · ບໍ່ເກີນ 5 MB ຕໍ່ຮູບ)", photo_add: "ເພີ່ມ", photo_remove: "ລຶບຮູບ",
       likes_btn: "ໃຜມັກຂ້ອຍ", likes_title: "ມັກເຈົ້າ", likes_empty: "ຍັງບໍ່ມີ. ສືບຕໍ່ຄົ້ນຫາຕໍ່ໄປ!",
       tagline: "ພົບກັບຄົນທີ່ເໝາະສົມກັບເຈົ້າ.",
@@ -1269,6 +1289,7 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      legal_btn: "លក្ខខណ្ឌ និងឯកជនភាព",
       photos_label: "រូបថត (រហូតដល់ ៥ · JPG, PNG ឬ WebP · ធំបំផុត ៥ MB ក្នុងមួយរូប)", photo_add: "បន្ថែម", photo_remove: "លុបរូបថត",
       likes_btn: "អ្នកណាចូលចិត្តខ្ញុំ", likes_title: "ចូលចិត្តអ្នក", likes_empty: "មិនទាន់មានទេ។ បន្តស្វែងរក!",
       tagline: "ជួបមនុស្សដែលស័ក្តិសមនឹងអ្នក។",
@@ -1501,7 +1522,7 @@
     img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "legal", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -1829,6 +1850,21 @@
   }
   $("go-likes").onclick = function () { showSection("likes"); loadLikes(); };
   $("likes-back").onclick = function () { showSection("home"); };
+
+  // ---------- Conditions et confidentialité ----------
+  var LEGAL = { fr: [["h", "Projet de texte : à faire relire par un juriste avant tout lancement public."], ["h", "1. Conditions d'utilisation"], ["p", "Jade est un service de rencontres réservé aux personnes de 18 ans et plus. En créant un compte, tu confirmes avoir 18 ans révolus et que les informations de ton profil sont exactes."], ["p", "Tu t'engages à ne pas usurper l'identité d'autrui, à ne pas publier de contenu illégal, sexuel explicite, haineux ou violent, à ne pas harceler les autres membres et à ne jamais demander d'argent."], ["p", "Jade ne vend pas de relations et n'est pas une agence matrimoniale. Les profils vérifiés (✓) ont envoyé un selfie contrôlé par notre équipe, ce qui ne garantit pas l'honnêteté d'une personne. Reste prudent(e) : voir les conseils de sécurité."], ["p", "Nous pouvons suspendre ou supprimer un compte qui ne respecte pas ces règles, notamment après signalement. Le service est fourni en l'état, sans garantie de disponibilité."], ["h", "2. Confidentialité"], ["p", "Données collectées : e-mail, mot de passe (chiffré), prénom, date de naissance, pays, genre, recherche, présentation, photos, messages, likes, signalements et, si tu demandes la vérification, un selfie."], ["p", "Finalités : faire fonctionner l'application (profils, matchs, messagerie), assurer la sécurité et la modération, vérifier les profils."], ["p", "Visibilité : ton prénom, ton âge, ton pays, ta présentation et tes photos sont visibles par les autres membres. Ton e-mail, ta date de naissance exacte et ton selfie de vérification ne sont jamais affichés. Les messages ne sont lisibles que par toi et ton match."], ["p", "Hébergement : tes données sont stockées chez Supabase (serveurs en Inde) et le site est hébergé par GitHub. Elles ne sont pas vendues."], ["p", "Conservation : tant que ton compte existe. Quand tu supprimes ton compte depuis l'application, ton profil, tes photos, ton selfie et tes messages sont effacés."], ["p", "Tes droits (RGPD) : accès, rectification, suppression, opposition, portabilité. Pour les exercer : [E-MAIL DE CONTACT À COMPLÉTER]."], ["p", "Éditeur : [NOM / SOCIÉTÉ À COMPLÉTER]."]], en: [["h", "Draft text: have a lawyer review it before any public launch."], ["h", "1. Terms of use"], ["p", "Jade is a dating service for people aged 18 and over. By creating an account you confirm you are at least 18 and that your profile information is accurate."], ["p", "You agree not to impersonate anyone, not to post illegal, sexually explicit, hateful or violent content, not to harass other members, and never to ask for money."], ["p", "Jade does not sell relationships and is not a marriage agency. Verified profiles (✓) sent a selfie checked by our team, which does not guarantee a person's honesty. Stay careful: see the safety tips."], ["p", "We may suspend or delete an account that breaks these rules, notably after a report. The service is provided as is, without any guarantee of availability."], ["h", "2. Privacy"], ["p", "Data we collect: email, password (encrypted), first name, date of birth, country, gender, who you are looking for, bio, photos, messages, likes, reports and, if you request verification, a selfie."], ["p", "Purposes: running the app (profiles, matches, messaging), security and moderation, verifying profiles."], ["p", "Visibility: your first name, age, country, bio and photos are visible to other members. Your email, exact date of birth and verification selfie are never shown. Messages can only be read by you and your match."], ["p", "Hosting: your data is stored with Supabase (servers in India) and the site is hosted by GitHub. It is not sold."], ["p", "Retention: as long as your account exists. When you delete your account in the app, your profile, photos, selfie and messages are erased."], ["p", "Your rights (GDPR): access, correction, deletion, objection, portability. To exercise them: [CONTACT EMAIL TO COMPLETE]."], ["p", "Publisher: [NAME / COMPANY TO COMPLETE]."]] };
+  var legalFrom = "home";
+  function openLegal(from) {
+    legalFrom = from;
+    var box = $("legal-body"); box.textContent = "";
+    (LEGAL[lang] || LEGAL.en).forEach(function (b) {
+      var el = document.createElement(b[0] === "h" ? "h3" : "p"); el.textContent = b[1]; box.appendChild(el);
+    });
+    showSection("legal");
+  }
+  $("go-legal").onclick = function () { openLegal("home"); };
+  $("legal-link-auth").onclick = function () { openLegal("auth"); };
+  $("legal-back").onclick = function () { showSection(legalFrom); };
 
   // ---------- Messagerie ----------
   var chatWith = null, chatTimer = null, lastCount = -1;
