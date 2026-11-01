@@ -110,6 +110,7 @@
       <option value="th">ไทย</option>
       <option value="vi">Tiếng Việt</option>
       <option value="zh">中文</option>
+      <option value="id">Bahasa Indonesia</option>
     </select>
   </div>
 
@@ -313,7 +314,7 @@
 <script>
   // ===== Réglages faciles à changer =====
   var APP_NAME = "Mon appli";
-  var COUNTRY_KEYS = ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Autre"];
+  var COUNTRY_KEYS = ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Indonésie", "Autre"];
 
   // ===== Textes dans les 4 langues =====
   var I18N = {
@@ -370,7 +371,7 @@
       verify_status_ok: "✓ Votre profil est vérifié.", verify_status_pending: "Demande envoyée : en cours d'examen.",
       verify_sent: "Merci ! Votre demande a été envoyée.", e_verify_file: "Choisissez une photo.", verified_tag: "✓ Vérifié",
       hint: "Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.",
-      countries: ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Autre"]
+      countries: ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Indonésie", "Autre"]
     },
     en: {
       tagline: "Meet people who are right for you.",
@@ -425,7 +426,7 @@
       verify_status_ok: "✓ Your profile is verified.", verify_status_pending: "Request sent: under review.",
       verify_sent: "Thank you! Your request has been sent.", e_verify_file: "Please choose a photo.", verified_tag: "✓ Verified",
       hint: "Prototype. The age check above is only a first step: identity verification will be required before any public launch.",
-      countries: ["Thailand", "Vietnam", "United States", "France", "Germany", "United Kingdom", "Italy", "Spain", "Other"]
+      countries: ["Thailand", "Vietnam", "United States", "France", "Germany", "United Kingdom", "Italy", "Spain", "Indonesia", "Other"]
     },
     th: {
       tagline: "พบกับคนที่เข้ากับคุณ",
@@ -480,7 +481,7 @@
       verify_status_ok: "✓ โปรไฟล์ของคุณได้รับการยืนยันแล้ว", verify_status_pending: "ส่งคำขอแล้ว: กำลังตรวจสอบ",
       verify_sent: "ขอบคุณ! ส่งคำขอของคุณแล้ว", e_verify_file: "กรุณาเลือกรูป", verified_tag: "✓ ยืนยันแล้ว",
       hint: "ต้นแบบ การตรวจสอบอายุข้างต้นเป็นเพียงขั้นแรก ต้องมีการยืนยันตัวตนก่อนเปิดให้ใช้งานจริง",
-      countries: ["ไทย", "เวียดนาม", "สหรัฐอเมริกา", "ฝรั่งเศส", "เยอรมนี", "สหราชอาณาจักร", "อิตาลี", "สเปน", "อื่น ๆ"]
+      countries: ["ไทย", "เวียดนาม", "สหรัฐอเมริกา", "ฝรั่งเศส", "เยอรมนี", "สหราชอาณาจักร", "อิตาลี", "สเปน", "อินโดนีเซีย", "อื่น ๆ"]
     },
     vi: {
       tagline: "Gặp gỡ những người phù hợp với bạn.",
@@ -535,7 +536,7 @@
       verify_status_ok: "✓ Hồ sơ của bạn đã được xác minh.", verify_status_pending: "Đã gửi yêu cầu: đang được xem xét.",
       verify_sent: "Cảm ơn! Yêu cầu của bạn đã được gửi.", e_verify_file: "Vui lòng chọn một ảnh.", verified_tag: "✓ Đã xác minh",
       hint: "Bản thử nghiệm. Việc kiểm tra tuổi ở trên chỉ là bước đầu: cần xác minh danh tính trước khi ra mắt công khai.",
-      countries: ["Thái Lan", "Việt Nam", "Hoa Kỳ", "Pháp", "Đức", "Vương quốc Anh", "Ý", "Tây Ban Nha", "Khác"]
+      countries: ["Thái Lan", "Việt Nam", "Hoa Kỳ", "Pháp", "Đức", "Vương quốc Anh", "Ý", "Tây Ban Nha", "Indonesia", "Khác"]
     },
     zh: {
       tagline: "遇见适合你的人。",
@@ -590,11 +591,66 @@
       verify_status_ok: "✓ 您的资料已通过验证。", verify_status_pending: "申请已提交：审核中。",
       verify_sent: "谢谢！您的申请已提交。", e_verify_file: "请选择一张照片。", verified_tag: "✓ 已验证",
       hint: "原型版本。上述年龄检查只是第一步：正式公开上线前需要进行身份验证。",
-      countries: ["泰国", "越南", "美国", "法国", "德国", "英国", "意大利", "西班牙", "其他"]
+      countries: ["泰国", "越南", "美国", "法国", "德国", "英国", "意大利", "西班牙", "印度尼西亚", "其他"]
+    },
+    id: {
+      tagline: "Temukan orang yang cocok untuk Anda.",
+      tab_signup: "Buat akun", tab_login: "Masuk",
+      email: "Email", password: "Kata sandi (minimal 8 karakter)", birth: "Tanggal lahir",
+      adult: "Saya menyatakan berusia 18 tahun atau lebih dan menyetujui ketentuan penggunaan.",
+      btn_signup: "Buat akun saya", btn_login: "Masuk", wait: "Mohon tunggu…",
+      e_creds: "Masukkan email dan kata sandi minimal 8 karakter.",
+      e_birth: "Masukkan tanggal lahir Anda.", e_under18: "Anda harus berusia 18 tahun atau lebih.",
+      e_adult: "Centang kotak untuk menyatakan usia Anda.",
+      ok_created: "Akun dibuat. Buka email konfirmasi, lalu kembali untuk masuk.",
+      e_generic: "Terjadi kesalahan.", e_profile_load: "Tidak dapat memuat profil: ",
+      profile_title: "Profil saya", profile_sub: "Beberapa informasi untuk memulai.",
+      no_photo: "Belum ada foto", photo_label: "Foto (JPG, PNG, atau WebP, maks. 5 MB)",
+      first_name: "Nama depan", country: "Negara", choose: "Pilih…", i_am: "Saya adalah", looking: "Saya mencari",
+      opt_man: "Seorang pria", opt_woman: "Seorang wanita", opt_other: "Lainnya", opt_any: "Siapa saja",
+      bio: "Tentang saya", bio_ph: "Ceritakan sedikit tentang diri Anda…",
+      save_profile: "Simpan profil", cancel: "Batal", saving: "Menyimpan…",
+      e_name: "Masukkan nama depan Anda.", e_gender: "Pilih Anda siapa dan siapa yang Anda cari.",
+      e_photo_type: "Foto harus berformat JPG, PNG, atau WebP.", e_photo_size: "Foto terlalu besar (maks. 5 MB).",
+      g_homme: "Pria", g_femme: "Wanita", g_autre: "Lainnya",
+      l_homme: "Mencari pria", l_femme: "Mencari wanita", l_tous: "Mencari: siapa saja",
+      connected: "Masuk sebagai: ", discover: "Temukan profil", matches: "Match saya", edit: "Ubah profil",
+      safety_btn: "Tips keamanan", verify_btn: "Verifikasi profil saya", logout: "Keluar",
+      delete: "Hapus akun saya", back: "← Kembali", back_matches: "← Match saya",
+      filters: "Filter", age_min: "Usia min.", age_max: "Usia maks.", all_countries: "Semua negara", apply: "Terapkan",
+      pass: "Lewati", like: "Suka ❤", report_profile: "Laporkan profil ini",
+      no_more: "Belum ada profil lagi untuk saat ini. Coba lagi nanti!", searching: "Mencari profil…",
+      match_with: "Anda match dengan {name}! 🎉",
+      matches_title: "Match saya", matches_empty: "Belum ada match. Terus temukan profil!",
+      matches_err: "Tidak dapat memuat match.", new_badge: "Baru", you: "Anda: ",
+      msg_ph: "Pesan Anda…", send: "Kirim", e_send: "Tidak dapat mengirim: ",
+      report: "Laporkan", block: "Blokir", report_title: "Laporkan",
+      report_sub: "Laporan Anda bersifat rahasia dan akan ditinjau oleh tim.",
+      reason: "Alasan", r_fake: "Profil palsu / foto curian", r_scam: "Meminta uang atau penipuan",
+      r_harass: "Pelecehan atau ancaman", r_content: "Konten tidak pantas", r_minor: "Orang yang tampak di bawah umur", r_other: "Lainnya",
+      details: "Detail (opsional)", send_report: "Kirim laporan", e_reason: "Pilih alasan.",
+      ok_report: "Terima kasih, laporan Anda telah dikirim. Anda juga dapat memblokir orang ini.",
+      block_confirm: "Blokir {name}? Kalian tidak akan saling melihat dan tidak dapat saling mengirim pesan.", e_block: "Tidak dapat memblokir: ",
+      safety_title: "Tips keamanan",
+      s1: "**Jangan pernah mengirim uang**, kartu hadiah, atau mata uang kripto kepada orang yang dikenal secara online, meski sudah mengobrol berminggu-minggu.",
+      s2: "Waspadai orang yang cepat-cepat mengajak pindah ke aplikasi lain (WhatsApp, Telegram…) atau menyatakan cinta setelah beberapa hari.",
+      s3: "Minta **panggilan video** sebelum bertemu. Orang yang selalu menolak adalah tanda bahaya.",
+      s4: "Jangan pernah membagikan dokumen identitas, kode perbankan, atau kode yang diterima lewat SMS.",
+      s5: "Untuk kencan pertama, pilih **tempat umum** dan beri tahu kerabat atau teman.",
+      s6: "Ada perilaku mencurigakan? **Laporkan** profilnya dan **blokir** orang tersebut.",
+      delete_confirm: "Hapus akun, profil, foto, dan pesan Anda secara permanen? Tindakan ini tidak dapat dibatalkan.",
+      deleting: "Menghapus…", e_delete: "Tidak dapat menghapus: ", deleted: "Akun Anda telah dihapus.",
+      verify_title: "Verifikasi profil saya",
+      verify_text: "Profil terverifikasi lebih meyakinkan bagi orang lain. Kirim selfie yang menampilkan wajah Anda dengan jelas sambil memegang kertas bertuliskan nama aplikasi dan tanggal hari ini. Tim akan membandingkannya dengan foto Anda. Selfie tetap pribadi dan tidak pernah ditampilkan kepada orang lain.",
+      verify_file: "Selfie Anda", verify_send: "Kirim untuk verifikasi",
+      verify_status_ok: "✓ Profil Anda telah terverifikasi.", verify_status_pending: "Permintaan terkirim: sedang ditinjau.",
+      verify_sent: "Terima kasih! Permintaan Anda telah dikirim.", e_verify_file: "Pilih sebuah foto.", verified_tag: "✓ Terverifikasi",
+      hint: "Prototipe. Pemeriksaan usia di atas hanyalah langkah pertama: verifikasi identitas diperlukan sebelum peluncuran publik.",
+      countries: ["Thailand", "Vietnam", "Amerika Serikat", "Prancis", "Jerman", "Inggris Raya", "Italia", "Spanyol", "Indonesia", "Lainnya"]
     }
   };
 
-  var LANGS = ["fr", "en", "th", "vi", "zh"];
+  var LANGS = ["fr", "en", "th", "vi", "zh", "id"];
   var lang = "fr";
   try { var saved = localStorage.getItem("lang"); if (LANGS.indexOf(saved) !== -1) lang = saved; else throw 0; }
   catch (e) {
