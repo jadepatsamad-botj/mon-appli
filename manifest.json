@@ -1,11 +1,11 @@
 {
-  "name": "Mon appli",
-  "short_name": "Mon appli",
+  "name": "Jade",
+  "short_name": "Jade",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#b8324f",
-  "theme_color": "#b8324f",
+  "background_color": "#1f7a5c",
+  "theme_color": "#1f7a5c",
   "icons": [
     { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
