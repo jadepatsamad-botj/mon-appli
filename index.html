@@ -30,11 +30,11 @@
   .tabs button[aria-selected="true"] { background: var(--card); color: var(--fg);
     box-shadow: 0 1px 2px rgba(0,0,0,.15); }
   label { display: block; font-size: .85rem; font-weight: 600; margin: 14px 0 6px; }
-  input[type=email], input[type=password], input[type=date], input[type=text], select, textarea {
+  input[type=email], input[type=password], input[type=date], input[type=text], input[type=number], select, textarea {
     width: 100%; padding: 12px; font: inherit; color: var(--fg); background: var(--bg);
     border: 1px solid var(--line); border-radius: 10px; }
   textarea { min-height: 110px; resize: vertical; }
-  input:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  input:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .check { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: .9rem; color: var(--muted); font-weight: 400; }
   .check input { margin-top: 4px; }
   .primary { width: 100%; margin-top: 20px; padding: 13px; border: 0; border-radius: 10px;
@@ -42,6 +42,9 @@
   .primary:disabled { opacity: .6; cursor: wait; }
   .secondary { width: 100%; margin-top: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 10px;
     background: transparent; color: var(--fg); font: inherit; font-weight: 600; cursor: pointer; }
+  .linkbtn { background: none; border: 0; color: var(--muted); font: inherit; font-size: .85rem; cursor: pointer;
+    text-decoration: underline; padding: 6px 0; }
+  .danger { color: var(--err); }
   .msg { margin-top: 16px; font-size: .92rem; min-height: 1.4em; }
   .msg.ok { color: var(--ok); } .msg.err { color: var(--err); }
   .hint { font-size: .8rem; color: var(--muted); margin-top: 18px; }
@@ -51,7 +54,7 @@
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
-  .bio { white-space: pre-wrap; margin: 12px 0 0; }
+  .bio { white-space: pre-wrap; margin: 12px 0 0; overflow-wrap: anywhere; }
   .count { font-size: .78rem; color: var(--muted); text-align: right; margin-top: 4px; }
   .chat-box { height: 340px; overflow-y: auto; background: var(--bg); border: 1px solid var(--line);
     border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
@@ -64,8 +67,8 @@
   .chat-form button { padding: 0 18px; border: 0; border-radius: 10px; background: var(--accent); color: var(--accent-fg);
     font: inherit; font-weight: 700; cursor: pointer; }
   .chat-form button:disabled { opacity: .6; }
-  .mrow.link { cursor: pointer; }
-  .mrow .go { margin-left: auto; color: var(--accent); font-weight: 600; font-size: .9rem; }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .head-actions { display: flex; gap: 12px; }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .row .primary, .row .secondary { margin-top: 12px; }
   .back { background: none; border: 0; color: var(--muted); font: inherit; cursor: pointer; padding: 0 0 12px; }
@@ -77,12 +80,19 @@
   .mrow img, .mrow .mph { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; background: var(--bg); flex: none; }
   .mrow .mph { display: grid; place-items: center; color: var(--muted); font-weight: 700; }
   .mrow small { color: var(--muted); display: block; }
+  .mrow.link { cursor: pointer; }
+  .mrow .go { margin-left: auto; color: var(--accent); font-weight: 600; font-size: .9rem; }
+  details.filters { margin-bottom: 14px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+  details.filters summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .tips { padding-left: 18px; margin: 8px 0 0; }
+  .tips li { margin-bottom: 10px; }
   [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <main>
-  <h1>Mon appli</h1>
+  <h1 id="app-name">Mon appli</h1>
   <p class="sub">Rencontrez des personnes qui vous ressemblent.</p>
 
   <!-- Connexion / inscription -->
@@ -112,7 +122,7 @@
   <!-- Formulaire de profil -->
   <section class="card" id="profile" hidden>
     <h2>Mon profil</h2>
-    <p class="sub" id="profile-sub" style="margin-bottom:8px">Quelques informations pour commencer.</p>
+    <p class="sub" style="margin-bottom:8px">Quelques informations pour commencer.</p>
     <form id="pform" novalidate>
       <img id="photo-prev" class="photo photo-ph" alt="Aperçu de la photo" hidden>
       <div id="photo-empty" class="photo photo-ph">Pas encore<br>de photo</div>
@@ -123,18 +133,7 @@
       <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
 
       <label for="country">Pays</label>
-      <select id="country">
-        <option value="">Choisir…</option>
-        <option>Thaïlande</option>
-        <option>Vietnam</option>
-        <option>États-Unis</option>
-        <option>France</option>
-        <option>Allemagne</option>
-        <option>Royaume-Uni</option>
-        <option>Italie</option>
-        <option>Espagne</option>
-        <option>Autre</option>
-      </select>
+      <select id="country"></select>
 
       <label for="gender">Je suis</label>
       <select id="gender">
@@ -162,7 +161,7 @@
     </form>
   </section>
 
-  <!-- Affichage du profil -->
+  <!-- Accueil / mon profil -->
   <section class="card" id="home" hidden>
     <img id="view-photo" class="view-photo" alt="Ma photo" hidden>
     <h2 id="view-name"></h2>
@@ -172,12 +171,27 @@
     <button class="primary" id="go-discover" type="button">Découvrir des profils</button>
     <button class="secondary" id="go-matches" type="button">Mes matchs</button>
     <button class="secondary" id="edit" type="button">Modifier mon profil</button>
+    <button class="secondary" id="go-safety" type="button">Conseils de sécurité</button>
     <button class="secondary" id="logout" type="button">Se déconnecter</button>
+    <div style="text-align:center;margin-top:8px">
+      <button class="linkbtn danger" id="delete-account" type="button">Supprimer mon compte</button>
+    </div>
+    <div class="msg" id="hmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Découverte -->
   <section class="card" id="discover" hidden>
     <button class="back" id="discover-back" type="button">← Retour</button>
+    <details class="filters" id="filters">
+      <summary>Filtres</summary>
+      <div class="two">
+        <div><label for="f-min">Âge min.</label><input id="f-min" type="number" min="18" max="99" value="18"></div>
+        <div><label for="f-max">Âge max.</label><input id="f-max" type="number" min="18" max="99" value="99"></div>
+      </div>
+      <label for="f-country">Pays</label>
+      <select id="f-country"></select>
+      <button class="secondary" id="f-apply" type="button">Appliquer</button>
+    </details>
     <div class="match-banner" id="match-banner" hidden></div>
     <div id="cand" hidden>
       <img id="cand-photo" class="view-photo" alt="Photo du profil" hidden>
@@ -187,6 +201,9 @@
       <div class="row">
         <button class="secondary" id="pass" type="button">Passer</button>
         <button class="primary" id="like" type="button">J'aime ❤</button>
+      </div>
+      <div style="text-align:center;margin-top:8px">
+        <button class="linkbtn" id="cand-report" type="button">Signaler ce profil</button>
       </div>
     </div>
     <p class="empty" id="cand-empty" hidden>Plus de profils pour le moment. Revenez plus tard !</p>
@@ -204,8 +221,14 @@
   <!-- Discussion -->
   <section class="card" id="chat" hidden>
     <button class="back" id="chat-back" type="button">← Mes matchs</button>
-    <h2 id="chat-name"></h2>
-    <div class="chat-box" id="chat-box" aria-live="polite"></div>
+    <div class="head">
+      <h2 id="chat-name" style="margin:0"></h2>
+      <div class="head-actions">
+        <button class="linkbtn" id="chat-report" type="button">Signaler</button>
+        <button class="linkbtn danger" id="chat-block" type="button">Bloquer</button>
+      </div>
+    </div>
+    <div class="chat-box" id="chat-box" aria-live="polite" style="margin-top:12px"></div>
     <form class="chat-form" id="chat-form">
       <input id="chat-input" type="text" maxlength="1000" placeholder="Votre message…" autocomplete="off" aria-label="Votre message">
       <button id="chat-send" type="submit">Envoyer</button>
@@ -213,11 +236,52 @@
     <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
   </section>
 
+  <!-- Signalement -->
+  <section class="card" id="report" hidden>
+    <button class="back" id="report-back" type="button">← Retour</button>
+    <h2>Signaler <span id="report-name"></span></h2>
+    <p class="sub" style="margin-bottom:0">Votre signalement est confidentiel. Il est examiné par l'équipe.</p>
+    <form id="report-form" novalidate>
+      <label for="report-reason">Motif</label>
+      <select id="report-reason">
+        <option value="">Choisir…</option>
+        <option value="faux_profil">Faux profil / photos volées</option>
+        <option value="arnaque">Demande d'argent ou arnaque</option>
+        <option value="harcelement">Harcèlement ou menaces</option>
+        <option value="contenu_inapproprie">Contenu inapproprié</option>
+        <option value="mineur">Personne qui semble mineure</option>
+        <option value="autre">Autre</option>
+      </select>
+      <label for="report-details">Détails (facultatif)</label>
+      <textarea id="report-details" maxlength="1000"></textarea>
+      <button class="primary" id="report-send" type="submit">Envoyer le signalement</button>
+      <div class="msg" id="rmsg" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- Sécurité -->
+  <section class="card" id="safety" hidden>
+    <button class="back" id="safety-back" type="button">← Retour</button>
+    <h2>Conseils de sécurité</h2>
+    <ul class="tips">
+      <li><strong>N'envoyez jamais d'argent</strong>, de cartes cadeaux ou de cryptomonnaie à quelqu'un rencontré en ligne, même après des semaines de discussion.</li>
+      <li>Méfiez-vous de quelqu'un qui veut très vite quitter l'appli (WhatsApp, Telegram…) ou qui déclare son amour après quelques jours.</li>
+      <li>Demandez un <strong>appel vidéo</strong> avant toute rencontre. Une personne qui refuse toujours est un signal d'alerte.</li>
+      <li>Ne partagez jamais vos papiers d'identité, codes bancaires ou codes reçus par SMS.</li>
+      <li>Pour un premier rendez-vous, choisissez un <strong>lieu public</strong> et prévenez un proche.</li>
+      <li>Un comportement suspect ? <strong>Signalez</strong> le profil et <strong>bloquez</strong> la personne.</li>
+    </ul>
+  </section>
+
   <p class="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
+  // ===== Réglages faciles à changer =====
+  var APP_NAME = "Mon appli";
+  var COUNTRIES = ["Thaïlande", "Vietnam", "États-Unis", "France", "Allemagne", "Royaume-Uni", "Italie", "Espagne", "Autre"];
+
   // Clé publique : elle est faite pour être visible dans l'appli.
   var SUPABASE_URL = "https://yvjmcaknsdpdxilenbku.supabase.co";
   var SUPABASE_KEY = "sb_publishable_OZixI26YHQ6zO3nijJpTCA_olbwJl-w";
@@ -227,6 +291,17 @@
   var currentUser = null;
   var currentProfile = null;
   var $ = function (id) { return document.getElementById(id); };
+
+  document.title = APP_NAME;
+  $("app-name").textContent = APP_NAME;
+
+  function fillCountries(sel, firstLabel) {
+    sel.textContent = "";
+    var o = document.createElement("option"); o.value = ""; o.textContent = firstLabel; sel.appendChild(o);
+    COUNTRIES.forEach(function (c) { var x = document.createElement("option"); x.value = c; x.textContent = c; sel.appendChild(x); });
+  }
+  fillCountries($("country"), "Choisir…");
+  fillCountries($("f-country"), "Tous les pays");
 
   function say(el, text, kind) { el.textContent = text; el.className = "msg " + (kind || ""); }
 
@@ -247,6 +322,8 @@
     if (m < 0 || (m === 0 && n.getDate() < b.getDate())) a--;
     return a;
   }
+  function dateYearsAgo(n) { var d = new Date(); d.setFullYear(d.getFullYear() - n); return d.toISOString().slice(0, 10); }
+  function nameWithAge(p) { return p.first_name + (p.birthdate ? ", " + ageFrom(p.birthdate) : ""); }
 
   function photoUrl(p) {
     if (!p || !p.photo_path) return null;
@@ -254,9 +331,10 @@
     return r.data.publicUrl + "?v=" + encodeURIComponent(p.updated_at || "");
   }
 
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "chat", "report", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
-    ["auth", "profile", "home", "discover", "matches", "chat"].forEach(function (id) { $(id).hidden = id !== name; });
+    SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
   }
 
   function labelFor(kind, v) {
@@ -267,18 +345,29 @@
     return (t[kind] && t[kind][v]) || "";
   }
 
-  function renderView(user, p) {
-    $("view-name").textContent = p.first_name;
-    var tags = $("view-tags"); tags.textContent = "";
+  function tagsInto(el, p) {
+    el.textContent = "";
     [p.country, labelFor("gender", p.gender), labelFor("looking_for", p.looking_for)].forEach(function (t) {
       if (!t) return;
-      var s = document.createElement("span"); s.className = "tag"; s.textContent = t; tags.appendChild(s);
+      var s = document.createElement("span"); s.className = "tag"; s.textContent = t; el.appendChild(s);
     });
+  }
+
+  function renderView(user, p) {
+    $("view-name").textContent = nameWithAge(p);
+    tagsInto($("view-tags"), p);
     $("view-bio").textContent = p.bio || "";
     var url = photoUrl(p), img = $("view-photo");
     if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
     $("who").textContent = "Connecté : " + user.email;
+    say($("hmsg"), "", "");
     showSection("home");
+  }
+
+  function setPreview(url) {
+    var prev = $("photo-prev"), empty = $("photo-empty");
+    if (url) { prev.src = url; prev.hidden = false; empty.hidden = true; }
+    else { prev.hidden = true; prev.removeAttribute("src"); empty.hidden = false; }
   }
 
   function fillForm(p) {
@@ -289,16 +378,9 @@
     $("bio").value = (p && p.bio) || "";
     $("bio-count").textContent = $("bio").value.length;
     $("photo").value = "";
-    var url = p ? photoUrl(p) : null;
-    setPreview(url);
+    setPreview(p ? photoUrl(p) : null);
     $("pcancel").hidden = !p;
     say($("pmsg"), "", "");
-  }
-
-  function setPreview(url) {
-    var prev = $("photo-prev"), empty = $("photo-empty");
-    if (url) { prev.src = url; prev.hidden = false; empty.hidden = true; }
-    else { prev.hidden = true; prev.removeAttribute("src"); empty.hidden = false; }
   }
 
   async function loadProfile(user) {
@@ -315,6 +397,7 @@
     loadProfile(user);
   }
 
+  // ---------- Connexion ----------
   $("tab-signup").onclick = function () { setMode("signup"); };
   $("tab-login").onclick = function () { setMode("login"); };
 
@@ -344,14 +427,13 @@
     $("submit").disabled = false;
   });
 
+  // ---------- Profil ----------
   $("bio").addEventListener("input", function () { $("bio-count").textContent = $("bio").value.length; });
-
   $("photo").addEventListener("change", function () {
     var f = $("photo").files[0];
     if (!f) return setPreview(currentProfile ? photoUrl(currentProfile) : null);
     setPreview(URL.createObjectURL(f));
   });
-
   $("edit").onclick = function () { fillForm(currentProfile); showSection("profile"); };
   $("pcancel").onclick = function () { renderView(currentUser, currentProfile); };
 
@@ -373,6 +455,7 @@
         if (up.error) throw up.error;
         photoPath = path;
       }
+      var bd = (currentProfile && currentProfile.birthdate) || (currentUser.user_metadata || {}).birthdate || null;
       var row = {
         id: currentUser.id,
         first_name: name,
@@ -381,6 +464,7 @@
         looking_for: $("looking_for").value,
         bio: $("bio").value.trim() || null,
         photo_path: photoPath,
+        birthdate: bd,
         updated_at: new Date().toISOString()
       };
       var s = await db.from("profiles").upsert(row).select().single();
@@ -394,14 +478,6 @@
   // ---------- Découverte ----------
   var candidate = null;
 
-  function tagsInto(el, p) {
-    el.textContent = "";
-    [p.country, labelFor("gender", p.gender), labelFor("looking_for", p.looking_for)].forEach(function (t) {
-      if (!t) return;
-      var s = document.createElement("span"); s.className = "tag"; s.textContent = t; el.appendChild(s);
-    });
-  }
-
   async function nextCandidate() {
     var dmsg = $("dmsg"); say(dmsg, "Recherche de profils…", "");
     $("cand").hidden = true; $("cand-empty").hidden = true;
@@ -414,12 +490,16 @@
       .in("looking_for", [currentProfile.gender, "tous"])
       .order("created_at", { ascending: false }).limit(1);
     if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
+    var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
+    if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
+    if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
+    if ($("f-country").value) q = q.eq("country", $("f-country").value);
     var r = await q;
     if (r.error) return say(dmsg, r.error.message, "err");
     say(dmsg, "", "");
     candidate = r.data && r.data[0];
     if (!candidate) { $("cand-empty").hidden = false; return; }
-    $("cand-name").textContent = candidate.first_name;
+    $("cand-name").textContent = nameWithAge(candidate);
     tagsInto($("cand-tags"), candidate);
     $("cand-bio").textContent = candidate.bio || "";
     var url = photoUrl(candidate), img = $("cand-photo");
@@ -445,6 +525,13 @@
     $("like").disabled = $("pass").disabled = false;
   }
 
+  $("go-discover").onclick = function () { $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
+  $("f-apply").onclick = function () { $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
+  $("discover-back").onclick = function () { showSection("home"); };
+  $("like").onclick = function () { swipe(true); };
+  $("pass").onclick = function () { swipe(false); };
+
+  // ---------- Matchs ----------
   async function loadMatches() {
     var list = $("matches-list"); list.textContent = ""; $("matches-empty").hidden = true;
     var a = await db.from("swipes").select("to_id").eq("from_id", currentUser.id).eq("liked", true);
@@ -452,24 +539,29 @@
     if (a.error || b.error) { $("matches-empty").textContent = "Impossible de charger les matchs."; $("matches-empty").hidden = false; return; }
     var mine = (a.data || []).map(function (x) { return x.to_id; });
     var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return mine.indexOf(id) !== -1; });
-    if (!ids.length) { $("matches-empty").textContent = "Pas encore de match. Continuez à découvrir des profils !"; $("matches-empty").hidden = false; return; }
-    var r = await db.from("profiles").select("*").in("id", ids);
-    (r.data || []).forEach(function (p) {
-      var row = document.createElement("div"); row.className = "mrow";
+    var people = [];
+    if (ids.length) {
+      var r = await db.from("profiles").select("*").in("id", ids);   // les personnes bloquées n'apparaissent plus
+      people = r.data || [];
+    }
+    if (!people.length) { $("matches-empty").textContent = "Pas encore de match. Continuez à découvrir des profils !"; $("matches-empty").hidden = false; return; }
+    people.forEach(function (p) {
+      var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
       var url = photoUrl(p), pic;
       if (url) { pic = document.createElement("img"); pic.src = url; pic.alt = ""; }
       else { pic = document.createElement("div"); pic.className = "mph"; pic.textContent = p.first_name.charAt(0).toUpperCase(); }
       var info = document.createElement("div");
-      var strong = document.createElement("strong"); strong.textContent = p.first_name;
+      var strong = document.createElement("strong"); strong.textContent = nameWithAge(p);
       var small = document.createElement("small"); small.textContent = p.country || "";
       info.appendChild(strong); info.appendChild(small);
       var go = document.createElement("span"); go.className = "go"; go.textContent = "Écrire →";
-      row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
       row.onclick = function () { openChat(p); };
       row.onkeydown = function (e) { if (e.key === "Enter") openChat(p); };
       row.appendChild(pic); row.appendChild(info); row.appendChild(go); list.appendChild(row);
     });
   }
+  $("go-matches").onclick = function () { showSection("matches"); loadMatches(); };
+  $("matches-back").onclick = function () { showSection("home"); };
 
   // ---------- Messagerie ----------
   var chatWith = null, chatTimer = null, lastCount = -1;
@@ -519,14 +611,66 @@
   });
   $("chat-back").onclick = function () { showSection("matches"); loadMatches(); };
 
-  $("go-discover").onclick = function () { $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
-  $("go-matches").onclick = function () { showSection("matches"); loadMatches(); };
-  $("discover-back").onclick = function () { showSection("home"); };
-  $("matches-back").onclick = function () { showSection("home"); };
-  $("like").onclick = function () { swipe(true); };
-  $("pass").onclick = function () { swipe(false); };
+  // ---------- Signaler / bloquer ----------
+  var reportTarget = null, reportReturn = "home";
+
+  function openReport(p, ret) {
+    reportTarget = p; reportReturn = ret;
+    $("report-name").textContent = p.first_name;
+    $("report-reason").value = ""; $("report-details").value = "";
+    say($("rmsg"), "", "");
+    showSection("report");
+  }
+  $("cand-report").onclick = function () { if (candidate) openReport(candidate, "discover"); };
+  $("chat-report").onclick = function () { if (chatWith) openReport(chatWith, "chat"); };
+  $("report-back").onclick = function () { showSection(reportReturn); };
+
+  $("report-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    if (!$("report-reason").value) return say($("rmsg"), "Choisissez un motif.", "err");
+    $("report-send").disabled = true;
+    var r = await db.from("reports").insert({
+      reporter_id: currentUser.id, reported_id: reportTarget.id,
+      reason: $("report-reason").value, details: $("report-details").value.trim() || null
+    });
+    if (r.error) say($("rmsg"), "Envoi impossible : " + r.error.message, "err");
+    else {
+      say($("rmsg"), "Merci, votre signalement a bien été envoyé. Vous pouvez aussi bloquer cette personne.", "ok");
+      setTimeout(function () { if (!$("report").hidden) showSection(reportReturn); }, 2200);
+    }
+    $("report-send").disabled = false;
+  });
+
+  $("chat-block").onclick = async function () {
+    if (!chatWith) return;
+    if (!confirm("Bloquer " + chatWith.first_name + " ? Vous ne vous verrez plus et ne pourrez plus vous écrire.")) return;
+    var r = await db.from("blocks").insert({ blocker_id: currentUser.id, blocked_id: chatWith.id });
+    if (r.error) return say($("cmsg"), "Blocage impossible : " + r.error.message, "err");
+    chatWith = null;
+    showSection("matches"); loadMatches();
+  };
+
+  // ---------- Sécurité, déconnexion, suppression ----------
+  $("go-safety").onclick = function () { showSection("safety"); };
+  $("safety-back").onclick = function () { showSection("home"); };
 
   $("logout").onclick = async function () { await db.auth.signOut(); show(null); setMode("login"); };
+
+  $("delete-account").onclick = async function () {
+    if (!confirm("Supprimer définitivement votre compte, votre profil, vos photos et vos messages ? Cette action est irréversible.")) return;
+    var hmsg = $("hmsg"); say(hmsg, "Suppression en cours…", "");
+    try {
+      var l = await db.storage.from("photos").list(currentUser.id);
+      if (l.data && l.data.length) {
+        await db.storage.from("photos").remove(l.data.map(function (f) { return currentUser.id + "/" + f.name; }));
+      }
+      var r = await db.rpc("delete_my_account");
+      if (r.error) throw r.error;
+      try { await db.auth.signOut({ scope: "local" }); } catch (x) {}
+      show(null); setMode("signup");
+      say($("msg"), "Votre compte a été supprimé.", "ok");
+    } catch (err) { say(hmsg, "Suppression impossible : " + (err.message || err), "err"); }
+  };
 
   db.auth.getSession().then(function (r) { show(r.data.session ? r.data.session.user : null); });
 </script>
