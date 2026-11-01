@@ -66,6 +66,10 @@
   .slot input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
   .slot .x { position: absolute; top: 2px; right: 2px; width: 24px; height: 24px; padding: 0; border-radius: 50%; border: 0; background: rgba(0,0,0,.65); color: #fff; font-size: .8rem; line-height: 24px; z-index: 2; cursor: pointer; }
   .gcount { text-align: center; font-size: .8rem; opacity: .7; margin: -10px 0 12px; }
+  .arow { border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .arow img { width: 96px; height: 128px; object-fit: cover; border-radius: 8px; background: var(--bg); }
+  .arow .ainfo { flex: 1; min-width: 160px; font-size: .9rem; }
+  .arow .abtns button { width: auto; display: inline-block; margin: 6px 6px 0 0; padding: 8px 12px; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -209,6 +213,7 @@
     <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
     <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
     <button class="secondary" id="go-legal" type="button" data-i18n="legal_btn"></button>
+    <button class="secondary" id="go-admin" type="button" hidden>Administration</button>
     <button class="secondary" id="logout" type="button" data-i18n="logout"></button>
     <div style="text-align:center;margin-top:8px">
       <button class="linkbtn danger" id="delete-account" type="button" data-i18n="delete"></button>
@@ -268,6 +273,17 @@
     <button class="back" id="legal-back" type="button" data-i18n="back"></button>
     <h2 data-i18n="legal_btn"></h2>
     <div id="legal-body" class="tips"></div>
+  </section>
+
+  <!-- Administration (réservée à l'admin) -->
+  <section class="card" id="admin" hidden>
+    <button class="back" id="admin-back" type="button">← Retour</button>
+    <h2>Administration</h2>
+    <h3>Vérifications en attente</h3>
+    <div id="admin-verifs"></div>
+    <h3>Signalements à traiter</h3>
+    <div id="admin-reports"></div>
+    <div class="msg" id="admsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Discussion -->
@@ -1522,7 +1538,7 @@
     img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "legal", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "legal", "admin", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -1549,6 +1565,7 @@
     $("who").textContent = t("connected") + user.email;
     say($("hmsg"), "", "");
     showSection("home");
+    checkAdmin();
   }
 
   var slots = [];   // 5 emplacements : { path, file, url }
@@ -1609,6 +1626,11 @@
     currentUser = user;
     var r = await db.from("profiles").select("*").eq("id", user.id).maybeSingle();
     if (r.error) { showSection("auth"); return say($("msg"), t("e_profile_load") + r.error.message, "err"); }
+    if (r.data && r.data.suspended) {
+      try { await db.auth.signOut({ scope: "local" }); } catch (x) {}
+      currentUser = null; currentProfile = null; showSection("auth");
+      return say($("msg"), "Compte suspendu / Account suspended.", "err");
+    }
     currentProfile = r.data;
     if (r.data) renderView(user, r.data);
     else { fillForm(null); showSection("profile"); }
@@ -1728,6 +1750,7 @@
     var q = db.from("profiles").select("*")
       .not("id", "in", "(" + seen.join(",") + ")")
       .in("looking_for", [currentProfile.gender, "tous"])
+      .eq("suspended", false)
       .order("created_at", { ascending: false }).limit(1);
     if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
     var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
@@ -1783,7 +1806,7 @@
     var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return mine.indexOf(id) !== -1; });
     var people = [];
     if (ids.length) {
-      var r = await db.from("profiles").select("*").in("id", ids);   // les personnes bloquées n'apparaissent plus
+      var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false);   // les personnes bloquées n'apparaissent plus
       people = r.data || [];
     }
     if (!people.length) { $("matches-empty").textContent = t("matches_empty"); $("matches-empty").hidden = false; return; }
@@ -1831,7 +1854,7 @@
     var done = (a.data || []).map(function (x) { return x.to_id; });
     var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return done.indexOf(id) === -1; });
     var people = [];
-    if (ids.length) { var r = await db.from("profiles").select("*").in("id", ids); people = r.data || []; }
+    if (ids.length) { var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false); people = r.data || []; }
     if (!people.length) { $("likes-empty").textContent = t("likes_empty"); $("likes-empty").hidden = false; return; }
     people.forEach(function (p) {
       var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
@@ -1865,6 +1888,70 @@
   $("go-legal").onclick = function () { openLegal("home"); };
   $("legal-link-auth").onclick = function () { openLegal("auth"); };
   $("legal-back").onclick = function () { showSection(legalFrom); };
+
+  // ---------- Administration ----------
+  var isAdmin = false;
+  async function checkAdmin() {
+    try {
+      var r = await db.from("admins").select("user_id").eq("user_id", currentUser.id).maybeSingle();
+      isAdmin = !!(r && r.data);
+    } catch (e) { isAdmin = false; }
+    $("go-admin").hidden = !isAdmin;
+  }
+  function abtn(label, fn) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "secondary"; b.textContent = label;
+    b.onclick = async function () { b.disabled = true; try { await fn(); } catch (e) { say($("admsg"), e.message || "Erreur", "err"); } b.disabled = false; };
+    return b;
+  }
+  function arow(p, lines, buttons, selfieUrl) {
+    var row = document.createElement("div"); row.className = "arow";
+    var url = p ? photoUrls(p)[0] : null;
+    if (url) { var im = document.createElement("img"); im.src = url; im.alt = ""; row.appendChild(im); }
+    if (selfieUrl) { var sf = document.createElement("img"); sf.src = selfieUrl; sf.alt = "selfie"; row.appendChild(sf); }
+    var info = document.createElement("div"); info.className = "ainfo";
+    lines.forEach(function (l, i) { var d = document.createElement(i === 0 ? "strong" : "div"); d.textContent = l; info.appendChild(d); });
+    var bx = document.createElement("div"); bx.className = "abtns";
+    buttons.forEach(function (b) { bx.appendChild(b); });
+    info.appendChild(bx); row.appendChild(info);
+    return row;
+  }
+  async function loadAdmin() {
+    var vbox = $("admin-verifs"), rbox = $("admin-reports");
+    vbox.textContent = ""; rbox.textContent = ""; say($("admsg"), "Chargement…", "");
+    var v = await db.from("profiles").select("*").eq("verification_requested", true).eq("verified", false);
+    if (v.error) return say($("admsg"), v.error.message, "err");
+    if (!(v.data || []).length) { var e1 = document.createElement("p"); e1.className = "empty"; e1.textContent = "Aucune demande."; vbox.appendChild(e1); }
+    for (var i = 0; i < (v.data || []).length; i++) {
+      var p = v.data[i];
+      var su = await db.storage.from("verifications").createSignedUrl(p.id + "/selfie", 600);
+      vbox.appendChild(arow(p, [nameWithAge(p), p.country ? countryLabel(p.country) : ""], [
+        abtn("✓ Valider", async function () { var x = await db.rpc("admin_set_verified", { uid: p.id, ok: true }); if (x.error) throw x.error; loadAdmin(); }),
+        abtn("✗ Refuser", async function () { var x = await db.rpc("admin_set_verified", { uid: p.id, ok: false }); if (x.error) throw x.error; loadAdmin(); })
+      ], su && su.data ? su.data.signedUrl : null));
+    }
+    var r = await db.from("reports").select("*").eq("handled", false).order("created_at", { ascending: false }).limit(50);
+    if (r.error) return say($("admsg"), r.error.message, "err");
+    var reps = r.data || [];
+    if (!reps.length) { var e2 = document.createElement("p"); e2.className = "empty"; e2.textContent = "Aucun signalement."; rbox.appendChild(e2); }
+    var ids = []; reps.forEach(function (x) { [x.reported_id, x.reporter_id].forEach(function (id) { if (id && ids.indexOf(id) === -1) ids.push(id); }); });
+    var map = {};
+    if (ids.length) { var pr = await db.from("profiles").select("*").in("id", ids); (pr.data || []).forEach(function (x) { map[x.id] = x; }); }
+    reps.forEach(function (rep) {
+      var tp = map[rep.reported_id], by = map[rep.reporter_id];
+      var lines = [(tp ? nameWithAge(tp) : "Profil introuvable") + (tp && tp.suspended ? " (suspendu)" : ""),
+        "Motif : " + rep.reason, rep.details ? "Détails : " + rep.details : "",
+        "Signalé par : " + (by ? by.first_name : "?") + (rep.created_at ? " · " + new Date(rep.created_at).toLocaleDateString() : "")].filter(Boolean);
+      var btns = [abtn("Marquer traité", async function () { var x = await db.rpc("admin_handle_report", { rid: String(rep.id) }); if (x.error) throw x.error; loadAdmin(); })];
+      if (tp) btns.push(abtn(tp.suspended ? "Réactiver" : "Suspendre le compte", async function () {
+        if (!tp.suspended && !confirm("Suspendre ce compte ?")) return;
+        var x = await db.rpc("admin_set_suspended", { uid: tp.id, flag: !tp.suspended }); if (x.error) throw x.error; loadAdmin();
+      }));
+      rbox.appendChild(arow(tp, lines, btns));
+    });
+    say($("admsg"), "", "");
+  }
+  $("go-admin").onclick = function () { showSection("admin"); loadAdmin(); };
+  $("admin-back").onclick = function () { showSection("home"); };
 
   // ---------- Messagerie ----------
   var chatWith = null, chatTimer = null, lastCount = -1;
