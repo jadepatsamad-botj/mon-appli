@@ -70,6 +70,11 @@
   .arow img { width: 96px; height: 128px; object-fit: cover; border-radius: 8px; background: var(--bg); }
   .arow .ainfo { flex: 1; min-width: 160px; font-size: .9rem; }
   .arow .abtns button { width: auto; display: inline-block; margin: 6px 6px 0 0; padding: 8px 12px; }
+  .hero { text-align: center; margin: -4px 0 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .hero-logo { width: 72px; height: 72px; border-radius: 18px; display: block; margin: 0 auto 12px; box-shadow: 0 6px 18px rgba(31,122,92,.25); }
+  .hero-title { font-size: 1.25rem; line-height: 1.35; margin: 0 0 12px; }
+  .hero-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: .95rem; color: var(--muted); }
+  .hero-list li::before { content: "◆ "; color: #c9a24a; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -136,6 +141,15 @@
 
   <!-- Connexion / inscription -->
   <section class="card" id="auth">
+    <div class="hero">
+      <img src="icon-180.png" alt="" class="hero-logo">
+      <h2 class="hero-title" data-i18n="hero_title"></h2>
+      <ul class="hero-list">
+        <li data-i18n="hero_f1"></li>
+        <li data-i18n="hero_f2"></li>
+        <li data-i18n="hero_f3"></li>
+      </ul>
+    </div>
     <div class="tabs" role="tablist">
       <button role="tab" id="tab-signup" aria-selected="true" type="button" data-i18n="tab_signup"></button>
       <button role="tab" id="tab-login" aria-selected="false" type="button" data-i18n="tab_login"></button>
@@ -367,6 +381,7 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      hero_title: "Des rencontres sincères entre l'Asie et le monde", hero_f1: "Profils vérifiés par notre équipe ✓", hero_f2: "Disponible en 12 langues", hero_f3: "Signalement et blocage en un geste",
       legal_btn: "Conditions et confidentialité",
       photos_label: "Photos (jusqu'à 5 · JPG, PNG ou WebP · 5 Mo max chacune)", photo_add: "Ajouter", photo_remove: "Supprimer la photo",
       likes_btn: "Qui m'a liké", likes_title: "Ils t'ont liké", likes_empty: "Personne pour l'instant. Continue à explorer !",
@@ -425,6 +440,7 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      hero_title: "Sincere connections between Asia and the world", hero_f1: "Profiles verified by our team ✓", hero_f2: "Available in 12 languages", hero_f3: "Report and block in one tap",
       legal_btn: "Terms & privacy",
       photos_label: "Photos (up to 5 · JPG, PNG or WebP · 5 MB each)", photo_add: "Add", photo_remove: "Remove photo",
       likes_btn: "Who liked me", likes_title: "Liked you", likes_empty: "No one yet. Keep exploring!",
@@ -483,6 +499,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      hero_title: "พบรักที่จริงใจระหว่างเอเชียและทั่วโลก", hero_f1: "โปรไฟล์ที่ได้รับการยืนยันโดยทีมงาน ✓", hero_f2: "รองรับ 12 ภาษา", hero_f3: "รายงานและบล็อกได้ในคลิกเดียว",
       legal_btn: "ข้อกำหนดและความเป็นส่วนตัว",
       photos_label: "รูปภาพ (สูงสุด 5 รูป · JPG, PNG หรือ WebP · รูปละไม่เกิน 5 MB)", photo_add: "เพิ่ม", photo_remove: "ลบรูปภาพ",
       likes_btn: "ใครถูกใจฉัน", likes_title: "คนที่ถูกใจคุณ", likes_empty: "ยังไม่มีใคร ลองค้นหาต่อไปนะ!",
@@ -541,6 +558,7 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      hero_title: "Những kết nối chân thành giữa châu Á và thế giới", hero_f1: "Hồ sơ được đội ngũ xác minh ✓", hero_f2: "Có sẵn 12 ngôn ngữ", hero_f3: "Báo cáo và chặn chỉ với một chạm",
       legal_btn: "Điều khoản & quyền riêng tư",
       photos_label: "Ảnh (tối đa 5 · JPG, PNG hoặc WebP · mỗi ảnh tối đa 5 MB)", photo_add: "Thêm", photo_remove: "Xóa ảnh",
       likes_btn: "Ai đã thích tôi", likes_title: "Đã thích bạn", likes_empty: "Chưa có ai. Hãy tiếp tục khám phá!",
@@ -599,6 +617,7 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      hero_title: "连接亚洲与世界的真诚相遇", hero_f1: "资料经团队人工验证 ✓", hero_f2: "支持12种语言", hero_f3: "一键举报和拉黑",
       legal_btn: "条款与隐私",
       photos_label: "照片（最多5张 · JPG、PNG或WebP · 每张最大5MB）", photo_add: "添加", photo_remove: "删除照片",
       likes_btn: "谁喜欢我", likes_title: "喜欢你的人", likes_empty: "暂时还没有。继续探索吧！",
@@ -657,6 +676,7 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      hero_title: "Pertemuan tulus antara Asia dan dunia", hero_f1: "Profil diverifikasi oleh tim kami ✓", hero_f2: "Tersedia dalam 12 bahasa", hero_f3: "Laporkan dan blokir dengan satu ketukan",
       legal_btn: "Ketentuan & privasi",
       photos_label: "Foto (maksimal 5 · JPG, PNG atau WebP · maks. 5 MB per foto)", photo_add: "Tambah", photo_remove: "Hapus foto",
       likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai Anda", likes_empty: "Belum ada. Teruslah menjelajah!",
@@ -715,6 +735,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      hero_title: "アジアと世界をつなぐ、誠実な出会い", hero_f1: "運営チームが認証したプロフィール ✓", hero_f2: "12言語に対応", hero_f3: "ワンタップで通報・ブロック",
       legal_btn: "利用規約とプライバシー",
       photos_label: "写真（最大5枚・JPG、PNG、WebP・各5MBまで）", photo_add: "追加", photo_remove: "写真を削除",
       likes_btn: "いいねしてくれた人", likes_title: "あなたにいいね", likes_empty: "まだ誰もいません。探し続けましょう！",
@@ -833,6 +854,7 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      hero_title: "아시아와 세계를 잇는 진실한 만남", hero_f1: "운영팀이 인증한 프로필 ✓", hero_f2: "12개 언어 지원", hero_f3: "한 번에 신고 및 차단",
       legal_btn: "이용약관 및 개인정보",
       photos_label: "사진 (최대 5장 · JPG, PNG 또는 WebP · 장당 최대 5MB)", photo_add: "추가", photo_remove: "사진 삭제",
       likes_btn: "나를 좋아한 사람", likes_title: "나를 좋아해요", likes_empty: "아직 없어요. 계속 둘러보세요!",
@@ -951,6 +973,7 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      hero_title: "Pertemuan ikhlas antara Asia dan dunia", hero_f1: "Profil disahkan oleh pasukan kami ✓", hero_f2: "Tersedia dalam 12 bahasa", hero_f3: "Lapor dan sekat dengan satu sentuhan",
       legal_btn: "Terma & privasi",
       photos_label: "Foto (sehingga 5 · JPG, PNG atau WebP · maksimum 5 MB setiap satu)", photo_add: "Tambah", photo_remove: "Buang foto",
       likes_btn: "Siapa yang menyukai saya", likes_title: "Menyukai anda", likes_empty: "Belum ada sesiapa. Teruskan menerokai!",
@@ -1069,6 +1092,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      hero_title: "Tapat na pagkikilala sa pagitan ng Asya at ng mundo", hero_f1: "Mga profile na na-verify ng aming team ✓", hero_f2: "Available sa 12 wika", hero_f3: "Mag-report at mag-block sa isang tap",
       legal_btn: "Mga tuntunin at privacy",
       photos_label: "Mga larawan (hanggang 5 · JPG, PNG o WebP · hanggang 5 MB bawat isa)", photo_add: "Idagdag", photo_remove: "Alisin ang larawan",
       likes_btn: "Sino ang may gusto sa akin", likes_title: "Nagustuhan ka", likes_empty: "Wala pa. Ituloy ang paghahanap!",
@@ -1187,6 +1211,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      hero_title: "ການພົບກັນຢ່າງຈິງໃຈລະຫວ່າງອາຊີ ແລະ ທົ່ວໂລກ", hero_f1: "ໂປຣໄຟລ໌ທີ່ທີມງານຢືນຢັນແລ້ວ ✓", hero_f2: "ມີໃຫ້ 12 ພາສາ", hero_f3: "ລາຍງານ ແລະ ບລັອກໄດ້ໃນຄັ້ງດຽວ",
       legal_btn: "ເງື່ອນໄຂ ແລະ ຄວາມເປັນສ່ວນຕົວ",
       photos_label: "ຮູບພາບ (ສູງສຸດ 5 ຮູບ · JPG, PNG ຫຼື WebP · ບໍ່ເກີນ 5 MB ຕໍ່ຮູບ)", photo_add: "ເພີ່ມ", photo_remove: "ລຶບຮູບ",
       likes_btn: "ໃຜມັກຂ້ອຍ", likes_title: "ມັກເຈົ້າ", likes_empty: "ຍັງບໍ່ມີ. ສືບຕໍ່ຄົ້ນຫາຕໍ່ໄປ!",
@@ -1305,6 +1330,7 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      hero_title: "ការជួបគ្នាដោយស្មោះត្រង់រវាងអាស៊ី និងពិភពលោក", hero_f1: "ប្រវត្តិរូបដែលក្រុមការងារបានផ្ទៀងផ្ទាត់ ✓", hero_f2: "មាន ១២ ភាសា", hero_f3: "រាយការណ៍ និងទប់ស្កាត់បានភ្លាមៗ",
       legal_btn: "លក្ខខណ្ឌ និងឯកជនភាព",
       photos_label: "រូបថត (រហូតដល់ ៥ · JPG, PNG ឬ WebP · ធំបំផុត ៥ MB ក្នុងមួយរូប)", photo_add: "បន្ថែម", photo_remove: "លុបរូបថត",
       likes_btn: "អ្នកណាចូលចិត្តខ្ញុំ", likes_title: "ចូលចិត្តអ្នក", likes_empty: "មិនទាន់មានទេ។ បន្តស្វែងរក!",
@@ -1877,7 +1903,7 @@
   $("likes-back").onclick = function () { showSection("home"); };
 
   // ---------- Conditions et confidentialité ----------
-  var LEGAL = { fr: [["h", "Projet de texte : à faire relire par un juriste avant tout lancement public."], ["h", "1. Conditions d'utilisation"], ["p", "Jade est un service de rencontres réservé aux personnes de 18 ans et plus. En créant un compte, tu confirmes avoir 18 ans révolus et que les informations de ton profil sont exactes."], ["p", "Tu t'engages à ne pas usurper l'identité d'autrui, à ne pas publier de contenu illégal, sexuel explicite, haineux ou violent, à ne pas harceler les autres membres et à ne jamais demander d'argent."], ["p", "Jade ne vend pas de relations et n'est pas une agence matrimoniale. Les profils vérifiés (✓) ont envoyé un selfie contrôlé par notre équipe, ce qui ne garantit pas l'honnêteté d'une personne. Reste prudent(e) : voir les conseils de sécurité."], ["p", "Nous pouvons suspendre ou supprimer un compte qui ne respecte pas ces règles, notamment après signalement. Le service est fourni en l'état, sans garantie de disponibilité."], ["h", "2. Confidentialité"], ["p", "Données collectées : e-mail, mot de passe (chiffré), prénom, date de naissance, pays, genre, recherche, présentation, photos, messages, likes, signalements et, si tu demandes la vérification, un selfie."], ["p", "Finalités : faire fonctionner l'application (profils, matchs, messagerie), assurer la sécurité et la modération, vérifier les profils."], ["p", "Visibilité : ton prénom, ton âge, ton pays, ta présentation et tes photos sont visibles par les autres membres. Ton e-mail, ta date de naissance exacte et ton selfie de vérification ne sont jamais affichés. Les messages ne sont lisibles que par toi et ton match."], ["p", "Hébergement : tes données sont stockées chez Supabase (serveurs en Inde) et le site est hébergé par GitHub. Elles ne sont pas vendues."], ["p", "Conservation : tant que ton compte existe. Quand tu supprimes ton compte depuis l'application, ton profil, tes photos, ton selfie et tes messages sont effacés."], ["p", "Tes droits (RGPD) : accès, rectification, suppression, opposition, portabilité. Pour les exercer : [E-MAIL DE CONTACT À COMPLÉTER]."], ["p", "Éditeur : [NOM / SOCIÉTÉ À COMPLÉTER]."]], en: [["h", "Draft text: have a lawyer review it before any public launch."], ["h", "1. Terms of use"], ["p", "Jade is a dating service for people aged 18 and over. By creating an account you confirm you are at least 18 and that your profile information is accurate."], ["p", "You agree not to impersonate anyone, not to post illegal, sexually explicit, hateful or violent content, not to harass other members, and never to ask for money."], ["p", "Jade does not sell relationships and is not a marriage agency. Verified profiles (✓) sent a selfie checked by our team, which does not guarantee a person's honesty. Stay careful: see the safety tips."], ["p", "We may suspend or delete an account that breaks these rules, notably after a report. The service is provided as is, without any guarantee of availability."], ["h", "2. Privacy"], ["p", "Data we collect: email, password (encrypted), first name, date of birth, country, gender, who you are looking for, bio, photos, messages, likes, reports and, if you request verification, a selfie."], ["p", "Purposes: running the app (profiles, matches, messaging), security and moderation, verifying profiles."], ["p", "Visibility: your first name, age, country, bio and photos are visible to other members. Your email, exact date of birth and verification selfie are never shown. Messages can only be read by you and your match."], ["p", "Hosting: your data is stored with Supabase (servers in India) and the site is hosted by GitHub. It is not sold."], ["p", "Retention: as long as your account exists. When you delete your account in the app, your profile, photos, selfie and messages are erased."], ["p", "Your rights (GDPR): access, correction, deletion, objection, portability. To exercise them: [CONTACT EMAIL TO COMPLETE]."], ["p", "Publisher: [NAME / COMPANY TO COMPLETE]."]] };
+  var LEGAL = { fr: [["h", "Projet de texte : à faire relire par un juriste avant tout lancement public."], ["h", "1. Conditions d'utilisation"], ["p", "Jade est un service de rencontres réservé aux personnes de 18 ans et plus. En créant un compte, tu confirmes avoir 18 ans révolus et que les informations de ton profil sont exactes."], ["p", "Tu t'engages à ne pas usurper l'identité d'autrui, à ne pas publier de contenu illégal, sexuel explicite, haineux ou violent, à ne pas harceler les autres membres et à ne jamais demander d'argent."], ["p", "Jade ne vend pas de relations et n'est pas une agence matrimoniale. Les profils vérifiés (✓) ont envoyé un selfie contrôlé par notre équipe, ce qui ne garantit pas l'honnêteté d'une personne. Reste prudent(e) : voir les conseils de sécurité."], ["p", "Nous pouvons suspendre ou supprimer un compte qui ne respecte pas ces règles, notamment après signalement. Le service est fourni en l'état, sans garantie de disponibilité."], ["h", "2. Confidentialité"], ["p", "Données collectées : e-mail, mot de passe (chiffré), prénom, date de naissance, pays, genre, recherche, présentation, photos, messages, likes, signalements et, si tu demandes la vérification, un selfie."], ["p", "Finalités : faire fonctionner l'application (profils, matchs, messagerie), assurer la sécurité et la modération, vérifier les profils."], ["p", "Visibilité : ton prénom, ton âge, ton pays, ta présentation et tes photos sont visibles par les autres membres. Ton e-mail, ta date de naissance exacte et ton selfie de vérification ne sont jamais affichés. Les messages ne sont lisibles que par toi et ton match."], ["p", "Hébergement : tes données sont stockées chez Supabase (serveurs en Inde) et le site est hébergé par GitHub. Elles ne sont pas vendues."], ["p", "Conservation : tant que ton compte existe. Quand tu supprimes ton compte depuis l'application, ton profil, tes photos, ton selfie et tes messages sont effacés."], ["p", "Tes droits (RGPD) : accès, rectification, suppression, opposition, portabilité. Pour les exercer : contact@jadedating.app."], ["p", "Éditeur : [NOM / SOCIÉTÉ À COMPLÉTER]."]], en: [["h", "Draft text: have a lawyer review it before any public launch."], ["h", "1. Terms of use"], ["p", "Jade is a dating service for people aged 18 and over. By creating an account you confirm you are at least 18 and that your profile information is accurate."], ["p", "You agree not to impersonate anyone, not to post illegal, sexually explicit, hateful or violent content, not to harass other members, and never to ask for money."], ["p", "Jade does not sell relationships and is not a marriage agency. Verified profiles (✓) sent a selfie checked by our team, which does not guarantee a person's honesty. Stay careful: see the safety tips."], ["p", "We may suspend or delete an account that breaks these rules, notably after a report. The service is provided as is, without any guarantee of availability."], ["h", "2. Privacy"], ["p", "Data we collect: email, password (encrypted), first name, date of birth, country, gender, who you are looking for, bio, photos, messages, likes, reports and, if you request verification, a selfie."], ["p", "Purposes: running the app (profiles, matches, messaging), security and moderation, verifying profiles."], ["p", "Visibility: your first name, age, country, bio and photos are visible to other members. Your email, exact date of birth and verification selfie are never shown. Messages can only be read by you and your match."], ["p", "Hosting: your data is stored with Supabase (servers in India) and the site is hosted by GitHub. It is not sold."], ["p", "Retention: as long as your account exists. When you delete your account in the app, your profile, photos, selfie and messages are erased."], ["p", "Your rights (GDPR): access, correction, deletion, objection, portability. To exercise them: contact@jadedating.app."], ["p", "Publisher: [NAME / COMPANY TO COMPLETE]."]] };
   var legalFrom = "home";
   function openLegal(from) {
     legalFrom = from;
