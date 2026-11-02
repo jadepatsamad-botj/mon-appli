@@ -90,6 +90,12 @@
   .chip { width: auto; margin: 0; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: .85rem; font-weight: 500; cursor: pointer; }
   .btrans { max-width: 100%; margin-top: 4px; padding: 6px 10px; border-left: 3px solid #c9a24a; background: var(--card); border-radius: 8px; font-size: .92rem; font-style: italic; white-space: pre-wrap; overflow-wrap: anywhere; }
   .trbtn { width: auto; margin: 0; padding: 0; border: 0; background: none; color: var(--accent); font: inherit; font-size: .72rem; text-decoration: underline; cursor: pointer; }
+  .complete { margin: 14px 0 6px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+  .complete-t { font-weight: 600; margin-bottom: 6px; }
+  .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .bar span { display: block; height: 100%; background: linear-gradient(90deg, #1f7a5c, #c9a24a); width: 0; transition: width .4s; }
+  .complete-h { font-size: .82rem; color: var(--muted); margin-top: 6px; }
+  .joinbtn { width: auto; margin: 6px 0 0; padding: 8px 14px; border-radius: 10px; border: 0; background: #c9a24a; color: #1d2330; font-weight: 600; cursor: pointer; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -234,6 +240,9 @@
       <label data-i18n="spoken"></label>
       <div id="spoken" class="langs"></div>
 
+      <label data-i18n="interests"></label>
+      <div id="interests" class="langs"></div>
+
       <label for="bio" data-i18n="bio"></label>
       <textarea id="bio" maxlength="500" data-i18n-ph="bio_ph"></textarea>
       <div class="count"><span id="bio-count">0</span> / 500</div>
@@ -250,6 +259,11 @@
     <h2 id="view-name"></h2>
     <div id="view-tags"></div>
     <p class="bio" id="view-bio"></p>
+    <div class="complete" id="complete" hidden>
+      <div class="complete-t" id="complete-t"></div>
+      <div class="bar"><span id="complete-bar"></span></div>
+      <div class="complete-h" data-i18n="complete_hint"></div>
+    </div>
     <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
     <button class="primary" id="go-discover" type="button" data-i18n="discover"></button>
     <button class="secondary" id="go-matches" type="button" data-i18n="matches"></button>
@@ -363,6 +377,7 @@
     <div class="head">
       <h2 id="chat-name" style="margin:0"></h2>
       <div class="head-actions">
+        <button class="linkbtn" id="chat-video" type="button" data-i18n="video_btn"></button>
         <button class="linkbtn" id="chat-report" type="button" data-i18n="report"></button>
         <button class="linkbtn danger" id="chat-block" type="button" data-i18n="block"></button>
       </div>
@@ -444,6 +459,25 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      interests: "Centres d'intérêt",
+      int_voyage: "Voyages",
+      int_cuisine: "Cuisine",
+      int_musique: "Musique",
+      int_sport: "Sport",
+      int_cinema: "Cinéma",
+      int_lecture: "Lecture",
+      int_nature: "Nature",
+      int_danse: "Danse",
+      int_photo: "Photo",
+      int_jeux: "Jeux vidéo",
+      int_animaux: "Animaux",
+      int_famille: "Famille",
+      video_btn: "📹 Appel vidéo",
+      video_confirm: "Envoyer une invitation à un appel vidéo ? Vous pourrez vous voir avant de vous rencontrer.",
+      video_invite: "📹 Je t'invite à un appel vidéo :",
+      video_join: "Rejoindre l'appel vidéo",
+      complete: "Profil complété à {n} %",
+      complete_hint: "Ajoute des photos, ta ville, tes langues et tes centres d'intérêt pour avoir plus de matchs.",
       translating: "Traduction…",
       tr_error: "Traduction impossible pour le moment.",
       original: "Voir l'original",
@@ -534,6 +568,25 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      interests: "Interests",
+      int_voyage: "Travel",
+      int_cuisine: "Cooking",
+      int_musique: "Music",
+      int_sport: "Sport",
+      int_cinema: "Movies",
+      int_lecture: "Reading",
+      int_nature: "Nature",
+      int_danse: "Dancing",
+      int_photo: "Photography",
+      int_jeux: "Video games",
+      int_animaux: "Animals",
+      int_famille: "Family",
+      video_btn: "📹 Video call",
+      video_confirm: "Send a video call invitation? You can see each other before meeting.",
+      video_invite: "📹 I'm inviting you to a video call:",
+      video_join: "Join the video call",
+      complete: "Profile {n}% complete",
+      complete_hint: "Add photos, your city, languages and interests to get more matches.",
       translating: "Translating…",
       tr_error: "Translation unavailable right now.",
       original: "Show original",
@@ -624,6 +677,25 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      interests: "ความสนใจ",
+      int_voyage: "ท่องเที่ยว",
+      int_cuisine: "ทำอาหาร",
+      int_musique: "ดนตรี",
+      int_sport: "กีฬา",
+      int_cinema: "ภาพยนตร์",
+      int_lecture: "อ่านหนังสือ",
+      int_nature: "ธรรมชาติ",
+      int_danse: "เต้นรำ",
+      int_photo: "ถ่ายภาพ",
+      int_jeux: "วิดีโอเกม",
+      int_animaux: "สัตว์เลี้ยง",
+      int_famille: "ครอบครัว",
+      video_btn: "📹 วิดีโอคอล",
+      video_confirm: "ส่งคำเชิญวิดีโอคอลไหม? คุณจะได้เห็นกันก่อนพบตัวจริง",
+      video_invite: "📹 ขอชวนวิดีโอคอลนะ:",
+      video_join: "เข้าร่วมวิดีโอคอล",
+      complete: "โปรไฟล์สมบูรณ์ {n}%",
+      complete_hint: "เพิ่มรูป เมือง ภาษา และความสนใจ เพื่อให้ได้แมตช์มากขึ้น",
       translating: "กำลังแปล…",
       tr_error: "ไม่สามารถแปลได้ในขณะนี้",
       original: "ดูต้นฉบับ",
@@ -714,6 +786,25 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      interests: "Sở thích",
+      int_voyage: "Du lịch",
+      int_cuisine: "Nấu ăn",
+      int_musique: "Âm nhạc",
+      int_sport: "Thể thao",
+      int_cinema: "Phim ảnh",
+      int_lecture: "Đọc sách",
+      int_nature: "Thiên nhiên",
+      int_danse: "Khiêu vũ",
+      int_photo: "Nhiếp ảnh",
+      int_jeux: "Trò chơi điện tử",
+      int_animaux: "Động vật",
+      int_famille: "Gia đình",
+      video_btn: "📹 Gọi video",
+      video_confirm: "Gửi lời mời gọi video? Hai bạn có thể nhìn thấy nhau trước khi gặp mặt.",
+      video_invite: "📹 Mình mời bạn gọi video:",
+      video_join: "Tham gia cuộc gọi video",
+      complete: "Hồ sơ hoàn thành {n}%",
+      complete_hint: "Thêm ảnh, thành phố, ngôn ngữ và sở thích để có nhiều kết nối hơn.",
       translating: "Đang dịch…",
       tr_error: "Hiện không thể dịch.",
       original: "Xem bản gốc",
@@ -804,6 +895,25 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      interests: "兴趣爱好",
+      int_voyage: "旅行",
+      int_cuisine: "烹饪",
+      int_musique: "音乐",
+      int_sport: "运动",
+      int_cinema: "电影",
+      int_lecture: "阅读",
+      int_nature: "大自然",
+      int_danse: "跳舞",
+      int_photo: "摄影",
+      int_jeux: "电子游戏",
+      int_animaux: "动物",
+      int_famille: "家庭",
+      video_btn: "📹 视频通话",
+      video_confirm: "发送视频通话邀请？见面前可以先看看对方。",
+      video_invite: "📹 邀请你视频通话：",
+      video_join: "加入视频通话",
+      complete: "资料完成度 {n}%",
+      complete_hint: "添加照片、城市、语言和兴趣，获得更多配对。",
       translating: "翻译中…",
       tr_error: "暂时无法翻译。",
       original: "查看原文",
@@ -894,6 +1004,25 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      interests: "Minat",
+      int_voyage: "Traveling",
+      int_cuisine: "Memasak",
+      int_musique: "Musik",
+      int_sport: "Olahraga",
+      int_cinema: "Film",
+      int_lecture: "Membaca",
+      int_nature: "Alam",
+      int_danse: "Menari",
+      int_photo: "Fotografi",
+      int_jeux: "Video game",
+      int_animaux: "Hewan",
+      int_famille: "Keluarga",
+      video_btn: "📹 Panggilan video",
+      video_confirm: "Kirim undangan panggilan video? Kalian bisa saling melihat sebelum bertemu.",
+      video_invite: "📹 Aku mengajakmu panggilan video:",
+      video_join: "Gabung panggilan video",
+      complete: "Profil lengkap {n}%",
+      complete_hint: "Tambahkan foto, kota, bahasa, dan minat untuk mendapat lebih banyak kecocokan.",
       translating: "Menerjemahkan…",
       tr_error: "Terjemahan tidak tersedia saat ini.",
       original: "Lihat asli",
@@ -984,6 +1113,25 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      interests: "趣味",
+      int_voyage: "旅行",
+      int_cuisine: "料理",
+      int_musique: "音楽",
+      int_sport: "スポーツ",
+      int_cinema: "映画",
+      int_lecture: "読書",
+      int_nature: "自然",
+      int_danse: "ダンス",
+      int_photo: "写真",
+      int_jeux: "ゲーム",
+      int_animaux: "動物",
+      int_famille: "家族",
+      video_btn: "📹 ビデオ通話",
+      video_confirm: "ビデオ通話の招待を送りますか？会う前にお互いの顔を見られます。",
+      video_invite: "📹 ビデオ通話に招待します：",
+      video_join: "ビデオ通話に参加",
+      complete: "プロフィール完成度 {n}%",
+      complete_hint: "写真、都市、言語、趣味を追加すると、マッチが増えます。",
       translating: "翻訳中…",
       tr_error: "現在翻訳できません。",
       original: "原文を表示",
@@ -1134,6 +1282,25 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      interests: "관심사",
+      int_voyage: "여행",
+      int_cuisine: "요리",
+      int_musique: "음악",
+      int_sport: "운동",
+      int_cinema: "영화",
+      int_lecture: "독서",
+      int_nature: "자연",
+      int_danse: "춤",
+      int_photo: "사진",
+      int_jeux: "게임",
+      int_animaux: "동물",
+      int_famille: "가족",
+      video_btn: "📹 영상 통화",
+      video_confirm: "영상 통화 초대를 보낼까요? 만나기 전에 서로 얼굴을 볼 수 있어요.",
+      video_invite: "📹 영상 통화에 초대할게요:",
+      video_join: "영상 통화 참여",
+      complete: "프로필 완성도 {n}%",
+      complete_hint: "사진, 도시, 언어, 관심사를 추가하면 매치가 늘어나요.",
       translating: "번역 중…",
       tr_error: "지금은 번역할 수 없습니다.",
       original: "원문 보기",
@@ -1284,6 +1451,25 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      interests: "Minat",
+      int_voyage: "Melancong",
+      int_cuisine: "Memasak",
+      int_musique: "Muzik",
+      int_sport: "Sukan",
+      int_cinema: "Filem",
+      int_lecture: "Membaca",
+      int_nature: "Alam semula jadi",
+      int_danse: "Menari",
+      int_photo: "Fotografi",
+      int_jeux: "Permainan video",
+      int_animaux: "Haiwan",
+      int_famille: "Keluarga",
+      video_btn: "📹 Panggilan video",
+      video_confirm: "Hantar jemputan panggilan video? Anda boleh melihat satu sama lain sebelum bertemu.",
+      video_invite: "📹 Saya menjemput awak ke panggilan video:",
+      video_join: "Sertai panggilan video",
+      complete: "Profil lengkap {n}%",
+      complete_hint: "Tambah foto, bandar, bahasa dan minat untuk lebih banyak padanan.",
       translating: "Menterjemah…",
       tr_error: "Terjemahan tidak tersedia buat masa ini.",
       original: "Lihat asal",
@@ -1434,6 +1620,25 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      interests: "Mga hilig",
+      int_voyage: "Paglalakbay",
+      int_cuisine: "Pagluluto",
+      int_musique: "Musika",
+      int_sport: "Isports",
+      int_cinema: "Pelikula",
+      int_lecture: "Pagbabasa",
+      int_nature: "Kalikasan",
+      int_danse: "Pagsasayaw",
+      int_photo: "Potograpiya",
+      int_jeux: "Video games",
+      int_animaux: "Mga hayop",
+      int_famille: "Pamilya",
+      video_btn: "📹 Video call",
+      video_confirm: "Magpadala ng imbitasyon sa video call? Makikita ninyo ang isa't isa bago magkita.",
+      video_invite: "📹 Inaanyayahan kita sa video call:",
+      video_join: "Sumali sa video call",
+      complete: "{n}% kumpleto ang profile",
+      complete_hint: "Magdagdag ng mga larawan, lungsod, wika at hilig para sa mas maraming match.",
       translating: "Isinasalin…",
       tr_error: "Hindi maisalin sa ngayon.",
       original: "Tingnan ang orihinal",
@@ -1584,6 +1789,25 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      interests: "ຄວາມສົນໃຈ",
+      int_voyage: "ທ່ອງທ່ຽວ",
+      int_cuisine: "ເຮັດອາຫານ",
+      int_musique: "ດົນຕີ",
+      int_sport: "ກິລາ",
+      int_cinema: "ຮູບເງົາ",
+      int_lecture: "ອ່ານໜັງສື",
+      int_nature: "ທຳມະຊາດ",
+      int_danse: "ເຕັ້ນລຳ",
+      int_photo: "ຖ່າຍຮູບ",
+      int_jeux: "ເກມ",
+      int_animaux: "ສັດລ້ຽງ",
+      int_famille: "ຄອບຄົວ",
+      video_btn: "📹 ໂທວິດີໂອ",
+      video_confirm: "ສົ່ງຄຳເຊີນໂທວິດີໂອບໍ? ທ່ານຈະໄດ້ເຫັນກັນກ່ອນພົບກັນ.",
+      video_invite: "📹 ຂໍເຊີນໂທວິດີໂອ:",
+      video_join: "ເຂົ້າຮ່ວມການໂທວິດີໂອ",
+      complete: "ໂປຣໄຟລ໌ສຳເລັດ {n}%",
+      complete_hint: "ເພີ່ມຮູບ, ເມືອງ, ພາສາ ແລະ ຄວາມສົນໃຈ ເພື່ອໃຫ້ໄດ້ການຈັບຄູ່ຫຼາຍຂຶ້ນ.",
       translating: "ກຳລັງແປ…",
       tr_error: "ບໍ່ສາມາດແປໄດ້ໃນຕອນນີ້.",
       original: "ເບິ່ງຕົ້ນສະບັບ",
@@ -1734,6 +1958,25 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      interests: "ចំណាប់អារម្មណ៍",
+      int_voyage: "ការធ្វើដំណើរ",
+      int_cuisine: "ការធ្វើម្ហូប",
+      int_musique: "តន្ត្រី",
+      int_sport: "កីឡា",
+      int_cinema: "ភាពយន្ត",
+      int_lecture: "ការអាន",
+      int_nature: "ធម្មជាតិ",
+      int_danse: "ការរាំ",
+      int_photo: "ការថតរូប",
+      int_jeux: "ហ្គេម",
+      int_animaux: "សត្វ",
+      int_famille: "គ្រួសារ",
+      video_btn: "📹 ហៅជាវីដេអូ",
+      video_confirm: "ផ្ញើការអញ្ជើញហៅជាវីដេអូ? អ្នកអាចឃើញគ្នាមុនពេលជួបផ្ទាល់។",
+      video_invite: "📹 ខ្ញុំអញ្ជើញអ្នកហៅជាវីដេអូ៖",
+      video_join: "ចូលរួមការហៅជាវីដេអូ",
+      complete: "ប្រវត្តិរូបបានបំពេញ {n}%",
+      complete_hint: "បន្ថែមរូបថត ទីក្រុង ភាសា និងចំណាប់អារម្មណ៍ ដើម្បីទទួលបានការផ្គូផ្គងច្រើនជាងនេះ។",
       translating: "កំពុងបកប្រែ…",
       tr_error: "មិនអាចបកប្រែបានទេពេលនេះ។",
       original: "មើលអត្ថបទដើម",
@@ -2009,6 +2252,33 @@
   }
 
   var LANG_NAMES = { fr: "Français", en: "English", th: "ไทย", vi: "Tiếng Việt", zh: "中文", id: "Bahasa Indonesia", ja: "日本語", ko: "한국어", ms: "Bahasa Melayu", tl: "Filipino", lo: "ລາວ", km: "ខ្មែរ" };
+  var INTERESTS = ["voyage", "cuisine", "musique", "sport", "cinema", "lecture", "nature", "danse", "photo", "jeux", "animaux", "famille"];
+  var INT_EMOJI = ["✈️", "🍜", "🎵", "⚽", "🎬", "📚", "🌿", "💃", "📷", "🎮", "🐾", "👨‍👩‍👧"];
+  function buildInterests() {
+    var box = $("interests"); box.textContent = "";
+    INTERESTS.forEach(function (k, i) {
+      var l = document.createElement("label"), c = document.createElement("input");
+      c.type = "checkbox"; c.value = k; l.appendChild(c); l.appendChild(document.createTextNode(INT_EMOJI[i] + " " + t("int_" + k))); box.appendChild(l);
+    });
+  }
+  function profileScore(p) {
+    var n = photoPaths(p).length, s = 0;
+    s += Math.min(n, 3) * 10;                       // 30
+    if (p.bio && p.bio.length >= 30) s += 15;
+    if (p.city) s += 10;
+    if (p.intention) s += 10;
+    if (p.spoken && p.spoken.length) s += 10;
+    if (p.interests && p.interests.length >= 3) s += 10; else if (p.interests && p.interests.length) s += 5;
+    if (p.verified) s += 15;
+    return Math.min(100, s);
+  }
+  function renderComplete(p) {
+    var sc = profileScore(p);
+    $("complete").hidden = sc >= 100;
+    $("complete-t").textContent = t("complete", { n: sc });
+    $("complete-bar").style.width = sc + "%";
+  }
+
   function buildSpoken() {
     var box = $("spoken"); if (box.childElementCount) return;
     Object.keys(LANG_NAMES).forEach(function (code) {
@@ -2038,6 +2308,7 @@
     items.push([p.gender ? t("g_" + p.gender) : "", false]);
     items.push([p.looking_for ? t("l_" + p.looking_for) : "", false]);
     items.push([p.intention ? t("i_" + p.intention) : "", false]);
+    (p.interests || []).forEach(function (k) { var i = INTERESTS.indexOf(k); if (i !== -1) items.push([INT_EMOJI[i] + " " + t("int_" + k), false]); });
     if (p.spoken && p.spoken.length) items.push(["🗣 " + p.spoken.map(function (c) { return LANG_NAMES[c] || c; }).join(" · "), false]);
     items.forEach(function (it) {
       if (!it[0]) return;
@@ -2049,6 +2320,7 @@
     $("view-name").textContent = nameWithAge(p);
     tagsInto($("view-tags"), p);
     $("view-bio").textContent = p.bio || "";
+    renderComplete(p);
     setGallery($("view-photo"), p);
     $("who").textContent = t("connected") + user.email;
     say($("hmsg"), "", "");
@@ -2107,6 +2379,9 @@
     $("bio").value = (p && p.bio) || "";
     $("city").value = (p && p.city) || "";
     $("intention").value = (p && p.intention) || "";
+    buildInterests();
+    var it = (p && p.interests) || [];
+    Array.prototype.forEach.call($("interests").querySelectorAll("input"), function (c) { c.checked = it.indexOf(c.value) !== -1; });
     buildSpoken();
     var sp = (p && p.spoken) || [];
     Array.prototype.forEach.call($("spoken").querySelectorAll("input"), function (c) { c.checked = sp.indexOf(c.value) !== -1; });
@@ -2240,6 +2515,7 @@
         bio: $("bio").value.trim() || null,
         city: $("city").value.trim() || null,
         intention: $("intention").value || null,
+        interests: Array.prototype.filter.call($("interests").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
         spoken: Array.prototype.filter.call($("spoken").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
         photo_path: photoPath,
         photos: paths,
@@ -2527,6 +2803,12 @@
       var mine = m.from_id === me;
       var w = document.createElement("div"); w.className = "bwrap " + (mine ? "me" : "them");
       var d = document.createElement("div"); d.className = "bubble " + (mine ? "me" : "them"); d.textContent = m.body; w.appendChild(d);
+      var vm = /https:\/\/meet\.jit\.si\/Jade-[A-Za-z0-9]{8,32}/.exec(m.body);
+      if (vm) {
+        var jb = document.createElement("button"); jb.type = "button"; jb.className = "joinbtn"; jb.textContent = "📹 " + t("video_join");
+        jb.onclick = (function (u) { return function () { window.open(u, "_blank", "noopener"); }; })(vm[0]);
+        w.appendChild(jb);
+      }
       var meta = document.createElement("div"); meta.className = "bmeta";
       var tm = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
       meta.appendChild(document.createTextNode(tm));
@@ -2591,6 +2873,16 @@
   Array.prototype.forEach.call(document.querySelectorAll("#ice .chip"), function (b) {
     b.onclick = function () { $("chat-input").value = b.textContent; $("chat-input").focus(); };
   });
+
+  $("chat-video").onclick = async function () {
+    if (!chatWith || !confirm(t("video_confirm"))) return;
+    var a = new Uint8Array(12); (window.crypto || window.msCrypto).getRandomValues(a);
+    var room = "Jade-" + Array.prototype.map.call(a, function (x) { return "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"[x % 56]; }).join("");
+    var r = await db.from("messages").insert({ from_id: currentUser.id, to_id: chatWith.id, body: t("video_invite") + " https://meet.jit.si/" + room });
+    if (r.error) return say($("cmsg"), t("e_send") + r.error.message, "err");
+    refreshChat();
+    window.open("https://meet.jit.si/" + room, "_blank", "noopener");
+  };
 
   $("chat-form").addEventListener("submit", async function (e) {
     e.preventDefault();
