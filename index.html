@@ -3076,6 +3076,7 @@
       catch (e) { return [label, false, e.message || String(e)]; }
     }
     var res = [];
+    res.push(await chk("Vérification des profils", function () { return db.from("profiles").select("verified,verification_requested").limit(1); }));
     res.push(await chk("Photos (5 par profil)", function () { return db.from("profiles").select("photos").limit(1); }));
     res.push(await chk("Administration (suspension)", function () { return db.from("profiles").select("suspended").limit(1); }));
     res.push(await chk("Signalements traités", function () { return db.from("reports").select("id,handled,created_at").limit(1); }));
