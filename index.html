@@ -79,6 +79,15 @@
   .langs label { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: .9rem; font-weight: 500; cursor: pointer; }
   .langs input { width: auto; margin: 0; }
   .tag.online { border-color: var(--ok); color: var(--ok); }
+  .bwrap { display: flex; flex-direction: column; max-width: 80%; }
+  .bwrap.me { align-self: flex-end; align-items: flex-end; }
+  .bwrap.them { align-self: flex-start; align-items: flex-start; }
+  .bwrap .bubble { max-width: 100%; }
+  .bmeta { font-size: .72rem; color: var(--muted); margin: 2px 6px 0; }
+  .bmeta a { color: var(--accent); }
+  .ice { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .ice-t { width: 100%; font-size: .85rem; color: var(--muted); }
+  .chip { width: auto; margin: 0; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: .85rem; font-weight: 500; cursor: pointer; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -341,6 +350,12 @@
       </div>
     </div>
     <div class="chat-box" id="chat-box" aria-live="polite" style="margin-top:12px"></div>
+    <div class="ice" id="ice" hidden>
+      <div class="ice-t" data-i18n="ice_title"></div>
+      <button type="button" class="chip" data-i18n="ice1"></button>
+      <button type="button" class="chip" data-i18n="ice2"></button>
+      <button type="button" class="chip" data-i18n="ice3"></button>
+    </div>
     <form class="chat-form" id="chat-form">
       <input id="chat-input" type="text" maxlength="1000" data-i18n-ph="msg_ph" autocomplete="off">
       <button id="chat-send" type="submit" data-i18n="send"></button>
@@ -411,6 +426,12 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      translate: "Traduire",
+      seen: "Vu",
+      ice_title: "Pour briser la glace :",
+      ice1: "Bonjour ! Ton profil m'a beaucoup plu 😊",
+      ice2: "Qu'est-ce que tu aimes faire le week-end ?",
+      ice3: "Tu as déjà voyagé dans mon pays ?",
       city: "Ville",
       intent: "Ce que je recherche",
       i_serieux: "Une relation sérieuse",
@@ -482,6 +503,12 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      translate: "Translate",
+      seen: "Seen",
+      ice_title: "Break the ice:",
+      ice1: "Hi! I really liked your profile 😊",
+      ice2: "What do you like to do at the weekend?",
+      ice3: "Have you ever been to my country?",
       city: "City",
       intent: "What I'm looking for",
       i_serieux: "A serious relationship",
@@ -553,6 +580,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      translate: "แปล",
+      seen: "อ่านแล้ว",
+      ice_title: "เริ่มทักทาย:",
+      ice1: "สวัสดีค่ะ/ครับ! ชอบโปรไฟล์ของคุณมากเลย 😊",
+      ice2: "วันหยุดสุดสัปดาห์ชอบทำอะไร?",
+      ice3: "เคยไปเที่ยวประเทศของฉันไหม?",
       city: "เมือง",
       intent: "สิ่งที่ฉันมองหา",
       i_serieux: "ความสัมพันธ์จริงจัง",
@@ -624,6 +657,12 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      translate: "Dịch",
+      seen: "Đã xem",
+      ice_title: "Bắt chuyện:",
+      ice1: "Xin chào! Mình rất thích hồ sơ của bạn 😊",
+      ice2: "Cuối tuần bạn thích làm gì?",
+      ice3: "Bạn đã từng đến đất nước của mình chưa?",
       city: "Thành phố",
       intent: "Điều tôi tìm kiếm",
       i_serieux: "Một mối quan hệ nghiêm túc",
@@ -695,6 +734,12 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      translate: "翻译",
+      seen: "已读",
+      ice_title: "打个招呼：",
+      ice1: "你好！我很喜欢你的资料 😊",
+      ice2: "你周末喜欢做什么？",
+      ice3: "你去过我的国家吗？",
       city: "城市",
       intent: "我在寻找",
       i_serieux: "认真的恋爱关系",
@@ -766,6 +811,12 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      translate: "Terjemahkan",
+      seen: "Dilihat",
+      ice_title: "Mulai obrolan:",
+      ice1: "Halo! Aku suka banget profilmu 😊",
+      ice2: "Apa yang suka kamu lakukan di akhir pekan?",
+      ice3: "Pernah pergi ke negaraku?",
       city: "Kota",
       intent: "Yang saya cari",
       i_serieux: "Hubungan serius",
@@ -837,6 +888,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      translate: "翻訳",
+      seen: "既読",
+      ice_title: "話しかけてみよう：",
+      ice1: "こんにちは！プロフィールがとても素敵でした 😊",
+      ice2: "週末は何をするのが好きですか？",
+      ice3: "私の国に行ったことはありますか？",
       city: "都市",
       intent: "探しているもの",
       i_serieux: "真剣な交際",
@@ -968,6 +1025,12 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      translate: "번역",
+      seen: "읽음",
+      ice_title: "먼저 말 걸어 보세요:",
+      ice1: "안녕하세요! 프로필이 정말 마음에 들어요 😊",
+      ice2: "주말에는 주로 뭐 하세요?",
+      ice3: "제 나라에 가 본 적 있어요?",
       city: "도시",
       intent: "내가 찾는 것",
       i_serieux: "진지한 관계",
@@ -1099,6 +1162,12 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      translate: "Terjemah",
+      seen: "Dilihat",
+      ice_title: "Mulakan perbualan:",
+      ice1: "Hai! Saya sangat suka profil awak 😊",
+      ice2: "Apa yang awak suka buat pada hujung minggu?",
+      ice3: "Pernah melawat negara saya?",
       city: "Bandar",
       intent: "Apa yang saya cari",
       i_serieux: "Hubungan serius",
@@ -1230,6 +1299,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      translate: "Isalin",
+      seen: "Nakita na",
+      ice_title: "Simulan ang usapan:",
+      ice1: "Hi! Gustong-gusto ko ang profile mo 😊",
+      ice2: "Ano ang gusto mong gawin tuwing weekend?",
+      ice3: "Nakapunta ka na ba sa bansa ko?",
       city: "Lungsod",
       intent: "Ang hinahanap ko",
       i_serieux: "Seryosong relasyon",
@@ -1361,6 +1436,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      translate: "ແປ",
+      seen: "ເຫັນແລ້ວ",
+      ice_title: "ເລີ່ມລົມກັນ:",
+      ice1: "ສະບາຍດີ! ມັກໂປຣໄຟລ໌ຂອງເຈົ້າຫຼາຍ 😊",
+      ice2: "ທ້າຍອາທິດມັກເຮັດຫຍັງ?",
+      ice3: "ເຄີຍໄປປະເທດຂອງຂ້ອຍບໍ?",
       city: "ເມືອງ",
       intent: "ສິ່ງທີ່ຂ້ອຍຊອກຫາ",
       i_serieux: "ຄວາມສຳພັນທີ່ຈິງຈັງ",
@@ -1492,6 +1573,12 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      translate: "បកប្រែ",
+      seen: "បានឃើញ",
+      ice_title: "ចាប់ផ្តើមសន្ទនា៖",
+      ice1: "សួស្តី! ខ្ញុំចូលចិត្តប្រវត្តិរូបរបស់អ្នកណាស់ 😊",
+      ice2: "តើអ្នកចូលចិត្តធ្វើអ្វីនៅចុងសប្តាហ៍?",
+      ice3: "តើអ្នកធ្លាប់ទៅប្រទេសរបស់ខ្ញុំទេ?",
       city: "ទីក្រុង",
       intent: "អ្វីដែលខ្ញុំកំពុងស្វែងរក",
       i_serieux: "ទំនាក់ទំនងស្និទ្ធស្នាលពិតប្រាកដ",
@@ -2236,12 +2323,28 @@
     var box = $("chat-box");
     var stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
     box.textContent = "";
-    (r.data || []).forEach(function (m) {
-      var d = document.createElement("div");
-      d.className = "bubble " + (m.from_id === me ? "me" : "them");
-      d.textContent = m.body;
-      box.appendChild(d);
+    var rows = r.data || [], lastMine = -1;
+    rows.forEach(function (m, i) { if (m.from_id === me) lastMine = i; });
+    rows.forEach(function (m, i) {
+      var mine = m.from_id === me;
+      var w = document.createElement("div"); w.className = "bwrap " + (mine ? "me" : "them");
+      var d = document.createElement("div"); d.className = "bubble " + (mine ? "me" : "them"); d.textContent = m.body; w.appendChild(d);
+      var meta = document.createElement("div"); meta.className = "bmeta";
+      var tm = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+      meta.appendChild(document.createTextNode(tm));
+      if (!mine) {
+        var a = document.createElement("a"); a.textContent = t("translate"); a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.href = "https://translate.google.com/?sl=auto&tl=" + (lang === "zh" ? "zh-CN" : lang) + "&op=translate&text=" + encodeURIComponent(m.body);
+        meta.appendChild(document.createTextNode(" · ")); meta.appendChild(a);
+      } else if (i === lastMine && m.read_at) {
+        meta.appendChild(document.createTextNode(" · " + t("seen") + " ✓✓"));
+      }
+      w.appendChild(meta); box.appendChild(w);
     });
+    $("ice").hidden = rows.length > 0;
+    if (rows.some(function (m) { return m.from_id === other && !m.read_at; })) {
+      db.rpc("mark_messages_read", { peer: other }).then(function () {}, function () {});
+    }
     if (stick || lastCount !== (r.data || []).length) box.scrollTop = box.scrollHeight;
     lastCount = (r.data || []).length;
     markRead(other);
@@ -2250,7 +2353,7 @@
   function openChat(p) {
     chatWith = p; lastCount = -1;
     $("chat-name").textContent = p.first_name;
-    $("chat-box").textContent = ""; $("chat-input").value = "";
+    $("chat-box").textContent = ""; $("chat-input").value = ""; $("ice").hidden = true;
     say($("cmsg"), "", "");
     showSection("chat");
     markRead(p.id);
@@ -2258,6 +2361,10 @@
     stopChat();
     chatTimer = setInterval(refreshChat, 4000);
   }
+
+  Array.prototype.forEach.call(document.querySelectorAll("#ice .chip"), function (b) {
+    b.onclick = function () { $("chat-input").value = b.textContent; $("chat-input").focus(); };
+  });
 
   $("chat-form").addEventListener("submit", async function (e) {
     e.preventDefault();
