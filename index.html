@@ -75,6 +75,10 @@
   .hero-title { font-size: 1.25rem; line-height: 1.35; margin: 0 0 12px; }
   .hero-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: .95rem; color: var(--muted); }
   .hero-list li::before { content: "◆ "; color: #c9a24a; }
+  .langs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .langs label { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: .9rem; font-weight: 500; cursor: pointer; }
+  .langs input { width: auto; margin: 0; }
+  .tag.online { border-color: var(--ok); color: var(--ok); }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -203,6 +207,21 @@
         <option value="tous" data-i18n="opt_any"></option>
       </select>
 
+      <label for="city" data-i18n="city"></label>
+      <input id="city" type="text" maxlength="40" autocomplete="address-level2">
+
+      <label for="intention" data-i18n="intent"></label>
+      <select id="intention">
+        <option value="" data-i18n="choose"></option>
+        <option value="serieux" data-i18n="i_serieux"></option>
+        <option value="mariage" data-i18n="i_mariage"></option>
+        <option value="amitie" data-i18n="i_amitie"></option>
+        <option value="voir" data-i18n="i_voir"></option>
+      </select>
+
+      <label data-i18n="spoken"></label>
+      <div id="spoken" class="langs"></div>
+
       <label for="bio" data-i18n="bio"></label>
       <textarea id="bio" maxlength="500" data-i18n-ph="bio_ph"></textarea>
       <div class="count"><span id="bio-count">0</span> / 500</div>
@@ -246,6 +265,17 @@
       </div>
       <label for="f-country" data-i18n="country"></label>
       <select id="f-country"></select>
+      <div class="two">
+        <div><label for="f-intent" data-i18n="intent"></label>
+          <select id="f-intent">
+            <option value="" data-i18n="all_intents"></option>
+            <option value="serieux" data-i18n="i_serieux"></option>
+            <option value="mariage" data-i18n="i_mariage"></option>
+            <option value="amitie" data-i18n="i_amitie"></option>
+            <option value="voir" data-i18n="i_voir"></option>
+          </select></div>
+        <div><label for="f-lang" data-i18n="filter_lang"></label><select id="f-lang"></select></div>
+      </div>
       <button class="secondary" id="f-apply" type="button" data-i18n="apply"></button>
     </details>
     <div class="match-banner" id="match-banner" hidden></div>
@@ -381,6 +411,18 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      city: "Ville",
+      intent: "Ce que je recherche",
+      i_serieux: "Une relation sérieuse",
+      i_mariage: "Le mariage",
+      i_amitie: "De l'amitié",
+      i_voir: "Je verrai bien",
+      spoken: "Langues parlées",
+      all_intents: "Toutes les intentions",
+      any_lang: "Toutes les langues",
+      filter_lang: "Parle",
+      online: "En ligne",
+      active_today: "Actif aujourd'hui",
       hero_title: "Des rencontres sincères entre l'Asie et le monde", hero_f1: "Profils vérifiés par notre équipe ✓", hero_f2: "Disponible en 12 langues", hero_f3: "Signalement et blocage en un geste",
       legal_btn: "Conditions et confidentialité",
       photos_label: "Photos (jusqu'à 5 · JPG, PNG ou WebP · 5 Mo max chacune)", photo_add: "Ajouter", photo_remove: "Supprimer la photo",
@@ -440,6 +482,18 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      city: "City",
+      intent: "What I'm looking for",
+      i_serieux: "A serious relationship",
+      i_mariage: "Marriage",
+      i_amitie: "Friendship",
+      i_voir: "Not sure yet",
+      spoken: "Languages spoken",
+      all_intents: "Any intention",
+      any_lang: "Any language",
+      filter_lang: "Speaks",
+      online: "Online",
+      active_today: "Active today",
       hero_title: "Sincere connections between Asia and the world", hero_f1: "Profiles verified by our team ✓", hero_f2: "Available in 12 languages", hero_f3: "Report and block in one tap",
       legal_btn: "Terms & privacy",
       photos_label: "Photos (up to 5 · JPG, PNG or WebP · 5 MB each)", photo_add: "Add", photo_remove: "Remove photo",
@@ -499,6 +553,18 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      city: "เมือง",
+      intent: "สิ่งที่ฉันมองหา",
+      i_serieux: "ความสัมพันธ์จริงจัง",
+      i_mariage: "การแต่งงาน",
+      i_amitie: "มิตรภาพ",
+      i_voir: "ยังไม่แน่ใจ",
+      spoken: "ภาษาที่พูดได้",
+      all_intents: "ทุกความตั้งใจ",
+      any_lang: "ทุกภาษา",
+      filter_lang: "พูดภาษา",
+      online: "ออนไลน์",
+      active_today: "ใช้งานวันนี้",
       hero_title: "พบรักที่จริงใจระหว่างเอเชียและทั่วโลก", hero_f1: "โปรไฟล์ที่ได้รับการยืนยันโดยทีมงาน ✓", hero_f2: "รองรับ 12 ภาษา", hero_f3: "รายงานและบล็อกได้ในคลิกเดียว",
       legal_btn: "ข้อกำหนดและความเป็นส่วนตัว",
       photos_label: "รูปภาพ (สูงสุด 5 รูป · JPG, PNG หรือ WebP · รูปละไม่เกิน 5 MB)", photo_add: "เพิ่ม", photo_remove: "ลบรูปภาพ",
@@ -558,6 +624,18 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      city: "Thành phố",
+      intent: "Điều tôi tìm kiếm",
+      i_serieux: "Một mối quan hệ nghiêm túc",
+      i_mariage: "Hôn nhân",
+      i_amitie: "Tình bạn",
+      i_voir: "Chưa chắc chắn",
+      spoken: "Ngôn ngữ sử dụng",
+      all_intents: "Mọi mục đích",
+      any_lang: "Mọi ngôn ngữ",
+      filter_lang: "Nói tiếng",
+      online: "Đang trực tuyến",
+      active_today: "Hoạt động hôm nay",
       hero_title: "Những kết nối chân thành giữa châu Á và thế giới", hero_f1: "Hồ sơ được đội ngũ xác minh ✓", hero_f2: "Có sẵn 12 ngôn ngữ", hero_f3: "Báo cáo và chặn chỉ với một chạm",
       legal_btn: "Điều khoản & quyền riêng tư",
       photos_label: "Ảnh (tối đa 5 · JPG, PNG hoặc WebP · mỗi ảnh tối đa 5 MB)", photo_add: "Thêm", photo_remove: "Xóa ảnh",
@@ -617,6 +695,18 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      city: "城市",
+      intent: "我在寻找",
+      i_serieux: "认真的恋爱关系",
+      i_mariage: "婚姻",
+      i_amitie: "友谊",
+      i_voir: "还不确定",
+      spoken: "会说的语言",
+      all_intents: "所有意向",
+      any_lang: "所有语言",
+      filter_lang: "会说",
+      online: "在线",
+      active_today: "今天活跃",
       hero_title: "连接亚洲与世界的真诚相遇", hero_f1: "资料经团队人工验证 ✓", hero_f2: "支持12种语言", hero_f3: "一键举报和拉黑",
       legal_btn: "条款与隐私",
       photos_label: "照片（最多5张 · JPG、PNG或WebP · 每张最大5MB）", photo_add: "添加", photo_remove: "删除照片",
@@ -676,6 +766,18 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      city: "Kota",
+      intent: "Yang saya cari",
+      i_serieux: "Hubungan serius",
+      i_mariage: "Pernikahan",
+      i_amitie: "Persahabatan",
+      i_voir: "Belum yakin",
+      spoken: "Bahasa yang dikuasai",
+      all_intents: "Semua tujuan",
+      any_lang: "Semua bahasa",
+      filter_lang: "Berbicara",
+      online: "Online",
+      active_today: "Aktif hari ini",
       hero_title: "Pertemuan tulus antara Asia dan dunia", hero_f1: "Profil diverifikasi oleh tim kami ✓", hero_f2: "Tersedia dalam 12 bahasa", hero_f3: "Laporkan dan blokir dengan satu ketukan",
       legal_btn: "Ketentuan & privasi",
       photos_label: "Foto (maksimal 5 · JPG, PNG atau WebP · maks. 5 MB per foto)", photo_add: "Tambah", photo_remove: "Hapus foto",
@@ -735,6 +837,18 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      city: "都市",
+      intent: "探しているもの",
+      i_serieux: "真剣な交際",
+      i_mariage: "結婚",
+      i_amitie: "友達",
+      i_voir: "まだわからない",
+      spoken: "話せる言語",
+      all_intents: "すべての目的",
+      any_lang: "すべての言語",
+      filter_lang: "話す言語",
+      online: "オンライン",
+      active_today: "今日アクティブ",
       hero_title: "アジアと世界をつなぐ、誠実な出会い", hero_f1: "運営チームが認証したプロフィール ✓", hero_f2: "12言語に対応", hero_f3: "ワンタップで通報・ブロック",
       legal_btn: "利用規約とプライバシー",
       photos_label: "写真（最大5枚・JPG、PNG、WebP・各5MBまで）", photo_add: "追加", photo_remove: "写真を削除",
@@ -854,6 +968,18 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      city: "도시",
+      intent: "내가 찾는 것",
+      i_serieux: "진지한 관계",
+      i_mariage: "결혼",
+      i_amitie: "친구",
+      i_voir: "아직 모르겠어요",
+      spoken: "사용 언어",
+      all_intents: "모든 목적",
+      any_lang: "모든 언어",
+      filter_lang: "사용 언어",
+      online: "온라인",
+      active_today: "오늘 활동",
       hero_title: "아시아와 세계를 잇는 진실한 만남", hero_f1: "운영팀이 인증한 프로필 ✓", hero_f2: "12개 언어 지원", hero_f3: "한 번에 신고 및 차단",
       legal_btn: "이용약관 및 개인정보",
       photos_label: "사진 (최대 5장 · JPG, PNG 또는 WebP · 장당 최대 5MB)", photo_add: "추가", photo_remove: "사진 삭제",
@@ -973,6 +1099,18 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      city: "Bandar",
+      intent: "Apa yang saya cari",
+      i_serieux: "Hubungan serius",
+      i_mariage: "Perkahwinan",
+      i_amitie: "Persahabatan",
+      i_voir: "Belum pasti",
+      spoken: "Bahasa yang dituturkan",
+      all_intents: "Semua niat",
+      any_lang: "Semua bahasa",
+      filter_lang: "Bertutur",
+      online: "Dalam talian",
+      active_today: "Aktif hari ini",
       hero_title: "Pertemuan ikhlas antara Asia dan dunia", hero_f1: "Profil disahkan oleh pasukan kami ✓", hero_f2: "Tersedia dalam 12 bahasa", hero_f3: "Lapor dan sekat dengan satu sentuhan",
       legal_btn: "Terma & privasi",
       photos_label: "Foto (sehingga 5 · JPG, PNG atau WebP · maksimum 5 MB setiap satu)", photo_add: "Tambah", photo_remove: "Buang foto",
@@ -1092,6 +1230,18 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      city: "Lungsod",
+      intent: "Ang hinahanap ko",
+      i_serieux: "Seryosong relasyon",
+      i_mariage: "Kasal",
+      i_amitie: "Pakikipagkaibigan",
+      i_voir: "Hindi pa sigurado",
+      spoken: "Mga wikang sinasalita",
+      all_intents: "Lahat ng layunin",
+      any_lang: "Lahat ng wika",
+      filter_lang: "Nagsasalita ng",
+      online: "Online",
+      active_today: "Aktibo ngayon",
       hero_title: "Tapat na pagkikilala sa pagitan ng Asya at ng mundo", hero_f1: "Mga profile na na-verify ng aming team ✓", hero_f2: "Available sa 12 wika", hero_f3: "Mag-report at mag-block sa isang tap",
       legal_btn: "Mga tuntunin at privacy",
       photos_label: "Mga larawan (hanggang 5 · JPG, PNG o WebP · hanggang 5 MB bawat isa)", photo_add: "Idagdag", photo_remove: "Alisin ang larawan",
@@ -1211,6 +1361,18 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      city: "ເມືອງ",
+      intent: "ສິ່ງທີ່ຂ້ອຍຊອກຫາ",
+      i_serieux: "ຄວາມສຳພັນທີ່ຈິງຈັງ",
+      i_mariage: "ການແຕ່ງງານ",
+      i_amitie: "ມິດຕະພາບ",
+      i_voir: "ຍັງບໍ່ແນ່ໃຈ",
+      spoken: "ພາສາທີ່ເວົ້າໄດ້",
+      all_intents: "ທຸກຈຸດປະສົງ",
+      any_lang: "ທຸກພາສາ",
+      filter_lang: "ເວົ້າພາສາ",
+      online: "ອອນລາຍ",
+      active_today: "ໃຊ້ງານມື້ນີ້",
       hero_title: "ການພົບກັນຢ່າງຈິງໃຈລະຫວ່າງອາຊີ ແລະ ທົ່ວໂລກ", hero_f1: "ໂປຣໄຟລ໌ທີ່ທີມງານຢືນຢັນແລ້ວ ✓", hero_f2: "ມີໃຫ້ 12 ພາສາ", hero_f3: "ລາຍງານ ແລະ ບລັອກໄດ້ໃນຄັ້ງດຽວ",
       legal_btn: "ເງື່ອນໄຂ ແລະ ຄວາມເປັນສ່ວນຕົວ",
       photos_label: "ຮູບພາບ (ສູງສຸດ 5 ຮູບ · JPG, PNG ຫຼື WebP · ບໍ່ເກີນ 5 MB ຕໍ່ຮູບ)", photo_add: "ເພີ່ມ", photo_remove: "ລຶບຮູບ",
@@ -1330,6 +1492,18 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      city: "ទីក្រុង",
+      intent: "អ្វីដែលខ្ញុំកំពុងស្វែងរក",
+      i_serieux: "ទំនាក់ទំនងស្និទ្ធស្នាលពិតប្រាកដ",
+      i_mariage: "អាពាហ៍ពិពាហ៍",
+      i_amitie: "មិត្តភាព",
+      i_voir: "មិនទាន់ប្រាកដ",
+      spoken: "ភាសាដែលនិយាយបាន",
+      all_intents: "គ្រប់គោលបំណង",
+      any_lang: "គ្រប់ភាសា",
+      filter_lang: "និយាយភាសា",
+      online: "អនឡាញ",
+      active_today: "សកម្មថ្ងៃនេះ",
       hero_title: "ការជួបគ្នាដោយស្មោះត្រង់រវាងអាស៊ី និងពិភពលោក", hero_f1: "ប្រវត្តិរូបដែលក្រុមការងារបានផ្ទៀងផ្ទាត់ ✓", hero_f2: "មាន ១២ ភាសា", hero_f3: "រាយការណ៍ និងទប់ស្កាត់បានភ្លាមៗ",
       legal_btn: "លក្ខខណ្ឌ និងឯកជនភាព",
       photos_label: "រូបថត (រហូតដល់ ៥ · JPG, PNG ឬ WebP · ធំបំផុត ៥ MB ក្នុងមួយរូប)", photo_add: "បន្ថែម", photo_remove: "លុបរូបថត",
@@ -1507,6 +1681,7 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-rich]"), function (el) { setRich(el, t(el.getAttribute("data-i18n-rich"))); });
     fillCountries($("country"), "choose");
     fillCountries($("f-country"), "all_countries");
+    fillLangFilter();
     $("submit").textContent = mode === "signup" ? t("btn_signup") : t("btn_login");
     $("lang").value = lang;
   }
@@ -1571,16 +1746,40 @@
     if (name === "home" && currentUser && typeof checkBadges === "function") checkBadges();
   }
 
+  var LANG_NAMES = { fr: "Français", en: "English", th: "ไทย", vi: "Tiếng Việt", zh: "中文", id: "Bahasa Indonesia", ja: "日本語", ko: "한국어", ms: "Bahasa Melayu", tl: "Filipino", lo: "ລາວ", km: "ខ្មែរ" };
+  function buildSpoken() {
+    var box = $("spoken"); if (box.childElementCount) return;
+    Object.keys(LANG_NAMES).forEach(function (code) {
+      var l = document.createElement("label"), c = document.createElement("input");
+      c.type = "checkbox"; c.value = code; l.appendChild(c); l.appendChild(document.createTextNode(LANG_NAMES[code])); box.appendChild(l);
+    });
+  }
+  function fillLangFilter() {
+    var s = $("f-lang"), keep = s.value; s.textContent = "";
+    var o = document.createElement("option"); o.value = ""; o.textContent = t("any_lang"); s.appendChild(o);
+    Object.keys(LANG_NAMES).forEach(function (code) { var x = document.createElement("option"); x.value = code; x.textContent = LANG_NAMES[code]; s.appendChild(x); });
+    s.value = keep || "";
+  }
+  function activityTag(p) {
+    if (!p.last_seen || (currentUser && p.id === currentUser.id)) return "";
+    var m = (Date.now() - new Date(p.last_seen).getTime()) / 60000;
+    return m < 15 ? t("online") : m < 1440 ? t("active_today") : "";
+  }
+
   function tagsInto(el, p) {
     el.textContent = "";
     var items = [];
     if (p.verified) items.push([t("verified_tag"), true]);
+    var act = activityTag(p); if (act) items.push([act, false, "online"]);
+    items.push([p.city || "", false]);
     items.push([p.country ? countryLabel(p.country) : "", false]);
     items.push([p.gender ? t("g_" + p.gender) : "", false]);
     items.push([p.looking_for ? t("l_" + p.looking_for) : "", false]);
+    items.push([p.intention ? t("i_" + p.intention) : "", false]);
+    if (p.spoken && p.spoken.length) items.push(["🗣 " + p.spoken.map(function (c) { return LANG_NAMES[c] || c; }).join(" · "), false]);
     items.forEach(function (it) {
       if (!it[0]) return;
-      var s = document.createElement("span"); s.className = "tag" + (it[1] ? " verified" : ""); s.textContent = it[0]; el.appendChild(s);
+      var s = document.createElement("span"); s.className = "tag" + (it[1] ? " verified" : "") + (it[2] ? " " + it[2] : ""); s.textContent = it[0]; el.appendChild(s);
     });
   }
 
@@ -1644,6 +1843,11 @@
     $("gender").value = (p && p.gender) || "";
     $("looking_for").value = (p && p.looking_for) || "";
     $("bio").value = (p && p.bio) || "";
+    $("city").value = (p && p.city) || "";
+    $("intention").value = (p && p.intention) || "";
+    buildSpoken();
+    var sp = (p && p.spoken) || [];
+    Array.prototype.forEach.call($("spoken").querySelectorAll("input"), function (c) { c.checked = sp.indexOf(c.value) !== -1; });
     $("bio-count").textContent = $("bio").value.length;
     initSlots(p);
     $("pcancel").hidden = !p;
@@ -1660,8 +1864,15 @@
       return say($("msg"), "Compte suspendu / Account suspended.", "err");
     }
     currentProfile = r.data;
-    if (r.data) renderView(user, r.data);
+    if (r.data) { touchSeen(); renderView(user, r.data); }
     else { fillForm(null); showSection("profile"); }
+  }
+
+  var seenTimer = null;
+  function touchSeen() {
+    if (!currentUser) return;
+    db.from("profiles").update({ last_seen: new Date().toISOString() }).eq("id", currentUser.id).then(function () {}, function () {});
+    if (!seenTimer) seenTimer = setInterval(function () { if (currentUser && currentProfile) touchSeen(); }, 300000);
   }
 
   function show(user) {
@@ -1743,6 +1954,9 @@
         gender: $("gender").value,
         looking_for: $("looking_for").value,
         bio: $("bio").value.trim() || null,
+        city: $("city").value.trim() || null,
+        intention: $("intention").value || null,
+        spoken: Array.prototype.filter.call($("spoken").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
         photo_path: photoPath,
         photos: paths,
         birthdate: bd,
@@ -1785,6 +1999,8 @@
     if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
     if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
     if ($("f-country").value) q = q.eq("country", $("f-country").value);
+    if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
+    if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
     var r = await q;
     if (r.error) return say(dmsg, r.error.message, "err");
     say(dmsg, "", "");
