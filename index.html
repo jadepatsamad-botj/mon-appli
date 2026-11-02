@@ -182,6 +182,7 @@
         <button class="linkbtn" id="legal-link-auth" type="button" data-i18n="legal_btn"></button>
       </div>
       <button class="primary" id="submit" type="submit"></button>
+      <div style="text-align:center"><button class="linkbtn" id="forgot" type="button" data-i18n="forgot" hidden></button></div>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
     </form>
   </section>
@@ -254,6 +255,7 @@
     <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
     <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
     <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
+    <button class="secondary" id="go-settings" type="button" data-i18n="settings_btn"></button>
     <button class="secondary" id="go-legal" type="button" data-i18n="legal_btn"></button>
     <button class="secondary" id="go-admin" type="button" hidden>Administration</button>
     <button class="secondary" id="logout" type="button" data-i18n="logout"></button>
@@ -337,6 +339,20 @@
     <h3>Signalements à traiter</h3>
     <div id="admin-reports"></div>
     <div class="msg" id="admsg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Paramètres -->
+  <section class="card" id="settings" hidden>
+    <button class="back" id="settings-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="settings_btn"></h2>
+    <label class="check" for="pause">
+      <input id="pause" type="checkbox">
+      <span data-i18n="pause_label"></span>
+    </label>
+    <label for="newpw" data-i18n="new_pw"></label>
+    <input id="newpw" type="password" minlength="8" autocomplete="new-password">
+    <button class="secondary" id="change-pw" type="button" data-i18n="change_pw"></button>
+    <div class="msg" id="smsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Discussion -->
@@ -426,6 +442,16 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      forgot: "Mot de passe oublié ?",
+      reset_sent: "Si un compte existe pour cette adresse, un e-mail de réinitialisation vient d'être envoyé.",
+      settings_btn: "Paramètres",
+      new_pw: "Nouveau mot de passe (8 caractères minimum)",
+      change_pw: "Changer le mot de passe",
+      pw_changed: "Mot de passe modifié.",
+      pause_label: "Mettre mon profil en pause (je n'apparais plus dans la découverte)",
+      pause_on: "Ton profil est en pause.",
+      pause_off: "Ton profil est de nouveau visible.",
+      recovery_msg: "Choisis ton nouveau mot de passe ci-dessous.",
       translate: "Traduire",
       seen: "Vu",
       ice_title: "Pour briser la glace :",
@@ -503,6 +529,16 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      forgot: "Forgot password?",
+      reset_sent: "If an account exists for this address, a reset email has just been sent.",
+      settings_btn: "Settings",
+      new_pw: "New password (8 characters minimum)",
+      change_pw: "Change password",
+      pw_changed: "Password changed.",
+      pause_label: "Pause my profile (I no longer appear in discovery)",
+      pause_on: "Your profile is paused.",
+      pause_off: "Your profile is visible again.",
+      recovery_msg: "Choose your new password below.",
       translate: "Translate",
       seen: "Seen",
       ice_title: "Break the ice:",
@@ -580,6 +616,16 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      forgot: "ลืมรหัสผ่าน?",
+      reset_sent: "หากมีบัญชีสำหรับอีเมลนี้ เราได้ส่งอีเมลรีเซ็ตรหัสผ่านไปแล้ว",
+      settings_btn: "การตั้งค่า",
+      new_pw: "รหัสผ่านใหม่ (อย่างน้อย 8 ตัวอักษร)",
+      change_pw: "เปลี่ยนรหัสผ่าน",
+      pw_changed: "เปลี่ยนรหัสผ่านแล้ว",
+      pause_label: "หยุดโปรไฟล์ชั่วคราว (จะไม่แสดงในการค้นหา)",
+      pause_on: "โปรไฟล์ของคุณถูกหยุดชั่วคราว",
+      pause_off: "โปรไฟล์ของคุณแสดงอีกครั้งแล้ว",
+      recovery_msg: "ตั้งรหัสผ่านใหม่ด้านล่าง",
       translate: "แปล",
       seen: "อ่านแล้ว",
       ice_title: "เริ่มทักทาย:",
@@ -657,6 +703,16 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      forgot: "Quên mật khẩu?",
+      reset_sent: "Nếu có tài khoản với địa chỉ này, email đặt lại mật khẩu vừa được gửi.",
+      settings_btn: "Cài đặt",
+      new_pw: "Mật khẩu mới (tối thiểu 8 ký tự)",
+      change_pw: "Đổi mật khẩu",
+      pw_changed: "Đã đổi mật khẩu.",
+      pause_label: "Tạm ẩn hồ sơ (không còn xuất hiện khi khám phá)",
+      pause_on: "Hồ sơ của bạn đang tạm ẩn.",
+      pause_off: "Hồ sơ của bạn đã hiển thị trở lại.",
+      recovery_msg: "Hãy chọn mật khẩu mới bên dưới.",
       translate: "Dịch",
       seen: "Đã xem",
       ice_title: "Bắt chuyện:",
@@ -734,6 +790,16 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      forgot: "忘记密码？",
+      reset_sent: "如果该邮箱已注册，重置邮件已发送。",
+      settings_btn: "设置",
+      new_pw: "新密码（至少8个字符）",
+      change_pw: "修改密码",
+      pw_changed: "密码已修改。",
+      pause_label: "暂停我的资料（不再出现在发现页）",
+      pause_on: "你的资料已暂停。",
+      pause_off: "你的资料已重新可见。",
+      recovery_msg: "请在下方设置新密码。",
       translate: "翻译",
       seen: "已读",
       ice_title: "打个招呼：",
@@ -811,6 +877,16 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      forgot: "Lupa kata sandi?",
+      reset_sent: "Jika ada akun untuk alamat ini, email reset baru saja dikirim.",
+      settings_btn: "Pengaturan",
+      new_pw: "Kata sandi baru (minimal 8 karakter)",
+      change_pw: "Ubah kata sandi",
+      pw_changed: "Kata sandi diubah.",
+      pause_label: "Jeda profil saya (tidak muncul lagi di jelajah)",
+      pause_on: "Profil Anda sedang dijeda.",
+      pause_off: "Profil Anda terlihat lagi.",
+      recovery_msg: "Pilih kata sandi baru di bawah ini.",
       translate: "Terjemahkan",
       seen: "Dilihat",
       ice_title: "Mulai obrolan:",
@@ -888,6 +964,16 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      forgot: "パスワードをお忘れですか？",
+      reset_sent: "このアドレスのアカウントがあれば、再設定メールを送信しました。",
+      settings_btn: "設定",
+      new_pw: "新しいパスワード（8文字以上）",
+      change_pw: "パスワードを変更",
+      pw_changed: "パスワードを変更しました。",
+      pause_label: "プロフィールを一時停止（検索に表示されなくなります）",
+      pause_on: "プロフィールを一時停止中です。",
+      pause_off: "プロフィールが再び表示されます。",
+      recovery_msg: "下で新しいパスワードを設定してください。",
       translate: "翻訳",
       seen: "既読",
       ice_title: "話しかけてみよう：",
@@ -1025,6 +1111,16 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      forgot: "비밀번호를 잊으셨나요?",
+      reset_sent: "이 주소로 된 계정이 있다면 재설정 이메일을 보냈습니다.",
+      settings_btn: "설정",
+      new_pw: "새 비밀번호 (8자 이상)",
+      change_pw: "비밀번호 변경",
+      pw_changed: "비밀번호가 변경되었습니다.",
+      pause_label: "프로필 일시 중지 (둘러보기에 더 이상 표시되지 않음)",
+      pause_on: "프로필이 일시 중지되었습니다.",
+      pause_off: "프로필이 다시 표시됩니다.",
+      recovery_msg: "아래에서 새 비밀번호를 설정하세요.",
       translate: "번역",
       seen: "읽음",
       ice_title: "먼저 말 걸어 보세요:",
@@ -1162,6 +1258,16 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      forgot: "Lupa kata laluan?",
+      reset_sent: "Jika akaun wujud untuk alamat ini, e-mel tetapan semula telah dihantar.",
+      settings_btn: "Tetapan",
+      new_pw: "Kata laluan baharu (minimum 8 aksara)",
+      change_pw: "Tukar kata laluan",
+      pw_changed: "Kata laluan telah ditukar.",
+      pause_label: "Jeda profil saya (tidak lagi muncul dalam terokai)",
+      pause_on: "Profil anda dijeda.",
+      pause_off: "Profil anda kelihatan semula.",
+      recovery_msg: "Pilih kata laluan baharu di bawah.",
       translate: "Terjemah",
       seen: "Dilihat",
       ice_title: "Mulakan perbualan:",
@@ -1299,6 +1405,16 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      forgot: "Nakalimutan ang password?",
+      reset_sent: "Kung may account para sa address na ito, naipadala na ang email para i-reset.",
+      settings_btn: "Mga setting",
+      new_pw: "Bagong password (hindi bababa sa 8 character)",
+      change_pw: "Palitan ang password",
+      pw_changed: "Napalitan na ang password.",
+      pause_label: "I-pause ang profile ko (hindi na ako lalabas sa paghahanap)",
+      pause_on: "Naka-pause ang profile mo.",
+      pause_off: "Nakikita na ulit ang profile mo.",
+      recovery_msg: "Pumili ng bagong password sa ibaba.",
       translate: "Isalin",
       seen: "Nakita na",
       ice_title: "Simulan ang usapan:",
@@ -1436,6 +1552,16 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      forgot: "ລືມລະຫັດຜ່ານ?",
+      reset_sent: "ຖ້າມີບັນຊີສຳລັບອີເມລນີ້ ໄດ້ສົ່ງອີເມລຕັ້ງລະຫັດໃໝ່ແລ້ວ.",
+      settings_btn: "ການຕັ້ງຄ່າ",
+      new_pw: "ລະຫັດຜ່ານໃໝ່ (ຢ່າງໜ້ອຍ 8 ຕົວອັກສອນ)",
+      change_pw: "ປ່ຽນລະຫັດຜ່ານ",
+      pw_changed: "ປ່ຽນລະຫັດຜ່ານແລ້ວ.",
+      pause_label: "ຢຸດໂປຣໄຟລ໌ຊົ່ວຄາວ (ບໍ່ສະແດງໃນການຄົ້ນຫາ)",
+      pause_on: "ໂປຣໄຟລ໌ຂອງເຈົ້າຖືກຢຸດຊົ່ວຄາວ.",
+      pause_off: "ໂປຣໄຟລ໌ຂອງເຈົ້າສະແດງອີກຄັ້ງ.",
+      recovery_msg: "ເລືອກລະຫັດຜ່ານໃໝ່ຂ້າງລຸ່ມ.",
       translate: "ແປ",
       seen: "ເຫັນແລ້ວ",
       ice_title: "ເລີ່ມລົມກັນ:",
@@ -1573,6 +1699,16 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      forgot: "ភ្លេចពាក្យសម្ងាត់?",
+      reset_sent: "បើមានគណនីសម្រាប់អាសយដ្ឋាននេះ អ៊ីមែលកំណត់ឡើងវិញត្រូវបានផ្ញើហើយ។",
+      settings_btn: "ការកំណត់",
+      new_pw: "ពាក្យសម្ងាត់ថ្មី (យ៉ាងតិច ៨ តួអក្សរ)",
+      change_pw: "ប្តូរពាក្យសម្ងាត់",
+      pw_changed: "បានប្តូរពាក្យសម្ងាត់។",
+      pause_label: "ផ្អាកប្រវត្តិរូបខ្ញុំ (លែងបង្ហាញក្នុងការស្វែងរក)",
+      pause_on: "ប្រវត្តិរូបរបស់អ្នកត្រូវបានផ្អាក។",
+      pause_off: "ប្រវត្តិរូបរបស់អ្នកបង្ហាញវិញហើយ។",
+      recovery_msg: "សូមជ្រើសរើសពាក្យសម្ងាត់ថ្មីខាងក្រោម។",
       translate: "បកប្រែ",
       seen: "បានឃើញ",
       ice_title: "ចាប់ផ្តើមសន្ទនា៖",
@@ -1782,6 +1918,7 @@
     $("signup-only").hidden = m !== "signup";
     $("submit").textContent = m === "signup" ? t("btn_signup") : t("btn_login");
     $("password").autocomplete = m === "signup" ? "new-password" : "current-password";
+    $("forgot").hidden = m !== "login";
     say($("msg"), "", "");
   }
 
@@ -1826,7 +1963,7 @@
     img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "legal", "admin", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "legal", "admin", "settings", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -2102,6 +2239,7 @@
       .not("id", "in", "(" + seen.join(",") + ")")
       .in("looking_for", [currentProfile.gender, "tous"])
       .eq("suspended", false)
+      .eq("hidden", false)
       .order("created_at", { ascending: false }).limit(1);
     if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
     var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
@@ -2494,7 +2632,51 @@
 
   applyI18n();
   setMode("signup");
-  db.auth.getSession().then(function (r) { show(r.data.session ? r.data.session.user : null); });
+  // ---------- Mot de passe oublié et paramètres ----------
+  var recovering = /type=recovery/.test(window.location.hash);
+  $("forgot").onclick = async function () {
+    var email = $("email").value.trim();
+    if (!email) return say($("msg"), t("e_creds"), "err");
+    $("forgot").disabled = true;
+    try { await db.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + window.location.pathname }); } catch (e) {}
+    say($("msg"), t("reset_sent"), "ok");
+    $("forgot").disabled = false;
+  };
+  function openSettings(note) {
+    $("pause").checked = !!(currentProfile && currentProfile.hidden);
+    $("newpw").value = "";
+    say($("smsg"), note || "", note ? "ok" : "");
+    showSection("settings");
+    if (note) $("newpw").focus();
+  }
+  $("go-settings").onclick = function () { openSettings(); };
+  $("settings-back").onclick = function () { if (currentProfile) renderView(currentUser, currentProfile); else showSection("profile"); };
+  $("pause").onchange = async function () {
+    var on = $("pause").checked;
+    var r = await db.from("profiles").update({ hidden: on }).eq("id", currentUser.id).select().single();
+    if (r.error) { $("pause").checked = !on; return say($("smsg"), r.error.message, "err"); }
+    currentProfile = r.data;
+    say($("smsg"), t(on ? "pause_on" : "pause_off"), "ok");
+  };
+  $("change-pw").onclick = async function () {
+    var pw = $("newpw").value;
+    if (pw.length < 8) return say($("smsg"), t("e_creds"), "err");
+    $("change-pw").disabled = true;
+    var r = await db.auth.updateUser({ password: pw });
+    $("change-pw").disabled = false;
+    if (r.error) return say($("smsg"), r.error.message, "err");
+    $("newpw").value = ""; say($("smsg"), t("pw_changed"), "ok");
+    if (recovering) { recovering = false; try { history.replaceState(null, "", window.location.pathname); } catch (e) {} }
+  };
+  if (db.auth.onAuthStateChange) {
+    db.auth.onAuthStateChange(function (ev) { if (ev === "PASSWORD_RECOVERY") { recovering = true; setTimeout(function () { openSettings(t("recovery_msg")); }, 600); } });
+  }
+
+  db.auth.getSession().then(async function (r) {
+    var u = r.data.session ? r.data.session.user : null;
+    show(u);
+    if (u && recovering) setTimeout(function () { openSettings(t("recovery_msg")); }, 900);
+  });
 </script>
 </body>
 </html>
