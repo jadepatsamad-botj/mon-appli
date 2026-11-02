@@ -98,6 +98,9 @@
   .joinbtn { width: auto; margin: 6px 0 0; padding: 8px 14px; border-radius: 10px; border: 0; background: #c9a24a; color: #1d2330; font-weight: 600; cursor: pointer; }
   .scamwarn { max-width: 100%; margin-top: 4px; padding: 6px 10px; border-radius: 8px; background: #fff4d6; color: #6b4a00; border: 1px solid #e8c766; font-size: .8rem; }
   @media (prefers-color-scheme: dark) { .scamwarn { background: #3a2f12; color: #f3d98a; border-color: #6b5520; } }
+  .superbtn { border-color: #c9a24a; color: #8a6a1f; }
+  @media (prefers-color-scheme: dark) { .superbtn { color: #e8c766; } }
+  .staricon { margin-left: auto; font-size: 1.2rem; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -270,6 +273,7 @@
     <button class="primary" id="go-discover" type="button" data-i18n="discover"></button>
     <button class="secondary" id="go-matches" type="button" data-i18n="matches"></button>
     <button class="secondary" id="go-likes" type="button" data-i18n="likes_btn"></button>
+    <button class="secondary" id="go-views" type="button" data-i18n="views_btn"></button>
     <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
     <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
     <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
@@ -308,6 +312,7 @@
       <button class="secondary" id="f-apply" type="button" data-i18n="apply"></button>
     </details>
     <div class="match-banner" id="match-banner" hidden></div>
+    <div style="text-align:right"><button class="linkbtn" id="undo" type="button" data-i18n="undo" hidden></button></div>
     <div id="cand" hidden>
       <img id="cand-photo" class="view-photo" alt="" hidden>
       <h2 id="cand-name"></h2>
@@ -317,6 +322,7 @@
         <button class="secondary" id="pass" type="button" data-i18n="pass"></button>
         <button class="primary" id="like" type="button" data-i18n="like"></button>
       </div>
+      <button class="secondary superbtn" id="superlike" type="button" data-i18n="super_like"></button>
       <div style="text-align:center;margin-top:8px">
         <button class="linkbtn" id="cand-report" type="button" data-i18n="report_profile"></button>
       </div>
@@ -331,6 +337,14 @@
     <h2 data-i18n="matches_title"></h2>
     <div id="matches-list"></div>
     <p class="empty" id="matches-empty" hidden></p>
+  </section>
+
+  <!-- Qui a vu mon profil -->
+  <section class="card" id="views" hidden>
+    <button class="back" id="views-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="views_title"></h2>
+    <div id="views-list"></div>
+    <p class="empty" id="views-empty" hidden></p>
   </section>
 
   <!-- Qui m'a liké -->
@@ -352,6 +366,8 @@
   <section class="card" id="admin" hidden>
     <button class="back" id="admin-back" type="button">← Retour</button>
     <h2>Administration</h2>
+    <button class="secondary" id="admin-diag" type="button">🩺 Vérifier l'installation</button>
+    <div id="diag-out"></div>
     <h3>Vérifications en attente</h3>
     <div id="admin-verifs"></div>
     <h3>Signalements à traiter</h3>
@@ -461,6 +477,14 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      views_btn: "Qui a vu mon profil",
+      views_title: "Ont vu ton profil",
+      views_empty: "Personne pour l'instant.",
+      super_like: "⭐ Super like",
+      super_tag: "⭐ Super like",
+      undo: "↩ Revenir",
+      super_sent: "Super like envoyé ! ⭐",
+      seen_on: "Vu le {d}",
       scam_warn: "⚠️ Prudence : ce message parle d'argent, de cadeaux ou d'investissement. Ne jamais envoyer d'argent à quelqu'un rencontré en ligne.",
       interests: "Centres d'intérêt",
       int_voyage: "Voyages",
@@ -571,6 +595,14 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      views_btn: "Who viewed me",
+      views_title: "Viewed your profile",
+      views_empty: "No one yet.",
+      super_like: "⭐ Super like",
+      super_tag: "⭐ Super like",
+      undo: "↩ Undo",
+      super_sent: "Super like sent! ⭐",
+      seen_on: "Viewed on {d}",
       scam_warn: "⚠️ Careful: this message mentions money, gifts or investment. Never send money to someone you met online.",
       interests: "Interests",
       int_voyage: "Travel",
@@ -681,6 +713,14 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      views_btn: "ใครดูโปรไฟล์ฉัน",
+      views_title: "ดูโปรไฟล์ของคุณ",
+      views_empty: "ยังไม่มีใคร",
+      super_like: "⭐ ซูเปอร์ไลก์",
+      super_tag: "⭐ ซูเปอร์ไลก์",
+      undo: "↩ ย้อนกลับ",
+      super_sent: "ส่งซูเปอร์ไลก์แล้ว! ⭐",
+      seen_on: "ดูเมื่อ {d}",
       scam_warn: "⚠️ ระวัง: ข้อความนี้พูดถึงเงิน ของขวัญ หรือการลงทุน อย่าโอนเงินให้คนที่รู้จักทางออนไลน์",
       interests: "ความสนใจ",
       int_voyage: "ท่องเที่ยว",
@@ -791,6 +831,14 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      views_btn: "Ai đã xem hồ sơ tôi",
+      views_title: "Đã xem hồ sơ của bạn",
+      views_empty: "Chưa có ai.",
+      super_like: "⭐ Siêu thích",
+      super_tag: "⭐ Siêu thích",
+      undo: "↩ Quay lại",
+      super_sent: "Đã gửi siêu thích! ⭐",
+      seen_on: "Đã xem ngày {d}",
       scam_warn: "⚠️ Cẩn thận: tin nhắn này nhắc đến tiền, quà hoặc đầu tư. Đừng bao giờ gửi tiền cho người quen qua mạng.",
       interests: "Sở thích",
       int_voyage: "Du lịch",
@@ -901,6 +949,14 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      views_btn: "谁看过我",
+      views_title: "看过你的资料",
+      views_empty: "暂时还没有。",
+      super_like: "⭐ 超级喜欢",
+      super_tag: "⭐ 超级喜欢",
+      undo: "↩ 撤回",
+      super_sent: "已发送超级喜欢！⭐",
+      seen_on: "查看于 {d}",
       scam_warn: "⚠️ 请注意：这条消息提到了钱、礼物或投资。千万不要给网上认识的人汇款。",
       interests: "兴趣爱好",
       int_voyage: "旅行",
@@ -1011,6 +1067,14 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      views_btn: "Siapa yang melihat saya",
+      views_title: "Melihat profil Anda",
+      views_empty: "Belum ada.",
+      super_like: "⭐ Super like",
+      super_tag: "⭐ Super like",
+      undo: "↩ Urungkan",
+      super_sent: "Super like terkirim! ⭐",
+      seen_on: "Dilihat {d}",
       scam_warn: "⚠️ Hati-hati: pesan ini menyebut uang, hadiah, atau investasi. Jangan pernah mengirim uang kepada orang yang dikenal secara online.",
       interests: "Minat",
       int_voyage: "Traveling",
@@ -1121,6 +1185,14 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      views_btn: "プロフィールを見た人",
+      views_title: "あなたのプロフィールを見た人",
+      views_empty: "まだいません。",
+      super_like: "⭐ スーパーいいね",
+      super_tag: "⭐ スーパーいいね",
+      undo: "↩ 戻す",
+      super_sent: "スーパーいいねを送りました！⭐",
+      seen_on: "{d} に閲覧",
       scam_warn: "⚠️ 注意：このメッセージはお金、プレゼント、または投資について触れています。ネットで知り合った人には絶対にお金を送らないでください。",
       interests: "趣味",
       int_voyage: "旅行",
@@ -1291,6 +1363,14 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      views_btn: "내 프로필을 본 사람",
+      views_title: "내 프로필을 봤어요",
+      views_empty: "아직 없어요.",
+      super_like: "⭐ 슈퍼 좋아요",
+      super_tag: "⭐ 슈퍼 좋아요",
+      undo: "↩ 되돌리기",
+      super_sent: "슈퍼 좋아요를 보냈어요! ⭐",
+      seen_on: "{d}에 봄",
       scam_warn: "⚠️ 주의: 이 메시지는 돈, 선물 또는 투자를 언급합니다. 온라인에서 만난 사람에게 절대 돈을 보내지 마세요.",
       interests: "관심사",
       int_voyage: "여행",
@@ -1461,6 +1541,14 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      views_btn: "Siapa lihat profil saya",
+      views_title: "Melihat profil anda",
+      views_empty: "Belum ada sesiapa.",
+      super_like: "⭐ Super like",
+      super_tag: "⭐ Super like",
+      undo: "↩ Buat asal",
+      super_sent: "Super like dihantar! ⭐",
+      seen_on: "Dilihat pada {d}",
       scam_warn: "⚠️ Berhati-hati: mesej ini menyebut wang, hadiah atau pelaburan. Jangan sekali-kali hantar wang kepada orang yang dikenali dalam talian.",
       interests: "Minat",
       int_voyage: "Melancong",
@@ -1631,6 +1719,14 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      views_btn: "Sino ang tumingin sa akin",
+      views_title: "Tumingin sa profile mo",
+      views_empty: "Wala pa.",
+      super_like: "⭐ Super like",
+      super_tag: "⭐ Super like",
+      undo: "↩ Bawiin",
+      super_sent: "Naipadala ang super like! ⭐",
+      seen_on: "Tiningnan noong {d}",
       scam_warn: "⚠️ Mag-ingat: binabanggit ng mensaheng ito ang pera, regalo o investment. Huwag kailanman magpadala ng pera sa taong nakilala online.",
       interests: "Mga hilig",
       int_voyage: "Paglalakbay",
@@ -1801,6 +1897,14 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      views_btn: "ໃຜເບິ່ງໂປຣໄຟລ໌ຂ້ອຍ",
+      views_title: "ເບິ່ງໂປຣໄຟລ໌ຂອງເຈົ້າ",
+      views_empty: "ຍັງບໍ່ມີ.",
+      super_like: "⭐ ມັກຫຼາຍ",
+      super_tag: "⭐ ມັກຫຼາຍ",
+      undo: "↩ ຍ້ອນກັບ",
+      super_sent: "ສົ່ງ ມັກຫຼາຍ ແລ້ວ! ⭐",
+      seen_on: "ເບິ່ງເມື່ອ {d}",
       scam_warn: "⚠️ ລະວັງ: ຂໍ້ຄວາມນີ້ກ່າວເຖິງເງິນ, ຂອງຂວັນ ຫຼື ການລົງທຶນ. ຢ່າສົ່ງເງິນໃຫ້ຄົນທີ່ຮູ້ຈັກທາງອອນລາຍ.",
       interests: "ຄວາມສົນໃຈ",
       int_voyage: "ທ່ອງທ່ຽວ",
@@ -1971,6 +2075,14 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      views_btn: "អ្នកណាមើលប្រវត្តិរូបខ្ញុំ",
+      views_title: "បានមើលប្រវត្តិរូបរបស់អ្នក",
+      views_empty: "មិនទាន់មានទេ។",
+      super_like: "⭐ ចូលចិត្តខ្លាំង",
+      super_tag: "⭐ ចូលចិត្តខ្លាំង",
+      undo: "↩ ត្រឡប់វិញ",
+      super_sent: "បានផ្ញើការចូលចិត្តខ្លាំង! ⭐",
+      seen_on: "បានមើលនៅ {d}",
       scam_warn: "⚠️ ប្រយ័ត្ន៖ សារនេះនិយាយអំពីលុយ អំណោយ ឬការវិនិយោគ។ កុំផ្ញើលុយទៅអ្នកដែលស្គាល់តាមអ៊ីនធឺណិតជាដាច់ខាត។",
       interests: "ចំណាប់អារម្មណ៍",
       int_voyage: "ការធ្វើដំណើរ",
@@ -2258,7 +2370,7 @@
     img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "legal", "admin", "settings", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -2553,6 +2665,9 @@
     tagsInto($("cand-tags"), candidate);
     $("cand-bio").textContent = candidate.bio || "";
     setGallery($("cand-photo"), candidate);
+    if (currentUser && candidate.id !== currentUser.id) {
+      db.from("profile_views").upsert({ viewer_id: currentUser.id, viewed_id: candidate.id, viewed_at: new Date().toISOString() }).then(function () {}, function () {});
+    }
     $("cand").hidden = false;
   }
 
@@ -2584,26 +2699,42 @@
     renderCandidate();
   }
 
-  async function swipe(liked) {
+  var lastPassed = null;
+  async function swipe(liked, isSuper) {
     if (!candidate) return;
-    $("like").disabled = $("pass").disabled = true;
+    $("like").disabled = $("pass").disabled = $("superlike").disabled = true;
     var dmsg = $("dmsg"), banner = $("match-banner");
     banner.hidden = true;
     try {
-      var ins = await db.from("swipes").insert({ from_id: currentUser.id, to_id: candidate.id, liked: liked });
+      var row = { from_id: currentUser.id, to_id: candidate.id, liked: liked };
+      if (isSuper) row.super = true;
+      var ins = await db.from("swipes").insert(row);
       if (ins.error) throw ins.error;
+      lastPassed = liked ? null : candidate;
+      $("undo").hidden = !lastPassed || fromLikes;
+      if (isSuper) say(dmsg, t("super_sent"), "ok");
       if (liked) {
         var back = await db.from("swipes").select("liked")
           .eq("from_id", candidate.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
         if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; }
       }
       if (fromLikes) { fromLikes = false; showSection("likes"); await loadLikes(); }
-      else await nextCandidate();
+      else { var keepMsg = isSuper; await nextCandidate(); if (keepMsg) say(dmsg, t("super_sent"), "ok"); }
     } catch (err) { say(dmsg, err.message || t("e_generic"), "err"); }
-    $("like").disabled = $("pass").disabled = false;
+    $("like").disabled = $("pass").disabled = $("superlike").disabled = false;
   }
+  $("superlike").onclick = function () { swipe(true, true); };
+  $("undo").onclick = async function () {
+    if (!lastPassed) return;
+    $("undo").disabled = true;
+    var r = await db.from("swipes").delete().eq("from_id", currentUser.id).eq("to_id", lastPassed.id).eq("liked", false);
+    $("undo").disabled = false;
+    if (r.error) return say($("dmsg"), r.error.message, "err");
+    candidate = lastPassed; lastPassed = null; $("undo").hidden = true;
+    $("cand-empty").hidden = true; say($("dmsg"), "", ""); renderCandidate();
+  };
 
-  $("go-discover").onclick = function () { fromLikes = false; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
+  $("go-discover").onclick = function () { fromLikes = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
   $("f-apply").onclick = function () { $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
   $("discover-back").onclick = function () { if (fromLikes) { fromLikes = false; showSection("likes"); loadLikes(); } else showSection("home"); };
   $("like").onclick = function () { swipe(true); };
@@ -2669,11 +2800,13 @@
     var list = $("likes-list"); list.textContent = ""; $("likes-empty").hidden = true;
     var me = currentUser.id;
     var a = await db.from("swipes").select("to_id").eq("from_id", me);
-    var b = await db.from("swipes").select("from_id").eq("to_id", me).eq("liked", true);
+    var b = await db.from("swipes").select("*").eq("to_id", me).eq("liked", true);
     var done = (a.data || []).map(function (x) { return x.to_id; });
+    var supers = {}; (b.data || []).forEach(function (x) { if (x.super) supers[x.from_id] = true; });
     var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return done.indexOf(id) === -1; });
     var people = [];
     if (ids.length) { var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false); people = r.data || []; }
+    people.sort(function (x, y) { return (supers[y.id] ? 1 : 0) - (supers[x.id] ? 1 : 0); });
     if (!people.length) { $("likes-empty").textContent = t("likes_empty"); $("likes-empty").hidden = false; return; }
     people.forEach(function (p) {
       var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
@@ -2685,11 +2818,38 @@
       var small = document.createElement("small"); small.textContent = p.country ? countryLabel(p.country) : "";
       info.appendChild(strong); info.appendChild(small);
       row.appendChild(pic); row.appendChild(info);
+      if (supers[p.id]) { var st = document.createElement("span"); st.className = "staricon"; st.textContent = "⭐"; st.title = t("super_tag"); row.appendChild(st); }
       var open = function () { fromLikes = true; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; showSection("discover"); renderCandidate(); };
       row.onclick = open; row.onkeydown = function (e) { if (e.key === "Enter") open(); };
       list.appendChild(row);
     });
   }
+  async function loadViews() {
+    var list = $("views-list"); list.textContent = ""; $("views-empty").hidden = true;
+    var v = await db.from("profile_views").select("viewer_id,viewed_at").eq("viewed_id", currentUser.id).order("viewed_at", { ascending: false }).limit(50);
+    var rows = (v.data || []), when = {};
+    rows.forEach(function (x) { when[x.viewer_id] = x.viewed_at; });
+    var ids = rows.map(function (x) { return x.viewer_id; }), people = [];
+    if (ids.length) { var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false); people = r.data || []; }
+    people.sort(function (x, y) { return when[x.id] < when[y.id] ? 1 : -1; });
+    if (!people.length) { $("views-empty").textContent = v.error ? v.error.message : t("views_empty"); $("views-empty").hidden = false; return; }
+    people.forEach(function (p) {
+      var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
+      var url = photoUrl(p), pic;
+      if (url) { pic = document.createElement("img"); pic.src = url; pic.alt = ""; }
+      else { pic = document.createElement("div"); pic.className = "mph"; pic.textContent = p.first_name.charAt(0).toUpperCase(); }
+      var info = document.createElement("div"); info.className = "mi";
+      var strong = document.createElement("strong"); strong.textContent = nameWithAge(p) + (p.verified ? " ✓" : "");
+      var small = document.createElement("small"); small.textContent = t("seen_on", { d: new Date(when[p.id]).toLocaleDateString() }) + (p.country ? " · " + countryLabel(p.country) : "");
+      info.appendChild(strong); info.appendChild(small); row.appendChild(pic); row.appendChild(info);
+      var open = function () { fromLikes = true; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; $("undo").hidden = true; showSection("discover"); renderCandidate(); };
+      row.onclick = open; row.onkeydown = function (e) { if (e.key === "Enter") open(); };
+      list.appendChild(row);
+    });
+  }
+  $("go-views").onclick = function () { showSection("views"); loadViews(); };
+  $("views-back").onclick = function () { showSection("home"); };
+
   $("go-likes").onclick = function () { showSection("likes"); loadLikes(); };
   $("likes-back").onclick = function () { showSection("home"); };
 
@@ -2793,6 +2953,35 @@
     });
     say($("admsg"), "", "");
   }
+  async function runDiag() {
+    var out = $("diag-out"); out.textContent = "Vérification…";
+    async function chk(label, fn) {
+      try { var r = await fn(); return [label, !(r && r.error), r && r.error ? r.error.message : ""]; }
+      catch (e) { return [label, false, e.message || String(e)]; }
+    }
+    var res = [];
+    res.push(await chk("Photos (5 par profil)", function () { return db.from("profiles").select("photos").limit(1); }));
+    res.push(await chk("Administration (suspension)", function () { return db.from("profiles").select("suspended").limit(1); }));
+    res.push(await chk("Signalements traités", function () { return db.from("reports").select("id,handled,created_at").limit(1); }));
+    res.push(await chk("Profils enrichis (ville, intention, langues)", function () { return db.from("profiles").select("city,intention,spoken,last_seen").limit(1); }));
+    res.push(await chk("Centres d'intérêt", function () { return db.from("profiles").select("interests").limit(1); }));
+    res.push(await chk("Profil en pause", function () { return db.from("profiles").select("hidden").limit(1); }));
+    res.push(await chk("Messages « Vu »", function () { return db.from("messages").select("read_at").limit(1); }));
+    res.push(await chk("Fonction « Vu »", function () { return db.rpc("mark_messages_read", { peer: "00000000-0000-0000-0000-000000000000" }); }));
+    res.push(await chk("Limites anti-abus (dates des likes)", function () { return db.from("swipes").select("created_at").limit(1); }));
+    res.push(await chk("Super like", function () { return db.from("swipes").select("super").limit(1); }));
+    res.push(await chk("Qui a vu mon profil", function () { return db.from("profile_views").select("viewer_id").limit(1); }));
+    out.textContent = "";
+    var ok = res.filter(function (x) { return x[1]; }).length;
+    var head = document.createElement("p"); head.innerHTML = "<strong>" + ok + " / " + res.length + " OK</strong>" + (ok < res.length ? " — relance sql-tout-en-un.txt dans Supabase." : " — tout est en place."); out.appendChild(head);
+    res.concat([["Temps réel", rtOk, rtOk ? "" : "non connecté : rouvre l'appli, ou relance sql-tout-en-un.txt (l'appli vérifie alors toutes les 4 s)"]]).forEach(function (x) {
+      var d = document.createElement("div"); d.style.fontSize = ".88rem"; d.style.margin = "2px 0";
+      d.textContent = (x[1] ? "✅ " : (x[0] === "Temps réel" ? "⚠️ " : "❌ ")) + x[0] + (x[2] ? " — " + x[2] : "");
+      out.appendChild(d);
+    });
+  }
+  $("admin-diag").onclick = runDiag;
+
   $("go-admin").onclick = function () { showSection("admin"); loadAdmin(); };
   $("admin-back").onclick = function () { showSection("home"); };
 
