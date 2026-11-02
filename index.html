@@ -96,6 +96,8 @@
   .bar span { display: block; height: 100%; background: linear-gradient(90deg, #1f7a5c, #c9a24a); width: 0; transition: width .4s; }
   .complete-h { font-size: .82rem; color: var(--muted); margin-top: 6px; }
   .joinbtn { width: auto; margin: 6px 0 0; padding: 8px 14px; border-radius: 10px; border: 0; background: #c9a24a; color: #1d2330; font-weight: 600; cursor: pointer; }
+  .scamwarn { max-width: 100%; margin-top: 4px; padding: 6px 10px; border-radius: 8px; background: #fff4d6; color: #6b4a00; border: 1px solid #e8c766; font-size: .8rem; }
+  @media (prefers-color-scheme: dark) { .scamwarn { background: #3a2f12; color: #f3d98a; border-color: #6b5520; } }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -459,6 +461,7 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      scam_warn: "⚠️ Prudence : ce message parle d'argent, de cadeaux ou d'investissement. Ne jamais envoyer d'argent à quelqu'un rencontré en ligne.",
       interests: "Centres d'intérêt",
       int_voyage: "Voyages",
       int_cuisine: "Cuisine",
@@ -568,6 +571,7 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      scam_warn: "⚠️ Careful: this message mentions money, gifts or investment. Never send money to someone you met online.",
       interests: "Interests",
       int_voyage: "Travel",
       int_cuisine: "Cooking",
@@ -677,6 +681,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      scam_warn: "⚠️ ระวัง: ข้อความนี้พูดถึงเงิน ของขวัญ หรือการลงทุน อย่าโอนเงินให้คนที่รู้จักทางออนไลน์",
       interests: "ความสนใจ",
       int_voyage: "ท่องเที่ยว",
       int_cuisine: "ทำอาหาร",
@@ -786,6 +791,7 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      scam_warn: "⚠️ Cẩn thận: tin nhắn này nhắc đến tiền, quà hoặc đầu tư. Đừng bao giờ gửi tiền cho người quen qua mạng.",
       interests: "Sở thích",
       int_voyage: "Du lịch",
       int_cuisine: "Nấu ăn",
@@ -895,6 +901,7 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      scam_warn: "⚠️ 请注意：这条消息提到了钱、礼物或投资。千万不要给网上认识的人汇款。",
       interests: "兴趣爱好",
       int_voyage: "旅行",
       int_cuisine: "烹饪",
@@ -1004,6 +1011,7 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      scam_warn: "⚠️ Hati-hati: pesan ini menyebut uang, hadiah, atau investasi. Jangan pernah mengirim uang kepada orang yang dikenal secara online.",
       interests: "Minat",
       int_voyage: "Traveling",
       int_cuisine: "Memasak",
@@ -1113,6 +1121,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      scam_warn: "⚠️ 注意：このメッセージはお金、プレゼント、または投資について触れています。ネットで知り合った人には絶対にお金を送らないでください。",
       interests: "趣味",
       int_voyage: "旅行",
       int_cuisine: "料理",
@@ -1282,6 +1291,7 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      scam_warn: "⚠️ 주의: 이 메시지는 돈, 선물 또는 투자를 언급합니다. 온라인에서 만난 사람에게 절대 돈을 보내지 마세요.",
       interests: "관심사",
       int_voyage: "여행",
       int_cuisine: "요리",
@@ -1451,6 +1461,7 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      scam_warn: "⚠️ Berhati-hati: mesej ini menyebut wang, hadiah atau pelaburan. Jangan sekali-kali hantar wang kepada orang yang dikenali dalam talian.",
       interests: "Minat",
       int_voyage: "Melancong",
       int_cuisine: "Memasak",
@@ -1620,6 +1631,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      scam_warn: "⚠️ Mag-ingat: binabanggit ng mensaheng ito ang pera, regalo o investment. Huwag kailanman magpadala ng pera sa taong nakilala online.",
       interests: "Mga hilig",
       int_voyage: "Paglalakbay",
       int_cuisine: "Pagluluto",
@@ -1789,6 +1801,7 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      scam_warn: "⚠️ ລະວັງ: ຂໍ້ຄວາມນີ້ກ່າວເຖິງເງິນ, ຂອງຂວັນ ຫຼື ການລົງທຶນ. ຢ່າສົ່ງເງິນໃຫ້ຄົນທີ່ຮູ້ຈັກທາງອອນລາຍ.",
       interests: "ຄວາມສົນໃຈ",
       int_voyage: "ທ່ອງທ່ຽວ",
       int_cuisine: "ເຮັດອາຫານ",
@@ -1958,6 +1971,7 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      scam_warn: "⚠️ ប្រយ័ត្ន៖ សារនេះនិយាយអំពីលុយ អំណោយ ឬការវិនិយោគ។ កុំផ្ញើលុយទៅអ្នកដែលស្គាល់តាមអ៊ីនធឺណិតជាដាច់ខាត។",
       interests: "ចំណាប់អារម្មណ៍",
       int_voyage: "ការធ្វើដំណើរ",
       int_cuisine: "ការធ្វើម្ហូប",
@@ -2812,6 +2826,12 @@
       var meta = document.createElement("div"); meta.className = "bmeta";
       var tm = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
       meta.appendChild(document.createTextNode(tm));
+      if (!mine && looksRisky(m.body)) {
+        var wv = document.createElement("div"); wv.className = "scamwarn"; wv.textContent = t("scam_warn") + " ";
+        var rb = document.createElement("button"); rb.type = "button"; rb.className = "trbtn"; rb.textContent = t("report");
+        rb.onclick = function () { if (chatWith) openReport(chatWith, "chat"); };
+        wv.appendChild(rb); w.appendChild(wv);
+      }
       if (!mine) {
         var key = msgKey(m), tr = TR[key + "|" + lang];
         if (tr && tr.text) {
@@ -2834,6 +2854,15 @@
     if (stick || lastCount !== (r.data || []).length) box.scrollTop = box.scrollHeight;
     lastCount = (r.data || []).length;
     markRead(other);
+  }
+
+  var SCAM_WORDS = ["argent", "money", "western union", "moneygram", "bitcoin", "btc", "crypto", "usdt", "binance", "gift card", "carte cadeau", "itunes", "google play card", "virement", "transfer", "wire", "bank account", "compte bancaire", "iban", "paypal", "investment", "invest", "investir", "trading", "forex", "loan", "hospital", "hôpital", "visa fee", "plane ticket", "billet d'avion", "customs", "douane", "เงิน", "โอน", "ลงทุน", "คริปโต", "บัญชีธนาคาร", "tiền", "chuyển khoản", "đầu tư", "tài khoản ngân hàng", "钱", "汇款", "转账", "投资", "比特币", "银行卡", "uang", "investasi", "rekening", "pinjaman", "お金", "送金", "振込", "投資", "仮想通貨", "돈", "송금", "입금", "투자", "코인", "wang", "pelaburan", "akaun bank", "pinjaman", "pera", "padala", "utang", "ເງິນ", "ໂອນ", "ລົງທຶນ", "លុយ", "ផ្ទេរប្រាក់", "វិនិយោគ"];
+  function looksRisky(text) {
+    var s = (text || "").toLowerCase();
+    return SCAM_WORDS.some(function (w) {
+      if (/^[a-z' ]+$/.test(w)) return new RegExp("(^|[^a-z])" + w.replace(/ /g, "\\s+") + "([^a-z]|$)").test(s);
+      return s.indexOf(w) !== -1;
+    });
   }
 
   // ---------- Traduction dans la discussion ----------
