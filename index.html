@@ -101,6 +101,12 @@
   .superbtn { border-color: #c9a24a; color: #8a6a1f; }
   @media (prefers-color-scheme: dark) { .superbtn { color: #e8c766; } }
   .staricon { margin-left: auto; font-size: 1.2rem; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 8px 0 14px; }
+  .stat { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; background: var(--bg); }
+  .stat b { display: block; font-size: 1.3rem; }
+  .stat span { font-size: .78rem; color: var(--muted); }
+  .brow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .brow button { width: auto; margin: 0; padding: 6px 12px; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -366,6 +372,7 @@
   <section class="card" id="admin" hidden>
     <button class="back" id="admin-back" type="button">← Retour</button>
     <h2>Administration</h2>
+    <div id="admin-stats" class="stats"></div>
     <button class="secondary" id="admin-diag" type="button">🩺 Vérifier l'installation</button>
     <div id="diag-out"></div>
     <h3>Vérifications en attente</h3>
@@ -387,6 +394,17 @@
     <input id="newpw" type="password" minlength="8" autocomplete="new-password">
     <button class="secondary" id="change-pw" type="button" data-i18n="change_pw"></button>
     <div class="msg" id="smsg" role="status" aria-live="polite"></div>
+    <h3 data-i18n="blocked_title" style="margin-top:22px"></h3>
+    <div id="blocked-list"></div>
+  </section>
+
+  <!-- Fiche d'un match -->
+  <section class="card" id="peer" hidden>
+    <button class="back" id="peer-back" type="button" data-i18n="back"></button>
+    <img id="peer-photo" class="view-photo" alt="" hidden>
+    <h2 id="peer-name"></h2>
+    <div id="peer-tags"></div>
+    <p class="bio" id="peer-bio"></p>
   </section>
 
   <!-- Discussion -->
@@ -395,6 +413,7 @@
     <div class="head">
       <h2 id="chat-name" style="margin:0"></h2>
       <div class="head-actions">
+        <button class="linkbtn" id="chat-profile" type="button" data-i18n="view_profile"></button>
         <button class="linkbtn" id="chat-video" type="button" data-i18n="video_btn"></button>
         <button class="linkbtn" id="chat-report" type="button" data-i18n="report"></button>
         <button class="linkbtn danger" id="chat-block" type="button" data-i18n="block"></button>
@@ -477,6 +496,12 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      view_profile: "Voir le profil",
+      blocked_title: "Personnes bloquées",
+      blocked_empty: "Tu n'as bloqué personne.",
+      unblock: "Débloquer",
+      unblock_confirm: "Débloquer {name} ? Vous pourrez de nouveau vous voir.",
+      compressing: "Préparation de la photo…",
       views_btn: "Qui a vu mon profil",
       views_title: "Ont vu ton profil",
       views_empty: "Personne pour l'instant.",
@@ -595,6 +620,12 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      view_profile: "View profile",
+      blocked_title: "Blocked people",
+      blocked_empty: "You haven't blocked anyone.",
+      unblock: "Unblock",
+      unblock_confirm: "Unblock {name}? You'll be able to see each other again.",
+      compressing: "Preparing photo…",
       views_btn: "Who viewed me",
       views_title: "Viewed your profile",
       views_empty: "No one yet.",
@@ -713,6 +744,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      view_profile: "ดูโปรไฟล์",
+      blocked_title: "คนที่ถูกบล็อก",
+      blocked_empty: "คุณยังไม่ได้บล็อกใคร",
+      unblock: "เลิกบล็อก",
+      unblock_confirm: "เลิกบล็อก {name} ไหม? คุณจะเห็นกันได้อีกครั้ง",
+      compressing: "กำลังเตรียมรูป…",
       views_btn: "ใครดูโปรไฟล์ฉัน",
       views_title: "ดูโปรไฟล์ของคุณ",
       views_empty: "ยังไม่มีใคร",
@@ -831,6 +868,12 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      view_profile: "Xem hồ sơ",
+      blocked_title: "Người đã chặn",
+      blocked_empty: "Bạn chưa chặn ai.",
+      unblock: "Bỏ chặn",
+      unblock_confirm: "Bỏ chặn {name}? Hai bạn sẽ lại nhìn thấy nhau.",
+      compressing: "Đang chuẩn bị ảnh…",
       views_btn: "Ai đã xem hồ sơ tôi",
       views_title: "Đã xem hồ sơ của bạn",
       views_empty: "Chưa có ai.",
@@ -949,6 +992,12 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      view_profile: "查看资料",
+      blocked_title: "已拉黑的人",
+      blocked_empty: "你还没有拉黑任何人。",
+      unblock: "取消拉黑",
+      unblock_confirm: "取消拉黑 {name}？你们将能再次看到对方。",
+      compressing: "正在处理照片…",
       views_btn: "谁看过我",
       views_title: "看过你的资料",
       views_empty: "暂时还没有。",
@@ -1067,6 +1116,12 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      view_profile: "Lihat profil",
+      blocked_title: "Orang yang diblokir",
+      blocked_empty: "Anda belum memblokir siapa pun.",
+      unblock: "Buka blokir",
+      unblock_confirm: "Buka blokir {name}? Kalian akan bisa saling melihat lagi.",
+      compressing: "Menyiapkan foto…",
       views_btn: "Siapa yang melihat saya",
       views_title: "Melihat profil Anda",
       views_empty: "Belum ada.",
@@ -1185,6 +1240,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      view_profile: "プロフィールを見る",
+      blocked_title: "ブロックした人",
+      blocked_empty: "まだ誰もブロックしていません。",
+      unblock: "ブロック解除",
+      unblock_confirm: "{name}さんのブロックを解除しますか？再びお互いが表示されます。",
+      compressing: "写真を準備中…",
       views_btn: "プロフィールを見た人",
       views_title: "あなたのプロフィールを見た人",
       views_empty: "まだいません。",
@@ -1363,6 +1424,12 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      view_profile: "프로필 보기",
+      blocked_title: "차단한 사람",
+      blocked_empty: "아직 차단한 사람이 없어요.",
+      unblock: "차단 해제",
+      unblock_confirm: "{name}님의 차단을 해제할까요? 다시 서로 볼 수 있어요.",
+      compressing: "사진 준비 중…",
       views_btn: "내 프로필을 본 사람",
       views_title: "내 프로필을 봤어요",
       views_empty: "아직 없어요.",
@@ -1541,6 +1608,12 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      view_profile: "Lihat profil",
+      blocked_title: "Orang yang disekat",
+      blocked_empty: "Anda belum menyekat sesiapa.",
+      unblock: "Nyahsekat",
+      unblock_confirm: "Nyahsekat {name}? Anda akan dapat melihat satu sama lain semula.",
+      compressing: "Menyediakan foto…",
       views_btn: "Siapa lihat profil saya",
       views_title: "Melihat profil anda",
       views_empty: "Belum ada sesiapa.",
@@ -1719,6 +1792,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      view_profile: "Tingnan ang profile",
+      blocked_title: "Mga naka-block",
+      blocked_empty: "Wala ka pang na-block.",
+      unblock: "I-unblock",
+      unblock_confirm: "I-unblock si {name}? Makikita ninyo ulit ang isa't isa.",
+      compressing: "Inihahanda ang larawan…",
       views_btn: "Sino ang tumingin sa akin",
       views_title: "Tumingin sa profile mo",
       views_empty: "Wala pa.",
@@ -1897,6 +1976,12 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      view_profile: "ເບິ່ງໂປຣໄຟລ໌",
+      blocked_title: "ຄົນທີ່ບລັອກໄວ້",
+      blocked_empty: "ເຈົ້າຍັງບໍ່ໄດ້ບລັອກໃຜ.",
+      unblock: "ຍົກເລີກບລັອກ",
+      unblock_confirm: "ຍົກເລີກບລັອກ {name} ບໍ? ພວກເຈົ້າຈະເຫັນກັນອີກ.",
+      compressing: "ກຳລັງກຽມຮູບ…",
       views_btn: "ໃຜເບິ່ງໂປຣໄຟລ໌ຂ້ອຍ",
       views_title: "ເບິ່ງໂປຣໄຟລ໌ຂອງເຈົ້າ",
       views_empty: "ຍັງບໍ່ມີ.",
@@ -2075,6 +2160,12 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      view_profile: "មើលប្រវត្តិរូប",
+      blocked_title: "អ្នកដែលបានទប់ស្កាត់",
+      blocked_empty: "អ្នកមិនទាន់បានទប់ស្កាត់នរណាម្នាក់ទេ។",
+      unblock: "ឈប់ទប់ស្កាត់",
+      unblock_confirm: "ឈប់ទប់ស្កាត់ {name} ឬ? អ្នកទាំងពីរនឹងអាចឃើញគ្នាវិញ។",
+      compressing: "កំពុងរៀបចំរូបថត…",
       views_btn: "អ្នកណាមើលប្រវត្តិរូបខ្ញុំ",
       views_title: "បានមើលប្រវត្តិរូបរបស់អ្នក",
       views_empty: "មិនទាន់មានទេ។",
@@ -2370,7 +2461,7 @@
     img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "peer", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -2455,6 +2546,28 @@
     startBadges();
   }
 
+  // Réduit la photo (max 1600 px, JPEG) : évite les photos trop lourdes des téléphones
+  function compressImage(file, maxSide) {
+    maxSide = maxSide || 1600;
+    return new Promise(function (resolve) {
+      try {
+        var url = URL.createObjectURL(file), img = new Image();
+        img.onload = function () {
+          var w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, maxSide / Math.max(w, h));
+          var c = document.createElement("canvas"); c.width = Math.round(w * k); c.height = Math.round(h * k);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(url);
+          c.toBlob(function (b) {
+            if (!b || (b.size >= file.size && /^image\/(jpeg|png|webp)$/.test(file.type))) return resolve(file);
+            resolve(new File([b], "photo.jpg", { type: "image/jpeg" }));
+          }, "image/jpeg", 0.85);
+        };
+        img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+        img.src = url;
+      } catch (e) { resolve(file); }
+    });
+  }
+
   var slots = [];   // 5 emplacements : { path, file, url }
   var removedPaths = [];
   function slotPath(i) { return currentUser.id + "/" + (i === 0 ? "avatar" : "p" + i); }
@@ -2483,8 +2596,11 @@
         d.setAttribute("aria-label", t("photo_add"));
       }
       var inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/jpeg,image/png,image/webp";
-      inp.onchange = function () {
+      inp.onchange = async function () {
         var f = inp.files[0]; if (!f) return;
+        if (!/^image\//.test(f.type)) return say($("pmsg"), t("e_photo_type"), "err");
+        say($("pmsg"), t("compressing"), "");
+        f = await compressImage(f);
         if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return say($("pmsg"), t("e_photo_type"), "err");
         if (f.size > 5 * 1024 * 1024) return say($("pmsg"), t("e_photo_size"), "err");
         say($("pmsg"), "", "");
@@ -2970,6 +3086,8 @@
     res.push(await chk("Fonction « Vu »", function () { return db.rpc("mark_messages_read", { peer: "00000000-0000-0000-0000-000000000000" }); }));
     res.push(await chk("Limites anti-abus (dates des likes)", function () { return db.from("swipes").select("created_at").limit(1); }));
     res.push(await chk("Super like", function () { return db.from("swipes").select("super").limit(1); }));
+    res.push(await chk("Liste des bloqués", function () { return db.rpc("my_blocked"); }));
+    res.push(await chk("Statistiques", function () { return db.rpc("admin_stats"); }));
     res.push(await chk("Qui a vu mon profil", function () { return db.from("profile_views").select("viewer_id").limit(1); }));
     out.textContent = "";
     var ok = res.filter(function (x) { return x[1]; }).length;
@@ -2982,7 +3100,20 @@
   }
   $("admin-diag").onclick = runDiag;
 
-  $("go-admin").onclick = function () { showSection("admin"); loadAdmin(); };
+  async function loadStats() {
+    var box = $("admin-stats"); box.textContent = "";
+    var r = await db.rpc("admin_stats");
+    if (!r || r.error || !r.data) return;
+    var labels = { comptes: "Comptes", profils: "Profils", verifies: "Vérifiés", suspendus: "Suspendus", actifs_24h: "Actifs 24 h", likes: "Likes", matchs: "Matchs", messages: "Messages", messages_24h: "Messages 24 h", signalements_ouverts: "Signalements ouverts" };
+    Object.keys(labels).forEach(function (k) {
+      if (r.data[k] === undefined) return;
+      var d = document.createElement("div"); d.className = "stat";
+      var b = document.createElement("b"); b.textContent = r.data[k];
+      var s = document.createElement("span"); s.textContent = labels[k];
+      d.appendChild(b); d.appendChild(s); box.appendChild(d);
+    });
+  }
+  $("go-admin").onclick = function () { showSection("admin"); loadStats(); loadAdmin(); };
   $("admin-back").onclick = function () { showSection("home"); };
 
   // ---------- Messagerie ----------
@@ -3092,6 +3223,17 @@
     b.onclick = function () { $("chat-input").value = b.textContent; $("chat-input").focus(); };
   });
 
+  var peerReturn = "chat";
+  function openPeer(p) {
+    $("peer-name").textContent = nameWithAge(p);
+    tagsInto($("peer-tags"), p);
+    $("peer-bio").textContent = p.bio || "";
+    setGallery($("peer-photo"), p);
+    showSection("peer");
+  }
+  $("chat-profile").onclick = function () { if (chatWith) { stopChat(); openPeer(chatWith); } };
+  $("peer-back").onclick = function () { if (chatWith) openChat(chatWith); else showSection("home"); };
+
   $("chat-video").onclick = async function () {
     if (!chatWith || !confirm(t("video_confirm"))) return;
     var a = new Uint8Array(12); (window.crypto || window.msCrypto).getRandomValues(a);
@@ -3167,6 +3309,7 @@
     e.preventDefault();
     var f = $("verify-file").files[0], msg = $("vmsg");
     if (!f) return say(msg, t("e_verify_file"), "err");
+    if (/^image\//.test(f.type)) f = await compressImage(f, 1400);
     if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return say(msg, t("e_photo_type"), "err");
     if (f.size > 5 * 1024 * 1024) return say(msg, t("e_photo_size"), "err");
     $("verify-send").disabled = true; say(msg, t("wait"), "");
@@ -3225,7 +3368,25 @@
     showSection("settings");
     if (note) $("newpw").focus();
   }
-  $("go-settings").onclick = function () { openSettings(); };
+  async function loadBlocked() {
+    var box = $("blocked-list"); box.textContent = "";
+    var r = await db.rpc("my_blocked");
+    var rows = (r && r.data) || [];
+    if (!rows.length) { var e = document.createElement("p"); e.className = "empty"; e.textContent = r && r.error ? r.error.message : t("blocked_empty"); box.appendChild(e); return; }
+    rows.forEach(function (p) {
+      var row = document.createElement("div"); row.className = "brow";
+      var n = document.createElement("span"); n.textContent = p.first_name;
+      var b = document.createElement("button"); b.type = "button"; b.className = "secondary"; b.textContent = t("unblock");
+      b.onclick = async function () {
+        if (!confirm(t("unblock_confirm", { name: p.first_name }))) return;
+        var d = await db.from("blocks").delete().eq("blocker_id", currentUser.id).eq("blocked_id", p.id);
+        if (d.error) return say($("smsg"), d.error.message, "err");
+        loadBlocked();
+      };
+      row.appendChild(n); row.appendChild(b); box.appendChild(row);
+    });
+  }
+  $("go-settings").onclick = function () { openSettings(); loadBlocked(); };
   $("settings-back").onclick = function () { if (currentProfile) renderView(currentUser, currentProfile); else showSection("profile"); };
   $("pause").onchange = async function () {
     var on = $("pause").checked;
