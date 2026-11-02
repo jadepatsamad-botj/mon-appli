@@ -1951,8 +1951,30 @@
       return say($("msg"), "Compte suspendu / Account suspended.", "err");
     }
     currentProfile = r.data;
-    if (r.data) { touchSeen(); renderView(user, r.data); }
+    if (r.data) { touchSeen(); startRealtime(); renderView(user, r.data); }
     else { fillForm(null); showSection("profile"); }
+  }
+
+  // ---------- Temps réel ----------
+  var rtChan = null, rtOk = false;
+  function startRealtime() {
+    if (!db.channel || !currentUser || rtChan) return;
+    var me = currentUser.id;
+    rtChan = db.channel("rt-" + me)
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: "to_id=eq." + me }, function (ev) {
+        var m = ev && ev.new;
+        if (chatWith && m && m.from_id === chatWith.id && !$("chat").hidden) refreshChat();
+        else checkBadges();
+      })
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "messages", filter: "from_id=eq." + me }, function () {
+        if (chatWith && !$("chat").hidden) refreshChat();
+      })
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "swipes", filter: "to_id=eq." + me }, function () { checkBadges(); })
+      .subscribe(function (status) { rtOk = status === "SUBSCRIBED"; });
+  }
+  function stopRealtime() {
+    if (rtChan && db.removeChannel) { try { db.removeChannel(rtChan); } catch (e) {} }
+    rtChan = null; rtOk = false;
   }
 
   var seenTimer = null;
@@ -1963,7 +1985,7 @@
   }
 
   function show(user) {
-    if (!user) { currentUser = null; currentProfile = null; showSection("auth"); return; }
+    if (!user) { stopRealtime(); currentUser = null; currentProfile = null; showSection("auth"); return; }
     loadProfile(user);
   }
 
@@ -2359,7 +2381,7 @@
     markRead(p.id);
     refreshChat();
     stopChat();
-    chatTimer = setInterval(refreshChat, 4000);
+    chatTimer = setInterval(refreshChat, rtOk ? 15000 : 4000);
   }
 
   Array.prototype.forEach.call(document.querySelectorAll("#ice .chip"), function (b) {
