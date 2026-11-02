@@ -88,6 +88,8 @@
   .ice { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
   .ice-t { width: 100%; font-size: .85rem; color: var(--muted); }
   .chip { width: auto; margin: 0; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: .85rem; font-weight: 500; cursor: pointer; }
+  .btrans { max-width: 100%; margin-top: 4px; padding: 6px 10px; border-left: 3px solid #c9a24a; background: var(--card); border-radius: 8px; font-size: .92rem; font-style: italic; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .trbtn { width: auto; margin: 0; padding: 0; border: 0; background: none; color: var(--accent); font: inherit; font-size: .72rem; text-decoration: underline; cursor: pointer; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -442,6 +444,9 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      translating: "Traduction…",
+      tr_error: "Traduction impossible pour le moment.",
+      original: "Voir l'original",
       forgot: "Mot de passe oublié ?",
       reset_sent: "Si un compte existe pour cette adresse, un e-mail de réinitialisation vient d'être envoyé.",
       settings_btn: "Paramètres",
@@ -529,6 +534,9 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      translating: "Translating…",
+      tr_error: "Translation unavailable right now.",
+      original: "Show original",
       forgot: "Forgot password?",
       reset_sent: "If an account exists for this address, a reset email has just been sent.",
       settings_btn: "Settings",
@@ -616,6 +624,9 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      translating: "กำลังแปล…",
+      tr_error: "ไม่สามารถแปลได้ในขณะนี้",
+      original: "ดูต้นฉบับ",
       forgot: "ลืมรหัสผ่าน?",
       reset_sent: "หากมีบัญชีสำหรับอีเมลนี้ เราได้ส่งอีเมลรีเซ็ตรหัสผ่านไปแล้ว",
       settings_btn: "การตั้งค่า",
@@ -703,6 +714,9 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      translating: "Đang dịch…",
+      tr_error: "Hiện không thể dịch.",
+      original: "Xem bản gốc",
       forgot: "Quên mật khẩu?",
       reset_sent: "Nếu có tài khoản với địa chỉ này, email đặt lại mật khẩu vừa được gửi.",
       settings_btn: "Cài đặt",
@@ -790,6 +804,9 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      translating: "翻译中…",
+      tr_error: "暂时无法翻译。",
+      original: "查看原文",
       forgot: "忘记密码？",
       reset_sent: "如果该邮箱已注册，重置邮件已发送。",
       settings_btn: "设置",
@@ -877,6 +894,9 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      translating: "Menerjemahkan…",
+      tr_error: "Terjemahan tidak tersedia saat ini.",
+      original: "Lihat asli",
       forgot: "Lupa kata sandi?",
       reset_sent: "Jika ada akun untuk alamat ini, email reset baru saja dikirim.",
       settings_btn: "Pengaturan",
@@ -964,6 +984,9 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      translating: "翻訳中…",
+      tr_error: "現在翻訳できません。",
+      original: "原文を表示",
       forgot: "パスワードをお忘れですか？",
       reset_sent: "このアドレスのアカウントがあれば、再設定メールを送信しました。",
       settings_btn: "設定",
@@ -1111,6 +1134,9 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      translating: "번역 중…",
+      tr_error: "지금은 번역할 수 없습니다.",
+      original: "원문 보기",
       forgot: "비밀번호를 잊으셨나요?",
       reset_sent: "이 주소로 된 계정이 있다면 재설정 이메일을 보냈습니다.",
       settings_btn: "설정",
@@ -1258,6 +1284,9 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      translating: "Menterjemah…",
+      tr_error: "Terjemahan tidak tersedia buat masa ini.",
+      original: "Lihat asal",
       forgot: "Lupa kata laluan?",
       reset_sent: "Jika akaun wujud untuk alamat ini, e-mel tetapan semula telah dihantar.",
       settings_btn: "Tetapan",
@@ -1405,6 +1434,9 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      translating: "Isinasalin…",
+      tr_error: "Hindi maisalin sa ngayon.",
+      original: "Tingnan ang orihinal",
       forgot: "Nakalimutan ang password?",
       reset_sent: "Kung may account para sa address na ito, naipadala na ang email para i-reset.",
       settings_btn: "Mga setting",
@@ -1552,6 +1584,9 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      translating: "ກຳລັງແປ…",
+      tr_error: "ບໍ່ສາມາດແປໄດ້ໃນຕອນນີ້.",
+      original: "ເບິ່ງຕົ້ນສະບັບ",
       forgot: "ລືມລະຫັດຜ່ານ?",
       reset_sent: "ຖ້າມີບັນຊີສຳລັບອີເມລນີ້ ໄດ້ສົ່ງອີເມລຕັ້ງລະຫັດໃໝ່ແລ້ວ.",
       settings_btn: "ການຕັ້ງຄ່າ",
@@ -1699,6 +1734,9 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      translating: "កំពុងបកប្រែ…",
+      tr_error: "មិនអាចបកប្រែបានទេពេលនេះ។",
+      original: "មើលអត្ថបទដើម",
       forgot: "ភ្លេចពាក្យសម្ងាត់?",
       reset_sent: "បើមានគណនីសម្រាប់អាសយដ្ឋាននេះ អ៊ីមែលកំណត់ឡើងវិញត្រូវបានផ្ញើហើយ។",
       settings_btn: "ការកំណត់",
@@ -2366,7 +2404,7 @@
   $("likes-back").onclick = function () { showSection("home"); };
 
   // ---------- Conditions et confidentialité ----------
-  var LEGAL = { fr: [["h", "Projet de texte : à faire relire par un juriste avant tout lancement public."], ["h", "1. Conditions d'utilisation"], ["p", "Jade est un service de rencontres réservé aux personnes de 18 ans et plus. En créant un compte, tu confirmes avoir 18 ans révolus et que les informations de ton profil sont exactes."], ["p", "Tu t'engages à ne pas usurper l'identité d'autrui, à ne pas publier de contenu illégal, sexuel explicite, haineux ou violent, à ne pas harceler les autres membres et à ne jamais demander d'argent."], ["p", "Jade ne vend pas de relations et n'est pas une agence matrimoniale. Les profils vérifiés (✓) ont envoyé un selfie contrôlé par notre équipe, ce qui ne garantit pas l'honnêteté d'une personne. Reste prudent(e) : voir les conseils de sécurité."], ["p", "Nous pouvons suspendre ou supprimer un compte qui ne respecte pas ces règles, notamment après signalement. Le service est fourni en l'état, sans garantie de disponibilité."], ["h", "2. Confidentialité"], ["p", "Données collectées : e-mail, mot de passe (chiffré), prénom, date de naissance, pays, genre, recherche, présentation, photos, messages, likes, signalements et, si tu demandes la vérification, un selfie."], ["p", "Finalités : faire fonctionner l'application (profils, matchs, messagerie), assurer la sécurité et la modération, vérifier les profils."], ["p", "Visibilité : ton prénom, ton âge, ton pays, ta présentation et tes photos sont visibles par les autres membres. Ton e-mail, ta date de naissance exacte et ton selfie de vérification ne sont jamais affichés. Les messages ne sont lisibles que par toi et ton match."], ["p", "Hébergement : tes données sont stockées chez Supabase (serveurs en Inde) et le site est hébergé par GitHub. Elles ne sont pas vendues."], ["p", "Conservation : tant que ton compte existe. Quand tu supprimes ton compte depuis l'application, ton profil, tes photos, ton selfie et tes messages sont effacés."], ["p", "Tes droits (RGPD) : accès, rectification, suppression, opposition, portabilité. Pour les exercer : contact@jadedating.app."], ["p", "Éditeur : [NOM / SOCIÉTÉ À COMPLÉTER]."]], en: [["h", "Draft text: have a lawyer review it before any public launch."], ["h", "1. Terms of use"], ["p", "Jade is a dating service for people aged 18 and over. By creating an account you confirm you are at least 18 and that your profile information is accurate."], ["p", "You agree not to impersonate anyone, not to post illegal, sexually explicit, hateful or violent content, not to harass other members, and never to ask for money."], ["p", "Jade does not sell relationships and is not a marriage agency. Verified profiles (✓) sent a selfie checked by our team, which does not guarantee a person's honesty. Stay careful: see the safety tips."], ["p", "We may suspend or delete an account that breaks these rules, notably after a report. The service is provided as is, without any guarantee of availability."], ["h", "2. Privacy"], ["p", "Data we collect: email, password (encrypted), first name, date of birth, country, gender, who you are looking for, bio, photos, messages, likes, reports and, if you request verification, a selfie."], ["p", "Purposes: running the app (profiles, matches, messaging), security and moderation, verifying profiles."], ["p", "Visibility: your first name, age, country, bio and photos are visible to other members. Your email, exact date of birth and verification selfie are never shown. Messages can only be read by you and your match."], ["p", "Hosting: your data is stored with Supabase (servers in India) and the site is hosted by GitHub. It is not sold."], ["p", "Retention: as long as your account exists. When you delete your account in the app, your profile, photos, selfie and messages are erased."], ["p", "Your rights (GDPR): access, correction, deletion, objection, portability. To exercise them: contact@jadedating.app."], ["p", "Publisher: [NAME / COMPANY TO COMPLETE]."]] };
+  var LEGAL = { fr: [["h", "Projet de texte : à faire relire par un juriste avant tout lancement public."], ["h", "1. Conditions d'utilisation"], ["p", "Jade est un service de rencontres réservé aux personnes de 18 ans et plus. En créant un compte, tu confirmes avoir 18 ans révolus et que les informations de ton profil sont exactes."], ["p", "Tu t'engages à ne pas usurper l'identité d'autrui, à ne pas publier de contenu illégal, sexuel explicite, haineux ou violent, à ne pas harceler les autres membres et à ne jamais demander d'argent."], ["p", "Jade ne vend pas de relations et n'est pas une agence matrimoniale. Les profils vérifiés (✓) ont envoyé un selfie contrôlé par notre équipe, ce qui ne garantit pas l'honnêteté d'une personne. Reste prudent(e) : voir les conseils de sécurité."], ["p", "Nous pouvons suspendre ou supprimer un compte qui ne respecte pas ces règles, notamment après signalement. Le service est fourni en l'état, sans garantie de disponibilité."], ["h", "2. Confidentialité"], ["p", "Données collectées : e-mail, mot de passe (chiffré), prénom, date de naissance, pays, genre, recherche, présentation, photos, messages, likes, signalements et, si tu demandes la vérification, un selfie."], ["p", "Finalités : faire fonctionner l'application (profils, matchs, messagerie), assurer la sécurité et la modération, vérifier les profils."], ["p", "Visibilité : ton prénom, ton âge, ton pays, ta présentation et tes photos sont visibles par les autres membres. Ton e-mail, ta date de naissance exacte et ton selfie de vérification ne sont jamais affichés. Les messages ne sont lisibles que par toi et ton match."], ["p", "Hébergement : tes données sont stockées chez Supabase (serveurs en Inde) et le site est hébergé par GitHub. Elles ne sont pas vendues."], ["p", "Traduction : quand tu appuies sur « Traduire » dans une discussion, le texte de ce message est envoyé au service de traduction MyMemory (Translated) pour être traduit. Rien n'est envoyé si tu n'appuies pas sur ce bouton."], ["p", "Conservation : tant que ton compte existe. Quand tu supprimes ton compte depuis l'application, ton profil, tes photos, ton selfie et tes messages sont effacés."], ["p", "Tes droits (RGPD) : accès, rectification, suppression, opposition, portabilité. Pour les exercer : contact@jadedating.app."], ["p", "Éditeur : [NOM / SOCIÉTÉ À COMPLÉTER]."]], en: [["h", "Draft text: have a lawyer review it before any public launch."], ["h", "1. Terms of use"], ["p", "Jade is a dating service for people aged 18 and over. By creating an account you confirm you are at least 18 and that your profile information is accurate."], ["p", "You agree not to impersonate anyone, not to post illegal, sexually explicit, hateful or violent content, not to harass other members, and never to ask for money."], ["p", "Jade does not sell relationships and is not a marriage agency. Verified profiles (✓) sent a selfie checked by our team, which does not guarantee a person's honesty. Stay careful: see the safety tips."], ["p", "We may suspend or delete an account that breaks these rules, notably after a report. The service is provided as is, without any guarantee of availability."], ["h", "2. Privacy"], ["p", "Data we collect: email, password (encrypted), first name, date of birth, country, gender, who you are looking for, bio, photos, messages, likes, reports and, if you request verification, a selfie."], ["p", "Purposes: running the app (profiles, matches, messaging), security and moderation, verifying profiles."], ["p", "Visibility: your first name, age, country, bio and photos are visible to other members. Your email, exact date of birth and verification selfie are never shown. Messages can only be read by you and your match."], ["p", "Hosting: your data is stored with Supabase (servers in India) and the site is hosted by GitHub. It is not sold."], ["p", "Translation: when you tap “Translate” in a conversation, the text of that message is sent to the MyMemory (Translated) translation service. Nothing is sent unless you tap that button."], ["p", "Retention: as long as your account exists. When you delete your account in the app, your profile, photos, selfie and messages are erased."], ["p", "Your rights (GDPR): access, correction, deletion, objection, portability. To exercise them: contact@jadedating.app."], ["p", "Publisher: [NAME / COMPANY TO COMPLETE]."]] };
   var legalFrom = "home";
   function openLegal(from) {
     legalFrom = from;
@@ -2493,9 +2531,15 @@
       var tm = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
       meta.appendChild(document.createTextNode(tm));
       if (!mine) {
-        var a = document.createElement("a"); a.textContent = t("translate"); a.target = "_blank"; a.rel = "noopener noreferrer";
-        a.href = "https://translate.google.com/?sl=auto&tl=" + (lang === "zh" ? "zh-CN" : lang) + "&op=translate&text=" + encodeURIComponent(m.body);
+        var key = msgKey(m), tr = TR[key + "|" + lang];
+        if (tr && tr.text) {
+          var tv = document.createElement("div"); tv.className = "btrans"; tv.textContent = tr.text; w.appendChild(tv);
+        }
+        var a = document.createElement("button"); a.type = "button"; a.className = "trbtn";
+        a.textContent = tr && tr.text ? t("original") : tr && tr.loading ? t("translating") : t("translate");
+        a.onclick = (function (msg, k) { return function () { toggleTranslate(msg, k); }; })(m, key);
         meta.appendChild(document.createTextNode(" · ")); meta.appendChild(a);
+        if (tr && tr.error) meta.appendChild(document.createTextNode(" · " + t("tr_error")));
       } else if (i === lastMine && m.read_at) {
         meta.appendChild(document.createTextNode(" · " + t("seen") + " ✓✓"));
       }
@@ -2508,6 +2552,28 @@
     if (stick || lastCount !== (r.data || []).length) box.scrollTop = box.scrollHeight;
     lastCount = (r.data || []).length;
     markRead(other);
+  }
+
+  // ---------- Traduction dans la discussion ----------
+  var TR = {};   // cache : message + langue -> { text, loading, error }
+  function msgKey(m) { return m.id ? String(m.id) : (m.created_at + "|" + m.body.slice(0, 40)); }
+  var TR_LANG = { zh: "zh-CN", tl: "tl", fr: "fr", en: "en", th: "th", vi: "vi", id: "id", ja: "ja", ko: "ko", ms: "ms", lo: "lo", km: "km" };
+  async function toggleTranslate(m, key) {
+    var k = key + "|" + lang, cur = TR[k];
+    if (cur && cur.text) { delete TR[k]; return refreshChat(); }
+    if (cur && cur.loading) return;
+    TR[k] = { loading: true }; refreshChat();
+    try {
+      var url = "https://api.mymemory.translated.net/get?q=" + encodeURIComponent(m.body.slice(0, 480)) +
+        "&langpair=" + encodeURIComponent("Autodetect|" + (TR_LANG[lang] || lang));
+      var res = await fetch(url);
+      var j = await res.json();
+      var out = j && j.responseData && j.responseData.translatedText;
+      if (!out || (j.responseStatus && Number(j.responseStatus) !== 200) || /^(PLEASE SELECT|MYMEMORY WARNING|INVALID)/i.test(out)) throw new Error("tr");
+      var tmp = document.createElement("textarea"); tmp.innerHTML = out;   // décode les entités HTML éventuelles
+      TR[k] = { text: tmp.value };
+    } catch (e) { TR[k] = { error: true }; }
+    refreshChat();
   }
 
   function openChat(p) {
