@@ -375,6 +375,12 @@
     <div id="admin-stats" class="stats"></div>
     <button class="secondary" id="admin-diag" type="button">🩺 Vérifier l'installation</button>
     <div id="diag-out"></div>
+    <h3>Membres</h3>
+    <div class="chat-form" style="margin-bottom:10px">
+      <input id="admin-q" type="search" placeholder="Prénom, ville ou identifiant (vide = les 50 derniers)">
+      <button id="admin-search" type="button">Chercher</button>
+    </div>
+    <div id="admin-members"></div>
     <h3>Vérifications en attente</h3>
     <div id="admin-verifs"></div>
     <h3>Signalements à traiter</h3>
@@ -2799,6 +2805,7 @@
       .in("looking_for", [currentProfile.gender, "tous"])
       .eq("suspended", false)
       .eq("hidden", false)
+      .eq("under_review", false)
       .order("created_at", { ascending: false }).limit(1);
     if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
     var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
@@ -2850,8 +2857,18 @@
     $("cand-empty").hidden = true; say($("dmsg"), "", ""); renderCandidate();
   };
 
-  $("go-discover").onclick = function () { fromLikes = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
-  $("f-apply").onclick = function () { $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
+  $("go-discover").onclick = function () { loadFilters(); fromLikes = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
+  function saveFilters() {
+    try { localStorage.setItem("filters", JSON.stringify({ min: $("f-min").value, max: $("f-max").value, country: $("f-country").value, intent: $("f-intent").value, lang: $("f-lang").value })); } catch (e) {}
+  }
+  function loadFilters() {
+    try {
+      var f = JSON.parse(localStorage.getItem("filters") || "null"); if (!f) return;
+      $("f-min").value = f.min || 18; $("f-max").value = f.max || 99;
+      $("f-country").value = f.country || ""; $("f-intent").value = f.intent || ""; $("f-lang").value = f.lang || "";
+    } catch (e) {}
+  }
+  $("f-apply").onclick = function () { saveFilters(); $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
   $("discover-back").onclick = function () { if (fromLikes) { fromLikes = false; showSection("likes"); loadLikes(); } else showSection("home"); };
   $("like").onclick = function () { swipe(true); };
   $("pass").onclick = function () { swipe(false); };
@@ -3057,7 +3074,7 @@
     if (ids.length) { var pr = await db.from("profiles").select("*").in("id", ids); (pr.data || []).forEach(function (x) { map[x.id] = x; }); }
     reps.forEach(function (rep) {
       var tp = map[rep.reported_id], by = map[rep.reporter_id];
-      var lines = [(tp ? nameWithAge(tp) : "Profil introuvable") + (tp && tp.suspended ? " (suspendu)" : ""),
+      var lines = [(tp ? nameWithAge(tp) : "Profil introuvable") + (tp && tp.suspended ? " (suspendu)" : "") + (tp && tp.under_review ? " (en revue auto)" : ""),
         "Motif : " + rep.reason, rep.details ? "Détails : " + rep.details : "",
         "Signalé par : " + (by ? by.first_name : "?") + (rep.created_at ? " · " + new Date(rep.created_at).toLocaleDateString() : "")].filter(Boolean);
       var btns = [abtn("Marquer traité", async function () { var x = await db.rpc("admin_handle_report", { rid: String(rep.id) }); if (x.error) throw x.error; loadAdmin(); })];
@@ -3087,6 +3104,8 @@
     res.push(await chk("Fonction « Vu »", function () { return db.rpc("mark_messages_read", { peer: "00000000-0000-0000-0000-000000000000" }); }));
     res.push(await chk("Limites anti-abus (dates des likes)", function () { return db.from("swipes").select("created_at").limit(1); }));
     res.push(await chk("Super like", function () { return db.from("swipes").select("super").limit(1); }));
+    res.push(await chk("Modération automatique", function () { return db.from("profiles").select("under_review").limit(1); }));
+    res.push(await chk("Recherche de membres", function () { return db.rpc("admin_search", { q: "zzzz-test" }); }));
     res.push(await chk("Liste des bloqués", function () { return db.rpc("my_blocked"); }));
     res.push(await chk("Statistiques", function () { return db.rpc("admin_stats"); }));
     res.push(await chk("Qui a vu mon profil", function () { return db.from("profile_views").select("viewer_id").limit(1); }));
@@ -3105,7 +3124,7 @@
     var box = $("admin-stats"); box.textContent = "";
     var r = await db.rpc("admin_stats");
     if (!r || r.error || !r.data) return;
-    var labels = { comptes: "Comptes", profils: "Profils", verifies: "Vérifiés", suspendus: "Suspendus", actifs_24h: "Actifs 24 h", likes: "Likes", matchs: "Matchs", messages: "Messages", messages_24h: "Messages 24 h", signalements_ouverts: "Signalements ouverts" };
+    var labels = { comptes: "Comptes", profils: "Profils", verifies: "Vérifiés", suspendus: "Suspendus", actifs_24h: "Actifs 24 h", likes: "Likes", matchs: "Matchs", messages: "Messages", messages_24h: "Messages 24 h", signalements_ouverts: "Signalements ouverts", en_revue: "En revue" };
     Object.keys(labels).forEach(function (k) {
       if (r.data[k] === undefined) return;
       var d = document.createElement("div"); d.className = "stat";
@@ -3114,6 +3133,28 @@
       d.appendChild(b); d.appendChild(s); box.appendChild(d);
     });
   }
+  async function adminSearch() {
+    var box = $("admin-members"); box.textContent = "Recherche…";
+    var r = await db.rpc("admin_search", { q: $("admin-q").value.trim() });
+    box.textContent = "";
+    if (r.error) return say($("admsg"), r.error.message, "err");
+    if (!(r.data || []).length) { box.textContent = "Aucun membre trouvé."; return; }
+    r.data.forEach(function (p) {
+      var flags = [p.verified ? "✓ vérifié" : "", p.suspended ? "⛔ suspendu" : "", p.under_review ? "🔎 en revue" : "", p.hidden ? "⏸ en pause" : ""].filter(Boolean).join(" · ");
+      var last = p.last_seen ? "Vu le " + new Date(p.last_seen).toLocaleDateString() : "";
+      var btns = [
+        abtn(p.verified ? "Retirer ✓" : "Vérifier ✓", async function () { var x = await db.rpc("admin_set_verified", { uid: p.id, ok: !p.verified }); if (x.error) throw x.error; adminSearch(); }),
+        abtn(p.suspended ? "Réactiver" : "Suspendre", async function () {
+          if (!p.suspended && !confirm("Suspendre " + p.first_name + " ?")) return;
+          var x = await db.rpc("admin_set_suspended", { uid: p.id, flag: !p.suspended }); if (x.error) throw x.error; adminSearch(); })
+      ];
+      if (p.under_review) btns.push(abtn("Lever la revue", async function () { var x = await db.rpc("admin_set_review", { uid: p.id, flag: false }); if (x.error) throw x.error; adminSearch(); }));
+      box.appendChild(arow(p, [nameWithAge(p), [p.city, p.country ? countryLabel(p.country) : ""].filter(Boolean).join(", "), flags, last].filter(Boolean), btns));
+    });
+  }
+  $("admin-search").onclick = adminSearch;
+  $("admin-q").onkeydown = function (e) { if (e.key === "Enter") adminSearch(); };
+
   $("go-admin").onclick = function () { showSection("admin"); loadStats(); loadAdmin(); };
   $("admin-back").onclick = function () { showSection("home"); };
 
@@ -3352,6 +3393,11 @@
 
   applyI18n();
   setMode("signup");
+  // ---------- Chargement plus rapide (service worker) ----------
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+  }
+
   // ---------- Mot de passe oublié et paramètres ----------
   var recovering = /type=recovery/.test(window.location.hash);
   $("forgot").onclick = async function () {
