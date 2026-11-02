@@ -400,6 +400,8 @@
     <input id="newpw" type="password" minlength="8" autocomplete="new-password">
     <button class="secondary" id="change-pw" type="button" data-i18n="change_pw"></button>
     <div class="msg" id="smsg" role="status" aria-live="polite"></div>
+    <button class="secondary" id="notif-btn" type="button" data-i18n="notif_btn" style="margin-top:16px"></button>
+    <div class="msg" id="nmsg" role="status" aria-live="polite"></div>
     <h3 data-i18n="blocked_title" style="margin-top:22px"></h3>
     <div id="blocked-list"></div>
   </section>
@@ -502,6 +504,11 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      notif_btn: "🔔 Activer les notifications",
+      notif_ok: "Notifications activées sur cet appareil.",
+      notif_denied: "Notifications refusées. Autorise-les dans les réglages de l'appareil.",
+      notif_ios: "Sur iPhone et iPad : ajoute d'abord Jade à l'écran d'accueil (Partager > Sur l'écran d'accueil), puis ouvre Jade depuis son icône et réessaie.",
+      notif_unsupported: "Ce navigateur ne permet pas les notifications.",
       view_profile: "Voir le profil",
       blocked_title: "Personnes bloquées",
       blocked_empty: "Tu n'as bloqué personne.",
@@ -626,6 +633,11 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      notif_btn: "🔔 Turn on notifications",
+      notif_ok: "Notifications are on for this device.",
+      notif_denied: "Notifications blocked. Allow them in your device settings.",
+      notif_ios: "On iPhone and iPad: first add Jade to your Home Screen (Share > Add to Home Screen), then open Jade from its icon and try again.",
+      notif_unsupported: "This browser doesn't support notifications.",
       view_profile: "View profile",
       blocked_title: "Blocked people",
       blocked_empty: "You haven't blocked anyone.",
@@ -750,6 +762,11 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      notif_btn: "🔔 เปิดการแจ้งเตือน",
+      notif_ok: "เปิดการแจ้งเตือนบนอุปกรณ์นี้แล้ว",
+      notif_denied: "การแจ้งเตือนถูกปิด โปรดอนุญาตในการตั้งค่าอุปกรณ์",
+      notif_ios: "บน iPhone และ iPad: เพิ่ม Jade ไปที่หน้าจอโฮมก่อน (แชร์ > เพิ่มไปยังหน้าจอโฮม) แล้วเปิด Jade จากไอคอนและลองอีกครั้ง",
+      notif_unsupported: "เบราว์เซอร์นี้ไม่รองรับการแจ้งเตือน",
       view_profile: "ดูโปรไฟล์",
       blocked_title: "คนที่ถูกบล็อก",
       blocked_empty: "คุณยังไม่ได้บล็อกใคร",
@@ -874,6 +891,11 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      notif_btn: "🔔 Bật thông báo",
+      notif_ok: "Đã bật thông báo trên thiết bị này.",
+      notif_denied: "Thông báo bị chặn. Hãy cho phép trong cài đặt thiết bị.",
+      notif_ios: "Trên iPhone và iPad: trước tiên thêm Jade vào Màn hình chính (Chia sẻ > Thêm vào MH chính), rồi mở Jade từ biểu tượng và thử lại.",
+      notif_unsupported: "Trình duyệt này không hỗ trợ thông báo.",
       view_profile: "Xem hồ sơ",
       blocked_title: "Người đã chặn",
       blocked_empty: "Bạn chưa chặn ai.",
@@ -998,6 +1020,11 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      notif_btn: "🔔 开启通知",
+      notif_ok: "已在此设备上开启通知。",
+      notif_denied: "通知已被拒绝。请在设备设置中允许。",
+      notif_ios: "在 iPhone 和 iPad 上：请先将 Jade 添加到主屏幕（分享 > 添加到主屏幕），然后从图标打开 Jade 再试一次。",
+      notif_unsupported: "此浏览器不支持通知。",
       view_profile: "查看资料",
       blocked_title: "已拉黑的人",
       blocked_empty: "你还没有拉黑任何人。",
@@ -1122,6 +1149,11 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      notif_btn: "🔔 Aktifkan notifikasi",
+      notif_ok: "Notifikasi aktif di perangkat ini.",
+      notif_denied: "Notifikasi diblokir. Izinkan di pengaturan perangkat.",
+      notif_ios: "Di iPhone dan iPad: tambahkan Jade ke Layar Utama dulu (Bagikan > Tambah ke Layar Utama), lalu buka Jade dari ikonnya dan coba lagi.",
+      notif_unsupported: "Browser ini tidak mendukung notifikasi.",
       view_profile: "Lihat profil",
       blocked_title: "Orang yang diblokir",
       blocked_empty: "Anda belum memblokir siapa pun.",
@@ -1246,6 +1278,11 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      notif_btn: "🔔 通知をオンにする",
+      notif_ok: "この端末で通知がオンになりました。",
+      notif_denied: "通知が拒否されています。端末の設定で許可してください。",
+      notif_ios: "iPhone・iPadの場合：まずJadeをホーム画面に追加し（共有 > ホーム画面に追加）、アイコンからJadeを開いてもう一度お試しください。",
+      notif_unsupported: "このブラウザは通知に対応していません。",
       view_profile: "プロフィールを見る",
       blocked_title: "ブロックした人",
       blocked_empty: "まだ誰もブロックしていません。",
@@ -1430,6 +1467,11 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      notif_btn: "🔔 알림 켜기",
+      notif_ok: "이 기기에서 알림이 켜졌어요.",
+      notif_denied: "알림이 차단되었어요. 기기 설정에서 허용해 주세요.",
+      notif_ios: "iPhone과 iPad: 먼저 Jade를 홈 화면에 추가한 뒤(공유 > 홈 화면에 추가), 아이콘으로 Jade를 열고 다시 시도하세요.",
+      notif_unsupported: "이 브라우저는 알림을 지원하지 않아요.",
       view_profile: "프로필 보기",
       blocked_title: "차단한 사람",
       blocked_empty: "아직 차단한 사람이 없어요.",
@@ -1614,6 +1656,11 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      notif_btn: "🔔 Hidupkan pemberitahuan",
+      notif_ok: "Pemberitahuan dihidupkan pada peranti ini.",
+      notif_denied: "Pemberitahuan disekat. Benarkan dalam tetapan peranti.",
+      notif_ios: "Pada iPhone dan iPad: tambah Jade ke Skrin Utama dahulu (Kongsi > Tambah ke Skrin Utama), kemudian buka Jade dari ikonnya dan cuba lagi.",
+      notif_unsupported: "Pelayar ini tidak menyokong pemberitahuan.",
       view_profile: "Lihat profil",
       blocked_title: "Orang yang disekat",
       blocked_empty: "Anda belum menyekat sesiapa.",
@@ -1798,6 +1845,11 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      notif_btn: "🔔 I-on ang mga notification",
+      notif_ok: "Naka-on na ang mga notification sa device na ito.",
+      notif_denied: "Naka-block ang mga notification. Payagan ito sa settings ng device.",
+      notif_ios: "Sa iPhone at iPad: idagdag muna ang Jade sa Home Screen (Share > Add to Home Screen), pagkatapos buksan ang Jade mula sa icon at subukan ulit.",
+      notif_unsupported: "Hindi sinusuportahan ng browser na ito ang mga notification.",
       view_profile: "Tingnan ang profile",
       blocked_title: "Mga naka-block",
       blocked_empty: "Wala ka pang na-block.",
@@ -1982,6 +2034,11 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      notif_btn: "🔔 ເປີດການແຈ້ງເຕືອນ",
+      notif_ok: "ເປີດການແຈ້ງເຕືອນໃນອຸປະກອນນີ້ແລ້ວ.",
+      notif_denied: "ການແຈ້ງເຕືອນຖືກປິດ. ກະລຸນາອະນຸຍາດໃນການຕັ້ງຄ່າອຸປະກອນ.",
+      notif_ios: "ໃນ iPhone ແລະ iPad: ເພີ່ມ Jade ໃສ່ໜ້າຈໍຫຼັກກ່ອນ (ແບ່ງປັນ > ເພີ່ມໃສ່ໜ້າຈໍຫຼັກ), ແລ້ວເປີດ Jade ຈາກໄອຄອນ ແລະ ລອງໃໝ່.",
+      notif_unsupported: "ບຣາວເຊີນີ້ບໍ່ຮອງຮັບການແຈ້ງເຕືອນ.",
       view_profile: "ເບິ່ງໂປຣໄຟລ໌",
       blocked_title: "ຄົນທີ່ບລັອກໄວ້",
       blocked_empty: "ເຈົ້າຍັງບໍ່ໄດ້ບລັອກໃຜ.",
@@ -2166,6 +2223,11 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      notif_btn: "🔔 បើកការជូនដំណឹង",
+      notif_ok: "បានបើកការជូនដំណឹងលើឧបករណ៍នេះ។",
+      notif_denied: "ការជូនដំណឹងត្រូវបានបិទ។ សូមអនុញ្ញាតក្នុងការកំណត់ឧបករណ៍។",
+      notif_ios: "លើ iPhone និង iPad៖ សូមបន្ថែម Jade ទៅអេក្រង់ដើមជាមុនសិន (ចែករំលែក > បន្ថែមទៅអេក្រង់ដើម) បន្ទាប់មកបើក Jade ពីរូបតំណាង ហើយសាកម្តងទៀត។",
+      notif_unsupported: "កម្មវិធីរុករកនេះមិនគាំទ្រការជូនដំណឹងទេ។",
       view_profile: "មើលប្រវត្តិរូប",
       blocked_title: "អ្នកដែលបានទប់ស្កាត់",
       blocked_empty: "អ្នកមិនទាន់បានទប់ស្កាត់នរណាម្នាក់ទេ។",
@@ -2839,7 +2901,8 @@
       if (liked) {
         var back = await db.from("swipes").select("liked")
           .eq("from_id", candidate.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
-        if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; }
+        if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; notify(candidate.id, "match"); }
+        else if (isSuper) notify(candidate.id, "super");
       }
       if (fromLikes) { fromLikes = false; showSection("likes"); await loadLikes(); }
       else { var keepMsg = isSuper; await nextCandidate(); if (keepMsg) say(dmsg, t("super_sent"), "ok"); }
@@ -3106,6 +3169,11 @@
     res.push(await chk("Super like", function () { return db.from("swipes").select("super").limit(1); }));
     res.push(await chk("Modération automatique", function () { return db.from("profiles").select("under_review").limit(1); }));
     res.push(await chk("Recherche de membres", function () { return db.rpc("admin_search", { q: "zzzz-test" }); }));
+    res.push(await chk("Notifications (table)", function () { return db.from("push_subscriptions").select("endpoint").limit(1); }));
+    res.push(await chk("Notifications (fonction notify)", async function () {
+      var r = await db.functions.invoke("notify", { body: { to: currentUser.id, kind: "message" } });
+      return r.error ? { error: { message: "fonction absente ou en erreur (" + (r.error.message || r.error) + ")" } } : {};
+    }));
     res.push(await chk("Liste des bloqués", function () { return db.rpc("my_blocked"); }));
     res.push(await chk("Statistiques", function () { return db.rpc("admin_stats"); }));
     res.push(await chk("Qui a vu mon profil", function () { return db.from("profile_views").select("viewer_id").limit(1); }));
@@ -3282,6 +3350,7 @@
     var room = "Jade-" + Array.prototype.map.call(a, function (x) { return "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"[x % 56]; }).join("");
     var r = await db.from("messages").insert({ from_id: currentUser.id, to_id: chatWith.id, body: t("video_invite") + " https://meet.jit.si/" + room });
     if (r.error) return say($("cmsg"), t("e_send") + r.error.message, "err");
+    notify(chatWith.id, "message");
     refreshChat();
     window.open("https://meet.jit.si/" + room, "_blank", "noopener");
   };
@@ -3293,7 +3362,7 @@
     $("chat-send").disabled = true;
     var r = await db.from("messages").insert({ from_id: currentUser.id, to_id: chatWith.id, body: text });
     if (r.error) say($("cmsg"), t("e_send") + r.error.message, "err");
-    else { $("chat-input").value = ""; say($("cmsg"), "", ""); await refreshChat(); }
+    else { $("chat-input").value = ""; say($("cmsg"), "", ""); notify(chatWith.id, "message"); await refreshChat(); }
     $("chat-send").disabled = false;
   });
   $("chat-back").onclick = function () { showSection("matches"); loadMatches(); };
@@ -3397,6 +3466,36 @@
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
   }
+
+  // ---------- Notifications ----------
+  var VAPID_PUBLIC = "BK-DELSdSbhb1II18DzsW3uqZffj8VzKInZyEUiwo257LU1SUUopGdNsvWwGyNZXdRObKNPZzeU4AbkioredGt4";
+  function b64ToU8(s) {
+    var p = "=".repeat((4 - s.length % 4) % 4), b = atob((s + p).replace(/-/g, "+").replace(/_/g, "/"));
+    var a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a;
+  }
+  function notify(to, kind) {
+    try { if (db.functions && to) db.functions.invoke("notify", { body: { to: to, kind: kind } }).catch(function () {}); } catch (e) {}
+  }
+  $("notif-btn").onclick = async function () {
+    var m = $("nmsg");
+    var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var standalone = window.navigator.standalone || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    if (!("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)) {
+      return say(m, ios && !standalone ? t("notif_ios") : t("notif_unsupported"), "err");
+    }
+    try {
+      var perm = await Notification.requestPermission();
+      if (perm !== "granted") return say(m, t("notif_denied"), "err");
+      var reg = await navigator.serviceWorker.register("sw.js");
+      reg = await navigator.serviceWorker.ready;
+      var sub = await reg.pushManager.getSubscription();
+      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToU8(VAPID_PUBLIC) });
+      var j = sub.toJSON();
+      var r = await db.from("push_subscriptions").upsert({ endpoint: j.endpoint, user_id: currentUser.id, subscription: j, lang: lang });
+      if (r.error) throw r.error;
+      say(m, t("notif_ok"), "ok");
+    } catch (e) { say(m, (e && e.message) || t("e_generic"), "err"); }
+  };
 
   // ---------- Mot de passe oublié et paramètres ----------
   var recovering = /type=recovery/.test(window.location.hash);
