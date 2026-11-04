@@ -107,6 +107,31 @@
   .stat span { font-size: .78rem; color: var(--muted); }
   .brow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
   .brow button { width: auto; margin: 0; padding: 6px 12px; }
+  .goldbtn { border-color: #c9a24a; }
+  .plans { display: grid; gap: 12px; margin: 12px 0; }
+  .plan { border: 1.5px solid var(--line); border-radius: 14px; padding: 14px; background: var(--card); }
+  .plan.gold { border-color: #c9a24a; }
+  .plan.diamond { border-color: #1f7a5c; background: linear-gradient(180deg, rgba(31,122,92,.08), transparent); }
+  .plan.current { box-shadow: 0 0 0 3px rgba(201,162,74,.45); }
+  .plan-name { font-weight: 700; font-size: 1.1rem; }
+  .plan-price { margin: 4px 0 8px; color: var(--muted); }
+  .plan-price b { color: var(--fg); font-size: 1.35rem; }
+  .plan ul { margin: 0 0 10px; padding-left: 18px; font-size: .92rem; }
+  .plan li.lead { list-style: none; margin-left: -18px; font-weight: 600; }
+  .locked { text-align: center; padding: 18px 12px; border: 1px dashed #c9a24a; border-radius: 12px; margin: 8px 0; }
+  .locked button { margin-top: 10px; }
+  .tag.premium { border-color: #c9a24a; color: #8a6a1f; }
+  @media (prefers-color-scheme: dark) { .tag.premium { color: #e8c766; } }
+  select:disabled { opacity: .55; }
+  .evcard { border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 12px; background: var(--card); }
+  .evcard h3 { margin: 0 0 4px; font-size: 1.08rem; }
+  .evmeta { font-size: .88rem; color: var(--muted); margin-bottom: 8px; }
+  .evdesc { font-size: .92rem; white-space: pre-wrap; margin: 0 0 10px; }
+  .evfoot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .evfoot button { width: auto; margin: 0; padding: 9px 16px; }
+  .evplaces { font-size: .85rem; font-weight: 600; }
+  .evadmin { display: grid; gap: 6px; margin-bottom: 14px; }
+  .evadmin input, .evadmin textarea, .evadmin select { margin: 0; }
   .view-photo { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--bg); }
   .tag { display: inline-block; font-size: .8rem; color: var(--muted); border: 1px solid var(--line);
     border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
@@ -278,8 +303,11 @@
     <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
     <button class="primary" id="go-discover" type="button" data-i18n="discover"></button>
     <button class="secondary" id="go-matches" type="button" data-i18n="matches"></button>
+    <button class="secondary" id="go-events" type="button" data-i18n="events_btn"></button>
     <button class="secondary" id="go-likes" type="button" data-i18n="likes_btn"></button>
     <button class="secondary" id="go-views" type="button" data-i18n="views_btn"></button>
+    <button class="secondary goldbtn" id="go-premium" type="button" data-i18n="premium_btn"></button>
+    <button class="secondary goldbtn" id="go-concierge" type="button" data-i18n="concierge_btn" hidden></button>
     <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
     <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
     <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
@@ -345,6 +373,55 @@
     <p class="empty" id="matches-empty" hidden></p>
   </section>
 
+  <!-- Activités -->
+  <section class="card" id="events" hidden>
+    <button class="back" id="events-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="events_title"></h2>
+    <p class="sub" style="font-size:.85rem" data-i18n="ev_safety"></p>
+    <div id="events-list"></div>
+    <p class="empty" id="events-empty" hidden></p>
+    <div class="msg" id="evmsg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Abonnements -->
+  <section class="card" id="premium" hidden>
+    <button class="back" id="premium-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="premium_title"></h2>
+    <div class="msg ok" id="premium-status"></div>
+    <div class="plans">
+      <div class="plan" data-plan="premium">
+        <div class="plan-name">★ Premium</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month"></span></div>
+        <ul><li data-i18n="f_p1"></li><li data-i18n="f_p2"></li><li data-i18n="f_p3"></li><li data-i18n="f_p4"></li></ul>
+        <button class="primary buy" type="button" data-i18n="choose_plan"></button>
+      </div>
+      <div class="plan gold" data-plan="gold">
+        <div class="plan-name">✦ Gold</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month"></span></div>
+        <ul><li class="lead" data-i18n="f_g0"></li><li data-i18n="f_g1"></li><li data-i18n="f_g2"></li><li data-i18n="f_g3"></li></ul>
+        <button class="primary buy" type="button" data-i18n="choose_plan"></button>
+      </div>
+      <div class="plan diamond" data-plan="diamond">
+        <div class="plan-name">💎 Diamond</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month"></span></div>
+        <ul><li class="lead" data-i18n="f_d0"></li><li data-i18n="f_d1"></li><li data-i18n="f_d2"></li></ul>
+        <button class="primary buy" type="button" data-i18n="choose_plan"></button>
+      </div>
+    </div>
+    <div style="text-align:center"><button class="linkbtn" id="manage-sub" type="button" data-i18n="manage_sub" hidden></button></div>
+    <p class="sub" style="font-size:.8rem;margin:10px 0 0" data-i18n="sub_note"></p>
+    <div class="msg" id="pmmsg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Assistant Jade (Diamond) -->
+  <section class="card" id="concierge" hidden>
+    <button class="back" id="concierge-back" type="button" data-i18n="back"></button>
+    <h2 data-i18n="concierge_title"></h2>
+    <p data-i18n="concierge_text"></p>
+    <textarea id="concierge-msg" maxlength="2000" data-i18n-ph="concierge_ph"></textarea>
+    <button class="primary" id="concierge-send" type="button" data-i18n="concierge_send"></button>
+    <p class="sub" style="font-size:.85rem;margin-top:10px" data-i18n="ai_soon"></p>
+    <div class="msg" id="cgmsg" role="status" aria-live="polite"></div>
+    <div id="concierge-list"></div>
+  </section>
+
   <!-- Qui a vu mon profil -->
   <section class="card" id="views" hidden>
     <button class="back" id="views-back" type="button" data-i18n="back"></button>
@@ -381,6 +458,28 @@
       <button id="admin-search" type="button">Chercher</button>
     </div>
     <div id="admin-members"></div>
+    <h3>🎉 Activités</h3>
+    <details>
+      <summary>Créer une activité</summary>
+      <div class="evadmin">
+        <input id="ev-title" type="text" maxlength="120" placeholder="Titre (ex. Atelier cuisine thaïe à deux)">
+        <textarea id="ev-desc" maxlength="3000" placeholder="Description : programme, lieu de rendez-vous, ce qu'il faut apporter…"></textarea>
+        <div class="two"><input id="ev-city" type="text" maxlength="60" placeholder="Ville"><select id="ev-country"></select></div>
+        <small class="sub" style="margin:0">Date et heure dans le fuseau horaire de cet appareil (chaque membre la verra à son heure locale).</small>
+        <div class="two"><input id="ev-start" type="datetime-local"><input id="ev-dur" type="number" min="0.5" max="240" step="0.5" value="2" placeholder="Durée (h)"></div>
+        <div class="two"><input id="ev-cap" type="number" min="1" max="500" value="10" placeholder="Places"><input id="ev-price" type="number" min="0" step="0.01" value="0" placeholder="Prix (€)"></div>
+        <select id="ev-level">
+          <option value="0">Ouverte à tous</option>
+          <option value="1">Réservée Premium et plus</option>
+          <option value="2">Réservée Gold et plus</option>
+          <option value="3">Réservée Diamond</option>
+        </select>
+        <button class="primary" id="ev-create" type="button">Publier l'activité</button>
+      </div>
+    </details>
+    <div id="admin-events"></div>
+    <h3>💎 Demandes Diamond</h3>
+    <div id="admin-concierge"></div>
     <h3>Vérifications en attente</h3>
     <div id="admin-verifs"></div>
     <h3>Signalements à traiter</h3>
@@ -504,6 +603,55 @@
   // ===== Textes dans les 4 langues =====
   var I18N = {
     fr: {
+      events_btn: "🎉 Activités",
+      events_title: "Activités à venir",
+      events_empty: "Aucune activité prévue pour l'instant. Reviens bientôt !",
+      ev_hours: "{n} h",
+      ev_places: "{n} place(s) restante(s)",
+      ev_full: "Complet",
+      ev_join: "Je participe",
+      ev_leave: "Me désinscrire",
+      ev_joined: "✓ Inscrit",
+      ev_free: "Gratuit",
+      ev_price: "Prix : {p} (payé sur place)",
+      ev_locked: "Réservé aux abonnés {plan}",
+      ev_past: "Cette activité est déjà passée.",
+      ev_err_full: "Désolé, cette activité est complète.",
+      ev_safety: "Activités encadrées par l'équipe Jade, dans des lieux publics. Respecte les autres participants.",
+      premium_btn: "★ Abonnements",
+      premium_title: "Abonnements Jade",
+      premium_free: "Pour toi, Premium est offert 🎁",
+      plan_active: "Ton abonnement : {plan}, jusqu'au {d}",
+      per_month: "/ mois",
+      choose_plan: "Choisir",
+      manage_sub: "Gérer ou résilier mon abonnement",
+      pay_soon: "Le paiement sera bientôt disponible.",
+      sub_note: "Renouvellement automatique chaque mois, résiliable à tout moment. Paiement sécurisé par Stripe.",
+      f_p1: "Voir qui t'a liké",
+      f_p2: "Voir qui a vu ton profil",
+      f_p3: "200 likes et 5 super likes par jour",
+      f_p4: "Filtres avancés et badge ★ Premium",
+      f_g0: "Tout Premium, plus :",
+      f_g1: "Ton profil mis en avant dans la découverte",
+      f_g2: "10 super likes par jour",
+      f_g3: "Vérification de profil prioritaire",
+      f_d0: "Tout Gold, plus :",
+      f_d1: "Assistant IA personnel (profil, messages, conseils)",
+      f_d2: "Une personne de notre équipe pour t'accompagner et organiser tes rendez-vous",
+      locked_likes: "{n} personne(s) t'ont liké. Passe à Premium pour les voir.",
+      locked_views: "{n} personne(s) ont vu ton profil. Passe à Premium pour les voir.",
+      see_plans: "Voir les abonnements",
+      limit_likes: "Limite de likes du jour atteinte. Passe à Premium pour en avoir plus.",
+      limit_super: "Limite de super likes du jour atteinte.",
+      premium_only: "Réservé aux abonnés",
+      concierge_btn: "💎 Mon assistant Jade",
+      concierge_title: "Assistant Jade (Diamond)",
+      concierge_text: "Dis-nous ce que tu souhaites (rendez-vous, conseils, organisation) et tes disponibilités. Un membre de notre équipe te répond sous 48 h.",
+      concierge_ph: "Ex. : organiser un premier rendez-vous à Bangkok en décembre…",
+      concierge_send: "Envoyer ma demande",
+      concierge_sent: "Demande envoyée ! Notre équipe te contacte bientôt.",
+      ai_soon: "L'assistant IA arrive bientôt.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 Activer les notifications",
       notif_ok: "Notifications activées sur cet appareil.",
       notif_denied: "Notifications refusées. Autorise-les dans les réglages de l'appareil.",
@@ -633,6 +781,55 @@
       countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
     },
     en: {
+      events_btn: "🎉 Activities",
+      events_title: "Upcoming activities",
+      events_empty: "No activities planned yet. Check back soon!",
+      ev_hours: "{n} h",
+      ev_places: "{n} spot(s) left",
+      ev_full: "Full",
+      ev_join: "Join",
+      ev_leave: "Leave",
+      ev_joined: "✓ Joined",
+      ev_free: "Free",
+      ev_price: "Price: {p} (paid on site)",
+      ev_locked: "For {plan} subscribers",
+      ev_past: "This activity has already taken place.",
+      ev_err_full: "Sorry, this activity is full.",
+      ev_safety: "Activities run by the Jade team, in public places. Please respect other participants.",
+      premium_btn: "★ Subscriptions",
+      premium_title: "Jade subscriptions",
+      premium_free: "Premium is free for you 🎁",
+      plan_active: "Your plan: {plan}, until {d}",
+      per_month: "/ month",
+      choose_plan: "Choose",
+      manage_sub: "Manage or cancel my subscription",
+      pay_soon: "Payment will be available soon.",
+      sub_note: "Renews automatically every month, cancel anytime. Secure payment by Stripe.",
+      f_p1: "See who liked you",
+      f_p2: "See who viewed your profile",
+      f_p3: "200 likes and 5 super likes per day",
+      f_p4: "Advanced filters and ★ Premium badge",
+      f_g0: "Everything in Premium, plus:",
+      f_g1: "Your profile highlighted in discovery",
+      f_g2: "10 super likes per day",
+      f_g3: "Priority profile verification",
+      f_d0: "Everything in Gold, plus:",
+      f_d1: "Personal AI assistant (profile, messages, advice)",
+      f_d2: "A member of our team to support you and organise your dates",
+      locked_likes: "{n} person(s) liked you. Go Premium to see them.",
+      locked_views: "{n} person(s) viewed your profile. Go Premium to see them.",
+      see_plans: "See subscriptions",
+      limit_likes: "Daily like limit reached. Go Premium for more.",
+      limit_super: "Daily super like limit reached.",
+      premium_only: "Subscribers only",
+      concierge_btn: "💎 My Jade assistant",
+      concierge_title: "Jade assistant (Diamond)",
+      concierge_text: "Tell us what you'd like (dates, advice, planning) and when you're available. A member of our team will reply within 48 hours.",
+      concierge_ph: "E.g. plan a first date in Bangkok in December…",
+      concierge_send: "Send my request",
+      concierge_sent: "Request sent! Our team will contact you soon.",
+      ai_soon: "The AI assistant is coming soon.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 Turn on notifications",
       notif_ok: "Notifications are on for this device.",
       notif_denied: "Notifications blocked. Allow them in your device settings.",
@@ -762,6 +959,55 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
     },
     th: {
+      events_btn: "🎉 กิจกรรม",
+      events_title: "กิจกรรมที่กำลังจะมาถึง",
+      events_empty: "ยังไม่มีกิจกรรมในตอนนี้ กลับมาดูใหม่เร็วๆ นี้!",
+      ev_hours: "{n} ชม.",
+      ev_places: "เหลือ {n} ที่",
+      ev_full: "เต็มแล้ว",
+      ev_join: "เข้าร่วม",
+      ev_leave: "ยกเลิกการเข้าร่วม",
+      ev_joined: "✓ ลงทะเบียนแล้ว",
+      ev_free: "ฟรี",
+      ev_price: "ราคา: {p} (ชำระที่งาน)",
+      ev_locked: "สำหรับสมาชิก {plan}",
+      ev_past: "กิจกรรมนี้ผ่านไปแล้ว",
+      ev_err_full: "ขออภัย กิจกรรมนี้เต็มแล้ว",
+      ev_safety: "กิจกรรมดูแลโดยทีม Jade ในสถานที่สาธารณะ โปรดเคารพผู้เข้าร่วมคนอื่น",
+      premium_btn: "★ สมาชิกแบบชำระเงิน",
+      premium_title: "แพ็กเกจสมาชิก Jade",
+      premium_free: "Premium ฟรีสำหรับคุณ 🎁",
+      plan_active: "แพ็กเกจของคุณ: {plan} ถึงวันที่ {d}",
+      per_month: "/ เดือน",
+      choose_plan: "เลือก",
+      manage_sub: "จัดการหรือยกเลิกการสมัคร",
+      pay_soon: "การชำระเงินจะเปิดให้ใช้เร็วๆ นี้",
+      sub_note: "ต่ออายุอัตโนมัติทุกเดือน ยกเลิกได้ทุกเมื่อ ชำระเงินอย่างปลอดภัยผ่าน Stripe",
+      f_p1: "ดูว่าใครถูกใจคุณ",
+      f_p2: "ดูว่าใครดูโปรไฟล์คุณ",
+      f_p3: "200 ไลก์และ 5 ซูเปอร์ไลก์ต่อวัน",
+      f_p4: "ตัวกรองขั้นสูงและป้าย ★ Premium",
+      f_g0: "ทุกอย่างใน Premium และ:",
+      f_g1: "โปรไฟล์ของคุณแสดงเด่นในการค้นหา",
+      f_g2: "10 ซูเปอร์ไลก์ต่อวัน",
+      f_g3: "ยืนยันโปรไฟล์แบบเร่งด่วน",
+      f_d0: "ทุกอย่างใน Gold และ:",
+      f_d1: "ผู้ช่วย AI ส่วนตัว (โปรไฟล์ ข้อความ คำแนะนำ)",
+      f_d2: "ทีมงานของเราช่วยดูแลและนัดหมายการพบเจอของคุณ",
+      locked_likes: "มี {n} คนถูกใจคุณ อัปเกรดเป็น Premium เพื่อดู",
+      locked_views: "มี {n} คนดูโปรไฟล์คุณ อัปเกรดเป็น Premium เพื่อดู",
+      see_plans: "ดูแพ็กเกจ",
+      limit_likes: "ครบจำนวนไลก์ของวันนี้แล้ว อัปเกรดเป็น Premium เพื่อเพิ่ม",
+      limit_super: "ครบจำนวนซูเปอร์ไลก์ของวันนี้แล้ว",
+      premium_only: "สำหรับสมาชิกเท่านั้น",
+      concierge_btn: "💎 ผู้ช่วย Jade ของฉัน",
+      concierge_title: "ผู้ช่วย Jade (Diamond)",
+      concierge_text: "บอกเราว่าคุณต้องการอะไร (นัดพบ คำแนะนำ การวางแผน) และเวลาที่สะดวก ทีมงานจะตอบกลับภายใน 48 ชม.",
+      concierge_ph: "เช่น: นัดพบครั้งแรกที่กรุงเทพฯ ในเดือนธันวาคม…",
+      concierge_send: "ส่งคำขอ",
+      concierge_sent: "ส่งคำขอแล้ว! ทีมงานจะติดต่อคุณเร็วๆ นี้",
+      ai_soon: "ผู้ช่วย AI จะมาเร็วๆ นี้",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 เปิดการแจ้งเตือน",
       notif_ok: "เปิดการแจ้งเตือนบนอุปกรณ์นี้แล้ว",
       notif_denied: "การแจ้งเตือนถูกปิด โปรดอนุญาตในการตั้งค่าอุปกรณ์",
@@ -891,6 +1137,55 @@
       countries: ["ไทย", "เวียดนาม", "อินโดนีเซีย", "ฟิลิปปินส์", "กัมพูชา", "ลาว", "มาเลเซีย", "สิงคโปร์", "จีน", "ไต้หวัน", "ฮ่องกง", "ญี่ปุ่น", "เกาหลีใต้", "สหรัฐอเมริกา", "แคนาดา", "ฝรั่งเศส", "เบลเยียม", "สวิตเซอร์แลนด์", "เยอรมนี", "สหราชอาณาจักร", "เนเธอร์แลนด์", "อิตาลี", "สเปน", "โปรตุเกส", "ออสเตรเลีย", "อื่น ๆ"]
     },
     vi: {
+      events_btn: "🎉 Hoạt động",
+      events_title: "Hoạt động sắp tới",
+      events_empty: "Chưa có hoạt động nào. Hãy quay lại sau nhé!",
+      ev_hours: "{n} giờ",
+      ev_places: "Còn {n} chỗ",
+      ev_full: "Đã đủ người",
+      ev_join: "Tham gia",
+      ev_leave: "Hủy tham gia",
+      ev_joined: "✓ Đã đăng ký",
+      ev_free: "Miễn phí",
+      ev_price: "Giá: {p} (trả tại chỗ)",
+      ev_locked: "Dành cho thành viên {plan}",
+      ev_past: "Hoạt động này đã diễn ra.",
+      ev_err_full: "Rất tiếc, hoạt động này đã đủ người.",
+      ev_safety: "Hoạt động do đội ngũ Jade tổ chức tại nơi công cộng. Hãy tôn trọng những người tham gia khác.",
+      premium_btn: "★ Gói thành viên",
+      premium_title: "Gói thành viên Jade",
+      premium_free: "Premium miễn phí cho bạn 🎁",
+      plan_active: "Gói của bạn: {plan}, đến ngày {d}",
+      per_month: "/ tháng",
+      choose_plan: "Chọn",
+      manage_sub: "Quản lý hoặc hủy gói",
+      pay_soon: "Thanh toán sẽ sớm có.",
+      sub_note: "Tự động gia hạn mỗi tháng, hủy bất cứ lúc nào. Thanh toán an toàn qua Stripe.",
+      f_p1: "Xem ai đã thích bạn",
+      f_p2: "Xem ai đã xem hồ sơ của bạn",
+      f_p3: "200 lượt thích và 5 siêu thích mỗi ngày",
+      f_p4: "Bộ lọc nâng cao và huy hiệu ★ Premium",
+      f_g0: "Mọi thứ của Premium, thêm:",
+      f_g1: "Hồ sơ của bạn được ưu tiên hiển thị",
+      f_g2: "10 siêu thích mỗi ngày",
+      f_g3: "Xác minh hồ sơ ưu tiên",
+      f_d0: "Mọi thứ của Gold, thêm:",
+      f_d1: "Trợ lý AI cá nhân (hồ sơ, tin nhắn, lời khuyên)",
+      f_d2: "Một thành viên đội ngũ hỗ trợ và sắp xếp các cuộc hẹn của bạn",
+      locked_likes: "{n} người đã thích bạn. Nâng cấp Premium để xem.",
+      locked_views: "{n} người đã xem hồ sơ của bạn. Nâng cấp Premium để xem.",
+      see_plans: "Xem các gói",
+      limit_likes: "Đã hết lượt thích hôm nay. Nâng cấp Premium để có thêm.",
+      limit_super: "Đã hết lượt siêu thích hôm nay.",
+      premium_only: "Chỉ dành cho thành viên trả phí",
+      concierge_btn: "💎 Trợ lý Jade của tôi",
+      concierge_title: "Trợ lý Jade (Diamond)",
+      concierge_text: "Hãy cho chúng tôi biết bạn cần gì (hẹn gặp, lời khuyên, sắp xếp) và thời gian rảnh. Đội ngũ sẽ trả lời trong 48 giờ.",
+      concierge_ph: "VD: sắp xếp buổi hẹn đầu tiên ở Bangkok vào tháng 12…",
+      concierge_send: "Gửi yêu cầu",
+      concierge_sent: "Đã gửi yêu cầu! Đội ngũ sẽ sớm liên hệ với bạn.",
+      ai_soon: "Trợ lý AI sắp ra mắt.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 Bật thông báo",
       notif_ok: "Đã bật thông báo trên thiết bị này.",
       notif_denied: "Thông báo bị chặn. Hãy cho phép trong cài đặt thiết bị.",
@@ -1020,6 +1315,55 @@
       countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
     },
     zh: {
+      events_btn: "🎉 活动",
+      events_title: "即将举行的活动",
+      events_empty: "暂时还没有活动，请稍后再来看看！",
+      ev_hours: "{n} 小时",
+      ev_places: "剩余 {n} 个名额",
+      ev_full: "已满",
+      ev_join: "我要参加",
+      ev_leave: "取消报名",
+      ev_joined: "✓ 已报名",
+      ev_free: "免费",
+      ev_price: "价格：{p}（现场支付）",
+      ev_locked: "仅限 {plan} 会员",
+      ev_past: "该活动已结束。",
+      ev_err_full: "抱歉，该活动名额已满。",
+      ev_safety: "活动由 Jade 团队在公共场所组织。请尊重其他参与者。",
+      premium_btn: "★ 会员订阅",
+      premium_title: "Jade 会员订阅",
+      premium_free: "Premium 对你免费 🎁",
+      plan_active: "你的套餐：{plan}，有效期至 {d}",
+      per_month: "/ 月",
+      choose_plan: "选择",
+      manage_sub: "管理或取消订阅",
+      pay_soon: "付款功能即将开放。",
+      sub_note: "每月自动续订，可随时取消。由 Stripe 安全支付。",
+      f_p1: "查看谁喜欢你",
+      f_p2: "查看谁看过你的资料",
+      f_p3: "每天 200 个喜欢和 5 个超级喜欢",
+      f_p4: "高级筛选和 ★ Premium 徽章",
+      f_g0: "包含 Premium 全部权益，另加：",
+      f_g1: "你的资料在发现页优先展示",
+      f_g2: "每天 10 个超级喜欢",
+      f_g3: "优先审核资料认证",
+      f_d0: "包含 Gold 全部权益，另加：",
+      f_d1: "个人 AI 助手（资料、消息、建议）",
+      f_d2: "我们团队的专人陪同并安排你的约会",
+      locked_likes: "有 {n} 人喜欢你。升级 Premium 即可查看。",
+      locked_views: "有 {n} 人看过你的资料。升级 Premium 即可查看。",
+      see_plans: "查看订阅方案",
+      limit_likes: "今天的喜欢次数已用完。升级 Premium 获取更多。",
+      limit_super: "今天的超级喜欢次数已用完。",
+      premium_only: "仅限订阅会员",
+      concierge_btn: "💎 我的 Jade 助手",
+      concierge_title: "Jade 助手（Diamond）",
+      concierge_text: "告诉我们你的需求（约会、建议、安排）和空闲时间。团队成员会在 48 小时内回复。",
+      concierge_ph: "例如：12 月在曼谷安排第一次约会…",
+      concierge_send: "发送请求",
+      concierge_sent: "请求已发送！我们的团队会尽快联系你。",
+      ai_soon: "AI 助手即将上线。",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 开启通知",
       notif_ok: "已在此设备上开启通知。",
       notif_denied: "通知已被拒绝。请在设备设置中允许。",
@@ -1149,6 +1493,55 @@
       countries: ["泰国", "越南", "印度尼西亚", "菲律宾", "柬埔寨", "老挝", "马来西亚", "新加坡", "中国", "台湾", "香港", "日本", "韩国", "美国", "加拿大", "法国", "比利时", "瑞士", "德国", "英国", "荷兰", "意大利", "西班牙", "葡萄牙", "澳大利亚", "其他"]
     },
     id: {
+      events_btn: "🎉 Aktivitas",
+      events_title: "Aktivitas mendatang",
+      events_empty: "Belum ada aktivitas. Cek lagi nanti!",
+      ev_hours: "{n} jam",
+      ev_places: "Sisa {n} tempat",
+      ev_full: "Penuh",
+      ev_join: "Ikut",
+      ev_leave: "Batal ikut",
+      ev_joined: "✓ Terdaftar",
+      ev_free: "Gratis",
+      ev_price: "Harga: {p} (bayar di tempat)",
+      ev_locked: "Khusus pelanggan {plan}",
+      ev_past: "Aktivitas ini sudah lewat.",
+      ev_err_full: "Maaf, aktivitas ini sudah penuh.",
+      ev_safety: "Aktivitas dipandu tim Jade di tempat umum. Hormati peserta lain.",
+      premium_btn: "★ Langganan",
+      premium_title: "Langganan Jade",
+      premium_free: "Premium gratis untuk Anda 🎁",
+      plan_active: "Paket Anda: {plan}, hingga {d}",
+      per_month: "/ bulan",
+      choose_plan: "Pilih",
+      manage_sub: "Kelola atau batalkan langganan",
+      pay_soon: "Pembayaran akan segera tersedia.",
+      sub_note: "Diperpanjang otomatis setiap bulan, bisa dibatalkan kapan saja. Pembayaran aman melalui Stripe.",
+      f_p1: "Lihat siapa yang menyukai Anda",
+      f_p2: "Lihat siapa yang melihat profil Anda",
+      f_p3: "200 suka dan 5 super like per hari",
+      f_p4: "Filter lanjutan dan lencana ★ Premium",
+      f_g0: "Semua fitur Premium, plus:",
+      f_g1: "Profil Anda ditonjolkan di jelajah",
+      f_g2: "10 super like per hari",
+      f_g3: "Verifikasi profil prioritas",
+      f_d0: "Semua fitur Gold, plus:",
+      f_d1: "Asisten AI pribadi (profil, pesan, saran)",
+      f_d2: "Anggota tim kami mendampingi dan mengatur kencan Anda",
+      locked_likes: "{n} orang menyukai Anda. Upgrade ke Premium untuk melihatnya.",
+      locked_views: "{n} orang melihat profil Anda. Upgrade ke Premium untuk melihatnya.",
+      see_plans: "Lihat langganan",
+      limit_likes: "Batas suka hari ini tercapai. Upgrade ke Premium untuk lebih banyak.",
+      limit_super: "Batas super like hari ini tercapai.",
+      premium_only: "Khusus pelanggan",
+      concierge_btn: "💎 Asisten Jade saya",
+      concierge_title: "Asisten Jade (Diamond)",
+      concierge_text: "Beri tahu kami kebutuhan Anda (kencan, saran, perencanaan) dan waktu luang Anda. Tim kami membalas dalam 48 jam.",
+      concierge_ph: "Contoh: mengatur kencan pertama di Bangkok bulan Desember…",
+      concierge_send: "Kirim permintaan",
+      concierge_sent: "Permintaan terkirim! Tim kami akan segera menghubungi Anda.",
+      ai_soon: "Asisten AI segera hadir.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 Aktifkan notifikasi",
       notif_ok: "Notifikasi aktif di perangkat ini.",
       notif_denied: "Notifikasi diblokir. Izinkan di pengaturan perangkat.",
@@ -1278,6 +1671,55 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
     },
     ja: {
+      events_btn: "🎉 アクティビティ",
+      events_title: "今後のアクティビティ",
+      events_empty: "現在予定されているアクティビティはありません。また見に来てください！",
+      ev_hours: "{n}時間",
+      ev_places: "残り{n}名",
+      ev_full: "満員",
+      ev_join: "参加する",
+      ev_leave: "参加をキャンセル",
+      ev_joined: "✓ 参加登録済み",
+      ev_free: "無料",
+      ev_price: "料金：{p}（当日支払い）",
+      ev_locked: "{plan} 会員限定",
+      ev_past: "このアクティビティは終了しました。",
+      ev_err_full: "申し訳ありません、満員です。",
+      ev_safety: "Jade スタッフが公共の場所で運営します。他の参加者を尊重してください。",
+      premium_btn: "★ サブスクリプション",
+      premium_title: "Jade のプラン",
+      premium_free: "Premium は無料でご利用いただけます 🎁",
+      plan_active: "ご利用中のプラン：{plan}（{d} まで）",
+      per_month: "/ 月",
+      choose_plan: "選択",
+      manage_sub: "サブスクリプションの管理・解約",
+      pay_soon: "お支払いは近日中に利用可能になります。",
+      sub_note: "毎月自動更新、いつでも解約できます。Stripe による安全なお支払い。",
+      f_p1: "いいねしてくれた人を見る",
+      f_p2: "プロフィールを見た人を見る",
+      f_p3: "1日200いいね・5スーパーいいね",
+      f_p4: "詳細フィルターと ★ Premium バッジ",
+      f_g0: "Premium のすべてに加えて：",
+      f_g1: "プロフィールを優先表示",
+      f_g2: "1日10スーパーいいね",
+      f_g3: "プロフィール認証を優先対応",
+      f_d0: "Gold のすべてに加えて：",
+      f_d1: "専属AIアシスタント（プロフィール、メッセージ、アドバイス）",
+      f_d2: "スタッフがデートのサポートと手配をお手伝い",
+      locked_likes: "{n}人があなたにいいねしました。Premium で確認できます。",
+      locked_views: "{n}人があなたのプロフィールを見ました。Premium で確認できます。",
+      see_plans: "プランを見る",
+      limit_likes: "本日のいいね上限に達しました。Premium で増やせます。",
+      limit_super: "本日のスーパーいいね上限に達しました。",
+      premium_only: "会員限定",
+      concierge_btn: "💎 マイ Jade アシスタント",
+      concierge_title: "Jade アシスタント（Diamond）",
+      concierge_text: "ご希望（デート、アドバイス、手配）とご都合をお知らせください。48時間以内にスタッフがご返信します。",
+      concierge_ph: "例：12月にバンコクで初デートを手配したい…",
+      concierge_send: "リクエストを送信",
+      concierge_sent: "リクエストを送信しました！スタッフからご連絡します。",
+      ai_soon: "AIアシスタントは近日公開予定です。",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 通知をオンにする",
       notif_ok: "この端末で通知がオンになりました。",
       notif_denied: "通知が拒否されています。端末の設定で許可してください。",
@@ -1467,6 +1909,55 @@
       countries: ["タイ", "ベトナム", "インドネシア", "フィリピン", "カンボジア", "ラオス", "マレーシア", "シンガポール", "中国", "台湾", "香港", "日本", "韓国", "アメリカ", "カナダ", "フランス", "ベルギー", "スイス", "ドイツ", "イギリス", "オランダ", "イタリア", "スペイン", "ポルトガル", "オーストラリア", "その他"]
     },
     ko: {
+      events_btn: "🎉 액티비티",
+      events_title: "예정된 액티비티",
+      events_empty: "아직 예정된 액티비티가 없어요. 곧 다시 확인해 주세요!",
+      ev_hours: "{n}시간",
+      ev_places: "{n}자리 남음",
+      ev_full: "마감",
+      ev_join: "참여하기",
+      ev_leave: "참여 취소",
+      ev_joined: "✓ 신청 완료",
+      ev_free: "무료",
+      ev_price: "가격: {p} (현장 결제)",
+      ev_locked: "{plan} 구독자 전용",
+      ev_past: "이미 지난 액티비티예요.",
+      ev_err_full: "죄송해요, 마감되었어요.",
+      ev_safety: "Jade 팀이 공공장소에서 진행해요. 다른 참가자를 존중해 주세요.",
+      premium_btn: "★ 구독",
+      premium_title: "Jade 구독",
+      premium_free: "Premium이 무료로 제공돼요 🎁",
+      plan_active: "내 플랜: {plan}, {d}까지",
+      per_month: "/ 월",
+      choose_plan: "선택",
+      manage_sub: "구독 관리 또는 해지",
+      pay_soon: "결제 기능이 곧 제공됩니다.",
+      sub_note: "매월 자동 갱신, 언제든 해지 가능. Stripe로 안전하게 결제됩니다.",
+      f_p1: "나를 좋아한 사람 보기",
+      f_p2: "내 프로필을 본 사람 보기",
+      f_p3: "하루 좋아요 200개, 슈퍼 좋아요 5개",
+      f_p4: "고급 필터와 ★ Premium 배지",
+      f_g0: "Premium의 모든 혜택, 그리고:",
+      f_g1: "둘러보기에서 내 프로필 우선 노출",
+      f_g2: "하루 슈퍼 좋아요 10개",
+      f_g3: "프로필 인증 우선 처리",
+      f_d0: "Gold의 모든 혜택, 그리고:",
+      f_d1: "개인 AI 어시스턴트 (프로필, 메시지, 조언)",
+      f_d2: "팀원이 직접 데이트를 돕고 일정을 조율해 드려요",
+      locked_likes: "{n}명이 나를 좋아했어요. Premium으로 확인하세요.",
+      locked_views: "{n}명이 내 프로필을 봤어요. Premium으로 확인하세요.",
+      see_plans: "구독 보기",
+      limit_likes: "오늘의 좋아요 한도에 도달했어요. Premium으로 더 받아보세요.",
+      limit_super: "오늘의 슈퍼 좋아요 한도에 도달했어요.",
+      premium_only: "구독자 전용",
+      concierge_btn: "💎 나의 Jade 어시스턴트",
+      concierge_title: "Jade 어시스턴트 (Diamond)",
+      concierge_text: "원하는 것(데이트, 조언, 일정)과 가능한 시간을 알려 주세요. 48시간 안에 팀원이 답변해 드려요.",
+      concierge_ph: "예: 12월에 방콕에서 첫 데이트 준비…",
+      concierge_send: "요청 보내기",
+      concierge_sent: "요청을 보냈어요! 곧 팀에서 연락드릴게요.",
+      ai_soon: "AI 어시스턴트가 곧 출시돼요.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 알림 켜기",
       notif_ok: "이 기기에서 알림이 켜졌어요.",
       notif_denied: "알림이 차단되었어요. 기기 설정에서 허용해 주세요.",
@@ -1656,6 +2147,55 @@
       countries: ["태국", "베트남", "인도네시아", "필리핀", "캄보디아", "라오스", "말레이시아", "싱가포르", "중국", "대만", "홍콩", "일본", "대한민국", "미국", "캐나다", "프랑스", "벨기에", "스위스", "독일", "영국", "네덜란드", "이탈리아", "스페인", "포르투갈", "호주", "기타"]
     },
     ms: {
+      events_btn: "🎉 Aktiviti",
+      events_title: "Aktiviti akan datang",
+      events_empty: "Belum ada aktiviti. Semak semula nanti!",
+      ev_hours: "{n} jam",
+      ev_places: "Tinggal {n} tempat",
+      ev_full: "Penuh",
+      ev_join: "Sertai",
+      ev_leave: "Tarik diri",
+      ev_joined: "✓ Berdaftar",
+      ev_free: "Percuma",
+      ev_price: "Harga: {p} (bayar di tempat)",
+      ev_locked: "Untuk pelanggan {plan}",
+      ev_past: "Aktiviti ini sudah berlalu.",
+      ev_err_full: "Maaf, aktiviti ini sudah penuh.",
+      ev_safety: "Aktiviti dikendalikan pasukan Jade di tempat awam. Hormati peserta lain.",
+      premium_btn: "★ Langganan",
+      premium_title: "Langganan Jade",
+      premium_free: "Premium percuma untuk anda 🎁",
+      plan_active: "Pelan anda: {plan}, sehingga {d}",
+      per_month: "/ bulan",
+      choose_plan: "Pilih",
+      manage_sub: "Urus atau batalkan langganan",
+      pay_soon: "Pembayaran akan tersedia tidak lama lagi.",
+      sub_note: "Diperbaharui secara automatik setiap bulan, boleh dibatalkan bila-bila masa. Pembayaran selamat melalui Stripe.",
+      f_p1: "Lihat siapa yang menyukai anda",
+      f_p2: "Lihat siapa yang melihat profil anda",
+      f_p3: "200 suka dan 5 super like sehari",
+      f_p4: "Penapis lanjutan dan lencana ★ Premium",
+      f_g0: "Semua dalam Premium, serta:",
+      f_g1: "Profil anda ditonjolkan dalam terokai",
+      f_g2: "10 super like sehari",
+      f_g3: "Pengesahan profil keutamaan",
+      f_d0: "Semua dalam Gold, serta:",
+      f_d1: "Pembantu AI peribadi (profil, mesej, nasihat)",
+      f_d2: "Ahli pasukan kami membantu dan mengatur temu janji anda",
+      locked_likes: "{n} orang menyukai anda. Naik taraf ke Premium untuk melihat.",
+      locked_views: "{n} orang melihat profil anda. Naik taraf ke Premium untuk melihat.",
+      see_plans: "Lihat langganan",
+      limit_likes: "Had suka hari ini dicapai. Naik taraf ke Premium untuk lebih.",
+      limit_super: "Had super like hari ini dicapai.",
+      premium_only: "Untuk pelanggan sahaja",
+      concierge_btn: "💎 Pembantu Jade saya",
+      concierge_title: "Pembantu Jade (Diamond)",
+      concierge_text: "Beritahu kami apa yang anda mahu (temu janji, nasihat, perancangan) dan masa lapang anda. Pasukan kami membalas dalam 48 jam.",
+      concierge_ph: "Cth: atur temu janji pertama di Bangkok pada Disember…",
+      concierge_send: "Hantar permintaan",
+      concierge_sent: "Permintaan dihantar! Pasukan kami akan menghubungi anda.",
+      ai_soon: "Pembantu AI akan datang tidak lama lagi.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 Hidupkan pemberitahuan",
       notif_ok: "Pemberitahuan dihidupkan pada peranti ini.",
       notif_denied: "Pemberitahuan disekat. Benarkan dalam tetapan peranti.",
@@ -1845,6 +2385,55 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
     },
     tl: {
+      events_btn: "🎉 Mga aktibidad",
+      events_title: "Mga paparating na aktibidad",
+      events_empty: "Wala pang aktibidad. Bumalik ka mamaya!",
+      ev_hours: "{n} oras",
+      ev_places: "{n} puwesto na lang",
+      ev_full: "Puno na",
+      ev_join: "Sumali",
+      ev_leave: "Umatras",
+      ev_joined: "✓ Nakarehistro",
+      ev_free: "Libre",
+      ev_price: "Presyo: {p} (bayad sa lugar)",
+      ev_locked: "Para sa {plan} subscribers",
+      ev_past: "Tapos na ang aktibidad na ito.",
+      ev_err_full: "Paumanhin, puno na ang aktibidad na ito.",
+      ev_safety: "Mga aktibidad na pinangangasiwaan ng Jade team sa pampublikong lugar. Igalang ang ibang kalahok.",
+      premium_btn: "★ Mga subscription",
+      premium_title: "Mga subscription ng Jade",
+      premium_free: "Libre ang Premium para sa iyo 🎁",
+      plan_active: "Ang plan mo: {plan}, hanggang {d}",
+      per_month: "/ buwan",
+      choose_plan: "Piliin",
+      manage_sub: "Pamahalaan o kanselahin ang subscription",
+      pay_soon: "Malapit nang magamit ang pagbabayad.",
+      sub_note: "Awtomatikong nire-renew bawat buwan, puwedeng kanselahin anumang oras. Ligtas na bayad sa pamamagitan ng Stripe.",
+      f_p1: "Tingnan kung sino ang may gusto sa iyo",
+      f_p2: "Tingnan kung sino ang tumingin sa profile mo",
+      f_p3: "200 like at 5 super like bawat araw",
+      f_p4: "Advanced filters at ★ Premium badge",
+      f_g0: "Lahat ng nasa Premium, at:",
+      f_g1: "Mas makikita ang profile mo sa paghahanap",
+      f_g2: "10 super like bawat araw",
+      f_g3: "Priority na pag-verify ng profile",
+      f_d0: "Lahat ng nasa Gold, at:",
+      f_d1: "Personal na AI assistant (profile, mensahe, payo)",
+      f_d2: "Isang miyembro ng aming team na tutulong at mag-aayos ng mga date mo",
+      locked_likes: "{n} tao ang may gusto sa iyo. Mag-Premium para makita sila.",
+      locked_views: "{n} tao ang tumingin sa profile mo. Mag-Premium para makita sila.",
+      see_plans: "Tingnan ang mga subscription",
+      limit_likes: "Naabot na ang limit ng like ngayong araw. Mag-Premium para sa higit pa.",
+      limit_super: "Naabot na ang limit ng super like ngayong araw.",
+      premium_only: "Para sa mga subscriber lang",
+      concierge_btn: "💎 Ang Jade assistant ko",
+      concierge_title: "Jade assistant (Diamond)",
+      concierge_text: "Sabihin sa amin ang gusto mo (date, payo, pag-aayos) at kung kailan ka available. Sasagot ang aming team sa loob ng 48 oras.",
+      concierge_ph: "Hal.: mag-ayos ng unang date sa Bangkok sa Disyembre…",
+      concierge_send: "Ipadala ang request",
+      concierge_sent: "Naipadala na ang request! Makikipag-ugnayan sa iyo ang aming team.",
+      ai_soon: "Malapit nang dumating ang AI assistant.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 I-on ang mga notification",
       notif_ok: "Naka-on na ang mga notification sa device na ito.",
       notif_denied: "Naka-block ang mga notification. Payagan ito sa settings ng device.",
@@ -2034,6 +2623,55 @@
       countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
     },
     lo: {
+      events_btn: "🎉 ກິດຈະກຳ",
+      events_title: "ກິດຈະກຳທີ່ຈະມາເຖິງ",
+      events_empty: "ຍັງບໍ່ມີກິດຈະກຳ. ກັບມາເບິ່ງໃໝ່ໄວໆນີ້!",
+      ev_hours: "{n} ຊົ່ວໂມງ",
+      ev_places: "ເຫຼືອ {n} ບ່ອນ",
+      ev_full: "ເຕັມແລ້ວ",
+      ev_join: "ເຂົ້າຮ່ວມ",
+      ev_leave: "ຍົກເລີກການເຂົ້າຮ່ວມ",
+      ev_joined: "✓ ລົງທະບຽນແລ້ວ",
+      ev_free: "ຟຣີ",
+      ev_price: "ລາຄາ: {p} (ຈ່າຍໜ້າງານ)",
+      ev_locked: "ສຳລັບສະມາຊິກ {plan}",
+      ev_past: "ກິດຈະກຳນີ້ຜ່ານໄປແລ້ວ.",
+      ev_err_full: "ຂໍອະໄພ, ກິດຈະກຳນີ້ເຕັມແລ້ວ.",
+      ev_safety: "ກິດຈະກຳດູແລໂດຍທີມ Jade ໃນສະຖານທີ່ສາທາລະນະ. ກະລຸນາເຄົາລົບຜູ້ເຂົ້າຮ່ວມຄົນອື່ນ.",
+      premium_btn: "★ ການສະໝັກສະມາຊິກ",
+      premium_title: "ແພັກເກດສະມາຊິກ Jade",
+      premium_free: "Premium ຟຣີສຳລັບເຈົ້າ 🎁",
+      plan_active: "ແພັກເກດຂອງເຈົ້າ: {plan}, ຮອດ {d}",
+      per_month: "/ ເດືອນ",
+      choose_plan: "ເລືອກ",
+      manage_sub: "ຈັດການ ຫຼື ຍົກເລີກການສະໝັກ",
+      pay_soon: "ການຊຳລະເງິນຈະມີໃຫ້ໃນໄວໆນີ້.",
+      sub_note: "ຕໍ່ອາຍຸອັດຕະໂນມັດທຸກເດືອນ, ຍົກເລີກໄດ້ທຸກເວລາ. ຊຳລະເງິນຢ່າງປອດໄພຜ່ານ Stripe.",
+      f_p1: "ເບິ່ງວ່າໃຜມັກເຈົ້າ",
+      f_p2: "ເບິ່ງວ່າໃຜເບິ່ງໂປຣໄຟລ໌ເຈົ້າ",
+      f_p3: "200 ມັກ ແລະ 5 ມັກຫຼາຍ ຕໍ່ມື້",
+      f_p4: "ຕົວກັ່ນຕອງຂັ້ນສູງ ແລະ ປ້າຍ ★ Premium",
+      f_g0: "ທຸກຢ່າງໃນ Premium ແລະ:",
+      f_g1: "ໂປຣໄຟລ໌ຂອງເຈົ້າສະແດງເດັ່ນໃນການຄົ້ນຫາ",
+      f_g2: "10 ມັກຫຼາຍ ຕໍ່ມື້",
+      f_g3: "ຢືນຢັນໂປຣໄຟລ໌ແບບດ່ວນ",
+      f_d0: "ທຸກຢ່າງໃນ Gold ແລະ:",
+      f_d1: "ຜູ້ຊ່ວຍ AI ສ່ວນຕົວ (ໂປຣໄຟລ໌, ຂໍ້ຄວາມ, ຄຳແນະນຳ)",
+      f_d2: "ທີມງານຂອງພວກເຮົາຊ່ວຍເບິ່ງແຍງ ແລະ ນັດໝາຍການພົບກັນຂອງເຈົ້າ",
+      locked_likes: "ມີ {n} ຄົນມັກເຈົ້າ. ອັບເກຣດເປັນ Premium ເພື່ອເບິ່ງ.",
+      locked_views: "ມີ {n} ຄົນເບິ່ງໂປຣໄຟລ໌ເຈົ້າ. ອັບເກຣດເປັນ Premium ເພື່ອເບິ່ງ.",
+      see_plans: "ເບິ່ງແພັກເກດ",
+      limit_likes: "ຄົບຈຳນວນມັກຂອງມື້ນີ້ແລ້ວ. ອັບເກຣດເປັນ Premium ເພື່ອເພີ່ມ.",
+      limit_super: "ຄົບຈຳນວນ ມັກຫຼາຍ ຂອງມື້ນີ້ແລ້ວ.",
+      premium_only: "ສຳລັບສະມາຊິກເທົ່ານັ້ນ",
+      concierge_btn: "💎 ຜູ້ຊ່ວຍ Jade ຂອງຂ້ອຍ",
+      concierge_title: "ຜູ້ຊ່ວຍ Jade (Diamond)",
+      concierge_text: "ບອກພວກເຮົາວ່າເຈົ້າຕ້ອງການຫຍັງ (ນັດພົບ, ຄຳແນະນຳ, ການວາງແຜນ) ແລະ ເວລາທີ່ສະດວກ. ທີມງານຈະຕອບພາຍໃນ 48 ຊົ່ວໂມງ.",
+      concierge_ph: "ຕົວຢ່າງ: ນັດພົບຄັ້ງທຳອິດທີ່ບາງກອກໃນເດືອນທັນວາ…",
+      concierge_send: "ສົ່ງຄຳຂໍ",
+      concierge_sent: "ສົ່ງຄຳຂໍແລ້ວ! ທີມງານຈະຕິດຕໍ່ເຈົ້າໃນໄວໆນີ້.",
+      ai_soon: "ຜູ້ຊ່ວຍ AI ຈະມາໃນໄວໆນີ້.",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 ເປີດການແຈ້ງເຕືອນ",
       notif_ok: "ເປີດການແຈ້ງເຕືອນໃນອຸປະກອນນີ້ແລ້ວ.",
       notif_denied: "ການແຈ້ງເຕືອນຖືກປິດ. ກະລຸນາອະນຸຍາດໃນການຕັ້ງຄ່າອຸປະກອນ.",
@@ -2223,6 +2861,55 @@
       countries: ["ໄທ", "ຫວຽດນາມ", "ອິນໂດເນເຊຍ", "ຟີລິບປິນ", "ກຳປູເຈຍ", "ລາວ", "ມາເລເຊຍ", "ສິງກະໂປ", "ຈີນ", "ໄຕ້ຫວັນ", "ຮ່ອງກົງ", "ຍີ່ປຸ່ນ", "ເກົາຫຼີໃຕ້", "ສະຫະລັດອາເມລິກາ", "ການາດາ", "ຝຣັ່ງ", "ເບວຢ້ຽມ", "ສະວິດເຊີແລນ", "ເຢຍລະມັນ", "ສະຫະຣາຊະອານາຈັກ", "ເນເທີແລນ", "ອິຕາລີ", "ສະເປນ", "ປໍຕຸຍການ", "ອອສເຕຣເລຍ", "ອື່ນໆ"]
     },
     km: {
+      events_btn: "🎉 សកម្មភាព",
+      events_title: "សកម្មភាពនាពេលខាងមុខ",
+      events_empty: "មិនទាន់មានសកម្មភាពទេ។ សូមត្រឡប់មកមើលឆាប់ៗ!",
+      ev_hours: "{n} ម៉ោង",
+      ev_places: "នៅសល់ {n} កន្លែង",
+      ev_full: "ពេញហើយ",
+      ev_join: "ចូលរួម",
+      ev_leave: "ដកខ្លួន",
+      ev_joined: "✓ បានចុះឈ្មោះ",
+      ev_free: "ឥតគិតថ្លៃ",
+      ev_price: "តម្លៃ៖ {p} (បង់នៅកន្លែង)",
+      ev_locked: "សម្រាប់អ្នកជាវ {plan}",
+      ev_past: "សកម្មភាពនេះបានកន្លងផុតហើយ។",
+      ev_err_full: "សូមអភ័យទោស សកម្មភាពនេះពេញហើយ។",
+      ev_safety: "សកម្មភាពដឹកនាំដោយក្រុម Jade នៅទីសាធារណៈ។ សូមគោរពអ្នកចូលរួមដទៃ។",
+      premium_btn: "★ ការជាវ",
+      premium_title: "គម្រោងជាវ Jade",
+      premium_free: "Premium ឥតគិតថ្លៃសម្រាប់អ្នក 🎁",
+      plan_active: "គម្រោងរបស់អ្នក៖ {plan} ដល់ {d}",
+      per_month: "/ ខែ",
+      choose_plan: "ជ្រើសរើស",
+      manage_sub: "គ្រប់គ្រង ឬបោះបង់ការជាវ",
+      pay_soon: "ការបង់ប្រាក់នឹងមានឆាប់ៗនេះ។",
+      sub_note: "បន្តដោយស្វ័យប្រវត្តិរៀងរាល់ខែ អាចបោះបង់បានគ្រប់ពេល។ បង់ប្រាក់ដោយសុវត្ថិភាពតាម Stripe។",
+      f_p1: "មើលថាអ្នកណាចូលចិត្តអ្នក",
+      f_p2: "មើលថាអ្នកណាបានមើលប្រវត្តិរូបអ្នក",
+      f_p3: "200 ចូលចិត្ត និង 5 ចូលចិត្តខ្លាំង ក្នុងមួយថ្ងៃ",
+      f_p4: "តម្រងកម្រិតខ្ពស់ និងស្លាក ★ Premium",
+      f_g0: "គ្រប់យ៉ាងក្នុង Premium បូកនឹង៖",
+      f_g1: "ប្រវត្តិរូបរបស់អ្នកត្រូវបានបង្ហាញលេចធ្លោ",
+      f_g2: "10 ចូលចិត្តខ្លាំង ក្នុងមួយថ្ងៃ",
+      f_g3: "ការផ្ទៀងផ្ទាត់ប្រវត្តិរូបជាអាទិភាព",
+      f_d0: "គ្រប់យ៉ាងក្នុង Gold បូកនឹង៖",
+      f_d1: "ជំនួយការ AI ផ្ទាល់ខ្លួន (ប្រវត្តិរូប សារ ដំបូន្មាន)",
+      f_d2: "សមាជិកក្រុមការងាររបស់យើងជួយ និងរៀបចំការណាត់ជួបរបស់អ្នក",
+      locked_likes: "មាន {n} នាក់ចូលចិត្តអ្នក។ ដំឡើងទៅ Premium ដើម្បីមើល។",
+      locked_views: "មាន {n} នាក់បានមើលប្រវត្តិរូបអ្នក។ ដំឡើងទៅ Premium ដើម្បីមើល។",
+      see_plans: "មើលគម្រោងជាវ",
+      limit_likes: "បានដល់កំណត់ចូលចិត្តសម្រាប់ថ្ងៃនេះ។ ដំឡើងទៅ Premium ដើម្បីបានច្រើនទៀត។",
+      limit_super: "បានដល់កំណត់ចូលចិត្តខ្លាំងសម្រាប់ថ្ងៃនេះ។",
+      premium_only: "សម្រាប់អ្នកជាវតែប៉ុណ្ណោះ",
+      concierge_btn: "💎 ជំនួយការ Jade របស់ខ្ញុំ",
+      concierge_title: "ជំនួយការ Jade (Diamond)",
+      concierge_text: "ប្រាប់យើងពីអ្វីដែលអ្នកចង់បាន (ការណាត់ជួប ដំបូន្មាន ការរៀបចំ) និងពេលទំនេររបស់អ្នក។ ក្រុមការងារនឹងឆ្លើយតបក្នុងរយៈពេល 48 ម៉ោង។",
+      concierge_ph: "ឧ. រៀបចំការណាត់ជួបលើកដំបូងនៅបាងកក ក្នុងខែធ្នូ…",
+      concierge_send: "ផ្ញើសំណើ",
+      concierge_sent: "បានផ្ញើសំណើហើយ! ក្រុមការងារនឹងទាក់ទងអ្នកឆាប់ៗ។",
+      ai_soon: "ជំនួយការ AI នឹងមកដល់ឆាប់ៗនេះ។",
+      premium_tag: "★ Premium",
       notif_btn: "🔔 បើកការជូនដំណឹង",
       notif_ok: "បានបើកការជូនដំណឹងលើឧបករណ៍នេះ។",
       notif_denied: "ការជូនដំណឹងត្រូវបានបិទ។ សូមអនុញ្ញាតក្នុងការកំណត់ឧបករណ៍។",
@@ -2529,7 +3216,7 @@
     img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
   }
 
-  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "peer", "chat", "report", "verify", "safety"];
+  var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "peer", "premium", "concierge", "events", "chat", "report", "verify", "safety"];
   function showSection(name) {
     if (name !== "chat") stopChat();
     SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });
@@ -2587,6 +3274,7 @@
     el.textContent = "";
     var items = [];
     if (p.verified) items.push([t("verified_tag"), true]);
+    if (paidPlan(p)) items.push([paidPlan(p) === "diamond" ? "💎 Diamond" : paidPlan(p) === "gold" ? "✦ Gold" : t("premium_tag"), false, "premium"]);
     var act = activityTag(p); if (act) items.push([act, false, "online"]);
     items.push([p.city || "", false]);
     items.push([p.country ? countryLabel(p.country) : "", false]);
@@ -2606,6 +3294,7 @@
     tagsInto($("view-tags"), p);
     $("view-bio").textContent = p.bio || "";
     renderComplete(p);
+    applyGating();
     setGallery($("view-photo"), p);
     $("who").textContent = t("connected") + user.email;
     say($("hmsg"), "", "");
@@ -2868,12 +3557,14 @@
       .eq("suspended", false)
       .eq("hidden", false)
       .eq("under_review", false)
+      .order("boost", { ascending: false })
       .order("created_at", { ascending: false }).limit(1);
     if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
     var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
     if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
     if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
     if ($("f-country").value) q = q.eq("country", $("f-country").value);
+    if (myLevel() < 1) { $("f-intent").value = ""; $("f-lang").value = ""; }
     if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
     if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
     var r = await q;
@@ -2906,7 +3597,12 @@
       }
       if (fromLikes) { fromLikes = false; showSection("likes"); await loadLikes(); }
       else { var keepMsg = isSuper; await nextCandidate(); if (keepMsg) say(dmsg, t("super_sent"), "ok"); }
-    } catch (err) { say(dmsg, err.message || t("e_generic"), "err"); }
+    } catch (err) {
+      var em = (err && err.message) || "";
+      if (/LIMIT_LIKES/.test(em)) say(dmsg, t("limit_likes"), "err");
+      else if (/LIMIT_SUPER/.test(em)) say(dmsg, t("limit_super"), "err");
+      else say(dmsg, em || t("e_generic"), "err");
+    }
     $("like").disabled = $("pass").disabled = $("superlike").disabled = false;
   }
   $("superlike").onclick = function () { swipe(true, true); };
@@ -3004,6 +3700,7 @@
     if (ids.length) { var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false); people = r.data || []; }
     people.sort(function (x, y) { return (supers[y.id] ? 1 : 0) - (supers[x.id] ? 1 : 0); });
     if (!people.length) { $("likes-empty").textContent = t("likes_empty"); $("likes-empty").hidden = false; return; }
+    if (myLevel() < 1) { list.appendChild(lockedBox(t("locked_likes", { n: people.length }))); return; }
     people.forEach(function (p) {
       var row = document.createElement("div"); row.className = "mrow link"; row.setAttribute("role", "button"); row.tabIndex = 0;
       var url = photoUrl(p), pic;
@@ -3022,6 +3719,13 @@
   }
   async function loadViews() {
     var list = $("views-list"); list.textContent = ""; $("views-empty").hidden = true;
+    if (myLevel() < 1) {
+      var cnt = await db.rpc("count_my_views");
+      var n = (cnt && typeof cnt.data === "number") ? cnt.data : 0;
+      if (!n) { $("views-empty").textContent = t("views_empty"); $("views-empty").hidden = false; }
+      else list.appendChild(lockedBox(t("locked_views", { n: n })));
+      return;
+    }
     var v = await db.from("profile_views").select("viewer_id,viewed_at").eq("viewed_id", currentUser.id).order("viewed_at", { ascending: false }).limit(50);
     var rows = (v.data || []), when = {};
     rows.forEach(function (x) { when[x.viewer_id] = x.viewed_at; });
@@ -3087,6 +3791,187 @@
     checkBadges();
     if (!badgeTimer) badgeTimer = setInterval(function () { if (currentUser && !$("home").hidden) checkBadges(); }, 30000);
   }
+
+  // ---------- Abonnements (Premium / Gold / Diamond) ----------
+  // Liens de paiement Stripe : à remplir quand ils sont créés (Stripe > Payment Links).
+  var STRIPE = { premium: "", gold: "", diamond: "", portal: "" };
+  var PRICES = { premium: 15.99, gold: 45.99, diamond: 149.99 };
+  var PLAN_LEVEL = { premium: 1, gold: 2, diamond: 3 };
+  var PAYS = "homme";   // choix actuel : seuls les hommes paient ; les autres ont Premium offert
+  function paidPlan(p) {
+    return p && p.premium_until && new Date(p.premium_until) > new Date() ? (p.plan || "premium") : null;
+  }
+  function levelOf(p) {
+    if (!p) return 0;
+    var paid = paidPlan(p) ? PLAN_LEVEL[paidPlan(p)] || 1 : 0;
+    return Math.max(p.gender !== PAYS ? 1 : 0, paid);
+  }
+  function myLevel() { return levelOf(currentProfile); }
+  function lockedBox(text) {
+    var d = document.createElement("div"); d.className = "locked";
+    var p = document.createElement("div"); p.textContent = "🔒 " + text; d.appendChild(p);
+    var b = document.createElement("button"); b.type = "button"; b.className = "primary"; b.textContent = t("see_plans");
+    b.onclick = openPremium; d.appendChild(b);
+    return d;
+  }
+  function money(x) {
+    try { return new Intl.NumberFormat(lang, { style: "currency", currency: "EUR" }).format(x); } catch (e) { return x + " €"; }
+  }
+  function applyGating() {
+    var lv = myLevel();
+    ["f-intent", "f-lang"].forEach(function (id) { var el = $(id); if (el) { el.disabled = lv < 1; el.title = lv < 1 ? t("premium_only") : ""; } });
+    $("go-concierge").hidden = lv < 3;
+  }
+  function openPremium() {
+    var p = currentProfile, plan = paidPlan(p), st = $("premium-status");
+    Array.prototype.forEach.call(document.querySelectorAll("#premium .plan"), function (card) {
+      var k = card.getAttribute("data-plan");
+      card.querySelector(".pp").textContent = money(PRICES[k]);
+      card.classList.toggle("current", plan === k);
+      card.querySelector(".buy").onclick = function () { buyPlan(k); };
+    });
+    if (plan) st.textContent = t("plan_active", { plan: plan.charAt(0).toUpperCase() + plan.slice(1), d: new Date(p.premium_until).toLocaleDateString() });
+    else if (myLevel() >= 1) st.textContent = t("premium_free");
+    else st.textContent = "";
+    st.hidden = !st.textContent;
+    $("manage-sub").hidden = !(plan && STRIPE.portal);
+    say($("pmmsg"), "", "");
+    showSection("premium");
+  }
+  function buyPlan(k) {
+    var link = STRIPE[k];
+    if (!link) return say($("pmmsg"), t("pay_soon"), "err");
+    var u = link + (link.indexOf("?") === -1 ? "?" : "&") + "client_reference_id=" + encodeURIComponent(currentUser.id) +
+      "&prefilled_email=" + encodeURIComponent(currentUser.email || "");
+    window.location.href = u;
+  }
+  $("manage-sub").onclick = function () { if (STRIPE.portal) window.open(STRIPE.portal, "_blank", "noopener"); };
+  $("go-premium").onclick = openPremium;
+  $("premium-back").onclick = function () { renderView(currentUser, currentProfile); };
+
+  async function loadConcierge() {
+    var box = $("concierge-list"); box.textContent = "";
+    var r = await db.from("concierge_requests").select("*").eq("user_id", currentUser.id).order("created_at", { ascending: false }).limit(20);
+    (r.data || []).forEach(function (x) {
+      var d = document.createElement("div"); d.className = "brow";
+      var s = document.createElement("span"); s.textContent = new Date(x.created_at).toLocaleDateString() + " · " + x.message.slice(0, 80);
+      var st = document.createElement("small"); st.textContent = x.status === "traité" ? "✅" : "⏳";
+      d.appendChild(s); d.appendChild(st); box.appendChild(d);
+    });
+  }
+  $("go-concierge").onclick = function () { $("concierge-msg").value = ""; say($("cgmsg"), "", ""); showSection("concierge"); loadConcierge(); };
+  $("concierge-back").onclick = function () { renderView(currentUser, currentProfile); };
+  $("concierge-send").onclick = async function () {
+    var txt = $("concierge-msg").value.trim();
+    if (txt.length < 5) return say($("cgmsg"), t("e_generic"), "err");
+    $("concierge-send").disabled = true;
+    var r = await db.from("concierge_requests").insert({ user_id: currentUser.id, message: txt });
+    $("concierge-send").disabled = false;
+    if (r.error) return say($("cgmsg"), r.error.message, "err");
+    $("concierge-msg").value = ""; say($("cgmsg"), t("concierge_sent"), "ok"); loadConcierge();
+  };
+
+  // ---------- Activités ----------
+  var LEVEL_NAME = { 1: "Premium", 2: "Gold", 3: "Diamond" };
+  function evWhen(e) {
+    var d = new Date(e.starts_at);
+    try { return d.toLocaleDateString(lang, { weekday: "long", day: "numeric", month: "long" }) + " · " + d.toLocaleTimeString(lang, { hour: "2-digit", minute: "2-digit" }); }
+    catch (x) { return d.toLocaleString(); }
+  }
+  async function loadEvents() {
+    var box = $("events-list"); box.textContent = ""; $("events-empty").hidden = true; say($("evmsg"), "", "");
+    var r = await db.from("events").select("*").eq("cancelled", false).gte("starts_at", new Date().toISOString()).order("starts_at", { ascending: true }).limit(50);
+    if (r.error) return say($("evmsg"), r.error.message, "err");
+    var evs = r.data || [];
+    if (!evs.length) { $("events-empty").textContent = t("events_empty"); $("events-empty").hidden = false; return; }
+    var c = await db.rpc("event_counts"), counts = {};
+    ((c && c.data) || []).forEach(function (x) { counts[x.event_id] = x.n; });
+    var mine = await db.from("event_signups").select("event_id").eq("user_id", currentUser.id), joined = {};
+    ((mine && mine.data) || []).forEach(function (x) { joined[x.event_id] = true; });
+    var lv = myLevel();
+    evs.forEach(function (e) {
+      var card = document.createElement("div"); card.className = "evcard";
+      var h3 = document.createElement("h3"); h3.textContent = e.title; card.appendChild(h3);
+      var meta = document.createElement("div"); meta.className = "evmeta";
+      var where = [e.city, e.country ? countryLabel(e.country) : ""].filter(Boolean).join(", ");
+      meta.textContent = "📅 " + evWhen(e) + " · ⏱ " + t("ev_hours", { n: String(e.duration_hours).replace(/\.0$/, "") }) + (where ? " · 📍 " + where : "") +
+        " · " + (Number(e.price_eur) > 0 ? t("ev_price", { p: money(Number(e.price_eur)) }) : t("ev_free"));
+      card.appendChild(meta);
+      if (e.description) { var p = document.createElement("p"); p.className = "evdesc"; p.textContent = e.description; card.appendChild(p); }
+      var foot = document.createElement("div"); foot.className = "evfoot";
+      var left = Math.max(0, e.capacity - (counts[e.id] || 0));
+      var pl = document.createElement("span"); pl.className = "evplaces"; pl.textContent = left > 0 ? t("ev_places", { n: left }) : t("ev_full"); foot.appendChild(pl);
+      var b = document.createElement("button"); b.type = "button";
+      if (joined[e.id]) {
+        b.className = "secondary"; b.textContent = t("ev_leave");
+        b.onclick = async function () { b.disabled = true; var d = await db.from("event_signups").delete().eq("event_id", e.id).eq("user_id", currentUser.id); if (d.error) say($("evmsg"), d.error.message, "err"); loadEvents(); };
+        var ok = document.createElement("span"); ok.className = "tag verified"; ok.textContent = t("ev_joined"); foot.insertBefore(ok, b);
+      } else if (lv < e.min_level) {
+        b.className = "secondary"; b.textContent = "🔒 " + t("ev_locked", { plan: LEVEL_NAME[e.min_level] }); b.onclick = openPremium;
+      } else if (left <= 0) {
+        b.className = "secondary"; b.textContent = t("ev_full"); b.disabled = true;
+      } else {
+        b.className = "primary"; b.textContent = t("ev_join");
+        b.onclick = async function () {
+          b.disabled = true;
+          var ins = await db.from("event_signups").insert({ event_id: e.id, user_id: currentUser.id });
+          if (ins.error) {
+            var m = ins.error.message || "";
+            say($("evmsg"), /EVENT_FULL/.test(m) ? t("ev_err_full") : /EVENT_PAST/.test(m) ? t("ev_past") : m, "err");
+          }
+          loadEvents();
+        };
+      }
+      foot.appendChild(b); card.appendChild(foot); box.appendChild(card);
+    });
+  }
+  $("go-events").onclick = function () { showSection("events"); loadEvents(); };
+  $("events-back").onclick = function () { showSection("home"); };
+
+  async function loadAdminEvents() {
+    var box = $("admin-events"); box.textContent = "";
+    if (!$("ev-country").childElementCount) fillCountries($("ev-country"), "choose");
+    var r = await db.from("events").select("*").gte("starts_at", new Date(Date.now() - 7 * 86400000).toISOString()).order("starts_at", { ascending: true }).limit(50);
+    if (r.error) { box.textContent = r.error.message; return; }
+    var c = await db.rpc("event_counts"), counts = {};
+    ((c && c.data) || []).forEach(function (x) { counts[x.event_id] = x.n; });
+    (r.data || []).forEach(function (e) {
+      var lines = [e.title + (e.cancelled ? " (annulée)" : ""), evWhen(e) + " · " + [e.city, e.country].filter(Boolean).join(", "),
+        (counts[e.id] || 0) + " / " + e.capacity + " inscrits" + (e.min_level ? " · réservée " + LEVEL_NAME[e.min_level] : "")];
+      var out = document.createElement("div");
+      var btns = [
+        abtn("Voir les inscrits", async function () {
+          var p = await db.rpc("admin_event_participants", { eid: e.id }); if (p.error) throw p.error;
+          out.textContent = (p.data || []).map(function (x) { return x.first_name + (x.country ? " (" + countryLabel(x.country) + ")" : "") + (x.gender ? " · " + t("g_" + x.gender) : ""); }).join(" · ") || "Aucun inscrit.";
+        }),
+        abtn(e.cancelled ? "Rétablir" : "Annuler", async function () {
+          if (!e.cancelled && !confirm("Annuler cette activité ?")) return;
+          var u = await db.from("events").update({ cancelled: !e.cancelled }).eq("id", e.id); if (u.error) throw u.error; loadAdminEvents();
+        }),
+        abtn("Supprimer", async function () {
+          if (!confirm("Supprimer définitivement cette activité et ses inscriptions ?")) return;
+          var d = await db.from("events").delete().eq("id", e.id); if (d.error) throw d.error; loadAdminEvents();
+        })
+      ];
+      var row = arow(null, lines, btns); row.querySelector(".ainfo").appendChild(out); box.appendChild(row);
+    });
+  }
+  $("ev-create").onclick = async function () {
+    var title = $("ev-title").value.trim(), start = $("ev-start").value;
+    if (title.length < 3 || !start) return say($("admsg"), "Indique au moins un titre et une date.", "err");
+    var row = {
+      title: title, description: $("ev-desc").value.trim() || null, city: $("ev-city").value.trim() || null,
+      country: $("ev-country").value || null, starts_at: new Date(start).toISOString(),
+      duration_hours: parseFloat($("ev-dur").value) || 2, capacity: parseInt($("ev-cap").value, 10) || 10,
+      price_eur: parseFloat($("ev-price").value) || 0, min_level: parseInt($("ev-level").value, 10) || 0
+    };
+    $("ev-create").disabled = true;
+    var r = await db.from("events").insert(row);
+    $("ev-create").disabled = false;
+    if (r.error) return say($("admsg"), r.error.message, "err");
+    ["ev-title", "ev-desc", "ev-city", "ev-start"].forEach(function (id) { $(id).value = ""; });
+    say($("admsg"), "Activité publiée ✓", "ok"); loadAdminEvents();
+  };
 
   // ---------- Administration ----------
   var isAdmin = false;
@@ -3174,6 +4059,14 @@
       var r = await db.functions.invoke("notify", { body: { to: currentUser.id, kind: "message" } });
       return r.error ? { error: { message: "fonction absente ou en erreur (" + (r.error.message || r.error) + ")" } } : {};
     }));
+    res.push(await chk("Abonnements (colonnes)", function () { return db.from("profiles").select("premium_until,plan,boost").limit(1); }));
+    res.push(await chk("Abonnements (niveau)", function () { return db.rpc("plan_level", { uid: currentUser.id }); }));
+    res.push(await chk("Abonnements Stripe (table)", function () { return db.from("subscriptions").select("user_id").limit(1); }));
+    res.push(await chk("Demandes Diamond", function () { return db.from("concierge_requests").select("id").limit(1); }));
+    res.push(await chk("Compteur de visites", function () { return db.rpc("count_my_views"); }));
+    res.push(await chk("Activités", function () { return db.from("events").select("id").limit(1); }));
+    res.push(await chk("Inscriptions aux activités", function () { return db.from("event_signups").select("event_id").limit(1); }));
+    res.push(await chk("Compteur d'inscrits", function () { return db.rpc("event_counts"); }));
     res.push(await chk("Liste des bloqués", function () { return db.rpc("my_blocked"); }));
     res.push(await chk("Statistiques", function () { return db.rpc("admin_stats"); }));
     res.push(await chk("Qui a vu mon profil", function () { return db.from("profile_views").select("viewer_id").limit(1); }));
@@ -3187,6 +4080,22 @@
     });
   }
   $("admin-diag").onclick = runDiag;
+
+  async function loadAdminConcierge() {
+    var box = $("admin-concierge"); box.textContent = "";
+    var r = await db.from("concierge_requests").select("*").eq("status", "nouveau").order("created_at", { ascending: true }).limit(50);
+    if (r.error) { box.textContent = r.error.message; return; }
+    if (!(r.data || []).length) { var e = document.createElement("p"); e.className = "empty"; e.textContent = "Aucune demande."; box.appendChild(e); return; }
+    var ids = r.data.map(function (x) { return x.user_id; });
+    var pr = await db.rpc("admin_search", { q: "" }); var map = {};
+    (pr.data || []).forEach(function (p) { map[p.id] = p; });
+    r.data.forEach(function (x) {
+      var p = map[x.user_id];
+      box.appendChild(arow(p || null, [(p ? nameWithAge(p) : x.user_id), new Date(x.created_at).toLocaleString(), x.message], [
+        abtn("Marquer traité", async function () { var y = await db.rpc("admin_concierge_done", { rid: x.id }); if (y.error) throw y.error; loadAdminConcierge(); })
+      ]));
+    });
+  }
 
   async function loadStats() {
     var box = $("admin-stats"); box.textContent = "";
@@ -3208,7 +4117,7 @@
     if (r.error) return say($("admsg"), r.error.message, "err");
     if (!(r.data || []).length) { box.textContent = "Aucun membre trouvé."; return; }
     r.data.forEach(function (p) {
-      var flags = [p.verified ? "✓ vérifié" : "", p.suspended ? "⛔ suspendu" : "", p.under_review ? "🔎 en revue" : "", p.hidden ? "⏸ en pause" : ""].filter(Boolean).join(" · ");
+      var flags = [paidPlan(p) ? "★ " + paidPlan(p) + " jusqu'au " + new Date(p.premium_until).toLocaleDateString() : "", p.verified ? "✓ vérifié" : "", p.suspended ? "⛔ suspendu" : "", p.under_review ? "🔎 en revue" : "", p.hidden ? "⏸ en pause" : ""].filter(Boolean).join(" · ");
       var last = p.last_seen ? "Vu le " + new Date(p.last_seen).toLocaleDateString() : "";
       var btns = [
         abtn(p.verified ? "Retirer ✓" : "Vérifier ✓", async function () { var x = await db.rpc("admin_set_verified", { uid: p.id, ok: !p.verified }); if (x.error) throw x.error; adminSearch(); }),
@@ -3216,6 +4125,9 @@
           if (!p.suspended && !confirm("Suspendre " + p.first_name + " ?")) return;
           var x = await db.rpc("admin_set_suspended", { uid: p.id, flag: !p.suspended }); if (x.error) throw x.error; adminSearch(); })
       ];
+      ["premium", "gold", "diamond"].forEach(function (k) {
+        btns.push(abtn("+30 j " + k.charAt(0).toUpperCase() + k.slice(1), async function () { var x = await db.rpc("admin_add_premium", { uid: p.id, days: 30, p: k }); if (x.error) throw x.error; adminSearch(); }));
+      });
       if (p.under_review) btns.push(abtn("Lever la revue", async function () { var x = await db.rpc("admin_set_review", { uid: p.id, flag: false }); if (x.error) throw x.error; adminSearch(); }));
       box.appendChild(arow(p, [nameWithAge(p), [p.city, p.country ? countryLabel(p.country) : ""].filter(Boolean).join(", "), flags, last].filter(Boolean), btns));
     });
@@ -3223,7 +4135,7 @@
   $("admin-search").onclick = adminSearch;
   $("admin-q").onkeydown = function (e) { if (e.key === "Enter") adminSearch(); };
 
-  $("go-admin").onclick = function () { showSection("admin"); loadStats(); loadAdmin(); };
+  $("go-admin").onclick = function () { showSection("admin"); loadStats(); loadAdminEvents(); loadAdminConcierge(); loadAdmin(); };
   $("admin-back").onclick = function () { showSection("home"); };
 
   // ---------- Messagerie ----------
