@@ -1,7 +1,7 @@
 // Navigation : barre du bas (Accueil, Intérêts, Activités, Messages) et en-tête (Mise à niveau, mon profil)
 
 // Quel onglet du bas est allumé pour chaque écran
-var TAB_OF = { feed: "home", discover: "home", likes: "interests", views: "interests", events: "events", matches: "messages", chat: "messages" };
+var TAB_OF = { feed: "home", discover: "home", likes: "interests", events: "events", matches: "messages", chat: "messages" };
 // Écrans où la barre du bas est cachée (formulaires plein écran)
 var NO_TABBAR = ["auth", "profile", "chat"];
 var navStarted = false;
@@ -14,13 +14,12 @@ function updateNav(name) {
   $("tabbar").hidden = !logged || NO_TABBAR.indexOf(name) !== -1;
   $("top-actions").hidden = !logged || name === "auth";
   var active = TAB_OF[name] || "";
+  if (name === "discover" && typeof fromLikes !== "undefined" && fromLikes) active = "interests";
   Array.prototype.forEach.call(document.querySelectorAll("#tabbar button"), function (b) {
     var on = b.dataset.tab === active;
     b.classList.toggle("on", on);
     if (on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
   });
-  Array.prototype.forEach.call(document.querySelectorAll(".seg-likes"), function (b) { b.setAttribute("aria-selected", name === "likes"); });
-  Array.prototype.forEach.call(document.querySelectorAll(".seg-views"), function (b) { b.setAttribute("aria-selected", name === "views"); });
   placeLang(logged);
   paintAvatar();
 }
@@ -74,12 +73,6 @@ function goTab(tab) {
 Array.prototype.forEach.call(document.querySelectorAll("#tabbar button"), function (b) {
   b.onclick = function () { goTab(b.dataset.tab); };
 });
-Array.prototype.forEach.call(document.querySelectorAll(".seg-likes"), function (b) {
-  b.onclick = function () { showSection("likes"); loadLikes(); };
-});
-Array.prototype.forEach.call(document.querySelectorAll(".seg-views"), function (b) {
-  b.onclick = function () { showSection("views"); loadViews(); };
-});
 $("top-upgrade").onclick = openPremium;
 $("top-me").onclick = function () { goTab.last = ""; renderView(currentUser, currentProfile); window.scrollTo(0, 0); };
 
@@ -100,7 +93,7 @@ paintBadge = function (id, key, n) {
 setInterval(function () { if (currentUser && document.body.classList.contains("nav-on") && $("home").hidden) checkBadges(); }, 30000);
 
 // Les boutons « Retour » de l'ancien menu ramènent maintenant à l'Accueil
-["events-back", "matches-back", "likes-back", "views-back"].forEach(function (id) {
+["events-back", "matches-back", "likes-back"].forEach(function (id) {
   $(id).onclick = function () { goTab("home"); };
 });
 $("chat-back").onclick = function () { goTab("messages"); };
@@ -109,6 +102,5 @@ $("chat-back").onclick = function () { goTab("messages"); };
 $("lang").addEventListener("change", function () {
   if (!$("feed").hidden) loadFeed(true);
   else if (!$("likes").hidden) loadLikes();
-  else if (!$("views").hidden) loadViews();
   else if (!$("events").hidden) loadEvents();
 });

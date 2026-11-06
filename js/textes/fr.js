@@ -217,5 +217,20 @@ I18N.fr = {
   unread_empty: "Aucun message non lu.",
   hide_conv: "Masquer la conversation",
   photo_label: "Photo",
-  say_hi: "Dis bonjour 👋"
+  say_hi: "Dis bonjour 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "Favoris",
+  tab_favme: "M'ont ajouté en favori",
+  sort_recent_int: "Trier par : les plus récents",
+  fav_btn: "♥ Favori",
+  fav_on: "♥ Dans tes favoris",
+  fav_added: "Ajouté à tes favoris ♥",
+  fav_removed: "Retiré de tes favoris",
+  btn_message: "Message",
+  btn_show_msg: "Voir le message",
+  favs_empty: "Tu n'as encore aucun favori. Touche ♥ sur un profil pour l'ajouter.",
+  favme_empty: "Personne ne t'a encore ajouté en favori.",
+  locked_favme: "{n} personne(s) t'ont ajouté en favori. Passe à Premium pour les voir.",
+  inbox_empty2: "Aucune conversation pour l'instant. Écris à quelqu'un depuis son profil !",
+  tab_views: "A consulté mon profil"
 };

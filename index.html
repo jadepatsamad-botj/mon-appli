@@ -213,8 +213,9 @@
       <p class="bio" id="cand-bio"></p>
       <div class="row">
         <button class="secondary" id="pass" type="button" data-i18n="pass"></button>
-        <button class="primary" id="like" type="button" data-i18n="like"></button>
+        <button class="primary" id="like" type="button" data-i18n="fav_btn"></button>
       </div>
+      <button class="primary msgbtn" id="cand-msg" type="button" data-i18n="btn_message"></button>
       <button class="secondary superbtn" id="superlike" type="button" data-i18n="super_like"></button>
       <div style="text-align:center;margin-top:8px">
         <button class="linkbtn" id="cand-report" type="button" data-i18n="report_profile"></button>
@@ -227,10 +228,6 @@
   <!-- Messages : boîte de réception -->
   <section id="matches" hidden>
     <button class="back" id="matches-back" type="button" data-i18n="back"></button>
-    <div class="itabs" role="tablist">
-      <button role="tab" type="button" id="itab-inbox" aria-selected="true" data-i18n="inbox_tab"></button>
-      <button role="tab" type="button" id="itab-new" aria-selected="false"><span data-i18n="newmatch_tab"></span> <b class="icount" id="new-count" hidden></b></button>
-    </div>
     <div class="ihead">
       <h2 data-i18n="inbox_title"></h2>
       <button class="cicon isearch-btn" id="inbox-search-btn" type="button" data-i18n-aria="search_conv">
@@ -299,28 +296,23 @@
     <div id="concierge-list"></div>
   </section>
 
-  <!-- Qui a vu mon profil -->
-  <section class="card" id="views" hidden>
-    <button class="back" id="views-back" type="button" data-i18n="back"></button>
-    <div class="tabs seg" role="tablist">
-      <button role="tab" type="button" class="seg-likes" data-i18n="tab_likes"></button>
-      <button role="tab" type="button" class="seg-views" data-i18n="tab_views"></button>
-    </div>
-    <h2 data-i18n="views_title"></h2>
-    <div id="views-list"></div>
-    <p class="empty" id="views-empty" hidden></p>
-  </section>
-
-  <!-- Qui m'a liké -->
-  <section class="card" id="likes" hidden>
+  <!-- Intérêts : a consulté mon profil, favoris, m'a ajouté en favori -->
+  <section id="likes" hidden>
     <button class="back" id="likes-back" type="button" data-i18n="back"></button>
-    <div class="tabs seg" role="tablist">
-      <button role="tab" type="button" class="seg-likes" data-i18n="tab_likes"></button>
-      <button role="tab" type="button" class="seg-views" data-i18n="tab_views"></button>
+    <div class="itabs three" role="tablist">
+      <button role="tab" type="button" id="ftab-views" aria-selected="true" data-i18n="tab_views"></button>
+      <button role="tab" type="button" id="ftab-favs" aria-selected="false" data-i18n="tab_favs"></button>
+      <button role="tab" type="button" id="ftab-favme" aria-selected="false"><span data-i18n="tab_favme"></span> <b class="icount" id="favme-count" hidden></b></button>
     </div>
-    <h2 data-i18n="likes_title"></h2>
-    <div id="likes-list"></div>
+    <div class="itools">
+      <select id="fav-sort" class="isort-wide" data-i18n-aria="sort_label">
+        <option value="new" data-i18n="sort_recent_int"></option>
+        <option value="online" data-i18n="sort_online"></option>
+      </select>
+    </div>
+    <div id="likes-list" class="ilist"></div>
     <p class="empty" id="likes-empty" hidden></p>
+    <div class="msg" id="lmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Conditions et confidentialité -->
@@ -390,7 +382,7 @@
     <div id="blocked-list"></div>
   </section>
 
-  <!-- Fiche d'un match -->
+  <!-- Fiche d'un profil (depuis la discussion) -->
   <section class="card" id="peer" hidden>
     <button class="back" id="peer-back" type="button" data-i18n="back"></button>
     <img id="peer-photo" class="view-photo" alt="" hidden>

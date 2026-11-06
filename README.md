@@ -48,6 +48,7 @@ Site en ligne : https://jadedating.app
 
 | Fichier | À quoi il sert |
 |---|---|
+| `sql/messages-sans-match.sql` | Permet d'écrire à n'importe quel membre (plus de match). À lancer une fois. |
 | `sql/photos-discussion.sql` | Active l'envoi de photos dans la discussion (stockage privé + règles). À lancer une fois dans Supabase > SQL Editor. |
 
 ## Bon à savoir

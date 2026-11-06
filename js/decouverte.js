@@ -34,6 +34,7 @@ function renderCandidate() {
     db.from("profile_views").upsert({ viewer_id: currentUser.id, viewed_id: candidate.id, viewed_at: new Date().toISOString() }).then(function () {}, function () {});
   }
   $("cand").hidden = false;
+  paintCandFav();
 }
 
 async function nextCandidate() {
@@ -60,18 +61,15 @@ async function swipe(liked, isSuper) {
   try {
     var row = { from_id: currentUser.id, to_id: candidate.id, liked: liked };
     if (isSuper) row.super = true;
+    await db.from("swipes").delete().eq("from_id", currentUser.id).eq("to_id", candidate.id);   // remplace un ancien choix
     var ins = await db.from("swipes").insert(row);
     if (ins.error) throw ins.error;
     lastPassed = liked ? null : candidate;
     $("undo").hidden = !lastPassed || fromLikes;
     if (isSuper) say(dmsg, t("super_sent"), "ok");
-    if (liked) {
-      var back = await db.from("swipes").select("liked")
-        .eq("from_id", candidate.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
-      if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; notify(candidate.id, "match"); }
-      else if (isSuper) notify(candidate.id, "super");
-    }
-    if (fromFeed) { backToFeed(candidate.id, liked, banner.hidden ? "" : banner.textContent); }
+    if (liked) { myFavs[candidate.id] = true; if (isSuper) notify(candidate.id, "super"); }
+    else delete myFavs[candidate.id];
+    if (fromFeed) { backToFeed(candidate.id, liked, liked ? t("fav_added") : ""); }
     else if (fromLikes) { backToInterests(); }
     else { var keepMsg = isSuper; await nextCandidate(); if (keepMsg) say(dmsg, t("super_sent"), "ok"); }
   } catch (err) {
@@ -110,5 +108,21 @@ $("discover-back").onclick = function () {
   else if (fromLikes) backToInterests();
   else showSection("home");
 };
-$("like").onclick = function () { swipe(true); };
+// Profil ouvert depuis l'Accueil ou Intérêts : ♥ ajoute / retire des favoris sans changer d'écran
+function paintCandFav() {
+  if (!candidate) return;
+  var single = fromFeed || fromLikes;
+  $("like").textContent = single && myFavs[candidate.id] ? t("fav_on") : t("fav_btn");
+  $("pass").hidden = !!fromLikes;
+}
+$("like").onclick = async function () {
+  if (!candidate) return;
+  if (fromFeed || fromLikes) {
+    if (await toggleFav(candidate, $("like"))) { say($("dmsg"), myFavs[candidate.id] ? t("fav_added") : t("fav_removed"), "ok"); paintCandFav(); }
+    else say($("dmsg"), $("lmsg").textContent, "err");
+    return;
+  }
+  swipe(true);
+};
+$("cand-msg").onclick = function () { if (candidate) openChat(candidate); };
 $("pass").onclick = function () { swipe(false); };

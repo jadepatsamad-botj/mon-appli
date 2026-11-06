@@ -11,10 +11,12 @@ async function checkBadges() {
     var seenAt = readMap(), lastIn = {};
     (mm.data || []).forEach(function (m) { if (!lastIn[m.from_id]) lastIn[m.from_id] = m.created_at; });
     Object.keys(lastIn).forEach(function (pid) { if (!seenAt[pid] || lastIn[pid] > seenAt[pid]) unread++; });
-    var a = await db.from("swipes").select("to_id").eq("from_id", me);
-    var b = await db.from("swipes").select("from_id").eq("to_id", me).eq("liked", true);
-    var done = (a.data || []).map(function (x) { return x.to_id; });
-    likes = (b.data || []).filter(function (x) { return done.indexOf(x.from_id) === -1; }).length;
+    // Nouveaux « m'a ajouté en favori » depuis la dernière visite de cet onglet
+    var since = null; try { since = localStorage.getItem("favseen:" + me); } catch (e) {}
+    var q = db.from("swipes").select("from_id").eq("to_id", me).eq("liked", true);
+    if (since) q = q.gt("created_at", since);
+    var b = await q;
+    likes = (b.data || []).length;
   } catch (e) {}
   paintBadge("go-matches", "matches", unread);
   paintBadge("go-likes", "likes_btn", likes);

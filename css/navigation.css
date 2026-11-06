@@ -11,7 +11,7 @@ body.nav-on .topbar .sub { display: none; }
 body.nav-on .hint { display: none; }
 /* L'ancien menu de la page profil : ces boutons sont maintenant dans la barre du bas */
 body.nav-on #go-matches, body.nav-on #go-events, body.nav-on #go-likes, body.nav-on #go-views,
-body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back, body.nav-on #views-back { display: none; }
+body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back { display: none; }
 #settings #lang { margin: 6px 0 4px; }
 
 .top-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }

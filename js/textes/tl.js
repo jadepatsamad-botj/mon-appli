@@ -277,5 +277,20 @@ I18N.tl = {
   unread_empty: "Walang hindi pa nababasang mensahe.",
   hide_conv: "Itago ang usapan",
   photo_label: "Larawan",
-  say_hi: "Mag-hi ka 👋"
+  say_hi: "Mag-hi ka 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "Mga paborito",
+  tab_favme: "Ginawa akong paborito",
+  sort_recent_int: "Ayusin: pinakabago",
+  fav_btn: "♥ Paborito",
+  fav_on: "♥ Nasa paborito mo",
+  fav_added: "Idinagdag sa paborito ♥",
+  fav_removed: "Inalis sa paborito",
+  btn_message: "Mensahe",
+  btn_show_msg: "Tingnan ang mensahe",
+  favs_empty: "Wala ka pang paborito. I-tap ang ♥ sa profile para idagdag.",
+  favme_empty: "Wala pang gumawa sa iyong paborito.",
+  locked_favme: "{n} tao ang gumawa sa iyong paborito. Mag-Premium para makita.",
+  inbox_empty2: "Wala pang usapan. Mag-mensahe mula sa profile ng isang tao!",
+  tab_views: "Tumingin sa akin"
 };

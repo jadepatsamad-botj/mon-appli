@@ -277,5 +277,20 @@ I18N.ms = {
   unread_empty: "Tiada mesej belum dibaca.",
   hide_conv: "Sembunyikan perbualan",
   photo_label: "Foto",
-  say_hi: "Tegur dia 👋"
+  say_hi: "Tegur dia 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "Kegemaran",
+  tab_favme: "Menggemari saya",
+  sort_recent_int: "Susun: terkini",
+  fav_btn: "♥ Kegemaran",
+  fav_on: "♥ Dalam kegemaran",
+  fav_added: "Ditambah ke kegemaran ♥",
+  fav_removed: "Dibuang dari kegemaran",
+  btn_message: "Mesej",
+  btn_show_msg: "Lihat mesej",
+  favs_empty: "Belum ada kegemaran. Ketik ♥ pada profil untuk menambah.",
+  favme_empty: "Belum ada yang menggemarimu.",
+  locked_favme: "{n} orang menggemarimu. Naik taraf ke Premium untuk melihat.",
+  inbox_empty2: "Belum ada perbualan. Hantar mesej dari profil seseorang!",
+  tab_views: "Lihat profil saya"
 };

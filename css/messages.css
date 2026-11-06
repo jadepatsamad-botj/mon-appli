@@ -153,3 +153,25 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .ihide:hover { background: var(--line); }
 #matches .empty { padding: 28px 20px; }
 @media (max-width: 360px) { .ipic { width: 72px; height: 72px; } .ihead h2 { font-size: 1.6rem; } }
+
+/* Intérêts : même panneau crème que la boîte de réception */
+#likes { background: var(--card); border-radius: 18px; padding: 0 0 8px; overflow: hidden; box-shadow: 0 2px 14px rgba(30,33,18,.18); }
+.itabs.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.itabs.three button { display: block; font-size: .86rem; padding: 14px 6px 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; }
+.itabs.three button > span { overflow: hidden; text-overflow: ellipsis; }
+#likes .itools { padding: 12px 12px; }
+.isort-wide { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--fg); background: var(--card); font: inherit; font-size: 1rem; color: var(--fg); }
+.irow.frow { align-items: flex-start; padding: 16px 12px; gap: 12px; }
+.ipic.tall { width: 84px; height: 112px; }
+.itime.right { flex: none; margin-left: auto; padding-left: 8px; }
+.ibtns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ibtn { display: inline-flex; align-items: center; gap: 5px; padding: 7px 12px; border-radius: 999px; font: inherit; font-size: .86rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.ibtn.dark { background: #2b2e1a; color: #fbf8ea; border: 1.5px solid #2b2e1a; }
+.ibtn.outline, .ibtn.fav { background: none; color: var(--fg); border: 1.5px solid var(--fg); }
+.ibtn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.ibtn.fav.on svg { fill: #b5452f; stroke: #b5452f; }
+.ibtn:disabled { opacity: .6; }
+#likes .msg { margin: 0 16px; }
+#likes .msg:empty { display: none; }
+@media (prefers-color-scheme: dark) { .ibtn.dark { background: #f3efd9; color: #262a19; border-color: #f3efd9; } }
+.primary.msgbtn { background: #2b2e1a; color: #fbf8ea; margin-top: 10px; }

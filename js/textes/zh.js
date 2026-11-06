@@ -217,5 +217,20 @@ I18N.zh = {
   unread_empty: "没有未读消息。",
   hide_conv: "隐藏对话",
   photo_label: "照片",
-  say_hi: "打个招呼 👋"
+  say_hi: "打个招呼 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "收藏",
+  tab_favme: "收藏了我",
+  sort_recent_int: "排序：最新",
+  fav_btn: "♥ 收藏",
+  fav_on: "♥ 已收藏",
+  fav_added: "已加入收藏 ♥",
+  fav_removed: "已取消收藏",
+  btn_message: "发消息",
+  btn_show_msg: "查看消息",
+  favs_empty: "还没有收藏。点资料上的 ♥ 即可收藏。",
+  favme_empty: "还没有人收藏你。",
+  locked_favme: "有 {n} 人收藏了你。升级 Premium 即可查看。",
+  inbox_empty2: "还没有对话。去对方的资料页发消息吧！",
+  tab_views: "看过我的人"
 };

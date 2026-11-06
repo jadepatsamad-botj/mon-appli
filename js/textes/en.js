@@ -217,5 +217,20 @@ I18N.en = {
   unread_empty: "No unread messages.",
   hide_conv: "Hide conversation",
   photo_label: "Photo",
-  say_hi: "Say hi 👋"
+  say_hi: "Say hi 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "Favorites",
+  tab_favme: "Favorited me",
+  sort_recent_int: "Sort by: most recent",
+  fav_btn: "♥ Favorite",
+  fav_on: "♥ In your favorites",
+  fav_added: "Added to your favorites ♥",
+  fav_removed: "Removed from your favorites",
+  btn_message: "Message",
+  btn_show_msg: "View message",
+  favs_empty: "No favorites yet. Tap ♥ on a profile to add it.",
+  favme_empty: "Nobody has favorited you yet.",
+  locked_favme: "{n} person(s) favorited you. Upgrade to Premium to see them.",
+  inbox_empty2: "No conversations yet. Message someone from their profile!",
+  tab_views: "Viewed me"
 };

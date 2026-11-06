@@ -96,7 +96,7 @@ function setGallery(img, p) {
   img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
 }
 
-var SECTIONS = ["auth", "profile", "feed", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "peer", "premium", "concierge", "events", "chat", "report", "verify", "safety"];
+var SECTIONS = ["auth", "profile", "feed", "home", "discover", "matches", "likes", "legal", "admin", "settings", "peer", "premium", "concierge", "events", "chat", "report", "verify", "safety"];
 function showSection(name) {
   if (name !== "chat") stopChat();
   SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });

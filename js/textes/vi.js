@@ -217,5 +217,20 @@ I18N.vi = {
   unread_empty: "Không có tin nhắn chưa đọc.",
   hide_conv: "Ẩn cuộc trò chuyện",
   photo_label: "Ảnh",
-  say_hi: "Chào nhau đi 👋"
+  say_hi: "Chào nhau đi 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "Yêu thích",
+  tab_favme: "Đã thêm tôi vào yêu thích",
+  sort_recent_int: "Sắp xếp: mới nhất",
+  fav_btn: "♥ Yêu thích",
+  fav_on: "♥ Trong mục yêu thích",
+  fav_added: "Đã thêm vào yêu thích ♥",
+  fav_removed: "Đã xóa khỏi yêu thích",
+  btn_message: "Nhắn tin",
+  btn_show_msg: "Xem tin nhắn",
+  favs_empty: "Chưa có mục yêu thích. Chạm ♥ trên hồ sơ để thêm.",
+  favme_empty: "Chưa ai thêm bạn vào yêu thích.",
+  locked_favme: "{n} người đã thêm bạn vào yêu thích. Nâng cấp Premium để xem.",
+  inbox_empty2: "Chưa có cuộc trò chuyện. Hãy nhắn tin cho ai đó từ hồ sơ của họ!",
+  tab_views: "Đã xem hồ sơ"
 };

@@ -277,5 +277,20 @@ I18N.ja = {
   unread_empty: "未読メッセージはありません。",
   hide_conv: "会話を非表示",
   photo_label: "写真",
-  say_hi: "あいさつしよう 👋"
+  say_hi: "あいさつしよう 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "お気に入り",
+  tab_favme: "私をお気に入り登録",
+  sort_recent_int: "並べ替え：新しい順",
+  fav_btn: "♥ お気に入り",
+  fav_on: "♥ お気に入り済み",
+  fav_added: "お気に入りに追加しました ♥",
+  fav_removed: "お気に入りから外しました",
+  btn_message: "メッセージ",
+  btn_show_msg: "メッセージを見る",
+  favs_empty: "まだお気に入りはありません。プロフィールの ♥ で追加できます。",
+  favme_empty: "まだ誰もあなたをお気に入りにしていません。",
+  locked_favme: "{n}人があなたをお気に入りに登録。Premiumで確認できます。",
+  inbox_empty2: "まだ会話がありません。相手のプロフィールからメッセージを送ろう！",
+  tab_views: "足あと"
 };

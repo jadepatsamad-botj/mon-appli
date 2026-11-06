@@ -277,5 +277,20 @@ I18N.ko = {
   unread_empty: "읽지 않은 메시지가 없습니다.",
   hide_conv: "대화 숨기기",
   photo_label: "사진",
-  say_hi: "인사해 보세요 👋"
+  say_hi: "인사해 보세요 👋",
+  // Intérêts et favoris (sans système de match)
+  tab_favs: "즐겨찾기",
+  tab_favme: "나를 즐겨찾기함",
+  sort_recent_int: "정렬: 최신순",
+  fav_btn: "♥ 즐겨찾기",
+  fav_on: "♥ 즐겨찾기됨",
+  fav_added: "즐겨찾기에 추가됨 ♥",
+  fav_removed: "즐겨찾기에서 삭제됨",
+  btn_message: "메시지",
+  btn_show_msg: "메시지 보기",
+  favs_empty: "아직 즐겨찾기가 없습니다. 프로필의 ♥를 눌러 추가하세요.",
+  favme_empty: "아직 아무도 나를 즐겨찾기하지 않았습니다.",
+  locked_favme: "{n}명이 나를 즐겨찾기했습니다. Premium으로 확인하세요.",
+  inbox_empty2: "아직 대화가 없습니다. 프로필에서 메시지를 보내 보세요!",
+  tab_views: "내 프로필 방문"
 };

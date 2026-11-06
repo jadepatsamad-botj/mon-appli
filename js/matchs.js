@@ -1,4 +1,4 @@
-// Liste des matchs (aperçu et messages non lus)
+// Boîte de réception des messages (aperçu et messages non lus)
 
 // ---------- Matchs (avec aperçu et messages non lus) ----------
 function readMap() { try { return JSON.parse(localStorage.getItem("lastread:" + currentUser.id) || "{}"); } catch (e) { return {}; } }
@@ -7,7 +7,7 @@ function markRead(peerId) {
 }
 
 // ---------- Boîte de réception ----------
-var inboxTab = "inbox";      // "inbox" = conversations, "new" = nouveaux matchs sans message
+// Toutes les personnes avec qui j'ai échangé au moins un message (plus besoin de match)
 var inboxData = null;        // dernières données chargées (pour filtrer sans recharger)
 
 // Conversations masquées avec la croix : elles reviennent si un nouveau message arrive
@@ -18,27 +18,22 @@ function hideConv(peerId) {
 
 async function loadMatches() {
   var list = $("matches-list"); $("matches-empty").hidden = true;
-  if (!list.children.length) list.textContent = "";
   var me = currentUser.id;
-  var a = await db.from("swipes").select("to_id").eq("from_id", me).eq("liked", true);
-  var b = await db.from("swipes").select("from_id").eq("to_id", me).eq("liked", true);
-  if (a.error || b.error) { list.textContent = ""; $("matches-empty").textContent = t("matches_err"); $("matches-empty").hidden = false; return; }
-  var mine = (a.data || []).map(function (x) { return x.to_id; });
-  var ids = (b.data || []).map(function (x) { return x.from_id; }).filter(function (id) { return mine.indexOf(id) !== -1; });
-  var people = [];
-  if (ids.length) {
-    var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false);   // les personnes bloquées n'apparaissent plus
-    people = r.data || [];
-  }
+  var mm = await db.from("messages").select("from_id,to_id,body,created_at,image_path")
+    .or("from_id.eq." + me + ",to_id.eq." + me).order("created_at", { ascending: false }).limit(500);
+  if (mm.error) { list.textContent = ""; $("matches-empty").textContent = t("matches_err"); $("matches-empty").hidden = false; return; }
   var last = {}, count = {};
-  if (people.length) {
-    var mm = await db.from("messages").select("from_id,to_id,body,created_at,image_path")
-      .or("from_id.eq." + me + ",to_id.eq." + me).order("created_at", { ascending: false }).limit(500);
-    (mm.data || []).forEach(function (m) {
-      var peer = m.from_id === me ? m.to_id : m.from_id;
-      if (!last[peer]) last[peer] = m;
-      count[peer] = (count[peer] || 0) + 1;
-    });
+  (mm.data || []).forEach(function (m) {
+    var peer = m.from_id === me ? m.to_id : m.from_id;
+    if (!last[peer]) last[peer] = m;
+    count[peer] = (count[peer] || 0) + 1;
+  });
+  var blocked = {};
+  try { var bl = await db.rpc("my_blocked"); ((bl && bl.data) || []).forEach(function (x) { blocked[x.id] = true; }); } catch (e) {}
+  var ids = Object.keys(last).filter(function (id) { return !blocked[id]; }), people = [];
+  if (ids.length) {
+    var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false);
+    people = r.data || [];
   }
   inboxData = { people: people, last: last, count: count };
   renderInbox();
@@ -54,20 +49,13 @@ function renderInbox() {
   if (!inboxData) return;
   var list = $("matches-list"), empty = $("matches-empty"), d = inboxData, hidden = hiddenMap();
   list.textContent = ""; empty.hidden = true;
-  var convs = d.people.filter(function (p) {
+  var rows = d.people.filter(function (p) {
     var lm = d.last[p.id];
     return lm && !(hidden[p.id] && lm.created_at <= hidden[p.id]);
   });
-  var fresh = d.people.filter(function (p) { return !d.last[p.id]; });
-  $("new-count").textContent = fresh.length; $("new-count").hidden = !fresh.length;
-  $("itab-inbox").setAttribute("aria-selected", String(inboxTab === "inbox"));
-  $("itab-new").setAttribute("aria-selected", String(inboxTab === "new"));
-  $("inbox-tools").hidden = inboxTab !== "inbox";
-
-  var rows = inboxTab === "inbox" ? convs : fresh;
   var q = plain($("inbox-q").value.trim());
   if (q) rows = rows.filter(function (p) { return plain(p.first_name + " " + (p.city || "")).indexOf(q) !== -1; });
-  if (inboxTab === "inbox" && $("only-unread").checked) rows = rows.filter(isUnread);
+  if ($("only-unread").checked) rows = rows.filter(isUnread);
   var sort = $("inbox-sort").value;
   rows.sort(function (x, y) {
     if (sort === "unread" && isUnread(x) !== isUnread(y)) return isUnread(x) ? -1 : 1;
@@ -77,7 +65,7 @@ function renderInbox() {
   });
 
   if (!rows.length) {
-    empty.textContent = !d.people.length ? t("matches_empty") : inboxTab === "new" ? t("newmatch_empty") : $("only-unread").checked ? t("unread_empty") : t("inbox_empty");
+    empty.textContent = $("only-unread").checked && d.people.length ? t("unread_empty") : t("inbox_empty2");
     empty.hidden = false; return;
   }
   rows.forEach(function (p) { list.appendChild(inboxRow(p)); });
@@ -111,7 +99,6 @@ function inboxRow(p) {
   if (place) { var l3 = document.createElement("div"); l3.className = "iplace"; l3.textContent = place; info.appendChild(l3); }
   var l4 = document.createElement("div"); l4.className = "ilast";
   if (lm) l4.textContent = (lm.from_id === currentUser.id ? t("you") : "") + (lm.image_path ? "📷 " + t("photo_label") : lm.body);
-  else l4.textContent = t("say_hi");
   info.appendChild(l4);
   row.appendChild(info);
 
@@ -126,8 +113,6 @@ function inboxRow(p) {
   return row;
 }
 
-$("itab-inbox").onclick = function () { inboxTab = "inbox"; renderInbox(); };
-$("itab-new").onclick = function () { inboxTab = "new"; renderInbox(); };
 $("only-unread").onchange = renderInbox;
 $("inbox-sort").onchange = function () { try { localStorage.setItem("inboxsort", $("inbox-sort").value); } catch (e) {} renderInbox(); };
 try { var _sort = localStorage.getItem("inboxsort"); if (_sort) $("inbox-sort").value = _sort; } catch (e) {}

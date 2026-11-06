@@ -50,8 +50,9 @@ function feedCard(p) {
   var btns = document.createElement("div"); btns.className = "fbtns";
   var see = document.createElement("button"); see.type = "button"; see.className = "fbtn"; see.setAttribute("aria-label", t("view_profile"));
   see.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>';
-  see.onclick = function (e) { e.stopPropagation(); open(); };
-  var like = document.createElement("button"); like.type = "button"; like.className = "fbtn like"; like.setAttribute("aria-label", t("like"));
+  see.setAttribute("aria-label", t("btn_message"));
+  see.onclick = function (e) { e.stopPropagation(); openChat(p); };
+  var like = document.createElement("button"); like.type = "button"; like.className = "fbtn like" + (myFavs[p.id] ? " on" : ""); like.setAttribute("aria-label", t("fav_btn"));
   like.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
   like.onclick = function (e) { e.stopPropagation(); feedLike(p, like); };
   btns.appendChild(see); btns.appendChild(like);
@@ -70,9 +71,10 @@ async function loadFeed(reset) {
   if (reset) {
     feedPage = 0; list.textContent = ""; $("feed-empty").hidden = true; $("feed-more").hidden = true;
     say(fmsg, t("searching"), "");
-    var s = await db.from("swipes").select("to_id").eq("from_id", currentUser.id);
+    var s = await db.from("swipes").select("to_id,liked").eq("from_id", currentUser.id);
     if (s.error) { feedLoading = false; return say(fmsg, s.error.message, "err"); }
-    feedSeen = (s.data || []).map(function (x) { return x.to_id; });
+    myFavs = {}; (s.data || []).forEach(function (x) { if (x.liked) myFavs[x.to_id] = true; });
+    feedSeen = (s.data || []).filter(function (x) { return !x.liked; }).map(function (x) { return x.to_id; });
     feedSeen.push(currentUser.id);
   }
   var from = feedPage * FEED_SIZE;
@@ -88,22 +90,9 @@ async function loadFeed(reset) {
 }
 
 async function feedLike(p, btn) {
-  if (btn.classList.contains("on")) return;
-  btn.disabled = true;
-  var fmsg = $("fmsg");
-  var ins = await db.from("swipes").insert({ from_id: currentUser.id, to_id: p.id, liked: true });
-  btn.disabled = false;
-  if (ins.error) {
-    var em = ins.error.message || "";
-    if (/LIMIT_LIKES/.test(em)) return say(fmsg, t("limit_likes"), "err");
-    if (/duplicate|23505/.test(em + (ins.error.code || ""))) { btn.classList.add("on"); return; }
-    return say(fmsg, em || t("e_generic"), "err");
-  }
-  btn.classList.add("on");
-  feedSeen.push(p.id);
-  var back = await db.from("swipes").select("liked").eq("from_id", p.id).eq("to_id", currentUser.id).eq("liked", true).maybeSingle();
-  if (back.data) { say(fmsg, t("match_with", { name: p.first_name }), "ok"); notify(p.id, "match"); }
-  else say(fmsg, "", "");
+  var ok = await toggleFav(p, btn);
+  if (ok) { btn.classList.toggle("on", !!myFavs[p.id]); say($("fmsg"), myFavs[p.id] ? t("fav_added") : t("fav_removed"), "ok"); }
+  else say($("fmsg"), $("lmsg").textContent, "err");
 }
 
 // Ouvre le profil en grand (écran de découverte avec Like / Pass)
@@ -120,9 +109,9 @@ function backToFeed(id, decided, matchText) {
   fromFeed = false;
   showSection("feed");
   if (id && decided !== undefined) {
-    feedSeen.push(id);
     var card = $("feed-list").querySelector('[data-id="' + id + '"]');
-    if (card) card.remove();
+    if (decided) { if (card) card.querySelector(".fbtn.like").classList.add("on"); }
+    else { feedSeen.push(id); if (card) card.remove(); }
     $("feed-empty").hidden = $("feed-list").children.length > 0;
   }
   say($("fmsg"), matchText || "", matchText ? "ok" : "");
