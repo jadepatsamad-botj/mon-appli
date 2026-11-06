@@ -107,7 +107,7 @@ function interestRow(p, when) {
   return row;
 }
 
-function isOnlineP(p) { return !!(p.last_seen && (Date.now() - new Date(p.last_seen).getTime()) < 15 * 60000); }
+function isOnlineP(p) { return isOnlineNow(p); }
 
 function favSeenKey() { return "favseen:" + currentUser.id; }
 

@@ -76,3 +76,10 @@ body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back { d
 .nbadge { position: absolute; top: 0; left: calc(50% + 6px); min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px;
   background: #b5452f; color: #fff; font-size: .7rem; font-weight: 700; line-height: 19px; text-align: center; }
 body.nav-on { grid-template-columns: minmax(0, 1fr); }
+
+/* Pastille verte « en ligne » */
+.cdot { display: inline-block; flex: none; width: 11px; height: 11px; border-radius: 50%; background: #3ccf6e; box-shadow: 0 0 0 2px rgba(60,207,110,.25); vertical-align: middle; }
+.fname .cdot { width: 13px; height: 13px; box-shadow: 0 0 0 2px rgba(255,255,255,.85); margin-right: 2px; }
+#cand-name .cdot, #peer-name .cdot { width: 13px; height: 13px; margin: 0 8px 4px 0; }
+.fonline { font-weight: 600; }
+.fonline.today { color: #f3efd9; font-weight: 400; opacity: .9; }

@@ -144,10 +144,17 @@ function fillLangFilter() {
   Object.keys(LANG_NAMES).forEach(function (code) { var x = document.createElement("option"); x.value = code; x.textContent = LANG_NAMES[code]; s.appendChild(x); });
   s.value = keep || "";
 }
+// En ligne = actif dans l'appli il y a moins de 10 minutes
+function isOnlineNow(p) { return !!(p && p.last_seen && (Date.now() - new Date(p.last_seen).getTime()) < 10 * 60000); }
+function onlineDot(p) {
+  var d = document.createElement("i"); d.className = "cdot"; d.title = t("online"); d.setAttribute("aria-label", t("online"));
+  return d;
+}
+
 function activityTag(p) {
   if (!p.last_seen || (currentUser && p.id === currentUser.id)) return "";
   var m = (Date.now() - new Date(p.last_seen).getTime()) / 60000;
-  return m < 15 ? t("online") : m < 1440 ? t("active_today") : "";
+  return m < 10 ? t("online") : m < 1440 ? t("active_today") : "";
 }
 
 function tagsInto(el, p) {

@@ -26,8 +26,10 @@ var seenTimer = null;
 function touchSeen() {
   if (!currentUser) return;
   db.from("profiles").update({ last_seen: new Date().toISOString() }).eq("id", currentUser.id).then(function () {}, function () {});
-  if (!seenTimer) seenTimer = setInterval(function () { if (currentUser && currentProfile) touchSeen(); }, 300000);
+  if (!seenTimer) seenTimer = setInterval(function () { if (currentUser && currentProfile && !document.hidden) touchSeen(); }, 120000);
 }
+// Quand on revient dans l'appli (iPhone, onglet), on redevient « en ligne » tout de suite
+document.addEventListener("visibilitychange", function () { if (!document.hidden && currentUser && currentProfile) touchSeen(); });
 
 function show(user) {
   if (!user) { stopRealtime(); currentUser = null; currentProfile = null; showSection("auth"); return; }

@@ -188,7 +188,7 @@ function timeAgo(iso) {
 function fillChatHead(p) {
   $("chat-name").textContent = p.first_name;
   $("chat-verified").hidden = !p.verified;
-  $("chat-dot").hidden = !(p.last_seen && (Date.now() - new Date(p.last_seen).getTime()) < 15 * 60000);
+  $("chat-dot").hidden = !isOnlineNow(p);
   $("chat-sub").textContent = [p.birthdate ? ageFrom(p.birthdate) : "", p.city || (p.country ? countryLabel(p.country) : "")].filter(Boolean).join(" · ");
   var url = photoUrl(p);
   $("chat-avatar").hidden = !url; if (url) $("chat-avatar").src = url;
@@ -225,6 +225,7 @@ Array.prototype.forEach.call(document.querySelectorAll("#ice .chip"), function (
 var peerReturn = "chat";
 function openPeer(p) {
   $("peer-name").textContent = nameWithAge(p);
+  if (isOnlineNow(p)) $("peer-name").insertBefore(onlineDot(p), $("peer-name").firstChild);
   tagsInto($("peer-tags"), p);
   $("peer-bio").textContent = p.bio || "";
   setGallery($("peer-photo"), p);

@@ -27,6 +27,7 @@ function discoverQuery(seen) {
 
 function renderCandidate() {
   $("cand-name").textContent = nameWithAge(candidate);
+  if (isOnlineNow(candidate)) $("cand-name").insertBefore(onlineDot(candidate), $("cand-name").firstChild);
   tagsInto($("cand-tags"), candidate);
   $("cand-bio").textContent = candidate.bio || "";
   setGallery($("cand-photo"), candidate);

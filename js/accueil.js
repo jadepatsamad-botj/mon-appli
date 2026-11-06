@@ -34,7 +34,9 @@ function feedCard(p) {
   if (isNewMember(p)) { var nw = document.createElement("span"); nw.className = "fnew"; nw.textContent = t("new_member"); card.appendChild(nw); }
 
   var info = document.createElement("div"); info.className = "finfo";
-  var name = document.createElement("div"); name.className = "fname"; name.textContent = p.first_name;
+  var name = document.createElement("div"); name.className = "fname";
+  if (isOnlineNow(p)) name.appendChild(onlineDot(p));
+  name.appendChild(document.createTextNode(p.first_name));
   if (p.verified) { var v = document.createElement("span"); v.className = "fcheck"; v.textContent = "✓"; v.title = t("verified_tag"); name.appendChild(v); }
   var meta = document.createElement("div"); meta.className = "fmeta";
   var bits = [];
@@ -44,7 +46,7 @@ function feedCard(p) {
   meta.textContent = bits.join(" · ");
   info.appendChild(name); info.appendChild(meta);
   var act = activityTag(p);
-  if (act) { var on = document.createElement("div"); on.className = "fonline"; on.textContent = "● " + act; info.appendChild(on); }
+  if (act) { var on = document.createElement("div"); on.className = "fonline" + (isOnlineNow(p) ? "" : " today"); on.textContent = act; info.appendChild(on); }
   card.appendChild(info);
 
   var btns = document.createElement("div"); btns.className = "fbtns";

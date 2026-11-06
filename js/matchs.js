@@ -55,7 +55,7 @@ function isUnread(p) {
   var lm = inboxData.last[p.id], seenAt = readMap();
   return !!(lm && lm.from_id !== currentUser.id && (!seenAt[p.id] || lm.created_at > seenAt[p.id]));
 }
-function isOnline(p) { return !!(p.last_seen && (Date.now() - new Date(p.last_seen).getTime()) < 15 * 60000); }
+function isOnline(p) { return isOnlineNow(p); }
 
 function renderInbox() {
   if (!inboxData) return;
