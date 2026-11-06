@@ -237,5 +237,7 @@ I18N.fr = {
   write_fav: "Écrire à un favori",
   inbox_empty_favs: "Aucune conversation pour l'instant. Touche un favori ci-dessus pour lui écrire !",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "L'email n'a pas pu être envoyé. Réessaie plus tard ou contacte le support."
+  reset_err: "L'email n'a pas pu être envoyé. Réessaie plus tard ou contacte le support.",
+  // Accueil : rangée des nouveaux membres
+  new_members: "Nouveaux membres"
 };

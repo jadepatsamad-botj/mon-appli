@@ -237,5 +237,7 @@ I18N.id = {
   write_fav: "Kirim pesan ke favorit",
   inbox_empty_favs: "Belum ada percakapan. Ketuk favorit di atas untuk mengirim pesan!",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "Email tidak dapat dikirim. Coba lagi nanti atau hubungi dukungan."
+  reset_err: "Email tidak dapat dikirim. Coba lagi nanti atau hubungi dukungan.",
+  // Accueil : rangée des nouveaux membres
+  new_members: "Anggota baru"
 };

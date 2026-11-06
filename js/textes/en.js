@@ -237,5 +237,7 @@ I18N.en = {
   write_fav: "Message a favorite",
   inbox_empty_favs: "No conversations yet. Tap a favorite above to write to them!",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "The email couldn't be sent. Try again later or contact support."
+  reset_err: "The email couldn't be sent. Try again later or contact support.",
+  // Accueil : rangée des nouveaux membres
+  new_members: "New members"
 };

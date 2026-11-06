@@ -237,5 +237,7 @@ I18N.th = {
   write_fav: "ส่งข้อความหารายการโปรด",
   inbox_empty_favs: "ยังไม่มีบทสนทนา แตะรายการโปรดด้านบนเพื่อส่งข้อความ!",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "ส่งอีเมลไม่ได้ ลองอีกครั้งภายหลังหรือติดต่อฝ่ายช่วยเหลือ"
+  reset_err: "ส่งอีเมลไม่ได้ ลองอีกครั้งภายหลังหรือติดต่อฝ่ายช่วยเหลือ",
+  // Accueil : rangée des nouveaux membres
+  new_members: "สมาชิกใหม่"
 };

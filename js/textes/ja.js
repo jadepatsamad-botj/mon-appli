@@ -297,5 +297,7 @@ I18N.ja = {
   write_fav: "お気に入りにメッセージ",
   inbox_empty_favs: "まだ会話がありません。上のお気に入りをタップしてメッセージを送ろう！",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "メールを送信できませんでした。後でもう一度お試しいただくか、サポートにご連絡ください。"
+  reset_err: "メールを送信できませんでした。後でもう一度お試しいただくか、サポートにご連絡ください。",
+  // Accueil : rangée des nouveaux membres
+  new_members: "新メンバー"
 };

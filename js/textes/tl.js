@@ -297,5 +297,7 @@ I18N.tl = {
   write_fav: "Mag-mensahe sa paborito",
   inbox_empty_favs: "Wala pang usapan. I-tap ang paborito sa itaas para mag-mensahe!",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "Hindi naipadala ang email. Subukan ulit mamaya o makipag-ugnayan sa suporta."
+  reset_err: "Hindi naipadala ang email. Subukan ulit mamaya o makipag-ugnayan sa suporta.",
+  // Accueil : rangée des nouveaux membres
+  new_members: "Mga bagong miyembro"
 };

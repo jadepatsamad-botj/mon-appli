@@ -83,7 +83,7 @@ async function loadFeed(reset) {
   var r = await withSearch(discoverQuery(feedSeen)).range(from, from + FEED_SIZE - 1);
   feedLoading = false;
   if (r.error) return say(fmsg, r.error.message, "err");
-  if (reset) say(fmsg, "", "");
+  if (reset) { say(fmsg, ""); loadNewStrip(); }
   var rows = r.data || [];
   rows.forEach(function (p) { list.appendChild(feedCard(p)); });
   feedPage++;
@@ -95,6 +95,31 @@ async function feedLike(p, btn) {
   var ok = await toggleFav(p, btn);
   if (ok) { btn.classList.toggle("on", !!myFavs[p.id]); say($("fmsg"), myFavs[p.id] ? t("fav_added") : t("fav_removed"), "ok"); }
   else say($("fmsg"), $("lmsg").textContent, "err");
+}
+
+// Rangée « Nouveaux membres » : inscrits des 14 derniers jours, compatibles et selon les filtres
+async function loadNewStrip() {
+  var strip = $("new-strip"), row = $("new-row");
+  if ($("feed-q").value.trim()) { strip.hidden = true; return; }
+  var since = new Date(Date.now() - 14 * 86400000).toISOString();
+  var r = await discoverQuery(feedSeen).gte("created_at", since).limit(20);
+  var list = ((r && r.data) || []).sort(function (a, b) { return (a.created_at || "") < (b.created_at || "") ? 1 : -1; });
+  row.textContent = "";
+  strip.hidden = !list.length;
+  list.forEach(function (p) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "ifav";
+    b.setAttribute("aria-label", nameWithAge(p));
+    var av = document.createElement("span"); av.className = "ifav-pic";
+    var url = photoUrl(p);
+    if (url) { var im = document.createElement("img"); im.src = url; im.alt = ""; im.loading = "lazy"; av.appendChild(im); }
+    else av.textContent = p.first_name.charAt(0).toUpperCase();
+    if (isOnlineNow(p)) av.appendChild(onlineDot(p));
+    var nm = document.createElement("span"); nm.className = "ifav-name";
+    nm.textContent = p.first_name + (p.birthdate ? ", " + ageFrom(p.birthdate) : "");
+    b.appendChild(av); b.appendChild(nm);
+    b.onclick = function () { openFromFeed(p); };
+    row.appendChild(b);
+  });
 }
 
 // Ouvre le profil en grand (écran de découverte avec Like / Pass)

@@ -237,5 +237,7 @@ I18N.zh = {
   write_fav: "给收藏的人发消息",
   inbox_empty_favs: "还没有对话。点上方收藏的人开始聊天吧！",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "邮件发送失败，请稍后再试或联系客服。"
+  reset_err: "邮件发送失败，请稍后再试或联系客服。",
+  // Accueil : rangée des nouveaux membres
+  new_members: "新会员"
 };

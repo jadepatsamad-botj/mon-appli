@@ -83,3 +83,10 @@ body.nav-on { grid-template-columns: minmax(0, 1fr); }
 #cand-name .cdot, #peer-name .cdot { width: 13px; height: 13px; margin: 0 8px 4px 0; }
 .fonline { font-weight: 600; }
 .fonline.today { color: #f3efd9; font-weight: 400; opacity: .9; }
+
+/* Accueil : rangée « Nouveaux membres » (sur le fond olive) */
+#new-strip { border: 0; padding: 2px 0 12px; margin: 0 -16px; }
+#new-strip .ifavs-t { color: var(--on-olive); font-family: var(--font-title); font-weight: 500; font-size: 1.15rem; padding: 0 16px 8px; }
+#new-strip .ifav { width: 76px; color: var(--on-olive); }
+#new-strip .ifav-pic { width: 70px; height: 70px; border-color: var(--cream); background: rgba(251,248,234,.15); color: var(--cream); }
+#new-strip .ifav-pic .cdot { border-color: var(--olive); }

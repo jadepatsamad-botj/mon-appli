@@ -297,5 +297,7 @@ I18N.ko = {
   write_fav: "즐겨찾기에게 메시지",
   inbox_empty_favs: "아직 대화가 없습니다. 위의 즐겨찾기를 눌러 메시지를 보내세요!",
   // Mot de passe oublié : erreur d'envoi
-  reset_err: "이메일을 보낼 수 없습니다. 나중에 다시 시도하거나 고객 지원에 문의하세요."
+  reset_err: "이메일을 보낼 수 없습니다. 나중에 다시 시도하거나 고객 지원에 문의하세요.",
+  // Accueil : rangée des nouveaux membres
+  new_members: "신규 회원"
 };
