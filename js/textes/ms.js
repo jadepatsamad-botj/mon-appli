@@ -292,5 +292,8 @@ I18N.ms = {
   favme_empty: "Belum ada yang menggemarimu.",
   locked_favme: "{n} orang menggemarimu. Naik taraf ke Premium untuk melihat.",
   inbox_empty2: "Belum ada perbualan. Hantar mesej dari profil seseorang!",
-  tab_views: "Lihat profil saya"
+  tab_views: "Lihat profil saya",
+  // Messages : écrire à un favori
+  write_fav: "Hantar mesej kepada kegemaran",
+  inbox_empty_favs: "Belum ada perbualan. Ketik kegemaran di atas untuk menghantar mesej!"
 };

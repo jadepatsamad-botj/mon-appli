@@ -35,7 +35,16 @@ async function loadMatches() {
     var r = await db.from("profiles").select("*").in("id", ids).eq("suspended", false);
     people = r.data || [];
   }
-  inboxData = { people: people, last: last, count: count };
+  // Mes favoris à qui je n'ai pas encore écrit : on peut leur écrire directement d'ici
+  var favs = [];
+  var f = await db.from("swipes").select("to_id,created_at").eq("from_id", me).eq("liked", true).order("created_at", { ascending: false }).limit(100);
+  var favIds = ((f && f.data) || []).map(function (x) { return x.to_id; }).filter(function (id) { return !last[id] && !blocked[id]; });
+  if (favIds.length) {
+    var fr = await db.from("profiles").select("*").in("id", favIds).eq("suspended", false);
+    var byId = {}; ((fr && fr.data) || []).forEach(function (p) { byId[p.id] = p; });
+    favs = favIds.map(function (id) { return byId[id]; }).filter(Boolean);
+  }
+  inboxData = { people: people, last: last, count: count, favs: favs };
   renderInbox();
 }
 
@@ -49,6 +58,7 @@ function renderInbox() {
   if (!inboxData) return;
   var list = $("matches-list"), empty = $("matches-empty"), d = inboxData, hidden = hiddenMap();
   list.textContent = ""; empty.hidden = true;
+  renderFavStrip();
   var rows = d.people.filter(function (p) {
     var lm = d.last[p.id];
     return lm && !(hidden[p.id] && lm.created_at <= hidden[p.id]);
@@ -65,10 +75,31 @@ function renderInbox() {
   });
 
   if (!rows.length) {
-    empty.textContent = $("only-unread").checked && d.people.length ? t("unread_empty") : t("inbox_empty2");
+    empty.textContent = $("only-unread").checked && d.people.length ? t("unread_empty") : (d.favs && d.favs.length) ? t("inbox_empty_favs") : t("inbox_empty2");
     empty.hidden = false; return;
   }
   rows.forEach(function (p) { list.appendChild(inboxRow(p)); });
+}
+
+// Rangée « Écrire à un favori » (et favoris trouvés avec la loupe)
+function renderFavStrip() {
+  var d = inboxData, row = $("inbox-favs-row"), q = plain($("inbox-q").value.trim());
+  var favs = (d.favs || []).filter(function (p) { return !q || plain(p.first_name + " " + (p.city || "")).indexOf(q) !== -1; });
+  row.textContent = "";
+  $("inbox-favs").hidden = !favs.length;
+  favs.forEach(function (p) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "ifav";
+    b.setAttribute("aria-label", t("btn_message") + " · " + p.first_name);
+    var av = document.createElement("span"); av.className = "ifav-pic";
+    var url = photoUrl(p);
+    if (url) { var im = document.createElement("img"); im.src = url; im.alt = ""; im.loading = "lazy"; av.appendChild(im); }
+    else av.textContent = p.first_name.charAt(0).toUpperCase();
+    if (isOnline(p)) { var dot = document.createElement("i"); dot.className = "cdot"; av.appendChild(dot); }
+    var nm = document.createElement("span"); nm.className = "ifav-name"; nm.textContent = p.first_name;
+    b.appendChild(av); b.appendChild(nm);
+    b.onclick = function () { openChat(p); };
+    row.appendChild(b);
+  });
 }
 
 function inboxRow(p) {

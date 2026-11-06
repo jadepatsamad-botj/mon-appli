@@ -232,5 +232,8 @@ I18N.vi = {
   favme_empty: "Chưa ai thêm bạn vào yêu thích.",
   locked_favme: "{n} người đã thêm bạn vào yêu thích. Nâng cấp Premium để xem.",
   inbox_empty2: "Chưa có cuộc trò chuyện. Hãy nhắn tin cho ai đó từ hồ sơ của họ!",
-  tab_views: "Đã xem hồ sơ"
+  tab_views: "Đã xem hồ sơ",
+  // Messages : écrire à un favori
+  write_fav: "Nhắn cho người yêu thích",
+  inbox_empty_favs: "Chưa có cuộc trò chuyện. Chạm vào một người yêu thích ở trên để nhắn tin!"
 };

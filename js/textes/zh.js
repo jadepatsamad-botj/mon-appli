@@ -232,5 +232,8 @@ I18N.zh = {
   favme_empty: "还没有人收藏你。",
   locked_favme: "有 {n} 人收藏了你。升级 Premium 即可查看。",
   inbox_empty2: "还没有对话。去对方的资料页发消息吧！",
-  tab_views: "看过我的人"
+  tab_views: "看过我的人",
+  // Messages : écrire à un favori
+  write_fav: "给收藏的人发消息",
+  inbox_empty_favs: "还没有对话。点上方收藏的人开始聊天吧！"
 };

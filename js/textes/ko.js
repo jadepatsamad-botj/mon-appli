@@ -292,5 +292,8 @@ I18N.ko = {
   favme_empty: "아직 아무도 나를 즐겨찾기하지 않았습니다.",
   locked_favme: "{n}명이 나를 즐겨찾기했습니다. Premium으로 확인하세요.",
   inbox_empty2: "아직 대화가 없습니다. 프로필에서 메시지를 보내 보세요!",
-  tab_views: "내 프로필 방문"
+  tab_views: "내 프로필 방문",
+  // Messages : écrire à un favori
+  write_fav: "즐겨찾기에게 메시지",
+  inbox_empty_favs: "아직 대화가 없습니다. 위의 즐겨찾기를 눌러 메시지를 보내세요!"
 };

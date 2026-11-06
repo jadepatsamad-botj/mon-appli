@@ -232,5 +232,8 @@ I18N.fr = {
   favme_empty: "Personne ne t'a encore ajouté en favori.",
   locked_favme: "{n} personne(s) t'ont ajouté en favori. Passe à Premium pour les voir.",
   inbox_empty2: "Aucune conversation pour l'instant. Écris à quelqu'un depuis son profil !",
-  tab_views: "A consulté mon profil"
+  tab_views: "A consulté mon profil",
+  // Messages : écrire à un favori
+  write_fav: "Écrire à un favori",
+  inbox_empty_favs: "Aucune conversation pour l'instant. Touche un favori ci-dessus pour lui écrire !"
 };

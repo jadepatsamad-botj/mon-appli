@@ -232,5 +232,8 @@ I18N.id = {
   favme_empty: "Belum ada yang memfavoritkanmu.",
   locked_favme: "{n} orang memfavoritkanmu. Tingkatkan ke Premium untuk melihat.",
   inbox_empty2: "Belum ada percakapan. Kirim pesan dari profil seseorang!",
-  tab_views: "Melihat profil saya"
+  tab_views: "Melihat profil saya",
+  // Messages : écrire à un favori
+  write_fav: "Kirim pesan ke favorit",
+  inbox_empty_favs: "Belum ada percakapan. Ketuk favorit di atas untuk mengirim pesan!"
 };

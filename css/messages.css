@@ -175,3 +175,16 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 #likes .msg:empty { display: none; }
 @media (prefers-color-scheme: dark) { .ibtn.dark { background: #f3efd9; color: #262a19; border-color: #f3efd9; } }
 .primary.msgbtn { background: #2b2e1a; color: #fbf8ea; margin-top: 10px; }
+
+/* Messages : « Écrire à un favori » */
+.ifavs { padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
+.ifavs[hidden] { display: none; }
+.ifavs-t { padding: 0 16px 8px; font-size: .9rem; font-weight: 700; color: var(--muted); }
+.ifavs-row { display: flex; gap: 14px; overflow-x: auto; padding: 2px 16px 4px; scrollbar-width: none; }
+.ifavs-row::-webkit-scrollbar { display: none; }
+.ifav { flex: none; width: 70px; display: flex; flex-direction: column; align-items: center; gap: 5px; border: 0; background: none; padding: 0; cursor: pointer; font: inherit; color: var(--fg); }
+.ifav-pic { position: relative; width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--olive); padding: 2px; background: var(--card);
+  display: grid; place-items: center; font-weight: 700; font-size: 1.4rem; color: var(--olive); }
+.ifav-pic img { position: absolute; inset: 2px; width: calc(100% - 4px); height: calc(100% - 4px); border-radius: 50%; object-fit: cover; display: block; }
+.ifav-pic .cdot { position: absolute; right: 2px; bottom: 2px; width: 13px; height: 13px; border: 2px solid var(--card); }
+.ifav-name { max-width: 100%; font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

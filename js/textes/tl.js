@@ -292,5 +292,8 @@ I18N.tl = {
   favme_empty: "Wala pang gumawa sa iyong paborito.",
   locked_favme: "{n} tao ang gumawa sa iyong paborito. Mag-Premium para makita.",
   inbox_empty2: "Wala pang usapan. Mag-mensahe mula sa profile ng isang tao!",
-  tab_views: "Tumingin sa akin"
+  tab_views: "Tumingin sa akin",
+  // Messages : écrire à un favori
+  write_fav: "Mag-mensahe sa paborito",
+  inbox_empty_favs: "Wala pang usapan. I-tap ang paborito sa itaas para mag-mensahe!"
 };

@@ -232,5 +232,8 @@ I18N.en = {
   favme_empty: "Nobody has favorited you yet.",
   locked_favme: "{n} person(s) favorited you. Upgrade to Premium to see them.",
   inbox_empty2: "No conversations yet. Message someone from their profile!",
-  tab_views: "Viewed me"
+  tab_views: "Viewed me",
+  // Messages : écrire à un favori
+  write_fav: "Message a favorite",
+  inbox_empty_favs: "No conversations yet. Tap a favorite above to write to them!"
 };

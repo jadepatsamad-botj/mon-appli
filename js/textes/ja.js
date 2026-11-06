@@ -292,5 +292,8 @@ I18N.ja = {
   favme_empty: "まだ誰もあなたをお気に入りにしていません。",
   locked_favme: "{n}人があなたをお気に入りに登録。Premiumで確認できます。",
   inbox_empty2: "まだ会話がありません。相手のプロフィールからメッセージを送ろう！",
-  tab_views: "足あと"
+  tab_views: "足あと",
+  // Messages : écrire à un favori
+  write_fav: "お気に入りにメッセージ",
+  inbox_empty_favs: "まだ会話がありません。上のお気に入りをタップしてメッセージを送ろう！"
 };
