@@ -261,5 +261,21 @@ I18N.tl = {
   photo_off: "Hindi pa naka-on ang pagpapadala ng larawan.",
   photo_err: "Hindi maipadala ang larawang ito. Subukan ang iba.",
   photo_big: "Masyadong malaki ang larawan (max 5 MB).",
-  close: "Isara"
+  close: "Isara",
+  // Boîte de réception
+  inbox_tab: "Inbox",
+  newmatch_tab: "Bagong match",
+  inbox_title: "Mensahe",
+  search_conv: "Maghanap ng usapan",
+  only_unread: "Hindi pa nababasa lang",
+  sort_label: "Ayusin",
+  sort_new: "Pinakabago",
+  sort_unread: "Hindi pa nababasa muna",
+  sort_online: "Online muna",
+  inbox_empty: "Wala pang usapan. Buksan ang «Bagong match» para magpadala ng unang mensahe!",
+  newmatch_empty: "Wala pang bagong match. Ituloy ang pag-like!",
+  unread_empty: "Walang hindi pa nababasang mensahe.",
+  hide_conv: "Itago ang usapan",
+  photo_label: "Larawan",
+  say_hi: "Mag-hi ka 👋"
 };

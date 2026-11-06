@@ -201,5 +201,21 @@ I18N.vi = {
   photo_off: "Chưa bật tính năng gửi ảnh.",
   photo_err: "Không gửi được ảnh này. Hãy thử ảnh khác.",
   photo_big: "Ảnh quá lớn (tối đa 5 MB).",
-  close: "Đóng"
+  close: "Đóng",
+  // Boîte de réception
+  inbox_tab: "Hộp thư",
+  newmatch_tab: "Ghép đôi mới",
+  inbox_title: "Tin nhắn",
+  search_conv: "Tìm cuộc trò chuyện",
+  only_unread: "Chỉ hiện tin chưa đọc",
+  sort_label: "Sắp xếp",
+  sort_new: "Mới nhất",
+  sort_unread: "Chưa đọc trước",
+  sort_online: "Đang online trước",
+  inbox_empty: "Chưa có cuộc trò chuyện. Vào «Ghép đôi mới» để gửi tin nhắn đầu tiên!",
+  newmatch_empty: "Chưa có ghép đôi mới. Tiếp tục thích hồ sơ nhé!",
+  unread_empty: "Không có tin nhắn chưa đọc.",
+  hide_conv: "Ẩn cuộc trò chuyện",
+  photo_label: "Ảnh",
+  say_hi: "Chào nhau đi 👋"
 };

@@ -261,5 +261,21 @@ I18N.ja = {
   photo_off: "写真の送信はまだ利用できません。",
   photo_err: "この写真は送信できません。別の画像をお試しください。",
   photo_big: "写真が大きすぎます（最大5MB）。",
-  close: "閉じる"
+  close: "閉じる",
+  // Boîte de réception
+  inbox_tab: "受信箱",
+  newmatch_tab: "新しいマッチ",
+  inbox_title: "メッセージ",
+  search_conv: "会話を検索",
+  only_unread: "未読のみ表示",
+  sort_label: "並べ替え",
+  sort_new: "新しい順",
+  sort_unread: "未読を先に",
+  sort_online: "オンラインを先に",
+  inbox_empty: "まだ会話がありません。「新しいマッチ」から最初のメッセージを送ろう！",
+  newmatch_empty: "まだ新しいマッチはありません。いいねを続けよう！",
+  unread_empty: "未読メッセージはありません。",
+  hide_conv: "会話を非表示",
+  photo_label: "写真",
+  say_hi: "あいさつしよう 👋"
 };

@@ -201,5 +201,21 @@ I18N.fr = {
   photo_off: "L'envoi de photos n'est pas encore activé. (Administrateur : lancer sql/photos-discussion.sql dans Supabase.)",
   photo_err: "Impossible d'envoyer cette photo. Essaie avec une autre image.",
   photo_big: "Photo trop lourde (5 Mo maximum).",
-  close: "Fermer"
+  close: "Fermer",
+  // Boîte de réception
+  inbox_tab: "Boîte de réception",
+  newmatch_tab: "Nouveaux matchs",
+  inbox_title: "Messages",
+  search_conv: "Rechercher une conversation",
+  only_unread: "Afficher uniquement les non lus",
+  sort_label: "Trier",
+  sort_new: "Plus récents",
+  sort_unread: "Non lus d'abord",
+  sort_online: "En ligne d'abord",
+  inbox_empty: "Aucune conversation pour l'instant. Va dans « Nouveaux matchs » pour écrire le premier message !",
+  newmatch_empty: "Pas de nouveau match pour l'instant. Continue à liker des profils !",
+  unread_empty: "Aucun message non lu.",
+  hide_conv: "Masquer la conversation",
+  photo_label: "Photo",
+  say_hi: "Dis bonjour 👋"
 };

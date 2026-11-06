@@ -75,3 +75,4 @@ body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back, bo
 .tabbar span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .nbadge { position: absolute; top: 0; left: calc(50% + 6px); min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px;
   background: #b5452f; color: #fff; font-size: .7rem; font-weight: 700; line-height: 19px; text-align: center; }
+body.nav-on { grid-template-columns: minmax(0, 1fr); }

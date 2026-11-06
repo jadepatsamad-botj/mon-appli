@@ -201,5 +201,21 @@ I18N.zh = {
   photo_off: "暂未开放发送照片。",
   photo_err: "无法发送这张照片，请换一张试试。",
   photo_big: "照片太大（最大 5 MB）。",
-  close: "关闭"
+  close: "关闭",
+  // Boîte de réception
+  inbox_tab: "收件箱",
+  newmatch_tab: "新配对",
+  inbox_title: "消息",
+  search_conv: "搜索对话",
+  only_unread: "只显示未读",
+  sort_label: "排序",
+  sort_new: "最新",
+  sort_unread: "未读优先",
+  sort_online: "在线优先",
+  inbox_empty: "还没有对话。去「新配对」发出第一条消息吧！",
+  newmatch_empty: "还没有新配对，继续喜欢更多资料吧！",
+  unread_empty: "没有未读消息。",
+  hide_conv: "隐藏对话",
+  photo_label: "照片",
+  say_hi: "打个招呼 👋"
 };

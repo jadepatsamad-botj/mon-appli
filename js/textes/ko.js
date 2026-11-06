@@ -261,5 +261,21 @@ I18N.ko = {
   photo_off: "아직 사진 보내기를 사용할 수 없습니다.",
   photo_err: "이 사진을 보낼 수 없습니다. 다른 이미지를 시도해 보세요.",
   photo_big: "사진이 너무 큽니다 (최대 5MB).",
-  close: "닫기"
+  close: "닫기",
+  // Boîte de réception
+  inbox_tab: "받은 편지함",
+  newmatch_tab: "새 매치",
+  inbox_title: "메시지",
+  search_conv: "대화 검색",
+  only_unread: "읽지 않은 것만 보기",
+  sort_label: "정렬",
+  sort_new: "최신순",
+  sort_unread: "안 읽은 것 먼저",
+  sort_online: "온라인 먼저",
+  inbox_empty: "아직 대화가 없습니다. «새 매치»에서 첫 메시지를 보내 보세요!",
+  newmatch_empty: "아직 새 매치가 없습니다. 계속 좋아요를 눌러 보세요!",
+  unread_empty: "읽지 않은 메시지가 없습니다.",
+  hide_conv: "대화 숨기기",
+  photo_label: "사진",
+  say_hi: "인사해 보세요 👋"
 };

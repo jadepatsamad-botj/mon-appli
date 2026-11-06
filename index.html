@@ -224,11 +224,29 @@
     <div class="msg" id="dmsg" role="status" aria-live="polite"></div>
   </section>
 
-  <!-- Matchs -->
-  <section class="card" id="matches" hidden>
+  <!-- Messages : boîte de réception -->
+  <section id="matches" hidden>
     <button class="back" id="matches-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="matches_title"></h2>
-    <div id="matches-list"></div>
+    <div class="itabs" role="tablist">
+      <button role="tab" type="button" id="itab-inbox" aria-selected="true" data-i18n="inbox_tab"></button>
+      <button role="tab" type="button" id="itab-new" aria-selected="false"><span data-i18n="newmatch_tab"></span> <b class="icount" id="new-count" hidden></b></button>
+    </div>
+    <div class="ihead">
+      <h2 data-i18n="inbox_title"></h2>
+      <button class="cicon isearch-btn" id="inbox-search-btn" type="button" data-i18n-aria="search_conv">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+    </div>
+    <input class="isearch" id="inbox-q" type="search" hidden autocomplete="off" data-i18n-ph="search_conv" data-i18n-aria="search_conv">
+    <div class="itools" id="inbox-tools">
+      <label class="check icheck" for="only-unread"><input id="only-unread" type="checkbox"><span data-i18n="only_unread"></span></label>
+      <select id="inbox-sort" data-i18n-aria="sort_label">
+        <option value="new" data-i18n="sort_new"></option>
+        <option value="unread" data-i18n="sort_unread"></option>
+        <option value="online" data-i18n="sort_online"></option>
+      </select>
+    </div>
+    <div id="matches-list" class="ilist"></div>
     <p class="empty" id="matches-empty" hidden></p>
   </section>
 

@@ -201,5 +201,21 @@ I18N.en = {
   photo_off: "Photo sending isn't enabled yet.",
   photo_err: "Couldn't send this photo. Try another image.",
   photo_big: "Photo too large (5 MB max).",
-  close: "Close"
+  close: "Close",
+  // Boîte de réception
+  inbox_tab: "Inbox",
+  newmatch_tab: "New matches",
+  inbox_title: "Messages",
+  search_conv: "Search conversations",
+  only_unread: "Show unread only",
+  sort_label: "Sort",
+  sort_new: "Newest",
+  sort_unread: "Unread first",
+  sort_online: "Online first",
+  inbox_empty: "No conversations yet. Open “New matches” to send the first message!",
+  newmatch_empty: "No new matches yet. Keep liking profiles!",
+  unread_empty: "No unread messages.",
+  hide_conv: "Hide conversation",
+  photo_label: "Photo",
+  say_hi: "Say hi 👋"
 };

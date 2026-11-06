@@ -201,5 +201,21 @@ I18N.id = {
   photo_off: "Pengiriman foto belum diaktifkan.",
   photo_err: "Foto ini tidak bisa dikirim. Coba gambar lain.",
   photo_big: "Foto terlalu besar (maks. 5 MB).",
-  close: "Tutup"
+  close: "Tutup",
+  // Boîte de réception
+  inbox_tab: "Kotak masuk",
+  newmatch_tab: "Match baru",
+  inbox_title: "Pesan",
+  search_conv: "Cari percakapan",
+  only_unread: "Hanya yang belum dibaca",
+  sort_label: "Urutkan",
+  sort_new: "Terbaru",
+  sort_unread: "Belum dibaca dulu",
+  sort_online: "Online dulu",
+  inbox_empty: "Belum ada percakapan. Buka «Match baru» untuk mengirim pesan pertama!",
+  newmatch_empty: "Belum ada match baru. Terus sukai profil!",
+  unread_empty: "Tidak ada pesan belum dibaca.",
+  hide_conv: "Sembunyikan percakapan",
+  photo_label: "Foto",
+  say_hi: "Sapa dia 👋"
 };

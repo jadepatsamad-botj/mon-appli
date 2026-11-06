@@ -261,5 +261,21 @@ I18N.ms = {
   photo_off: "Penghantaran foto belum diaktifkan.",
   photo_err: "Foto ini tidak dapat dihantar. Cuba imej lain.",
   photo_big: "Foto terlalu besar (maks. 5 MB).",
-  close: "Tutup"
+  close: "Tutup",
+  // Boîte de réception
+  inbox_tab: "Peti masuk",
+  newmatch_tab: "Padanan baharu",
+  inbox_title: "Mesej",
+  search_conv: "Cari perbualan",
+  only_unread: "Tunjuk yang belum dibaca sahaja",
+  sort_label: "Susun",
+  sort_new: "Terkini",
+  sort_unread: "Belum dibaca dahulu",
+  sort_online: "Dalam talian dahulu",
+  inbox_empty: "Belum ada perbualan. Buka «Padanan baharu» untuk hantar mesej pertama!",
+  newmatch_empty: "Belum ada padanan baharu. Teruskan menyukai profil!",
+  unread_empty: "Tiada mesej belum dibaca.",
+  hide_conv: "Sembunyikan perbualan",
+  photo_label: "Foto",
+  say_hi: "Tegur dia 👋"
 };
