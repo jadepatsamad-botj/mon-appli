@@ -21,7 +21,10 @@ async function loadMatches() {
   var me = currentUser.id;
   var mm = await db.from("messages").select("from_id,to_id,body,created_at,image_path")
     .or("from_id.eq." + me + ",to_id.eq." + me).order("created_at", { ascending: false }).limit(500);
-  if (mm.error) { list.textContent = ""; $("matches-empty").textContent = t("matches_err"); $("matches-empty").hidden = false; return; }
+  // Si la colonne des photos n'existe pas encore (SQL pas encore lancé), on charge sans elle
+  if (mm.error) mm = await db.from("messages").select("from_id,to_id,body,created_at")
+    .or("from_id.eq." + me + ",to_id.eq." + me).order("created_at", { ascending: false }).limit(500);
+  if (mm.error) { list.textContent = ""; $("matches-empty").textContent = t("matches_err") + " (" + (mm.error.message || "") + ")"; $("matches-empty").hidden = false; return; }
   var last = {}, count = {};
   (mm.data || []).forEach(function (m) {
     var peer = m.from_id === me ? m.to_id : m.from_id;
