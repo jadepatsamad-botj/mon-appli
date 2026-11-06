@@ -26,7 +26,18 @@ async function refreshChat() {
     if (!mine) line.appendChild(miniAvatar(chatWith, peerPic));
     var w = document.createElement("div"); w.className = "bwrap " + (mine ? "me" : "them");
     var vm = /https:\/\/meet\.jit\.si\/Jade-[A-Za-z0-9]{8,32}/.exec(m.body);
-    var d = document.createElement("div"); d.className = "bubble " + (mine ? "me" : "them") + (vm ? " sys" : ""); d.textContent = m.body; w.appendChild(d);
+    var d;
+    if (m.image_path) {
+      d = document.createElement("button"); d.type = "button"; d.className = "bphoto " + (mine ? "me" : "them");
+      d.setAttribute("aria-label", t("photo_open"));
+      var im = document.createElement("img"); im.alt = ""; d.appendChild(im);
+      chatImage(m.image_path, im);
+      d.onclick = (function (img) { return function () { if (img.src) openLightbox(img.src); }; })(im);
+      w.appendChild(d);
+      if (m.body && m.body !== PHOTO_BODY) { var cap = document.createElement("div"); cap.className = "bubble " + (mine ? "me" : "them"); cap.textContent = m.body; w.appendChild(cap); }
+    } else {
+      d = document.createElement("div"); d.className = "bubble " + (mine ? "me" : "them") + (vm ? " sys" : ""); d.textContent = m.body; w.appendChild(d);
+    }
     if (vm) {
       var jb = document.createElement("button"); jb.type = "button"; jb.className = "joinbtn"; jb.textContent = "📹 " + t("video_join");
       jb.onclick = (function (u) { return function () { window.open(u, "_blank", "noopener"); }; })(vm[0]);
@@ -40,7 +51,9 @@ async function refreshChat() {
     }
     var meta = document.createElement("div"); meta.className = "bmeta";
     var bits = [];
-    if (!mine) {
+    if (!mine && m.image_path) {
+      if (groupEnd && m.created_at) bits.push(document.createTextNode(timeAgo(m.created_at)));
+    } else if (!mine) {
       var key = msgKey(m), tr = TR[key + "|" + lang];
       if (tr && tr.text) {
         var tv = document.createElement("div"); tv.className = "btrans"; tv.textContent = tr.text; w.appendChild(tv);
@@ -100,6 +113,56 @@ async function toggleTranslate(m, key) {
   } catch (e) { TR[k] = { error: true }; }
   refreshChat();
 }
+
+// ---------- Photos dans la discussion ----------
+var PHOTO_BODY = "📷";            // texte enregistré avec une photo (aperçu dans la liste des messages)
+var CHAT_BUCKET = "chat-photos";  // espace de stockage privé (voir sql/photos-discussion.sql)
+var CHAT_URLS = {};               // liens temporaires déjà obtenus, pour ne pas recharger les images
+
+// Les photos sont privées : on demande un lien valable 1 heure
+function chatImage(path, img) {
+  var c = CHAT_URLS[path];
+  if (c && c.until > Date.now()) { img.src = c.url; return; }
+  db.storage.from(CHAT_BUCKET).createSignedUrl(path, 3600).then(function (r) {
+    if (r && r.data && r.data.signedUrl) {
+      CHAT_URLS[path] = { url: r.data.signedUrl, until: Date.now() + 3000000 };
+      img.src = r.data.signedUrl;
+    } else img.parentNode && img.parentNode.classList.add("missing");
+  }, function () {});
+}
+
+function openLightbox(src) { $("lightbox-img").src = src; $("lightbox").hidden = false; }
+function closeLightbox() { $("lightbox").hidden = true; $("lightbox-img").removeAttribute("src"); }
+$("lightbox-close").onclick = closeLightbox;
+$("lightbox").onclick = function (e) { if (e.target === $("lightbox")) closeLightbox(); };
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("lightbox").hidden) closeLightbox(); });
+
+$("chat-photo").onclick = function () { $("chat-file").click(); };
+$("chat-file").onchange = async function () {
+  var file = $("chat-file").files && $("chat-file").files[0];
+  $("chat-file").value = "";
+  if (!file || !chatWith) return;
+  var cm = $("cmsg"), other = chatWith;
+  if (!/^image\//.test(file.type) && !/\.(jpe?g|png|webp|heic|heif)$/i.test(file.name)) return say(cm, t("photo_err"), "err");
+  $("chat-photo").disabled = true; say(cm, t("photo_sending"), "");
+  try {
+    var f = await compressImage(file, 1600);
+    if (f.size > 5 * 1024 * 1024) throw new Error(t("photo_big"));
+    var a = new Uint8Array(9); crypto.getRandomValues(a);
+    var name = Array.prototype.map.call(a, function (x) { return ("0" + x.toString(16)).slice(-2); }).join("");
+    var path = currentUser.id + "/" + other.id + "/" + Date.now() + "-" + name + ".jpg";
+    var up = await db.storage.from(CHAT_BUCKET).upload(path, f, { contentType: f.type || "image/jpeg", upsert: false });
+    if (up.error) throw up.error;
+    var r = await db.from("messages").insert({ from_id: currentUser.id, to_id: other.id, body: PHOTO_BODY, image_path: path });
+    if (r.error) { db.storage.from(CHAT_BUCKET).remove([path]).then(function () {}, function () {}); throw r.error; }
+    say(cm, "", ""); notify(other.id, "message");
+    lastCount = -1; await refreshChat();
+  } catch (e) {
+    var em = (e && e.message) || "";
+    say(cm, /bucket|image_path|not found|schema cache/i.test(em) ? t("photo_off") : (em || t("photo_err")), "err");
+  }
+  $("chat-photo").disabled = false;
+};
 
 // Petite photo ronde à côté des messages reçus
 function miniAvatar(p, url) {

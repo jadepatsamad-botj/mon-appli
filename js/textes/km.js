@@ -253,5 +253,13 @@ I18N.km = {
   // Écran de discussion
   quick_profile: "មើលប្រវត្តិរូបសង្ខេប",
   more_options: "ជម្រើសបន្ថែម",
-  full_profile: "មើលប្រវត្តិរូបពេញ"
+  full_profile: "មើលប្រវត្តិរូបពេញ",
+  // Photos dans la discussion
+  photo_send: "ផ្ញើរូបថត",
+  photo_open: "មើលរូបថតធំ",
+  photo_sending: "កំពុងផ្ញើរូបថត…",
+  photo_off: "មិនទាន់បើកការផ្ញើរូបថតនៅឡើយ។",
+  photo_err: "មិនអាចផ្ញើរូបថតនេះបានទេ។ សាកល្បងរូបផ្សេង។",
+  photo_big: "រូបថតធំពេក (អតិបរមា 5 MB)។",
+  close: "បិទ"
 };

@@ -88,3 +88,22 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 #chat .chat-form input { border-radius: 999px; padding: 12px 18px; background: var(--card); border: 1px solid var(--line); }
 #chat .chat-form button { width: 46px; height: 46px; padding: 0; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--cream); color: #4f5631; }
 #chat .chat-form button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+
+/* Photos dans la discussion */
+.cphoto { flex: none; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer;
+  display: grid; place-items: center; color: var(--chat-head-fg); }
+.cphoto svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; }
+.cphoto:disabled { opacity: .5; cursor: wait; }
+#chat .chat-form .cphoto { background: none; color: var(--chat-head-fg); }
+.bphoto { display: block; padding: 0; border: 0; cursor: zoom-in; border-radius: 18px; overflow: hidden; background: var(--bub-them);
+  box-shadow: 0 1px 2px rgba(0,0,0,.12); width: min(240px, 62vw); aspect-ratio: 3 / 4; }
+.bphoto.me { border-bottom-right-radius: 6px; }
+.bphoto.them { border-top-left-radius: 6px; }
+.bphoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bphoto img:not([src]) { visibility: hidden; }
+.bphoto.missing { cursor: default; background: repeating-linear-gradient(45deg, var(--bub-them), var(--bub-them) 8px, var(--bub-me) 8px, var(--bub-me) 16px); }
+.bphoto + .bubble { margin-top: 4px; }
+.lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(20, 22, 12, .94); display: grid; place-items: center; padding: 16px; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+.lightbox .cicon { position: absolute; top: calc(10px + env(safe-area-inset-top)); right: 10px; color: #fbf8ea; background: rgba(255,255,255,.12); }

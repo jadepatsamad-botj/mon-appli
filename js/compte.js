@@ -11,6 +11,13 @@ $("delete-account").onclick = async function () {
   var hmsg = $("hmsg"); say(hmsg, t("deleting"), "");
   try {
     var uid = currentUser.id, buckets = ["photos", "verifications"];
+    try {   // photos envoyées dans les discussions : dossier moi / destinataire / fichier
+      var dirs = await db.storage.from("chat-photos").list(uid);
+      for (var j = 0; j < ((dirs.data) || []).length; j++) {
+        var sub = uid + "/" + dirs.data[j].name, fl = await db.storage.from("chat-photos").list(sub, { limit: 1000 });
+        if (fl.data && fl.data.length) await db.storage.from("chat-photos").remove(fl.data.map(function (x) { return sub + "/" + x.name; }));
+      }
+    } catch (x) {}
     for (var i = 0; i < buckets.length; i++) {
       var l = await db.storage.from(buckets[i]).list(uid);
       if (l.data && l.data.length) {

@@ -253,5 +253,13 @@ I18N.ms = {
   // Écran de discussion
   quick_profile: "Pratonton profil",
   more_options: "Pilihan lain",
-  full_profile: "Lihat profil penuh"
+  full_profile: "Lihat profil penuh",
+  // Photos dans la discussion
+  photo_send: "Hantar foto",
+  photo_open: "Lihat foto",
+  photo_sending: "Menghantar foto…",
+  photo_off: "Penghantaran foto belum diaktifkan.",
+  photo_err: "Foto ini tidak dapat dihantar. Cuba imej lain.",
+  photo_big: "Foto terlalu besar (maks. 5 MB).",
+  close: "Tutup"
 };

@@ -428,6 +428,10 @@
       </div>
       <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
       <form class="chat-form" id="chat-form">
+        <button class="cphoto" id="chat-photo" type="button" data-i18n-aria="photo_send">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h2l1.6-2h5.8l1.6 2h2A2.5 2.5 0 0 1 21 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.8"/></svg>
+        </button>
+        <input id="chat-file" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" hidden>
         <input id="chat-input" type="text" maxlength="1000" data-i18n-ph="msg_ph" autocomplete="off" enterkeyhint="send">
         <button id="chat-send" type="submit" data-i18n-aria="send">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5L21 4l-6.5 17-3-7.5z"/><path d="M11.5 13.5L21 4"/></svg>
@@ -435,6 +439,14 @@
       </form>
     </div>
   </section>
+
+  <!-- Photo de la discussion en grand -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true">
+    <button class="cicon" id="lightbox-close" type="button" data-i18n-aria="close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img id="lightbox-img" alt="">
+  </div>
 
   <!-- Signalement -->
   <section class="card" id="report" hidden>

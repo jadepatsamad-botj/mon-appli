@@ -193,5 +193,13 @@ I18N.id = {
   // Écran de discussion
   quick_profile: "Lihat profil sekilas",
   more_options: "Opsi lainnya",
-  full_profile: "Lihat profil lengkap"
+  full_profile: "Lihat profil lengkap",
+  // Photos dans la discussion
+  photo_send: "Kirim foto",
+  photo_open: "Lihat foto",
+  photo_sending: "Mengirim foto…",
+  photo_off: "Pengiriman foto belum diaktifkan.",
+  photo_err: "Foto ini tidak bisa dikirim. Coba gambar lain.",
+  photo_big: "Foto terlalu besar (maks. 5 MB).",
+  close: "Tutup"
 };

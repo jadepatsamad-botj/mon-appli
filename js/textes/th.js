@@ -193,5 +193,13 @@ I18N.th = {
   // Écran de discussion
   quick_profile: "ดูโปรไฟล์แบบย่อ",
   more_options: "ตัวเลือกเพิ่มเติม",
-  full_profile: "ดูโปรไฟล์เต็ม"
+  full_profile: "ดูโปรไฟล์เต็ม",
+  // Photos dans la discussion
+  photo_send: "ส่งรูปภาพ",
+  photo_open: "ดูรูปขนาดใหญ่",
+  photo_sending: "กำลังส่งรูป…",
+  photo_off: "ยังไม่เปิดให้ส่งรูปภาพ",
+  photo_err: "ส่งรูปนี้ไม่ได้ ลองใช้รูปอื่น",
+  photo_big: "รูปใหญ่เกินไป (สูงสุด 5 MB)",
+  close: "ปิด"
 };

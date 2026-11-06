@@ -253,5 +253,13 @@ I18N.ja = {
   // Écran de discussion
   quick_profile: "プロフィールをちょっと見る",
   more_options: "その他",
-  full_profile: "プロフィールをすべて見る"
+  full_profile: "プロフィールをすべて見る",
+  // Photos dans la discussion
+  photo_send: "写真を送る",
+  photo_open: "写真を拡大",
+  photo_sending: "写真を送信中…",
+  photo_off: "写真の送信はまだ利用できません。",
+  photo_err: "この写真は送信できません。別の画像をお試しください。",
+  photo_big: "写真が大きすぎます（最大5MB）。",
+  close: "閉じる"
 };

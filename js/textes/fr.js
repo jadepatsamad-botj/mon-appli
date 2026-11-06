@@ -193,5 +193,13 @@ I18N.fr = {
   // Écran de discussion
   quick_profile: "Aperçu rapide du profil",
   more_options: "Plus d'options",
-  full_profile: "Voir le profil complet"
+  full_profile: "Voir le profil complet",
+  // Photos dans la discussion
+  photo_send: "Envoyer une photo",
+  photo_open: "Voir la photo en grand",
+  photo_sending: "Envoi de la photo…",
+  photo_off: "L'envoi de photos n'est pas encore activé. (Administrateur : lancer sql/photos-discussion.sql dans Supabase.)",
+  photo_err: "Impossible d'envoyer cette photo. Essaie avec une autre image.",
+  photo_big: "Photo trop lourde (5 Mo maximum).",
+  close: "Fermer"
 };

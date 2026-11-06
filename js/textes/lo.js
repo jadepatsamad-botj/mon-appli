@@ -253,5 +253,13 @@ I18N.lo = {
   // Écran de discussion
   quick_profile: "ເບິ່ງໂປຣໄຟລ໌ໂດຍຫຍໍ້",
   more_options: "ຕົວເລືອກເພີ່ມເຕີມ",
-  full_profile: "ເບິ່ງໂປຣໄຟລ໌ເຕັມ"
+  full_profile: "ເບິ່ງໂປຣໄຟລ໌ເຕັມ",
+  // Photos dans la discussion
+  photo_send: "ສົ່ງຮູບ",
+  photo_open: "ເບິ່ງຮູບໃຫຍ່",
+  photo_sending: "ກຳລັງສົ່ງຮູບ…",
+  photo_off: "ຍັງບໍ່ເປີດໃຊ້ການສົ່ງຮູບ.",
+  photo_err: "ສົ່ງຮູບນີ້ບໍ່ໄດ້. ລອງຮູບອື່ນ.",
+  photo_big: "ຮູບໃຫຍ່ເກີນໄປ (ສູງສຸດ 5 MB).",
+  close: "ປິດ"
 };

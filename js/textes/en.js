@@ -193,5 +193,13 @@ I18N.en = {
   // Écran de discussion
   quick_profile: "Quick profile preview",
   more_options: "More options",
-  full_profile: "See full profile"
+  full_profile: "See full profile",
+  // Photos dans la discussion
+  photo_send: "Send a photo",
+  photo_open: "View photo",
+  photo_sending: "Sending photo…",
+  photo_off: "Photo sending isn't enabled yet.",
+  photo_err: "Couldn't send this photo. Try another image.",
+  photo_big: "Photo too large (5 MB max).",
+  close: "Close"
 };

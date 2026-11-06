@@ -253,5 +253,13 @@ I18N.tl = {
   // Écran de discussion
   quick_profile: "Mabilis na silip sa profile",
   more_options: "Iba pang opsyon",
-  full_profile: "Tingnan ang buong profile"
+  full_profile: "Tingnan ang buong profile",
+  // Photos dans la discussion
+  photo_send: "Magpadala ng larawan",
+  photo_open: "Tingnan ang larawan",
+  photo_sending: "Ipinapadala ang larawan…",
+  photo_off: "Hindi pa naka-on ang pagpapadala ng larawan.",
+  photo_err: "Hindi maipadala ang larawang ito. Subukan ang iba.",
+  photo_big: "Masyadong malaki ang larawan (max 5 MB).",
+  close: "Isara"
 };

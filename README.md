@@ -44,6 +44,12 @@ Site en ligne : https://jadedating.app
 | `navigation.js` | Barre du bas (Accueil, Intérêts, Activités, Messages) et en-tête (Mise à niveau, mon profil) |
 | `demarrage.js` | Démarrage de l'appli (toujours chargé en dernier) |
 
+## Le dossier `sql/` (réglages Supabase)
+
+| Fichier | À quoi il sert |
+|---|---|
+| `sql/photos-discussion.sql` | Active l'envoi de photos dans la discussion (stockage privé + règles). À lancer une fois dans Supabase > SQL Editor. |
+
 ## Bon à savoir
 
 - **Changer les couleurs** : en haut de `css/style.css` (vert olive `--olive`, crème `--cream`). Les couleurs de la discussion sont en haut de `css/messages.css`.

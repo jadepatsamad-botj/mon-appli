@@ -96,6 +96,8 @@ async function runDiag() {
   res.push(await chk("Compteur d'inscrits", function () { return db.rpc("event_counts"); }));
   res.push(await chk("Liste des bloqués", function () { return db.rpc("my_blocked"); }));
   res.push(await chk("Statistiques", function () { return db.rpc("admin_stats"); }));
+  res.push(await chk("Photos dans la discussion (colonne)", function () { return db.from("messages").select("image_path").limit(1); }));
+  res.push(await chk("Photos dans la discussion (stockage)", function () { return db.storage.from("chat-photos").list(currentUser.id, { limit: 1 }); }));
   res.push(await chk("Qui a vu mon profil", function () { return db.from("profile_views").select("viewer_id").limit(1); }));
   out.textContent = "";
   var ok = res.filter(function (x) { return x[1]; }).length;

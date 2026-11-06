@@ -253,5 +253,13 @@ I18N.ko = {
   // Écran de discussion
   quick_profile: "프로필 미리 보기",
   more_options: "더보기",
-  full_profile: "전체 프로필 보기"
+  full_profile: "전체 프로필 보기",
+  // Photos dans la discussion
+  photo_send: "사진 보내기",
+  photo_open: "사진 크게 보기",
+  photo_sending: "사진 보내는 중…",
+  photo_off: "아직 사진 보내기를 사용할 수 없습니다.",
+  photo_err: "이 사진을 보낼 수 없습니다. 다른 이미지를 시도해 보세요.",
+  photo_big: "사진이 너무 큽니다 (최대 5MB).",
+  close: "닫기"
 };

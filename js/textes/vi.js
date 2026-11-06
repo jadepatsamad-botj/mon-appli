@@ -193,5 +193,13 @@ I18N.vi = {
   // Écran de discussion
   quick_profile: "Xem nhanh hồ sơ",
   more_options: "Tùy chọn khác",
-  full_profile: "Xem toàn bộ hồ sơ"
+  full_profile: "Xem toàn bộ hồ sơ",
+  // Photos dans la discussion
+  photo_send: "Gửi ảnh",
+  photo_open: "Xem ảnh lớn",
+  photo_sending: "Đang gửi ảnh…",
+  photo_off: "Chưa bật tính năng gửi ảnh.",
+  photo_err: "Không gửi được ảnh này. Hãy thử ảnh khác.",
+  photo_big: "Ảnh quá lớn (tối đa 5 MB).",
+  close: "Đóng"
 };

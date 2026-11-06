@@ -193,5 +193,13 @@ I18N.zh = {
   // Écran de discussion
   quick_profile: "资料速览",
   more_options: "更多选项",
-  full_profile: "查看完整资料"
+  full_profile: "查看完整资料",
+  // Photos dans la discussion
+  photo_send: "发送照片",
+  photo_open: "查看大图",
+  photo_sending: "正在发送照片…",
+  photo_off: "暂未开放发送照片。",
+  photo_err: "无法发送这张照片，请换一张试试。",
+  photo_big: "照片太大（最大 5 MB）。",
+  close: "关闭"
 };
