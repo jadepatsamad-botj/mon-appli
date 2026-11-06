@@ -14,7 +14,7 @@ function levelOf(p) {
   var paid = paidPlan(p) ? PLAN_LEVEL[paidPlan(p)] || 1 : 0;
   return Math.max(p.gender !== PAYS ? 1 : 0, paid);
 }
-function myLevel() { return levelOf(currentProfile); }
+function myLevel() { return FREE_FOR_ALL ? PLAN_LEVEL.diamond : levelOf(currentProfile); }
 function lockedBox(text) {
   var d = document.createElement("div"); d.className = "locked";
   var p = document.createElement("div"); p.textContent = "🔒 " + text; d.appendChild(p);
@@ -36,9 +36,12 @@ function openPremium() {
     var k = card.getAttribute("data-plan");
     card.querySelector(".pp").textContent = money(PRICES[k]);
     card.classList.toggle("current", plan === k);
-    card.querySelector(".buy").onclick = function () { buyPlan(k); };
+    var buy = card.querySelector(".buy");
+    if (FREE_FOR_ALL) { buy.textContent = t("plan_included"); buy.disabled = true; buy.onclick = null; }
+    else buy.onclick = function () { buyPlan(k); };
   });
-  if (plan) st.textContent = t("plan_active", { plan: plan.charAt(0).toUpperCase() + plan.slice(1), d: new Date(p.premium_until).toLocaleDateString() });
+  if (FREE_FOR_ALL) st.textContent = t("free_launch");
+  else if (plan) st.textContent = t("plan_active", { plan: plan.charAt(0).toUpperCase() + plan.slice(1), d: new Date(p.premium_until).toLocaleDateString() });
   else if (myLevel() >= 1) st.textContent = t("premium_free");
   else st.textContent = "";
   st.hidden = !st.textContent;

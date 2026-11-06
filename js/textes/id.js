@@ -239,5 +239,8 @@ I18N.id = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "Email tidak dapat dikirim. Coba lagi nanti atau hubungi dukungan.",
   // Accueil : rangée des nouveaux membres
-  new_members: "Anggota baru"
+  new_members: "Anggota baru",
+  // Lancement : abonnements offerts
+  free_launch: "Selama peluncuran, semua paket gratis untuk semua orang 🎁",
+  plan_included: "Gratis"
 };

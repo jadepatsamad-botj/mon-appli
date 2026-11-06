@@ -239,5 +239,8 @@ I18N.vi = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "Không gửi được email. Hãy thử lại sau hoặc liên hệ hỗ trợ.",
   // Accueil : rangée des nouveaux membres
-  new_members: "Thành viên mới"
+  new_members: "Thành viên mới",
+  // Lancement : abonnements offerts
+  free_launch: "Trong thời gian ra mắt, mọi gói đều miễn phí cho tất cả 🎁",
+  plan_included: "Miễn phí"
 };

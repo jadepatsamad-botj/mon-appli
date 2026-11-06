@@ -239,5 +239,8 @@ I18N.th = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "ส่งอีเมลไม่ได้ ลองอีกครั้งภายหลังหรือติดต่อฝ่ายช่วยเหลือ",
   // Accueil : rangée des nouveaux membres
-  new_members: "สมาชิกใหม่"
+  new_members: "สมาชิกใหม่",
+  // Lancement : abonnements offerts
+  free_launch: "ช่วงเปิดตัว ทุกแพ็กเกจฟรีสำหรับทุกคน 🎁",
+  plan_included: "รวมฟรี"
 };

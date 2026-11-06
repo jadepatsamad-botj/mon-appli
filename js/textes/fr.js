@@ -239,5 +239,8 @@ I18N.fr = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "L'email n'a pas pu être envoyé. Réessaie plus tard ou contacte le support.",
   // Accueil : rangée des nouveaux membres
-  new_members: "Nouveaux membres"
+  new_members: "Nouveaux membres",
+  // Lancement : abonnements offerts
+  free_launch: "Pendant le lancement, tous les abonnements sont offerts à tout le monde 🎁",
+  plan_included: "Inclus gratuitement"
 };

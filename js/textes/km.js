@@ -299,5 +299,8 @@ I18N.km = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "មិនអាចផ្ញើអ៊ីមែលបានទេ។ សូមព្យាយាមម្តងទៀតពេលក្រោយ ឬទាក់ទងផ្នែកជំនួយ។",
   // Accueil : rangée des nouveaux membres
-  new_members: "សមាជិកថ្មី"
+  new_members: "សមាជិកថ្មី",
+  // Lancement : abonnements offerts
+  free_launch: "ក្នុងអំឡុងពេលដាក់ឱ្យប្រើ គម្រោងទាំងអស់ឥតគិតថ្លៃសម្រាប់គ្រប់គ្នា 🎁",
+  plan_included: "ឥតគិតថ្លៃ"
 };

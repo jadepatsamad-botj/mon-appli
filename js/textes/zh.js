@@ -239,5 +239,8 @@ I18N.zh = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "邮件发送失败，请稍后再试或联系客服。",
   // Accueil : rangée des nouveaux membres
-  new_members: "新会员"
+  new_members: "新会员",
+  // Lancement : abonnements offerts
+  free_launch: "上线期间，所有会员套餐对所有人免费 🎁",
+  plan_included: "免费包含"
 };

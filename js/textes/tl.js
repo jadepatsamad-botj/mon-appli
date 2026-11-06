@@ -299,5 +299,8 @@ I18N.tl = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "Hindi naipadala ang email. Subukan ulit mamaya o makipag-ugnayan sa suporta.",
   // Accueil : rangée des nouveaux membres
-  new_members: "Mga bagong miyembro"
+  new_members: "Mga bagong miyembro",
+  // Lancement : abonnements offerts
+  free_launch: "Habang inilulunsad, libre ang lahat ng plan para sa lahat 🎁",
+  plan_included: "Kasama nang libre"
 };

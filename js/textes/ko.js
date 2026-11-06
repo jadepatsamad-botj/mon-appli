@@ -299,5 +299,8 @@ I18N.ko = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "이메일을 보낼 수 없습니다. 나중에 다시 시도하거나 고객 지원에 문의하세요.",
   // Accueil : rangée des nouveaux membres
-  new_members: "신규 회원"
+  new_members: "신규 회원",
+  // Lancement : abonnements offerts
+  free_launch: "출시 기간 동안 모든 요금제가 모두에게 무료입니다 🎁",
+  plan_included: "무료 포함"
 };

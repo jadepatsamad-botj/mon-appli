@@ -299,5 +299,8 @@ I18N.ms = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "E-mel tidak dapat dihantar. Cuba lagi kemudian atau hubungi sokongan.",
   // Accueil : rangée des nouveaux membres
-  new_members: "Ahli baharu"
+  new_members: "Ahli baharu",
+  // Lancement : abonnements offerts
+  free_launch: "Sepanjang pelancaran, semua pelan percuma untuk semua 🎁",
+  plan_included: "Percuma"
 };

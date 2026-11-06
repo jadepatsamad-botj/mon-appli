@@ -299,5 +299,8 @@ I18N.lo = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "ບໍ່ສາມາດສົ່ງອີເມວໄດ້. ລອງໃໝ່ພາຍຫຼັງ ຫຼື ຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອ.",
   // Accueil : rangée des nouveaux membres
-  new_members: "ສະມາຊິກໃໝ່"
+  new_members: "ສະມາຊິກໃໝ່",
+  // Lancement : abonnements offerts
+  free_launch: "ໃນຊ່ວງເປີດຕົວ ທຸກແພັກເກດຟຣີສຳລັບທຸກຄົນ 🎁",
+  plan_included: "ຟຣີ"
 };

@@ -299,5 +299,8 @@ I18N.ja = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "メールを送信できませんでした。後でもう一度お試しいただくか、サポートにご連絡ください。",
   // Accueil : rangée des nouveaux membres
-  new_members: "新メンバー"
+  new_members: "新メンバー",
+  // Lancement : abonnements offerts
+  free_launch: "リリース期間中は、すべてのプランが全員無料です 🎁",
+  plan_included: "無料で利用可"
 };

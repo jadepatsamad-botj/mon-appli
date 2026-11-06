@@ -239,5 +239,8 @@ I18N.en = {
   // Mot de passe oublié : erreur d'envoi
   reset_err: "The email couldn't be sent. Try again later or contact support.",
   // Accueil : rangée des nouveaux membres
-  new_members: "New members"
+  new_members: "New members",
+  // Lancement : abonnements offerts
+  free_launch: "During our launch, every plan is free for everyone 🎁",
+  plan_included: "Included for free"
 };
