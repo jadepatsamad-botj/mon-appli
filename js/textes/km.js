@@ -249,5 +249,9 @@ I18N.km = {
   feed_empty: "រកមិនឃើញប្រវត្តិរូប។ សាកល្បងស្វែងរក ឬតម្រងផ្សេង។",
   new_member: "សមាជិកថ្មី",
   tab_likes: "ចូលចិត្តខ្ញុំ",
-  tab_views: "បានមើលខ្ញុំ"
+  tab_views: "បានមើលខ្ញុំ",
+  // Écran de discussion
+  quick_profile: "មើលប្រវត្តិរូបសង្ខេប",
+  more_options: "ជម្រើសបន្ថែម",
+  full_profile: "មើលប្រវត្តិរូបពេញ"
 };

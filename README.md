@@ -8,6 +8,7 @@ Site en ligne : https://jadedating.app
 |---|---|
 | `index.html` | La structure des écrans (formulaires, boutons, sections). Il charge tous les autres fichiers. |
 | `css/style.css` | L'apparence : couleurs, tailles, espacements. |
+| `css/messages.css` | L'apparence de l'écran de discussion (bulles, en-tête, fond). |
 | `css/navigation.css` | L'apparence de la barre du bas, de l'en-tête et des cartes de l'Accueil. |
 | `manifest.json` | Nom et couleur de l'appli quand on l'installe sur un téléphone. |
 | `sw.js` | Fonctionnement hors connexion et notifications. |
@@ -44,6 +45,8 @@ Site en ligne : https://jadedating.app
 | `demarrage.js` | Démarrage de l'appli (toujours chargé en dernier) |
 
 ## Bon à savoir
+
+- **Changer les couleurs** : en haut de `css/style.css` (vert olive `--olive`, crème `--cream`). Les couleurs de la discussion sont en haut de `css/messages.css`.
 
 - **Changer un texte** : ouvre le fichier de la langue dans `js/textes/`. Le même mot-clé (par exemple `events_btn`) existe dans chaque langue.
 - **Changer un prix** : `js/abonnements.js`, ligne `PRICES`.

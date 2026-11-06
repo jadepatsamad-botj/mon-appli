@@ -189,5 +189,9 @@ I18N.fr = {
   feed_empty: "Aucun profil trouvé. Essaie une autre recherche ou d'autres filtres.",
   new_member: "Nouveau membre",
   tab_likes: "Ils m'ont liké",
-  tab_views: "Ont vu mon profil"
+  tab_views: "Ont vu mon profil",
+  // Écran de discussion
+  quick_profile: "Aperçu rapide du profil",
+  more_options: "Plus d'options",
+  full_profile: "Voir le profil complet"
 };

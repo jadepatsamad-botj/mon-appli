@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#1f7a5c">
+<meta name="theme-color" content="#6e7548">
 <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="icon" href="icon-180.png">
@@ -13,6 +13,7 @@
   <title>Jade</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/navigation.css">
+<link rel="stylesheet" href="css/messages.css">
 </head>
 <body>
 <main>
@@ -381,29 +382,58 @@
   </section>
 
   <!-- Discussion -->
-  <section class="card" id="chat" hidden>
-    <button class="back" id="chat-back" type="button" data-i18n="back_matches"></button>
-    <div class="head">
-      <h2 id="chat-name" style="margin:0"></h2>
-      <div class="head-actions">
-        <button class="linkbtn" id="chat-profile" type="button" data-i18n="view_profile"></button>
-        <button class="linkbtn" id="chat-video" type="button" data-i18n="video_btn"></button>
-        <button class="linkbtn" id="chat-report" type="button" data-i18n="report"></button>
-        <button class="linkbtn danger" id="chat-block" type="button" data-i18n="block"></button>
+  <section id="chat" hidden>
+    <header class="chead">
+      <button class="cicon" id="chat-back" type="button" data-i18n-aria="back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="cwho" id="chat-who" type="button">
+        <span class="cav"><img id="chat-avatar" alt=""><span id="chat-initial"></span></span>
+        <span class="cid">
+          <span class="cname"><i class="cdot" id="chat-dot" hidden></i><span id="chat-name"></span><span class="fcheck" id="chat-verified" hidden>✓</span></span>
+          <span class="csub" id="chat-sub"></span>
+        </span>
+      </button>
+      <button class="cicon" id="chat-video" type="button" data-i18n-aria="video_btn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/></svg>
+      </button>
+      <div class="cmenu-wrap">
+        <button class="cicon" id="chat-more" type="button" aria-haspopup="true" aria-expanded="false" data-i18n-aria="more_options">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+        </button>
+        <div class="cmenu" id="chat-menu" hidden>
+          <button id="chat-profile" type="button" data-i18n="view_profile"></button>
+          <button id="chat-report" type="button" data-i18n="report"></button>
+          <button id="chat-block" type="button" class="danger" data-i18n="block"></button>
+        </div>
       </div>
+    </header>
+    <button class="cpeek" id="chat-peek" type="button" aria-expanded="false" aria-controls="chat-peek-body">
+      <span data-i18n="quick_profile"></span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="cpeek-body" id="chat-peek-body" hidden>
+      <div class="cpeek-photos" id="chat-peek-photos"></div>
+      <div id="chat-peek-tags"></div>
+      <p class="bio" id="chat-peek-bio"></p>
+      <button class="linkbtn" id="chat-peek-full" type="button" data-i18n="full_profile"></button>
     </div>
-    <div class="chat-box" id="chat-box" aria-live="polite" style="margin-top:12px"></div>
-    <div class="ice" id="ice" hidden>
-      <div class="ice-t" data-i18n="ice_title"></div>
-      <button type="button" class="chip" data-i18n="ice1"></button>
-      <button type="button" class="chip" data-i18n="ice2"></button>
-      <button type="button" class="chip" data-i18n="ice3"></button>
+    <div class="chat-box" id="chat-box" aria-live="polite"></div>
+    <div class="cbottom">
+      <div class="ice" id="ice" hidden>
+        <div class="ice-t" data-i18n="ice_title"></div>
+        <button type="button" class="chip" data-i18n="ice1"></button>
+        <button type="button" class="chip" data-i18n="ice2"></button>
+        <button type="button" class="chip" data-i18n="ice3"></button>
+      </div>
+      <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
+      <form class="chat-form" id="chat-form">
+        <input id="chat-input" type="text" maxlength="1000" data-i18n-ph="msg_ph" autocomplete="off" enterkeyhint="send">
+        <button id="chat-send" type="submit" data-i18n-aria="send">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5L21 4l-6.5 17-3-7.5z"/><path d="M11.5 13.5L21 4"/></svg>
+        </button>
+      </form>
     </div>
-    <form class="chat-form" id="chat-form">
-      <input id="chat-input" type="text" maxlength="1000" data-i18n-ph="msg_ph" autocomplete="off">
-      <button id="chat-send" type="submit" data-i18n="send"></button>
-    </form>
-    <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Signalement -->

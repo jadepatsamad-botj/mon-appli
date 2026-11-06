@@ -189,5 +189,9 @@ I18N.th = {
   feed_empty: "ไม่พบโปรไฟล์ ลองค้นหาใหม่หรือเปลี่ยนตัวกรอง",
   new_member: "สมาชิกใหม่",
   tab_likes: "ถูกใจฉัน",
-  tab_views: "ดูโปรไฟล์ฉัน"
+  tab_views: "ดูโปรไฟล์ฉัน",
+  // Écran de discussion
+  quick_profile: "ดูโปรไฟล์แบบย่อ",
+  more_options: "ตัวเลือกเพิ่มเติม",
+  full_profile: "ดูโปรไฟล์เต็ม"
 };

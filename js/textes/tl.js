@@ -249,5 +249,9 @@ I18N.tl = {
   feed_empty: "Walang nahanap na profile. Subukan ang ibang paghahanap o filter.",
   new_member: "Bagong miyembro",
   tab_likes: "Nag-like sa akin",
-  tab_views: "Tumingin sa akin"
+  tab_views: "Tumingin sa akin",
+  // Écran de discussion
+  quick_profile: "Mabilis na silip sa profile",
+  more_options: "Iba pang opsyon",
+  full_profile: "Tingnan ang buong profile"
 };

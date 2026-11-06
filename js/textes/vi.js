@@ -189,5 +189,9 @@ I18N.vi = {
   feed_empty: "Không tìm thấy hồ sơ. Hãy thử tìm kiếm hoặc bộ lọc khác.",
   new_member: "Thành viên mới",
   tab_likes: "Đã thích tôi",
-  tab_views: "Đã xem hồ sơ"
+  tab_views: "Đã xem hồ sơ",
+  // Écran de discussion
+  quick_profile: "Xem nhanh hồ sơ",
+  more_options: "Tùy chọn khác",
+  full_profile: "Xem toàn bộ hồ sơ"
 };

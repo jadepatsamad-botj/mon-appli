@@ -189,5 +189,9 @@ I18N.en = {
   feed_empty: "No profiles found. Try another search or other filters.",
   new_member: "New member",
   tab_likes: "Liked me",
-  tab_views: "Viewed me"
+  tab_views: "Viewed me",
+  // Écran de discussion
+  quick_profile: "Quick profile preview",
+  more_options: "More options",
+  full_profile: "See full profile"
 };

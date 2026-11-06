@@ -249,5 +249,9 @@ I18N.lo = {
   feed_empty: "ບໍ່ພົບໂປຣໄຟລ໌. ລອງຄົ້ນຫາ ຫຼື ຕົວກອງອື່ນ.",
   new_member: "ສະມາຊິກໃໝ່",
   tab_likes: "ມັກຂ້ອຍ",
-  tab_views: "ເບິ່ງໂປຣໄຟລ໌ຂ້ອຍ"
+  tab_views: "ເບິ່ງໂປຣໄຟລ໌ຂ້ອຍ",
+  // Écran de discussion
+  quick_profile: "ເບິ່ງໂປຣໄຟລ໌ໂດຍຫຍໍ້",
+  more_options: "ຕົວເລືອກເພີ່ມເຕີມ",
+  full_profile: "ເບິ່ງໂປຣໄຟລ໌ເຕັມ"
 };

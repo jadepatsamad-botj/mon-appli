@@ -189,5 +189,9 @@ I18N.zh = {
   feed_empty: "没有找到资料。请换个搜索或筛选条件。",
   new_member: "新会员",
   tab_likes: "喜欢我的人",
-  tab_views: "看过我的人"
+  tab_views: "看过我的人",
+  // Écran de discussion
+  quick_profile: "资料速览",
+  more_options: "更多选项",
+  full_profile: "查看完整资料"
 };

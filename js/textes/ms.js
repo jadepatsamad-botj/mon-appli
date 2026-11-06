@@ -249,5 +249,9 @@ I18N.ms = {
   feed_empty: "Tiada profil ditemui. Cuba carian atau penapis lain.",
   new_member: "Ahli baharu",
   tab_likes: "Suka saya",
-  tab_views: "Lihat profil saya"
+  tab_views: "Lihat profil saya",
+  // Écran de discussion
+  quick_profile: "Pratonton profil",
+  more_options: "Pilihan lain",
+  full_profile: "Lihat profil penuh"
 };

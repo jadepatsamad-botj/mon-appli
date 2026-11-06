@@ -249,5 +249,9 @@ I18N.ja = {
   feed_empty: "プロフィールが見つかりません。検索や絞り込みを変えてみてください。",
   new_member: "新メンバー",
   tab_likes: "いいねした人",
-  tab_views: "足あと"
+  tab_views: "足あと",
+  // Écran de discussion
+  quick_profile: "プロフィールをちょっと見る",
+  more_options: "その他",
+  full_profile: "プロフィールをすべて見る"
 };

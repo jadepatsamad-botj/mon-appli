@@ -189,5 +189,9 @@ I18N.id = {
   feed_empty: "Tidak ada profil. Coba pencarian atau filter lain.",
   new_member: "Anggota baru",
   tab_likes: "Menyukai saya",
-  tab_views: "Melihat profil saya"
+  tab_views: "Melihat profil saya",
+  // Écran de discussion
+  quick_profile: "Lihat profil sekilas",
+  more_options: "Opsi lainnya",
+  full_profile: "Lihat profil lengkap"
 };

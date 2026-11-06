@@ -9,6 +9,7 @@ var navStarted = false;
 function updateNav(name) {
   var logged = !!(currentUser && currentProfile);
   document.body.classList.toggle("nav-on", logged && NO_TABBAR.indexOf(name) === -1);
+  document.body.classList.toggle("chat-on", name === "chat");
   $("tabbar").hidden = !logged || NO_TABBAR.indexOf(name) !== -1;
   $("top-actions").hidden = !logged || name === "auth";
   var active = TAB_OF[name] || "";

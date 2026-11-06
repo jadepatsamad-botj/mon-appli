@@ -249,5 +249,9 @@ I18N.ko = {
   feed_empty: "프로필이 없습니다. 다른 검색어나 필터를 사용해 보세요.",
   new_member: "신규 회원",
   tab_likes: "나를 좋아요",
-  tab_views: "내 프로필 방문"
+  tab_views: "내 프로필 방문",
+  // Écran de discussion
+  quick_profile: "프로필 미리 보기",
+  more_options: "더보기",
+  full_profile: "전체 프로필 보기"
 };
