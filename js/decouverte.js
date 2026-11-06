@@ -4,17 +4,18 @@
 var candidate = null;
 var fromFeed = false;   // vrai quand le profil a été ouvert depuis l'Accueil
 
-// Requête des profils compatibles avec moi + filtres choisis (utilisée par la découverte et l'Accueil)
+// Colonnes optionnelles absentes de la base (on les découvre au premier essai et on s'en passe)
+var MISSING_COLS = {};
+
+// Requête des profils à montrer : tous les inscrits du genre que je cherche + filtres choisis
+// (utilisée par l'Accueil et la découverte)
 function discoverQuery(seen) {
-  var q = db.from("profiles").select("*")
-    .not("id", "in", "(" + seen.join(",") + ")")
-    .in("looking_for", [currentProfile.gender, "tous"])
-    .eq("suspended", false)
-    .eq("hidden", false)
-    .eq("under_review", false)
-    .order("boost", { ascending: false })
-    .order("created_at", { ascending: false });
-  if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
+  var q = db.from("profiles").select("*").not("id", "in", "(" + seen.join(",") + ")");
+  ["suspended", "hidden", "under_review"].forEach(function (c) { if (!MISSING_COLS[c]) q = q.not(c, "is", true); });
+  if (!MISSING_COLS.boost) q = q.order("boost", { ascending: false, nullsFirst: false });
+  q = q.order("created_at", { ascending: false });
+  var want = currentProfile.looking_for;
+  if (want === "homme" || want === "femme") q = q.eq("gender", want);
   var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
   if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
   if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
@@ -23,6 +24,17 @@ function discoverQuery(seen) {
   if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
   if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
   return q;
+}
+
+// Lance une requête de profils ; si une colonne optionnelle n'existe pas, on réessaie sans elle
+async function fetchProfiles(make) {
+  for (var i = 0; i < 5; i++) {
+    var r = await make();
+    var m = r && r.error && /column profiles\.(\w+) does not exist/.exec(r.error.message || "");
+    if (!m || MISSING_COLS[m[1]]) return r;
+    MISSING_COLS[m[1]] = true;
+  }
+  return r;
 }
 
 function renderCandidate() {
@@ -45,7 +57,7 @@ async function nextCandidate() {
   if (s.error) return say(dmsg, s.error.message, "err");
   var seen = (s.data || []).map(function (x) { return x.to_id; });
   seen.push(currentUser.id);
-  var r = await discoverQuery(seen).limit(1);
+  var r = await fetchProfiles(function () { return discoverQuery(seen).limit(1); });
   if (r.error) return say(dmsg, r.error.message, "err");
   say(dmsg, "", "");
   candidate = r.data && r.data[0];

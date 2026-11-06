@@ -80,7 +80,7 @@ async function loadFeed(reset) {
     feedSeen.push(currentUser.id);
   }
   var from = feedPage * FEED_SIZE;
-  var r = await withSearch(discoverQuery(feedSeen)).range(from, from + FEED_SIZE - 1);
+  var r = await fetchProfiles(function () { return withSearch(discoverQuery(feedSeen)).range(from, from + FEED_SIZE - 1); });
   feedLoading = false;
   if (r.error) return say(fmsg, r.error.message, "err");
   if (reset) { say(fmsg, ""); loadNewStrip(); }
@@ -102,7 +102,7 @@ async function loadNewStrip() {
   var strip = $("new-strip"), row = $("new-row");
   if ($("feed-q").value.trim()) { strip.hidden = true; return; }
   var since = new Date(Date.now() - 14 * 86400000).toISOString();
-  var r = await discoverQuery(feedSeen).gte("created_at", since).limit(20);
+  var r = await fetchProfiles(function () { return discoverQuery(feedSeen).gte("created_at", since).limit(20); });
   var list = ((r && r.data) || []).sort(function (a, b) { return (a.created_at || "") < (b.created_at || "") ? 1 : -1; });
   row.textContent = "";
   strip.hidden = !list.length;
