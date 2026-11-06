@@ -1,6 +1,8 @@
 /* Jade : apparence de l'appli (couleurs, tailles, mise en page) */
 
   :root {
+    /* Polices de Jade : Playfair Display (logo, titres, prénoms) + DM Sans (textes) */
+    --font-title: "Playfair Display", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
     /* Couleurs de Jade : vert olive et crème */
     --olive: #6e7548; --olive-light: #a3a77f; --olive-dark: #545a33; --cream: #fbf8ea; --on-olive: #fbf8ea;
     --bg: #f1eedc; --card: #fbf8ea; --fg: #2b2e1a; --muted: #67694f;
@@ -14,7 +16,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Thai", "Noto Sans Lao", "Noto Sans Khmer", "Khmer Sangam MN", "Lao Sangam MN", "Noto Sans", sans-serif;
+    font: 16px/1.5 "DM Sans", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Thai", "Noto Sans Lao", "Noto Sans Khmer", "Khmer Sangam MN", "Lao Sangam MN", "Noto Sans", sans-serif;
     min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
   main { width: 100%; max-width: 420px; }
   .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -175,3 +177,6 @@ body {
 /* Textes posés directement sur le fond olive */
 .topbar h1, .topbar .sub, .hint { color: var(--on-olive); }
 .topbar .sub { opacity: .85; }
+
+/* Titres et logo en Playfair Display */
+h1, h2, .hero-title { font-family: var(--font-title); font-weight: 500; letter-spacing: -.005em; }

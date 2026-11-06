@@ -35,7 +35,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .cav img, .bav img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cav img[hidden] { display: none; }
 .cid { min-width: 0; display: flex; flex-direction: column; }
-.cname { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 1.1rem; }
+.cname { font-family: var(--font-title); font-weight: 600; display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 1.1rem; }
 .cname #chat-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cname .fcheck { background: #b5452f; width: 20px; height: 20px; font-size: .72rem; line-height: 20px; }
 .cname .fcheck[hidden], .cdot[hidden] { display: none; }
@@ -119,7 +119,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .icount { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #b5452f; color: #fff; font-size: .72rem; line-height: 20px; }
 .icount[hidden] { display: none; }
 .ihead { display: flex; align-items: center; justify-content: space-between; padding: 18px 16px 4px; }
-.ihead h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 2rem; letter-spacing: -.01em; }
+.ihead h2 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 2rem; letter-spacing: -.01em; }
 .isearch-btn { color: var(--fg); }
 .isearch { margin: 6px 16px 0; width: calc(100% - 32px); padding: 11px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); font: inherit; color: var(--fg); }
 .isearch[hidden] { display: none; }
@@ -139,7 +139,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .ipcount { position: absolute; right: 5px; bottom: 5px; padding: 1px 6px; border-radius: 8px; background: rgba(0,0,0,.5); color: #fff; font-size: .72rem; font-weight: 600; }
 .iinfo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .il1 { display: flex; align-items: center; gap: 6px; min-width: 0; }
-.iname { flex: 0 1 auto; max-width: 62%; font-size: 1.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.iname { font-family: var(--font-title); flex: 0 1 auto; max-width: 62%; font-size: 1.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .il1 .fcheck { width: 20px; height: 20px; font-size: .7rem; line-height: 20px; background: #b5452f; }
 .itime { flex: 1 1 0; min-width: 0; margin-left: 4px; color: var(--muted); font-size: .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .il1 .cdot, .il1 .fcheck { flex: none; }
