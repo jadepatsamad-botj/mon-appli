@@ -1,7 +1,15 @@
 // Qui m'a liké, qui a vu mon profil
 
 // ---------- Qui m'a liké ----------
-var fromLikes = false;
+var fromLikes = false;   // "likes" ou "views" quand un profil est ouvert depuis Intérêts
+
+// Revenir à la bonne liste (likes ou vues) après avoir ouvert un profil
+function backToInterests() {
+  var where = fromLikes === "views" ? "views" : "likes";
+  fromLikes = false;
+  showSection(where);
+  if (where === "views") loadViews(); else loadLikes();
+}
 async function loadLikes() {
   var list = $("likes-list"); list.textContent = ""; $("likes-empty").hidden = true;
   var me = currentUser.id;
@@ -26,7 +34,7 @@ async function loadLikes() {
     info.appendChild(strong); info.appendChild(small);
     row.appendChild(pic); row.appendChild(info);
     if (supers[p.id]) { var st = document.createElement("span"); st.className = "staricon"; st.textContent = "⭐"; st.title = t("super_tag"); row.appendChild(st); }
-    var open = function () { fromLikes = true; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; showSection("discover"); renderCandidate(); };
+    var open = function () { fromLikes = "likes"; fromFeed = false; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; showSection("discover"); renderCandidate(); };
     row.onclick = open; row.onkeydown = function (e) { if (e.key === "Enter") open(); };
     list.appendChild(row);
   });
@@ -56,7 +64,7 @@ async function loadViews() {
     var strong = document.createElement("strong"); strong.textContent = nameWithAge(p) + (p.verified ? " ✓" : "");
     var small = document.createElement("small"); small.textContent = t("seen_on", { d: new Date(when[p.id]).toLocaleDateString() }) + (p.country ? " · " + countryLabel(p.country) : "");
     info.appendChild(strong); info.appendChild(small); row.appendChild(pic); row.appendChild(info);
-    var open = function () { fromLikes = true; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; $("undo").hidden = true; showSection("discover"); renderCandidate(); };
+    var open = function () { fromLikes = "views"; fromFeed = false; candidate = p; $("match-banner").hidden = true; $("cand-empty").hidden = true; $("undo").hidden = true; showSection("discover"); renderCandidate(); };
     row.onclick = open; row.onkeydown = function (e) { if (e.key === "Enter") open(); };
     list.appendChild(row);
   });

@@ -176,5 +176,18 @@ I18N.id = {
   verify_status_ok: "✓ Profil Anda telah terverifikasi.", verify_status_pending: "Permintaan terkirim: sedang ditinjau.",
   verify_sent: "Terima kasih! Permintaan Anda telah dikirim.", e_verify_file: "Pilih sebuah foto.", verified_tag: "✓ Terverifikasi",
   hint: "Prototipe. Pemeriksaan usia di atas hanyalah langkah pertama: verifikasi identitas diperlukan sebelum peluncuran publik.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"]
+  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"],
+  // Barre du bas, en-tête et Accueil
+  nav_home: "Beranda",
+  nav_interests: "Minat",
+  nav_events: "Aktivitas",
+  nav_messages: "Pesan",
+  upgrade: "Tingkatkan",
+  my_profile: "Profil saya",
+  search_ph: "Nama, kota, atau negara…",
+  feed_more: "Lihat lagi",
+  feed_empty: "Tidak ada profil. Coba pencarian atau filter lain.",
+  new_member: "Anggota baru",
+  tab_likes: "Menyukai saya",
+  tab_views: "Melihat profil saya"
 };

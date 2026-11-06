@@ -33,6 +33,7 @@ function applyI18n() {
   document.title = APP_NAME;
   Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-ph]"), function (el) { el.placeholder = t(el.getAttribute("data-i18n-ph")); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-aria]"), function (el) { el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria"))); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-rich]"), function (el) { setRich(el, t(el.getAttribute("data-i18n-rich"))); });
   fillCountries($("country"), "choose");
   fillCountries($("f-country"), "all_countries");
@@ -95,7 +96,7 @@ function setGallery(img, p) {
   img.onclick = urls.length > 1 ? function () { i = (i + 1) % urls.length; show(); } : null;
 }
 
-var SECTIONS = ["auth", "profile", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "peer", "premium", "concierge", "events", "chat", "report", "verify", "safety"];
+var SECTIONS = ["auth", "profile", "feed", "home", "discover", "matches", "likes", "views", "legal", "admin", "settings", "peer", "premium", "concierge", "events", "chat", "report", "verify", "safety"];
 function showSection(name) {
   if (name !== "chat") stopChat();
   SECTIONS.forEach(function (id) { $(id).hidden = id !== name; });

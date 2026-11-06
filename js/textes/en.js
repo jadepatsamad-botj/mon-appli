@@ -176,5 +176,18 @@ I18N.en = {
   verify_status_ok: "✓ Your profile is verified.", verify_status_pending: "Request sent: under review.",
   verify_sent: "Thank you! Your request has been sent.", e_verify_file: "Please choose a photo.", verified_tag: "✓ Verified",
   hint: "Prototype. The age check above is only a first step: identity verification will be required before any public launch.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"]
+  countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"],
+  // Barre du bas, en-tête et Accueil
+  nav_home: "Home",
+  nav_interests: "Interests",
+  nav_events: "Activities",
+  nav_messages: "Messages",
+  upgrade: "Upgrade",
+  my_profile: "My profile",
+  search_ph: "Name, city or country…",
+  feed_more: "See more",
+  feed_empty: "No profiles found. Try another search or other filters.",
+  new_member: "New member",
+  tab_likes: "Liked me",
+  tab_views: "Viewed me"
 };

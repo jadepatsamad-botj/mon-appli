@@ -236,5 +236,18 @@ I18N.tl = {
   e_verify_file: "Pumili ng larawan.",
   verified_tag: "✓ Verified",
   hint: "Prototype. Unang hakbang pa lang ang pagsusuri ng edad sa itaas: kakailanganin ang pagpapatunay ng pagkakakilanlan bago ang pampublikong paglulunsad.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"]
+  countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"],
+  // Barre du bas, en-tête et Accueil
+  nav_home: "Home",
+  nav_interests: "Interes",
+  nav_events: "Aktibidad",
+  nav_messages: "Mensahe",
+  upgrade: "Mag-upgrade",
+  my_profile: "Profile ko",
+  search_ph: "Pangalan, lungsod o bansa…",
+  feed_more: "Tingnan pa",
+  feed_empty: "Walang nahanap na profile. Subukan ang ibang paghahanap o filter.",
+  new_member: "Bagong miyembro",
+  tab_likes: "Nag-like sa akin",
+  tab_views: "Tumingin sa akin"
 };

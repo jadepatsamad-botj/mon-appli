@@ -236,5 +236,18 @@ I18N.ms = {
   e_verify_file: "Sila pilih satu foto.",
   verified_tag: "✓ Disahkan",
   hint: "Prototaip. Semakan umur di atas hanyalah langkah pertama: pengesahan identiti diperlukan sebelum pelancaran awam.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"]
+  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"],
+  // Barre du bas, en-tête et Accueil
+  nav_home: "Utama",
+  nav_interests: "Minat",
+  nav_events: "Aktiviti",
+  nav_messages: "Mesej",
+  upgrade: "Naik taraf",
+  my_profile: "Profil saya",
+  search_ph: "Nama, bandar atau negara…",
+  feed_more: "Lihat lagi",
+  feed_empty: "Tiada profil ditemui. Cuba carian atau penapis lain.",
+  new_member: "Ahli baharu",
+  tab_likes: "Suka saya",
+  tab_views: "Lihat profil saya"
 };

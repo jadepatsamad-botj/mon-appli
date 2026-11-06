@@ -12,6 +12,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Jade</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/navigation.css">
 </head>
 <body>
 <main>
@@ -19,6 +20,10 @@
     <div>
       <h1 id="app-name">Jade</h1>
       <p class="sub" data-i18n="tagline"></p>
+    </div>
+    <div class="top-actions" id="top-actions" hidden>
+      <button class="top-upgrade" id="top-upgrade" type="button" data-i18n="upgrade"></button>
+      <button class="top-me" id="top-me" type="button" data-i18n-aria="my_profile"><img id="top-avatar" alt=""><span id="top-initial"></span></button>
     </div>
     <select id="lang" aria-label="Langue / Language / ภาษา / Ngôn ngữ">
       <option value="fr">Français</option>
@@ -129,7 +134,20 @@
     </form>
   </section>
 
-  <!-- Accueil / mon profil -->
+  <!-- Accueil : recherche et profils -->
+  <section id="feed" hidden>
+    <div class="searchbar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="feed-q" type="search" enterkeyhint="search" autocomplete="off" data-i18n-ph="search_ph" data-i18n-aria="search_ph">
+    </div>
+    <div id="feed-filter-slot"></div>
+    <div class="msg" id="fmsg" role="status" aria-live="polite"></div>
+    <div id="feed-list" class="feed"></div>
+    <p class="empty" id="feed-empty" hidden data-i18n="feed_empty"></p>
+    <button class="secondary" id="feed-more" type="button" hidden data-i18n="feed_more"></button>
+  </section>
+
+  <!-- Mon profil (ouvert depuis la photo en haut à droite) -->
   <section class="card" id="home" hidden>
     <img id="view-photo" class="view-photo" alt="" hidden>
     <h2 id="view-name"></h2>
@@ -265,6 +283,10 @@
   <!-- Qui a vu mon profil -->
   <section class="card" id="views" hidden>
     <button class="back" id="views-back" type="button" data-i18n="back"></button>
+    <div class="tabs seg" role="tablist">
+      <button role="tab" type="button" class="seg-likes" data-i18n="tab_likes"></button>
+      <button role="tab" type="button" class="seg-views" data-i18n="tab_views"></button>
+    </div>
     <h2 data-i18n="views_title"></h2>
     <div id="views-list"></div>
     <p class="empty" id="views-empty" hidden></p>
@@ -273,6 +295,10 @@
   <!-- Qui m'a liké -->
   <section class="card" id="likes" hidden>
     <button class="back" id="likes-back" type="button" data-i18n="back"></button>
+    <div class="tabs seg" role="tablist">
+      <button role="tab" type="button" class="seg-likes" data-i18n="tab_likes"></button>
+      <button role="tab" type="button" class="seg-views" data-i18n="tab_views"></button>
+    </div>
     <h2 data-i18n="likes_title"></h2>
     <div id="likes-list"></div>
     <p class="empty" id="likes-empty" hidden></p>
@@ -434,6 +460,26 @@
   <p class="hint" data-i18n="hint"></p>
 </main>
 
+<!-- Barre du bas : Accueil, Intérêts, Activités, Messages -->
+<nav class="tabbar" id="tabbar" hidden>
+  <button type="button" id="nav-home" data-tab="home">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
+    <span data-i18n="nav_home"></span>
+  </button>
+  <button type="button" id="nav-interests" data-tab="interests">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+    <span data-i18n="nav_interests"></span><b class="nbadge" id="nb-interests" hidden></b>
+  </button>
+  <button type="button" id="nav-events" data-tab="events">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+    <span data-i18n="nav_events"></span>
+  </button>
+  <button type="button" id="nav-messages" data-tab="messages">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+    <span data-i18n="nav_messages"></span><b class="nbadge" id="nb-messages" hidden></b>
+  </button>
+</nav>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="js/reglages.js"></script>
 <script src="js/textes/fr.js"></script>
@@ -468,6 +514,8 @@
 <script src="js/compte.js"></script>
 <script src="js/notifications.js"></script>
 <script src="js/parametres.js"></script>
+<script src="js/accueil.js"></script>
+<script src="js/navigation.js"></script>
 <script src="js/demarrage.js"></script>
 </body>
 </html>

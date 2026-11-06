@@ -176,5 +176,18 @@ I18N.fr = {
   verify_status_ok: "✓ Votre profil est vérifié.", verify_status_pending: "Demande envoyée : en cours d'examen.",
   verify_sent: "Merci ! Votre demande a été envoyée.", e_verify_file: "Choisissez une photo.", verified_tag: "✓ Vérifié",
   hint: "Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.",
-  countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"]
+  countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"],
+  // Barre du bas, en-tête et Accueil
+  nav_home: "Accueil",
+  nav_interests: "Intérêts",
+  nav_events: "Activités",
+  nav_messages: "Messages",
+  upgrade: "Mise à niveau",
+  my_profile: "Mon profil",
+  search_ph: "Prénom, ville ou pays…",
+  feed_more: "Voir plus",
+  feed_empty: "Aucun profil trouvé. Essaie une autre recherche ou d'autres filtres.",
+  new_member: "Nouveau membre",
+  tab_likes: "Ils m'ont liké",
+  tab_views: "Ont vu mon profil"
 };

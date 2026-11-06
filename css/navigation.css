@@ -1,0 +1,75 @@
+/* Jade : en-tête, barre du bas et cartes de l'Accueil */
+
+#tabbar[hidden], #top-actions[hidden], .nbadge[hidden], #top-avatar[hidden] { display: none !important; }
+
+/* Quand on est connecté : contenu en haut de l'écran, place pour la barre du bas */
+body.nav-on { place-items: start center; padding: 12px 16px calc(84px + env(safe-area-inset-bottom)); }
+body.nav-on .topbar { position: sticky; top: 0; z-index: 20; align-items: center; background: var(--bg);
+  margin: -12px -16px 12px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; border-bottom: 1px solid var(--line); }
+body.nav-on .topbar h1 { font-size: 1.6rem; margin: 0; color: var(--accent); font-family: Georgia, "Times New Roman", serif; letter-spacing: 0; }
+body.nav-on .topbar .sub { display: none; }
+body.nav-on .hint { display: none; }
+/* L'ancien menu de la page profil : ces boutons sont maintenant dans la barre du bas */
+body.nav-on #go-matches, body.nav-on #go-events, body.nav-on #go-likes, body.nav-on #go-views,
+body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back, body.nav-on #views-back { display: none; }
+#settings #lang { margin: 6px 0 4px; }
+
+.top-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.top-upgrade { border: 0; border-radius: 999px; padding: 9px 16px; font: inherit; font-size: .9rem; font-weight: 700;
+  background: var(--accent); color: var(--accent-fg); cursor: pointer; white-space: nowrap; }
+.top-me { width: 42px; height: 42px; padding: 0; border-radius: 50%; border: 2px solid var(--accent); overflow: hidden;
+  background: var(--card); color: var(--muted); font: inherit; font-weight: 700; cursor: pointer; flex: none; display: grid; place-items: center; }
+.top-me img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Barre de recherche */
+.searchbar { position: relative; margin-bottom: 10px; }
+.searchbar svg { position: absolute; left: 14px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%);
+  fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; pointer-events: none; }
+.searchbar input { width: 100%; padding: 13px 14px 13px 44px; font: inherit; color: var(--fg); background: var(--card);
+  border: 1px solid var(--line); border-radius: 999px; -webkit-appearance: none; appearance: none; }
+#feed .filters { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px 14px; margin-bottom: 4px; }
+#feed .msg { margin-top: 6px; }
+
+/* Cartes de profils */
+.feed { display: grid; gap: 16px; }
+.fcard { position: relative; width: 100%; height: clamp(380px, calc(100svh - 390px), 520px); border-radius: 18px; overflow: hidden; background: #2a2f3a; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+.fcard img, .fcard .fph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fcard .fph { display: grid; place-items: center; font-size: 5rem; font-weight: 700; color: rgba(255,255,255,.55); background: linear-gradient(160deg, #1f7a5c, #123d31); }
+.fcard::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 32%, rgba(0,0,0,0) 55%); }
+.fcount { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; border-radius: 999px;
+  background: rgba(0,0,0,.45); color: #fff; font-size: .85rem; font-weight: 600; }
+.fnew { position: absolute; top: 12px; right: 12px; z-index: 2; padding: 3px 10px; border-radius: 8px;
+  border: 1.5px solid #fff; color: #fff; font-size: .85rem; font-weight: 600; background: rgba(0,0,0,.2); }
+.finfo { position: absolute; left: 16px; right: 120px; bottom: 16px; z-index: 2; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.fname { font-family: Georgia, "Times New Roman", serif; font-size: 2rem; line-height: 1.1; display: flex; align-items: center; gap: 8px;
+  overflow-wrap: anywhere; }
+.fcheck { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .85rem/24px system-ui, sans-serif;
+  text-align: center; text-shadow: none; }
+.fmeta { font-size: 1.05rem; margin-top: 4px; }
+.fonline { font-size: .85rem; color: #9ff0c8; margin-top: 2px; }
+.fbtns { position: absolute; right: 14px; bottom: 16px; z-index: 2; display: flex; gap: 10px; }
+.fbtn { width: 52px; height: 52px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; display: grid; place-items: center;
+  background: rgba(255,255,255,.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.fbtn svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.fbtn.like.on { background: #fff; }
+.fbtn.like.on svg { fill: #e0245e; stroke: #e0245e; }
+.fbtn:disabled { opacity: .6; }
+#feed-more { margin: 16px 0 0; }
+
+/* Interrupteur Ils m'ont liké / Ont vu mon profil */
+.seg { margin-bottom: 16px; }
+.seg button { font-size: .88rem; padding: 10px 6px; line-height: 1.25; }
+
+/* Barre du bas */
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; justify-content: center;
+  background: var(--card); border-top: 1px solid var(--line); padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); }
+.tabbar button { flex: 1; max-width: 120px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  border: 0; background: none; padding: 6px 2px; font: inherit; font-size: .75rem; color: var(--muted); cursor: pointer; }
+.tabbar svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; stroke-linecap: round; }
+.tabbar button.on { color: var(--accent); font-weight: 700; }
+.tabbar button.on svg { fill: currentColor; fill-opacity: .15; }
+.tabbar span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.nbadge { position: absolute; top: 0; left: calc(50% + 6px); min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px;
+  background: #e0245e; color: #fff; font-size: .7rem; font-weight: 700; line-height: 19px; text-align: center; }

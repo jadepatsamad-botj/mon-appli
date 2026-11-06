@@ -176,5 +176,18 @@ I18N.vi = {
   verify_status_ok: "✓ Hồ sơ của bạn đã được xác minh.", verify_status_pending: "Đã gửi yêu cầu: đang được xem xét.",
   verify_sent: "Cảm ơn! Yêu cầu của bạn đã được gửi.", e_verify_file: "Vui lòng chọn một ảnh.", verified_tag: "✓ Đã xác minh",
   hint: "Bản thử nghiệm. Việc kiểm tra tuổi ở trên chỉ là bước đầu: cần xác minh danh tính trước khi ra mắt công khai.",
-  countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"]
+  countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"],
+  // Barre du bas, en-tête et Accueil
+  nav_home: "Trang chủ",
+  nav_interests: "Quan tâm",
+  nav_events: "Hoạt động",
+  nav_messages: "Tin nhắn",
+  upgrade: "Nâng cấp",
+  my_profile: "Hồ sơ của tôi",
+  search_ph: "Tên, thành phố hoặc quốc gia…",
+  feed_more: "Xem thêm",
+  feed_empty: "Không tìm thấy hồ sơ. Hãy thử tìm kiếm hoặc bộ lọc khác.",
+  new_member: "Thành viên mới",
+  tab_likes: "Đã thích tôi",
+  tab_views: "Đã xem hồ sơ"
 };

@@ -2,6 +2,28 @@
 
 // ---------- Découverte ----------
 var candidate = null;
+var fromFeed = false;   // vrai quand le profil a été ouvert depuis l'Accueil
+
+// Requête des profils compatibles avec moi + filtres choisis (utilisée par la découverte et l'Accueil)
+function discoverQuery(seen) {
+  var q = db.from("profiles").select("*")
+    .not("id", "in", "(" + seen.join(",") + ")")
+    .in("looking_for", [currentProfile.gender, "tous"])
+    .eq("suspended", false)
+    .eq("hidden", false)
+    .eq("under_review", false)
+    .order("boost", { ascending: false })
+    .order("created_at", { ascending: false });
+  if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
+  var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
+  if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
+  if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
+  if ($("f-country").value) q = q.eq("country", $("f-country").value);
+  if (myLevel() < 1) { $("f-intent").value = ""; $("f-lang").value = ""; }
+  if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
+  if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
+  return q;
+}
 
 function renderCandidate() {
   $("cand-name").textContent = nameWithAge(candidate);
@@ -21,23 +43,7 @@ async function nextCandidate() {
   if (s.error) return say(dmsg, s.error.message, "err");
   var seen = (s.data || []).map(function (x) { return x.to_id; });
   seen.push(currentUser.id);
-  var q = db.from("profiles").select("*")
-    .not("id", "in", "(" + seen.join(",") + ")")
-    .in("looking_for", [currentProfile.gender, "tous"])
-    .eq("suspended", false)
-    .eq("hidden", false)
-    .eq("under_review", false)
-    .order("boost", { ascending: false })
-    .order("created_at", { ascending: false }).limit(1);
-  if (currentProfile.looking_for !== "tous") q = q.eq("gender", currentProfile.looking_for);
-  var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
-  if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
-  if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
-  if ($("f-country").value) q = q.eq("country", $("f-country").value);
-  if (myLevel() < 1) { $("f-intent").value = ""; $("f-lang").value = ""; }
-  if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
-  if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
-  var r = await q;
+  var r = await discoverQuery(seen).limit(1);
   if (r.error) return say(dmsg, r.error.message, "err");
   say(dmsg, "", "");
   candidate = r.data && r.data[0];
@@ -65,7 +71,8 @@ async function swipe(liked, isSuper) {
       if (back.data) { banner.textContent = t("match_with", { name: candidate.first_name }); banner.hidden = false; notify(candidate.id, "match"); }
       else if (isSuper) notify(candidate.id, "super");
     }
-    if (fromLikes) { fromLikes = false; showSection("likes"); await loadLikes(); }
+    if (fromFeed) { backToFeed(candidate.id, liked, banner.hidden ? "" : banner.textContent); }
+    else if (fromLikes) { backToInterests(); }
     else { var keepMsg = isSuper; await nextCandidate(); if (keepMsg) say(dmsg, t("super_sent"), "ok"); }
   } catch (err) {
     var em = (err && err.message) || "";
@@ -86,7 +93,7 @@ $("undo").onclick = async function () {
   $("cand-empty").hidden = true; say($("dmsg"), "", ""); renderCandidate();
 };
 
-$("go-discover").onclick = function () { loadFilters(); fromLikes = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
+$("go-discover").onclick = function () { loadFilters(); fromLikes = false; fromFeed = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
 function saveFilters() {
   try { localStorage.setItem("filters", JSON.stringify({ min: $("f-min").value, max: $("f-max").value, country: $("f-country").value, intent: $("f-intent").value, lang: $("f-lang").value })); } catch (e) {}
 }
@@ -98,6 +105,10 @@ function loadFilters() {
   } catch (e) {}
 }
 $("f-apply").onclick = function () { saveFilters(); $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
-$("discover-back").onclick = function () { if (fromLikes) { fromLikes = false; showSection("likes"); loadLikes(); } else showSection("home"); };
+$("discover-back").onclick = function () {
+  if (fromFeed) backToFeed();
+  else if (fromLikes) backToInterests();
+  else showSection("home");
+};
 $("like").onclick = function () { swipe(true); };
 $("pass").onclick = function () { swipe(false); };

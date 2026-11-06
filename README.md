@@ -8,6 +8,7 @@ Site en ligne : https://jadedating.app
 |---|---|
 | `index.html` | La structure des écrans (formulaires, boutons, sections). Il charge tous les autres fichiers. |
 | `css/style.css` | L'apparence : couleurs, tailles, espacements. |
+| `css/navigation.css` | L'apparence de la barre du bas, de l'en-tête et des cartes de l'Accueil. |
 | `manifest.json` | Nom et couleur de l'appli quand on l'installe sur un téléphone. |
 | `sw.js` | Fonctionnement hors connexion et notifications. |
 | `CNAME` | Le nom de domaine (jadedating.app). Ne pas supprimer. |
@@ -38,6 +39,8 @@ Site en ligne : https://jadedating.app
 | `compte.js` | Déconnexion et suppression du compte |
 | `notifications.js` | Notifications |
 | `parametres.js` | Mot de passe oublié et paramètres |
+| `accueil.js` | Onglet Accueil : barre de recherche et cartes de profils |
+| `navigation.js` | Barre du bas (Accueil, Intérêts, Activités, Messages) et en-tête (Mise à niveau, mon profil) |
 | `demarrage.js` | Démarrage de l'appli (toujours chargé en dernier) |
 
 ## Bon à savoir
@@ -45,3 +48,4 @@ Site en ligne : https://jadedating.app
 - **Changer un texte** : ouvre le fichier de la langue dans `js/textes/`. Le même mot-clé (par exemple `events_btn`) existe dans chaque langue.
 - **Changer un prix** : `js/abonnements.js`, ligne `PRICES`.
 - **Ajouter un nouveau fichier `js/`** : il faut aussi l'ajouter dans `index.html`, dans la liste des `<script>` en bas, avant `demarrage.js`. L'ordre compte.
+- **Les 4 onglets du bas** : Accueil → `accueil.js`, Intérêts → `likes-vues.js`, Activités → `activites.js`, Messages → `matchs.js` et `messagerie.js`.
