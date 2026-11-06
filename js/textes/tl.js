@@ -295,5 +295,7 @@ I18N.tl = {
   tab_views: "Tumingin sa akin",
   // Messages : écrire à un favori
   write_fav: "Mag-mensahe sa paborito",
-  inbox_empty_favs: "Wala pang usapan. I-tap ang paborito sa itaas para mag-mensahe!"
+  inbox_empty_favs: "Wala pang usapan. I-tap ang paborito sa itaas para mag-mensahe!",
+  // Mot de passe oublié : erreur d'envoi
+  reset_err: "Hindi naipadala ang email. Subukan ulit mamaya o makipag-ugnayan sa suporta."
 };

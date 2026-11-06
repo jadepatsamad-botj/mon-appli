@@ -6,8 +6,14 @@ $("forgot").onclick = async function () {
   var email = $("email").value.trim();
   if (!email) return say($("msg"), t("e_creds"), "err");
   $("forgot").disabled = true;
-  try { await db.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + window.location.pathname }); } catch (e) {}
-  say($("msg"), t("reset_sent"), "ok");
+  var err = null;
+  try {
+    var r = await db.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + window.location.pathname });
+    err = r && r.error;
+  } catch (e) { err = e; }
+  // On affiche le vrai problème (ex. limite d'envoi, email non autorisé) au lieu de dire « envoyé »
+  if (err) say($("msg"), t("reset_err") + " (" + (err.message || err) + ")", "err");
+  else say($("msg"), t("reset_sent"), "ok");
   $("forgot").disabled = false;
 };
 function openSettings(note) {

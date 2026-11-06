@@ -235,5 +235,7 @@ I18N.vi = {
   tab_views: "Đã xem hồ sơ",
   // Messages : écrire à un favori
   write_fav: "Nhắn cho người yêu thích",
-  inbox_empty_favs: "Chưa có cuộc trò chuyện. Chạm vào một người yêu thích ở trên để nhắn tin!"
+  inbox_empty_favs: "Chưa có cuộc trò chuyện. Chạm vào một người yêu thích ở trên để nhắn tin!",
+  // Mot de passe oublié : erreur d'envoi
+  reset_err: "Không gửi được email. Hãy thử lại sau hoặc liên hệ hỗ trợ."
 };

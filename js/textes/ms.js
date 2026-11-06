@@ -295,5 +295,7 @@ I18N.ms = {
   tab_views: "Lihat profil saya",
   // Messages : écrire à un favori
   write_fav: "Hantar mesej kepada kegemaran",
-  inbox_empty_favs: "Belum ada perbualan. Ketik kegemaran di atas untuk menghantar mesej!"
+  inbox_empty_favs: "Belum ada perbualan. Ketik kegemaran di atas untuk menghantar mesej!",
+  // Mot de passe oublié : erreur d'envoi
+  reset_err: "E-mel tidak dapat dihantar. Cuba lagi kemudian atau hubungi sokongan."
 };
