@@ -346,5 +346,8 @@ I18N.tl = {
   lp_val3_p: "Beripikasyon, moderasyon at mga tool sa pag-report.",
   lp_final_t: "Alam mo ang hinahanap mo. Hanapin ito sa Jade.",
   lp_legal: "Mga tuntunin at privacy",
-  lp_foot: "Jade · Tapat na pagkikita ng Asya at ng mundo. Para lamang sa 18 pataas."
+  lp_foot: "Jade · Tapat na pagkikita ng Asya at ng mundo. Para lamang sa 18 pataas.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "Tuklasin",
+  lp_create: "Gumawa ng account"
 };

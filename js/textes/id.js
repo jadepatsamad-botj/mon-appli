@@ -286,5 +286,8 @@ I18N.id = {
   lp_val3_p: "Verifikasi, moderasi, dan alat pelaporan.",
   lp_final_t: "Anda tahu apa yang Anda cari. Temukan di Jade.",
   lp_legal: "Ketentuan dan privasi",
-  lp_foot: "Jade · Pertemuan tulus antara Asia dan dunia. Hanya untuk usia 18+."
+  lp_foot: "Jade · Pertemuan tulus antara Asia dan dunia. Hanya untuk usia 18+.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "Jelajahi",
+  lp_create: "Buat akun"
 };

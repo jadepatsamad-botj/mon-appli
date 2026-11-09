@@ -286,5 +286,8 @@ I18N.en = {
   lp_val3_p: "Verification, moderation and reporting tools.",
   lp_final_t: "You know what you're looking for. Find it on Jade.",
   lp_legal: "Terms and privacy",
-  lp_foot: "Jade · Sincere connections between Asia and the world. Adults 18+ only."
+  lp_foot: "Jade · Sincere connections between Asia and the world. Adults 18+ only.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "Discover",
+  lp_create: "Create an account"
 };

@@ -346,5 +346,8 @@ I18N.ja = {
   lp_val3_p: "本人確認、見守り、通報機能。",
   lp_final_t: "探しているものは、わかっているはず。Jade で見つけよう。",
   lp_legal: "利用規約とプライバシー",
-  lp_foot: "Jade · アジアと世界をつなぐ、誠実な出会い。18歳以上限定。"
+  lp_foot: "Jade · アジアと世界をつなぐ、誠実な出会い。18歳以上限定。",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "見てみる",
+  lp_create: "アカウント作成"
 };

@@ -346,5 +346,8 @@ I18N.ko = {
   lp_val3_p: "인증, 모니터링, 신고 기능.",
   lp_final_t: "원하는 것을 알고 있다면, Jade에서 찾으세요.",
   lp_legal: "이용약관 및 개인정보",
-  lp_foot: "Jade · 아시아와 세계를 잇는 진실한 만남. 만 18세 이상."
+  lp_foot: "Jade · 아시아와 세계를 잇는 진실한 만남. 만 18세 이상.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "둘러보기",
+  lp_create: "계정 만들기"
 };

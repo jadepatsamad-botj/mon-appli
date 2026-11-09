@@ -286,5 +286,8 @@ I18N.fr = {
   lp_val3_p: "Vérification, modération et outils de signalement.",
   lp_final_t: "Vous savez ce que vous cherchez. Trouvez-le sur Jade.",
   lp_legal: "Conditions et confidentialité",
-  lp_foot: "Jade · Rencontres sincères entre l'Asie et le monde. Réservé aux plus de 18 ans."
+  lp_foot: "Jade · Rencontres sincères entre l'Asie et le monde. Réservé aux plus de 18 ans.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "Découvrir",
+  lp_create: "Créer un compte"
 };

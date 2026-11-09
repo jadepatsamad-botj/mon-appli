@@ -346,5 +346,8 @@ I18N.ms = {
   lp_val3_p: "Pengesahan, moderasi dan alat laporan.",
   lp_final_t: "Anda tahu apa yang anda cari. Temuinya di Jade.",
   lp_legal: "Terma dan privasi",
-  lp_foot: "Jade · Pertemuan ikhlas antara Asia dan dunia. Untuk 18 tahun ke atas sahaja."
+  lp_foot: "Jade · Pertemuan ikhlas antara Asia dan dunia. Untuk 18 tahun ke atas sahaja.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "Terokai",
+  lp_create: "Cipta akaun"
 };

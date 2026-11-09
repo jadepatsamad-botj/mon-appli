@@ -286,5 +286,8 @@ I18N.vi = {
   lp_val3_p: "Xác minh, kiểm duyệt và công cụ báo cáo.",
   lp_final_t: "Bạn biết mình đang tìm gì. Hãy tìm trên Jade.",
   lp_legal: "Điều khoản và quyền riêng tư",
-  lp_foot: "Jade · Những cuộc gặp chân thành giữa châu Á và thế giới. Chỉ dành cho người từ 18 tuổi."
+  lp_foot: "Jade · Những cuộc gặp chân thành giữa châu Á và thế giới. Chỉ dành cho người từ 18 tuổi.",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "Khám phá",
+  lp_create: "Tạo tài khoản"
 };

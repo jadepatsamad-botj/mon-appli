@@ -286,5 +286,8 @@ I18N.zh = {
   lp_val3_p: "身份验证、内容审核与举报工具。",
   lp_final_t: "你知道自己在寻找什么。在 Jade 找到它。",
   lp_legal: "条款与隐私",
-  lp_foot: "Jade · 亚洲与世界之间的真诚相遇。仅限 18 岁以上。"
+  lp_foot: "Jade · 亚洲与世界之间的真诚相遇。仅限 18 岁以上。",
+  // Page d'accueil publique : photo d'ouverture
+  lp_discover: "探索",
+  lp_create: "创建账户"
 };
