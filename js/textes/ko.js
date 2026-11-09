@@ -349,5 +349,19 @@ I18N.ko = {
   lp_foot: "Jade · 아시아와 세계를 잇는 진실한 만남. 만 18세 이상.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "둘러보기",
-  lp_create: "계정 만들기"
+  lp_create: "계정 만들기",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "당신의 반쪽, 소중한 사람을 찾고 소규모 그룹 모임에서 직접 만나세요.",
+  lp_spirit_p1: "옥은 귀하고 오래가는 보석입니다. 아시아에서는 수백 년 동안 순수함과 장수의 상징으로 사랑하는 사람에게 옥을 선물해 왔습니다.",
+  lp_spirit_p2: "하지만 Jade에서 가장 소중한 것은 돌이 아니라, 평생을 찾아 헤매는 단 한 사람입니다. 당신의 반쪽, 당신의 소중한 사람.",
+  lp_spirit_p3: "이곳에서는 천천히 서로를 알아가고, 소규모 그룹 모임에서 직접 만나며, 오래가는 관계를 만들어 갑니다.",
+  lp_act_t: "실제로 만나기",
+  lp_act_p: "Jade에서는 화면 뒤에만 머물지 않습니다. 편안하고 안전한 분위기에서 서로를 알아갈 수 있도록 소규모 그룹 모임을 준비합니다.",
+  lp_step1_t: "모임 선택",
+  lp_step1_p: "요리, 하이킹, 언어 카페… 가까운 곳에서.",
+  lp_step2_t: "그룹 참여",
+  lp_step2_p: "소수의 회원과 Jade 팀이 함께합니다.",
+  lp_step3_t: "만나기",
+  lp_step3_p: "마음이 통하나요? 앱에서 대화를 이어가세요.",
+  lp_close: "닫기"
 };

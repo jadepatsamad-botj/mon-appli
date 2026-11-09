@@ -349,5 +349,19 @@ I18N.ms = {
   lp_foot: "Jade · Pertemuan ikhlas antara Asia dan dunia. Untuk 18 tahun ke atas sahaja.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "Terokai",
-  lp_create: "Cipta akaun"
+  lp_create: "Cipta akaun",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "Temui belahan jiwa anda, insan berharga anda, dan bersemuka dalam aktiviti kumpulan kecil.",
+  lp_spirit_p1: "Jed ialah batu berharga, jarang dan kekal. Di Asia, sejak berabad-abad jed dihadiahkan kepada orang tersayang sebagai lambang kesucian dan umur panjang.",
+  lp_spirit_p2: "Tetapi di Jade, yang paling berharga bukanlah batu: ia ialah insan yang dicari sepanjang hayat. Belahan jiwa anda. Insan berharga anda.",
+  lp_spirit_p3: "Di sini, kita meluangkan masa untuk saling mengenali, bersemuka dalam aktiviti kumpulan kecil, dan membina sesuatu yang kekal.",
+  lp_act_t: "Bertemu secara nyata",
+  lp_act_p: "Di Jade, anda tidak hanya di sebalik skrin. Kami menganjurkan aktiviti kumpulan kecil supaya anda dapat berkenalan dalam suasana santai dan selamat.",
+  lp_step1_t: "Pilih aktiviti",
+  lp_step1_p: "Memasak, mendaki, kafe bahasa… berhampiran anda.",
+  lp_step2_t: "Sertai kumpulan",
+  lp_step2_p: "Beberapa ahli, diiringi pasukan Jade.",
+  lp_step3_t: "Bertemu",
+  lp_step3_p: "Rasa serasi? Teruskan perbualan dalam aplikasi.",
+  lp_close: "Tutup"
 };

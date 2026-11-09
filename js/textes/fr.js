@@ -289,5 +289,19 @@ I18N.fr = {
   lp_foot: "Jade · Rencontres sincères entre l'Asie et le monde. Réservé aux plus de 18 ans.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "Découvrir",
-  lp_create: "Créer un compte"
+  lp_create: "Créer un compte",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "Trouvez votre moitié, votre précieux, et rencontrez-vous en vrai lors de sorties en petit groupe.",
+  lp_spirit_p1: "Le jade est une pierre précieuse, rare et durable. En Asie, on l'offre depuis des siècles à ceux qu'on aime, comme un symbole de pureté et de longévité.",
+  lp_spirit_p2: "Mais chez Jade, le plus précieux n'est pas une pierre : c'est la personne que l'on cherche toute une vie. Votre moitié. Votre précieux.",
+  lp_spirit_p3: "Ici, on prend le temps de se découvrir, on se retrouve en vrai lors de sorties en petit groupe, et on construit quelque chose qui dure.",
+  lp_act_t: "Se rencontrer en vrai",
+  lp_act_p: "Chez Jade, on ne reste pas derrière un écran. Nous organisons des sorties en petit groupe pour faire connaissance dans un cadre détendu et sûr.",
+  lp_step1_t: "Choisissez une sortie",
+  lp_step1_p: "Cuisine, randonnée, café des langues… près de chez vous.",
+  lp_step2_t: "Rejoignez le groupe",
+  lp_step2_p: "Quelques membres, accompagnés par l'équipe Jade.",
+  lp_step3_t: "Rencontrez-vous",
+  lp_step3_p: "Le courant passe ? Continuez la conversation dans l'appli.",
+  lp_close: "Fermer"
 };

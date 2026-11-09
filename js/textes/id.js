@@ -289,5 +289,19 @@ I18N.id = {
   lp_foot: "Jade · Pertemuan tulus antara Asia dan dunia. Hanya untuk usia 18+.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "Jelajahi",
-  lp_create: "Buat akun"
+  lp_create: "Buat akun",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "Temukan belahan jiwamu, orang berhargamu, dan bertemu langsung lewat kegiatan kelompok kecil.",
+  lp_spirit_p1: "Giok adalah batu berharga, langka dan abadi. Di Asia, sejak berabad-abad giok diberikan kepada orang tercinta sebagai lambang kemurnian dan umur panjang.",
+  lp_spirit_p2: "Namun di Jade, yang paling berharga bukanlah batu: melainkan orang yang kita cari seumur hidup. Belahan jiwamu. Orang berhargamu.",
+  lp_spirit_p3: "Di sini, kita meluangkan waktu untuk saling mengenal, bertemu langsung lewat kegiatan kelompok kecil, dan membangun sesuatu yang langgeng.",
+  lp_act_t: "Bertemu di dunia nyata",
+  lp_act_p: "Di Jade, Anda tidak hanya berada di balik layar. Kami mengadakan kegiatan kelompok kecil agar bisa saling mengenal dalam suasana santai dan aman.",
+  lp_step1_t: "Pilih kegiatan",
+  lp_step1_p: "Memasak, mendaki, kafe bahasa… di dekat Anda.",
+  lp_step2_t: "Bergabung dengan grup",
+  lp_step2_p: "Beberapa anggota, didampingi tim Jade.",
+  lp_step3_t: "Saling bertemu",
+  lp_step3_p: "Merasa cocok? Lanjutkan obrolan di aplikasi.",
+  lp_close: "Tutup"
 };

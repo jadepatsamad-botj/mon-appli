@@ -289,5 +289,19 @@ I18N.vi = {
   lp_foot: "Jade · Những cuộc gặp chân thành giữa châu Á và thế giới. Chỉ dành cho người từ 18 tuổi.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "Khám phá",
-  lp_create: "Tạo tài khoản"
+  lp_create: "Tạo tài khoản",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "Tìm một nửa của bạn, người quý giá của bạn, và gặp nhau thật sự trong những buổi đi chơi nhóm nhỏ.",
+  lp_spirit_p1: "Ngọc bích là một loại đá quý, hiếm và bền lâu. Ở châu Á, từ nhiều thế kỷ người ta tặng ngọc cho người mình yêu, như biểu tượng của sự thuần khiết và trường thọ.",
+  lp_spirit_p2: "Nhưng ở Jade, điều quý giá nhất không phải là viên đá: đó là người mà ta tìm kiếm cả đời. Một nửa của bạn. Người quý giá của bạn.",
+  lp_spirit_p3: "Ở đây, mọi người dành thời gian tìm hiểu nhau, gặp nhau thật sự trong những buổi đi chơi nhóm nhỏ và xây dựng điều gì đó lâu dài.",
+  lp_act_t: "Gặp nhau ngoài đời thật",
+  lp_act_p: "Ở Jade, bạn không chỉ ngồi sau màn hình. Chúng tôi tổ chức những buổi đi chơi nhóm nhỏ để làm quen trong không khí thoải mái và an toàn.",
+  lp_step1_t: "Chọn một buổi đi chơi",
+  lp_step1_p: "Nấu ăn, leo núi, cà phê ngôn ngữ… gần bạn.",
+  lp_step2_t: "Tham gia nhóm",
+  lp_step2_p: "Vài thành viên, có đội ngũ Jade đồng hành.",
+  lp_step3_t: "Gặp nhau",
+  lp_step3_p: "Thấy hợp nhau? Tiếp tục trò chuyện trong ứng dụng.",
+  lp_close: "Đóng"
 };

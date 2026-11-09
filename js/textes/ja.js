@@ -349,5 +349,19 @@ I18N.ja = {
   lp_foot: "Jade · アジアと世界をつなぐ、誠実な出会い。18歳以上限定。",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "見てみる",
-  lp_create: "アカウント作成"
+  lp_create: "アカウント作成",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "運命の相手、あなたの大切な人を見つけ、少人数のおでかけで実際に会いましょう。",
+  lp_spirit_p1: "翡翠は希少で長く輝き続ける宝石。アジアでは何世紀にもわたり、純粋さと長寿の象徴として大切な人に贈られてきました。",
+  lp_spirit_p2: "でも Jade でいちばん大切なのは石ではありません。一生をかけて探す、たったひとりの人。あなたの運命の相手。あなたの宝物。",
+  lp_spirit_p3: "ここでは、ゆっくりお互いを知り、少人数のおでかけで実際に会い、長く続く関係を育てます。",
+  lp_act_t: "リアルで出会う",
+  lp_act_p: "Jade では画面の向こうだけで終わりません。リラックスした安全な雰囲気で知り合えるよう、少人数のおでかけを企画しています。",
+  lp_step1_t: "おでかけを選ぶ",
+  lp_step1_p: "料理、ハイキング、ランゲージカフェ…お近くで。",
+  lp_step2_t: "グループに参加",
+  lp_step2_p: "少人数のメンバーに、Jade のスタッフが付き添います。",
+  lp_step3_t: "出会う",
+  lp_step3_p: "気が合ったら、アプリで会話を続けましょう。",
+  lp_close: "閉じる"
 };

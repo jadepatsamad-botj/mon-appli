@@ -349,5 +349,19 @@ I18N.tl = {
   lp_foot: "Jade · Tapat na pagkikita ng Asya at ng mundo. Para lamang sa 18 pataas.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "Tuklasin",
-  lp_create: "Gumawa ng account"
+  lp_create: "Gumawa ng account",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "Hanapin ang iyong kabiyak, ang iyong mahal, at magkita nang personal sa maliliit na grupong lakad.",
+  lp_spirit_p1: "Ang jade ay isang mahalagang bato, bihira at matibay. Sa Asya, ibinibigay ito sa mga minamahal sa loob ng maraming siglo bilang simbolo ng kadalisayan at mahabang buhay.",
+  lp_spirit_p2: "Pero sa Jade, ang pinakamahalaga ay hindi bato: ito ang taong hinahanap mo buong buhay. Ang iyong kabiyak. Ang iyong mahal.",
+  lp_spirit_p3: "Dito, naglalaan ng oras para makilala ang isa't isa, nagkikita nang personal sa maliliit na grupong lakad, at bumubuo ng pangmatagalan.",
+  lp_act_t: "Magkita nang totoo",
+  lp_act_p: "Sa Jade, hindi ka lang nasa likod ng screen. Nag-oorganisa kami ng maliliit na grupong lakad para magkakilala sa relaks at ligtas na kapaligiran.",
+  lp_step1_t: "Pumili ng lakad",
+  lp_step1_p: "Pagluluto, hiking, language café… malapit sa iyo.",
+  lp_step2_t: "Sumali sa grupo",
+  lp_step2_p: "Ilang miyembro, kasama ang team ng Jade.",
+  lp_step3_t: "Magkita kayo",
+  lp_step3_p: "May spark? Ituloy ang usapan sa app.",
+  lp_close: "Isara"
 };

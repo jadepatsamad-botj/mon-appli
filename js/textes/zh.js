@@ -289,5 +289,19 @@ I18N.zh = {
   lp_foot: "Jade · 亚洲与世界之间的真诚相遇。仅限 18 岁以上。",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "探索",
-  lp_create: "创建账户"
+  lp_create: "创建账户",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "找到你的另一半、你的珍宝，在小组活动中真实相遇。",
+  lp_spirit_p1: "玉是一种珍贵的宝石，稀有而恒久。几个世纪以来，在亚洲人们把玉送给所爱之人，象征纯洁与长久。",
+  lp_spirit_p2: "但在 Jade，最珍贵的不是一块石头，而是你用一生去寻找的那个人。你的另一半，你的珍宝。",
+  lp_spirit_p3: "在这里，大家慢慢了解彼此，在小组活动中真实相遇，建立长久的关系。",
+  lp_act_t: "在现实中相遇",
+  lp_act_p: "在 Jade，你不只是待在屏幕后面。我们组织小组活动，让大家在轻松、安全的氛围中相识。",
+  lp_step1_t: "选择一个活动",
+  lp_step1_p: "烹饪、徒步、语言咖啡馆……就在你附近。",
+  lp_step2_t: "加入小组",
+  lp_step2_p: "几位会员，由 Jade 团队陪同。",
+  lp_step3_t: "见面相识",
+  lp_step3_p: "有感觉吗？在应用里继续聊。",
+  lp_close: "关闭"
 };

@@ -289,5 +289,19 @@ I18N.en = {
   lp_foot: "Jade · Sincere connections between Asia and the world. Adults 18+ only.",
   // Page d'accueil publique : photo d'ouverture
   lp_discover: "Discover",
-  lp_create: "Create an account"
+  lp_create: "Create an account",
+  // Page d'accueil publique : esprit de Jade (pierre précieuse → sa moitié) et sorties en groupe
+  lp_hero_p: "Find your other half, your precious one, and meet in person at small-group outings.",
+  lp_spirit_p1: "Jade is a precious stone, rare and enduring. In Asia, it has been given to loved ones for centuries as a symbol of purity and long life.",
+  lp_spirit_p2: "But at Jade, the most precious thing isn't a stone: it's the person you search for your whole life. Your other half. Your precious one.",
+  lp_spirit_p3: "Here, people take time to get to know each other, meet in person at small-group outings, and build something that lasts.",
+  lp_act_t: "Meet in real life",
+  lp_act_p: "At Jade, you don't stay behind a screen. We organise small-group outings so you can get to know each other in a relaxed, safe setting.",
+  lp_step1_t: "Choose an outing",
+  lp_step1_p: "Cooking, hiking, language café… near you.",
+  lp_step2_t: "Join the group",
+  lp_step2_p: "A few members, accompanied by the Jade team.",
+  lp_step3_t: "Meet each other",
+  lp_step3_p: "Feel a spark? Keep the conversation going in the app.",
+  lp_close: "Close"
 };
