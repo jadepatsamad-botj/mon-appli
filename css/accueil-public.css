@@ -110,12 +110,15 @@ body.landing-on #auth .hero { display: none; }
 .lp-win-text { display: none; }
 
 @media (min-width: 900px) and (min-aspect-ratio: 1/1) {
-  .lp-win-col { max-width: 1240px; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(32px, 6vw, 96px);
-    padding: 48px max(32px, env(safe-area-inset-right, 0px)) 56px max(32px, env(safe-area-inset-left, 0px)); box-sizing: border-box; }
-  .lp-win-text { display: block; color: #fbf8ea; min-width: 0; }
-  .lp-win-text .lp-win-word { font-size: clamp(3.4rem, 7vw, 6.4rem); margin-bottom: 28px; }
-  .lp-win-h1 { margin: 0 0 18px; max-width: 14ch; font-family: var(--font-title); font-weight: 400; font-size: clamp(2.2rem, 3.6vw, 3.4rem); line-height: 1.12; text-wrap: balance; }
-  .lp-win-lead { margin: 0; max-width: 40ch; font-size: 1.15rem; line-height: 1.6; color: rgba(251, 248, 234, .85); }
-  .lp-win-img img { width: auto; height: min(82vh, 900px); border-radius: 4px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); }
-  .lp-win-title { display: none; }
+  /* Ordinateur : la photo large en plein écran, le texte sur le panneau de bois à gauche */
+  .lp-win { background: #1d140e url("../img/accueil-large.jpg") 70% center / cover no-repeat; }
+  .lp-win::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(18, 11, 7, .78) 0%, rgba(18, 11, 7, .5) 26%, rgba(18, 11, 7, 0) 46%); }
+  .lp-win-bg, .lp-win-img { display: none; }
+  .lp-win-col { max-width: none; min-height: calc(100vh - 64px); display: flex; align-items: center; box-sizing: border-box;
+    padding: 56px max(32px, env(safe-area-inset-right, 0px)) 64px max(5vw, env(safe-area-inset-left, 0px)); }
+  .lp-win-text { display: block; position: relative; width: min(34vw, 520px); color: #fbf8ea; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
+  .lp-win-text .lp-win-word { font-size: clamp(3rem, 5.6vw, 6rem); margin-bottom: 26px; }
+  .lp-win-h1 { margin: 0 0 18px; font-family: var(--font-title); font-weight: 400; font-size: clamp(2rem, 3.1vw, 3.3rem); line-height: 1.12; text-wrap: balance; }
+  .lp-win-lead { margin: 0; max-width: 34ch; font-size: clamp(1rem, 1.2vw, 1.2rem); line-height: 1.6; color: rgba(251, 248, 234, .88); }
 }
