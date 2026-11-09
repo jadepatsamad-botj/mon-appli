@@ -303,5 +303,8 @@ I18N.zh = {
   lp_step2_p: "几位会员，由 Jade 团队陪同。",
   lp_step3_t: "见面相识",
   lp_step3_p: "有感觉吗？在应用里继续聊。",
-  lp_close: "关闭"
+  lp_close: "关闭",
+  photo_req: "至少需要一张您本人的照片。",
+  e_photo_required: "请至少添加一张您本人的照片以继续。",
+  photo_locked: "您的 Jade 使用已暂停：请至少添加一张您本人的照片以恢复。"
 };

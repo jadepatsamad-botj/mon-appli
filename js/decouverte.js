@@ -11,6 +11,7 @@ var MISSING_COLS = {};
 // (utilisée par l'Accueil et la découverte)
 function discoverQuery(seen) {
   var q = db.from("profiles").select("*").not("id", "in", "(" + seen.join(",") + ")");
+  q = q.not("photo_path", "is", null);
   ["suspended", "hidden", "under_review"].forEach(function (c) { if (!MISSING_COLS[c]) q = q.not(c, "is", true); });
   if (!MISSING_COLS.boost) q = q.order("boost", { ascending: false, nullsFirst: false });
   q = q.order("created_at", { ascending: false });

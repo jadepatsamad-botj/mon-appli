@@ -303,5 +303,8 @@ I18N.id = {
   lp_step2_p: "Beberapa anggota, didampingi tim Jade.",
   lp_step3_t: "Saling bertemu",
   lp_step3_p: "Merasa cocok? Lanjutkan obrolan di aplikasi.",
-  lp_close: "Tutup"
+  lp_close: "Tutup",
+  photo_req: "Minimal satu foto diri Anda wajib ada.",
+  e_photo_required: "Tambahkan minimal satu foto diri Anda untuk melanjutkan.",
+  photo_locked: "Akses Anda ke Jade dijeda: tambahkan minimal satu foto diri Anda untuk memulihkannya."
 };

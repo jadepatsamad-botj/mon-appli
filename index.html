@@ -190,9 +190,11 @@
   <section class="card" id="profile" hidden>
     <h2 data-i18n="profile_title"></h2>
     <p class="sub" style="margin-bottom:8px" data-i18n="profile_sub"></p>
+    <p class="photo-lock" id="photo-lock" role="alert" data-i18n="photo_locked" hidden></p>
     <form id="pform" novalidate>
       <label data-i18n="photos_label"></label>
       <div id="slots" class="slots"></div>
+      <p class="photo-req" data-i18n="photo_req"></p>
 
       <label for="first_name" data-i18n="first_name"></label>
       <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
@@ -444,6 +446,7 @@
     <h2>Administration</h2>
     <div id="admin-stats" class="stats"></div>
     <button class="secondary" id="admin-diag" type="button">🩺 Vérifier l'installation</button>
+    <button class="secondary" id="admin-photo-sweep" type="button">📷 Prévenir les profils sans photo</button>
     <div id="diag-out"></div>
     <h3>Membres</h3>
     <div class="chat-form" style="margin-bottom:10px">
@@ -685,6 +688,7 @@
 <script src="js/accueil.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/accueil-public.js"></script>
+<script src="js/photo-obligatoire.js"></script>
 <script src="js/demarrage.js"></script>
 </body>
 </html>

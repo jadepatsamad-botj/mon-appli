@@ -303,5 +303,8 @@ I18N.fr = {
   lp_step2_p: "Quelques membres, accompagnés par l'équipe Jade.",
   lp_step3_t: "Rencontrez-vous",
   lp_step3_p: "Le courant passe ? Continuez la conversation dans l'appli.",
-  lp_close: "Fermer"
+  lp_close: "Fermer",
+  photo_req: "Au moins une photo de vous est obligatoire.",
+  e_photo_required: "Ajoutez au moins une photo de vous pour continuer.",
+  photo_locked: "Votre accès à Jade est en pause : ajoutez au moins une photo de vous pour le retrouver."
 };

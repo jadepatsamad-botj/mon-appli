@@ -11,6 +11,8 @@ $("pform").addEventListener("submit", async function (e) {
   var name = $("first_name").value.trim();
   if (!name) return say(msg, t("e_name"), "err");
   if (!$("gender").value || !$("looking_for").value) return say(msg, t("e_gender"), "err");
+  // Au moins une photo de soi est obligatoire (à l'inscription comme en modifiant son profil)
+  if (!slots.some(function (s) { return s.path || s.file; })) { say(msg, t("e_photo_required"), "err"); $("slots").scrollIntoView({ block: "center" }); return; }
   $("psave").disabled = true; say(msg, t("saving"), "");
   try {
     for (var i = 0; i < 5; i++) {

@@ -303,5 +303,8 @@ I18N.en = {
   lp_step2_p: "A few members, accompanied by the Jade team.",
   lp_step3_t: "Meet each other",
   lp_step3_p: "Feel a spark? Keep the conversation going in the app.",
-  lp_close: "Close"
+  lp_close: "Close",
+  photo_req: "At least one photo of yourself is required.",
+  e_photo_required: "Add at least one photo of yourself to continue.",
+  photo_locked: "Your access to Jade is paused: add at least one photo of yourself to get it back."
 };

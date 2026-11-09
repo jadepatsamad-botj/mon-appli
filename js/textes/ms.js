@@ -363,5 +363,8 @@ I18N.ms = {
   lp_step2_p: "Beberapa ahli, diiringi pasukan Jade.",
   lp_step3_t: "Bertemu",
   lp_step3_p: "Rasa serasi? Teruskan perbualan dalam aplikasi.",
-  lp_close: "Tutup"
+  lp_close: "Tutup",
+  photo_req: "Sekurang-kurangnya satu foto diri anda diwajibkan.",
+  e_photo_required: "Tambah sekurang-kurangnya satu foto diri anda untuk meneruskan.",
+  photo_locked: "Akses anda ke Jade dijeda: tambah sekurang-kurangnya satu foto diri anda untuk mendapatkannya semula."
 };

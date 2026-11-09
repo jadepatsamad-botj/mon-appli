@@ -303,5 +303,8 @@ I18N.vi = {
   lp_step2_p: "Vài thành viên, có đội ngũ Jade đồng hành.",
   lp_step3_t: "Gặp nhau",
   lp_step3_p: "Thấy hợp nhau? Tiếp tục trò chuyện trong ứng dụng.",
-  lp_close: "Đóng"
+  lp_close: "Đóng",
+  photo_req: "Bắt buộc phải có ít nhất một ảnh của bạn.",
+  e_photo_required: "Hãy thêm ít nhất một ảnh của bạn để tiếp tục.",
+  photo_locked: "Quyền truy cập Jade của bạn đang tạm dừng: hãy thêm ít nhất một ảnh của bạn để sử dụng lại."
 };

@@ -363,5 +363,8 @@ I18N.tl = {
   lp_step2_p: "Ilang miyembro, kasama ang team ng Jade.",
   lp_step3_t: "Magkita kayo",
   lp_step3_p: "May spark? Ituloy ang usapan sa app.",
-  lp_close: "Isara"
+  lp_close: "Isara",
+  photo_req: "Kailangan ng kahit isang larawan mo.",
+  e_photo_required: "Magdagdag ng kahit isang larawan mo para magpatuloy.",
+  photo_locked: "Naka-pause ang access mo sa Jade: magdagdag ng kahit isang larawan mo para maibalik ito."
 };

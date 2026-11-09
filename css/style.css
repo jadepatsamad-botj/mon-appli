@@ -198,3 +198,9 @@ body.nav-on .topbar h1 { font-size: 2.3rem !important; line-height: 1; }
 /* Cormorant est plus fin que Playfair : on renforce un peu les titres et les prénoms */
 .fname, .iname, .cname, #cand-name, #peer-name { font-weight: 600; }
 .lp-h2, .lp-h3, .lp-vals h3, .lp-win-h1, .lp-h1, .ihead h2, .lp-acts b { font-weight: 500 !important; }
+
+/* Photo obligatoire : petit rappel sous les emplacements de photos */
+.photo-req { margin: 6px 0 4px; font-size: .88rem; color: var(--muted); }
+.photo-lock { margin: 4px 0 16px; padding: 12px 14px; border-radius: 12px; background: #f6e3d6; color: #6b2e17; border: 1px solid #e7c3ad; font-weight: 700; line-height: 1.45; }
+/* Le nom « Jade » en haut de l'appli est toujours en calligraphie, aussi sur l'écran du profil */
+.topbar #app-name { font-family: var(--font-script) !important; font-weight: 400 !important; letter-spacing: 0 !important; }
