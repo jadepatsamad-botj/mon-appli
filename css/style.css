@@ -1,8 +1,12 @@
 /* Jade : apparence de l'appli (couleurs, tailles, mise en page) */
 
+/* La calligraphie du logo « Jade » est hébergée avec l'appli : même écriture sur ordinateur, téléphone et iPad,
+   même si Google Fonts ne se charge pas (police libre Great Vibes, licence OFL dans fonts/). */
+@font-face { font-family: "Jade Script"; src: url("../fonts/GreatVibes-Regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: block; }
+
   :root {
     /* Polices de Jade : Great Vibes (logo « Jade »), Cormorant Garamond (titres, prénoms), Lato (textes) */
-    --font-script: "Great Vibes", "Cormorant Garamond", Georgia, cursive;
+    --font-script: "Jade Script", "Great Vibes", "Cormorant Garamond", Georgia, cursive;
     --font-title: "Cormorant Garamond", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
     /* Couleurs de Jade : vert olive et crème */
     --olive: #6e7548; --olive-light: #a3a77f; --olive-dark: #545a33; --cream: #fbf8ea; --on-olive: #fbf8ea;
