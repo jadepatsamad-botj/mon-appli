@@ -190,7 +190,6 @@ body.nav-on .topbar h1 { font-size: 2.3rem !important; line-height: 1; }
 .lp-logo { font-size: 2.1rem !important; line-height: 1; }
 .lp-foot .lp-logo { font-size: 2.8rem !important; }
 .lp-word { font-size: clamp(5rem, 24vw, 10rem) !important; }
-.lp-win-word { font-size: clamp(3.6rem, 17vw, 5.4rem) !important; line-height: .95 !important; }
 @media (min-width: 900px) and (min-aspect-ratio: 1/1) { .lp-win-text .lp-win-word { font-size: clamp(5rem, 9vw, 9rem) !important; margin-bottom: 14px !important; } }
 /* Cormorant est plus fin que Playfair : on renforce un peu les titres et les prénoms */
 .fname, .iname, .cname, #cand-name, #peer-name { font-weight: 600; }
