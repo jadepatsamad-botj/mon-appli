@@ -17,8 +17,103 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/navigation.css">
 <link rel="stylesheet" href="css/messages.css">
+<link rel="stylesheet" href="css/accueil-public.css">
 </head>
 <body>
+<!-- Page d'accueil publique (visiteurs non connectés) -->
+<div id="landing">
+  <header class="lp-bar">
+    <span class="lp-logo">Jade</span>
+    <button type="button" class="lp-login" id="lp-login" data-i18n="lp_login"></button>
+    <button type="button" class="lp-join-s" id="lp-join-top" data-i18n="lp_join_short"></button>
+  </header>
+
+  <section class="lp-hero">
+    <svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg>
+    <div class="lp-word">Jade</div>
+    <h1 class="lp-h1" data-i18n="lp_hero_t"></h1>
+    <p class="lp-lead" data-i18n="lp_hero_p"></p>
+    <button type="button" class="lp-cta" data-join data-i18n="lp_join"></button>
+    <p class="lp-free" data-i18n="lp_free"></p>
+  </section>
+
+  <section class="lp-band cream">
+    <div class="lp-in narrow">
+      <h2 class="lp-h2" data-i18n="lp_spirit_t"></h2>
+      <div class="lp-hands" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div>
+      <p data-i18n="lp_spirit_p1"></p>
+      <p data-i18n="lp_spirit_p2"></p>
+      <p class="lp-strong" data-i18n="lp_spirit_p3"></p>
+      <button type="button" class="lp-cta dark" data-join data-i18n="lp_join"></button>
+    </div>
+  </section>
+
+  <section class="lp-band paper">
+    <div class="lp-in narrow">
+      <h2 class="lp-h3" data-i18n="lp_rules_t"></h2>
+      <ul class="lp-rules">
+        <li data-i18n="lp_rule1"></li>
+        <li data-i18n="lp_rule2"></li>
+        <li class="lp-em" data-i18n="lp_rule3"></li>
+        <li data-i18n="lp_rule4"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="lp-band cream">
+    <div class="lp-in">
+      <h2 class="lp-h2" data-i18n="lp_adv_t"></h2>
+      <div class="lp-adv">
+        <article><h3 data-i18n="lp_adv1_t"></h3><p data-i18n="lp_adv1_p"></p></article>
+        <article><h3 data-i18n="lp_adv2_t"></h3><p data-i18n="lp_adv2_p"></p></article>
+        <article><h3 data-i18n="lp_adv3_t"></h3><p data-i18n="lp_adv3_p"></p></article>
+        <article><h3 data-i18n="lp_adv4_t"></h3><p data-i18n="lp_adv4_p"></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-band olive">
+    <div class="lp-in narrow">
+      <h2 class="lp-h2" data-i18n="lp_act_t"></h2>
+      <p data-i18n="lp_act_p"></p>
+      <ul class="lp-acts">
+        <li><b data-i18n="lp_act1"></b><span data-i18n="lp_act1_d"></span></li>
+        <li><b data-i18n="lp_act2"></b><span data-i18n="lp_act2_d"></span></li>
+        <li><b data-i18n="lp_act3"></b><span data-i18n="lp_act3_d"></span></li>
+      </ul>
+      <p class="lp-note" data-i18n="lp_act_note"></p>
+    </div>
+  </section>
+
+  <section class="lp-band cream">
+    <div class="lp-in">
+      <h2 class="lp-h2" data-i18n="lp_val_t"></h2>
+      <div class="lp-vals">
+        <article><div class="lp-ring" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div><h3 data-i18n="lp_val1"></h3><p data-i18n="lp_val1_p"></p></article>
+        <article><div class="lp-ring" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div><h3 data-i18n="lp_val2"></h3><p data-i18n="lp_val2_p"></p></article>
+        <article><div class="lp-ring" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div><h3 data-i18n="lp_val3"></h3><p data-i18n="lp_val3_p"></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-final">
+    <svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg>
+    <h2 class="lp-h1" data-i18n="lp_final_t"></h2>
+    <p class="lp-free big" data-i18n="lp_free"></p>
+    <button type="button" class="lp-cta" data-join data-i18n="lp_join"></button>
+  </section>
+
+  <footer class="lp-foot">
+    <div class="lp-logo">Jade</div>
+    <div class="lp-langs" id="lp-langs"></div>
+    <div class="lp-links">
+      <button type="button" class="linkbtn" id="lp-legal" data-i18n="lp_legal"></button>
+      <button type="button" class="linkbtn" id="lp-login2" data-i18n="lp_login"></button>
+    </div>
+    <p data-i18n="lp_foot"></p>
+  </footer>
+</div>
+
 <main>
   <div class="topbar">
     <div>
@@ -578,6 +673,7 @@
 <script src="js/parametres.js"></script>
 <script src="js/accueil.js"></script>
 <script src="js/navigation.js"></script>
+<script src="js/accueil-public.js"></script>
 <script src="js/demarrage.js"></script>
 </body>
 </html>

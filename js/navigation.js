@@ -10,6 +10,7 @@ function updateNav(name) {
   var logged = !!(currentUser && currentProfile);
   document.body.classList.toggle("nav-on", logged && NO_TABBAR.indexOf(name) === -1);
   document.body.classList.toggle("chat-on", name === "chat");
+  document.body.classList.toggle("landing-on", name === "auth" && !logged);
   if (name !== "chat" && typeof closeLightbox === "function") closeLightbox();
   $("tabbar").hidden = !logged || NO_TABBAR.indexOf(name) !== -1;
   $("top-actions").hidden = !logged || name === "auth";

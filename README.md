@@ -8,6 +8,7 @@ Site en ligne : https://jadedating.app
 |---|---|
 | `index.html` | La structure des écrans (formulaires, boutons, sections). Il charge tous les autres fichiers. |
 | `css/style.css` | L'apparence : couleurs, tailles, espacements. |
+| `css/accueil-public.css` | L'apparence de la page d'accueil publique (visiteurs non connectés). |
 | `css/messages.css` | L'apparence de l'écran de discussion (bulles, en-tête, fond). |
 | `css/navigation.css` | L'apparence de la barre du bas, de l'en-tête et des cartes de l'Accueil. |
 | `manifest.json` | Nom et couleur de l'appli quand on l'installe sur un téléphone. |
@@ -40,6 +41,7 @@ Site en ligne : https://jadedating.app
 | `compte.js` | Déconnexion et suppression du compte |
 | `notifications.js` | Notifications |
 | `parametres.js` | Mot de passe oublié et paramètres |
+| `accueil-public.js` | Page d'accueil publique : boutons d'inscription et de connexion, choix des langues. Les textes sont les clés `lp_…` dans `js/textes/`. |
 | `accueil.js` | Onglet Accueil : barre de recherche et cartes de profils |
 | `navigation.js` | Barre du bas (Accueil, Intérêts, Activités, Messages) et en-tête (Mise à niveau, mon profil) |
 | `demarrage.js` | Démarrage de l'appli (toujours chargé en dernier) |
