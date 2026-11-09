@@ -18,7 +18,6 @@ function closeAuth() {
 
 $("lp-join-top").onclick = function () { goAuth("signup"); };
 $("lp-login").onclick = function () { goAuth("login"); };
-$("lp-login2").onclick = function () { goAuth("login"); };
 $("auth-close").onclick = closeAuth;
 $("lp-legal").onclick = function () { document.body.classList.add("auth-open"); openLegal("auth"); };
 document.addEventListener("keydown", function (e) {
