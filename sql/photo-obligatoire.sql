@@ -2,9 +2,10 @@
 -- À coller une seule fois dans Supabase → SQL Editor → Run.
 --
 -- Ce que ça fait :
---  * Un membre sans photo reçoit un message de « l'équipe Jade » dans Messages.
---  * 3 jours plus tard, s'il n'a toujours pas de photo, son accès à Jade est mis en pause :
+--  * Un membre sans photo voit son accès à Jade mis en pause tout de suite :
 --    il ne peut plus que modifier son profil, jusqu'à ce qu'il ajoute une photo.
+--  * Il reçoit aussi un message de « l'équipe Jade » dans Messages.
+--  * Ce fichier peut être relancé sans risque (il remplace l'ancienne version).
 --  * L'équipe Jade est un compte normal de l'appli, marqué is_team = true (voir tout en bas).
 
 alter table public.profiles add column if not exists photo_warned_at timestamptz;
@@ -30,12 +31,12 @@ create trigger jade_protect_photo_cols before insert or update on public.profile
 -- Le message envoyé par l'équipe Jade (en français et en anglais)
 create or replace function public.jade_photo_message() returns text
 language sql immutable as $$
-  select 'Bonjour, ici l''équipe Jade. Votre profil n''a pas encore de photo. Sur Jade, au moins une photo de vous est obligatoire, pour que les autres membres puissent vous reconnaître. Ajoutez-en une dans « Modifier mon profil » d''ici 3 jours, sinon votre accès à Jade sera mis en pause jusqu''à l''ajout d''une photo. Merci !'
+  select 'Bonjour, ici l''équipe Jade. Votre profil n''a pas encore de photo. Sur Jade, au moins une photo de vous est obligatoire, pour que les autres membres puissent vous reconnaître. Votre accès à Jade est en pause jusqu''à l''ajout d''une photo dans « Modifier mon profil ». Merci !'
     || E'\n\n'
-    || 'Hello, this is the Jade team. Your profile does not have a photo yet. At least one photo of yourself is required on Jade, so other members can recognise you. Please add one in « Edit my profile » within 3 days, otherwise your access to Jade will be paused until you add a photo. Thank you!'
+    || 'Hello, this is the Jade team. Your profile does not have a photo yet. At least one photo of yourself is required on Jade, so other members can recognise you. Your access to Jade is paused until you add a photo in « Edit my profile ». Thank you!'
 $$;
 
--- Appelée par l'appli à chaque connexion : prévient une fois, puis met en pause après 3 jours
+-- Appelée par l'appli à chaque connexion : pause immédiate sans photo, message de l'équipe Jade une seule fois
 create or replace function public.jade_photo_check() returns json
 language plpgsql security definer set search_path = public as $$
 declare
@@ -68,11 +69,11 @@ begin
       end;
     end if;
     update public.profiles set photo_warned_at = now() where id = me;
-    return json_build_object('warned', sent, 'locked', false);
+    return json_build_object('warned', sent, 'locked', true);
   end if;
 
-  -- Déjà prévenu : pause au bout de 3 jours
-  return json_build_object('warned', false, 'locked', p.photo_warned_at < now() - interval '3 days');
+  -- Déjà prévenu : toujours en pause tant qu'il n'y a pas de photo
+  return json_build_object('warned', false, 'locked', true);
 end $$;
 revoke all on function public.jade_photo_check() from public, anon;
 grant execute on function public.jade_photo_check() to authenticated;

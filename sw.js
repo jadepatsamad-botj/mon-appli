@@ -1,5 +1,5 @@
 // Jade : service worker « réseau d'abord » — toujours la dernière version en ligne, copie de secours hors connexion.
-var CACHE = "jade-v9";
+var CACHE = "jade-v10";
 var SHELL = ["./", "index.html", "manifest.json", "icon-180.png", "icon-512.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); }));

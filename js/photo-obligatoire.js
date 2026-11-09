@@ -1,6 +1,6 @@
 // Photo obligatoire : chaque membre doit avoir au moins une photo de lui.
-// Sans photo, l'équipe Jade lui écrit dans Messages ; 3 jours plus tard, son accès à Jade est mis en pause
-// (il ne peut plus que modifier son profil) jusqu'à ce qu'il ajoute une photo.
+// Sans photo, son accès à Jade est mis en pause tout de suite (il ne peut plus que modifier son profil)
+// jusqu'à ce qu'il ajoute une photo, et l'équipe Jade lui écrit dans Messages.
 // Le contrôle se fait côté Supabase avec la fonction jade_photo_check (fichier sql/photo-obligatoire.sql).
 
 var photoLocked = false;
@@ -20,20 +20,20 @@ async function checkPhoto() {
   var p = currentProfile;
   if (!currentUser || !p) return;
   if (hasPhoto(p) && !p.photo_warned_at) { photoLocked = false; return; }
+  if (!hasPhoto(p)) { photoLocked = true; lockToProfile(); }   // pause immédiate
   try {
+    // Côté Supabase : envoie le message de l'équipe Jade (une seule fois) ou efface l'avertissement
     var r = await db.rpc("jade_photo_check");
-    if (r.error || !r.data || currentProfile !== p) return;   // fonction pas encore installée : on ne bloque rien
-    if (hasPhoto(p)) { p.photo_warned_at = null; photoLocked = false; return; }
-    p.photo_warned_at = p.photo_warned_at || new Date().toISOString();
-    if (r.data.warned && typeof checkBadges === "function") checkBadges();   // nouveau message de l'équipe Jade
-    if (r.data.locked) { photoLocked = true; lockToProfile(); }
+    if (r.error || !r.data || currentProfile !== p) return;
+    p.photo_warned_at = hasPhoto(p) ? null : (p.photo_warned_at || new Date().toISOString());
+    if (r.data.warned && typeof checkBadges === "function") checkBadges();
   } catch (e) {}
 }
 
 // Chaque affichage du profil (connexion, enregistrement) refait le contrôle
 var _renderViewPhoto = renderView;
 renderView = function (user, p) {
-  if (photoLocked && !hasPhoto(p)) return lockToProfile();
+  if (!hasPhoto(p)) { photoLocked = true; lockToProfile(); checkPhoto(); return; }
   if (hasPhoto(p)) { photoLocked = false; $("photo-lock").hidden = true; }
   _renderViewPhoto(user, p);
   checkPhoto();
