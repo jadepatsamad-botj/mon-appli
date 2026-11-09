@@ -1,8 +1,9 @@
 /* Jade : apparence de l'appli (couleurs, tailles, mise en page) */
 
   :root {
-    /* Polices de Jade : Playfair Display (logo, titres, prénoms) + DM Sans (textes) */
-    --font-title: "Playfair Display", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
+    /* Polices de Jade : Great Vibes (logo « Jade »), Cormorant Garamond (titres, prénoms), Lato (textes) */
+    --font-script: "Great Vibes", "Cormorant Garamond", Georgia, cursive;
+    --font-title: "Cormorant Garamond", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
     /* Couleurs de Jade : vert olive et crème */
     --olive: #6e7548; --olive-light: #a3a77f; --olive-dark: #545a33; --cream: #fbf8ea; --on-olive: #fbf8ea;
     --bg: #f1eedc; --card: #fbf8ea; --fg: #2b2e1a; --muted: #67694f;
@@ -16,7 +17,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 "DM Sans", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Thai", "Noto Sans Lao", "Noto Sans Khmer", "Khmer Sangam MN", "Lao Sangam MN", "Noto Sans", sans-serif;
+    font: 16px/1.5 "Lato", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Thai", "Noto Sans Lao", "Noto Sans Khmer", "Khmer Sangam MN", "Lao Sangam MN", "Noto Sans", sans-serif;
     min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
   main { width: 100%; max-width: 420px; }
   .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -179,4 +180,18 @@ body {
 .topbar .sub { opacity: .85; }
 
 /* Titres et logo en Playfair Display */
-h1, h2, .hero-title { font-family: var(--font-title); font-weight: 500; letter-spacing: -.005em; }
+h1, h2, .hero-title { font-family: var(--font-title); font-weight: 600; letter-spacing: 0; }
+
+/* Le logo « Jade » en écriture calligraphiée (Great Vibes), partout où il apparaît */
+body.nav-on .topbar h1, .lp-logo, .lp-word, .lp-win-word {
+  font-family: var(--font-script) !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none !important; margin-right: 0 !important;
+}
+body.nav-on .topbar h1 { font-size: 2.3rem !important; line-height: 1; }
+.lp-logo { font-size: 2.1rem !important; line-height: 1; }
+.lp-foot .lp-logo { font-size: 2.8rem !important; }
+.lp-word { font-size: clamp(5rem, 24vw, 10rem) !important; }
+.lp-win-word { font-size: clamp(3.6rem, 17vw, 5.4rem) !important; line-height: .95 !important; }
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) { .lp-win-text .lp-win-word { font-size: clamp(5rem, 9vw, 9rem) !important; margin-bottom: 14px !important; } }
+/* Cormorant est plus fin que Playfair : on renforce un peu les titres et les prénoms */
+.fname, .iname, .cname, #cand-name, #peer-name { font-weight: 600; }
+.lp-h2, .lp-h3, .lp-vals h3, .lp-win-h1, .lp-h1, .ihead h2, .lp-acts b { font-weight: 500 !important; }

@@ -7,7 +7,7 @@ Site en ligne : https://jadedating.app
 | Fichier | Ce qu'il contient |
 |---|---|
 | `index.html` | La structure des écrans (formulaires, boutons, sections). Il charge tous les autres fichiers. |
-| `css/style.css` | L'apparence : couleurs, tailles, espacements. |
+| `css/style.css` | L'apparence : couleurs, polices (en haut du fichier), tailles, espacements. |
 | `css/accueil-public.css` | L'apparence de la page d'accueil publique (visiteurs non connectés). |
 | `css/messages.css` | L'apparence de l'écran de discussion (bulles, en-tête, fond). |
 | `css/navigation.css` | L'apparence de la barre du bas, de l'en-tête et des cartes de l'Accueil. |
