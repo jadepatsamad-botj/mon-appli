@@ -96,28 +96,26 @@ body.landing-on #auth .hero { display: none; }
 
 @media (prefers-reduced-motion: reduce) { .lp-cta { transition: none; } }
 
-/* Ouverture : la photo de la fenêtre, avec les boutons sur le plancher en bois */
-.lp-bar { transition: transform .3s ease, opacity .3s ease; }
-body.landing-on:not(.lp-scrolled) .lp-bar { position: fixed; left: 0; right: 0; transform: translateY(-100%); opacity: 0; pointer-events: none; }
+/* Ouverture : la photo de la fenêtre.
+   Téléphone : la photo en pleine largeur, J A D E posé dans le ciel.
+   Ordinateur / iPad paysage : texte à gauche, photo à droite, fond flouté de la même image. */
 .lp-win { position: relative; overflow: hidden; background: #2e2118; padding: 0 !important; }
-.lp-win-bg { position: absolute; inset: -40px; background: url("../img/accueil-fenetre.jpg") center 40% / cover; filter: blur(28px) brightness(.55); }
-.lp-win-col { position: relative; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; min-height: 100svh; }
-.lp-win-img { position: relative; flex: none; }
+.lp-win-bg { position: absolute; inset: -60px; background: url("../img/accueil-fenetre.jpg") center 45% / cover; filter: blur(32px) brightness(.5) saturate(1.1); }
+.lp-win-col { position: relative; max-width: 520px; margin: 0 auto; }
+.lp-win-img { position: relative; }
 .lp-win-img img { display: block; width: 100%; height: auto; max-width: 100%; }
 .lp-win-title { position: absolute; left: 0; right: 0; top: 20%; text-align: center; color: #3d4226; padding: 0 22%; }
 .lp-win-word { font-family: var(--font-title); font-size: clamp(2rem, 10vw, 3.2rem); letter-spacing: .32em; margin-right: -.32em; text-transform: uppercase; line-height: 1; }
 .lp-win-title p { margin: 10px 0 0; font-family: var(--font-title); font-style: italic; font-size: clamp(.95rem, 3.9vw, 1.2rem); line-height: 1.3; color: #4a4f2e; text-wrap: balance; }
-.lp-win-floor { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 26px 24px calc(28px + env(safe-area-inset-bottom, 0px));
-  background: linear-gradient(180deg, #39281e 0%, #4d3c30 28%, #6d5f55 70%, #7f6d60 100%); color: #f6efe2; }
-.lp-win-go, .lp-win-login { width: 100%; max-width: 340px; border-radius: 999px; font-family: var(--font-title); font-size: 1.25rem; padding: 14px 26px; cursor: pointer; }
-.lp-win-go { position: relative; border: 1.5px solid rgba(246, 239, 226, .7); background: #6f7a52; color: #fbf8ea; box-shadow: 0 6px 18px rgba(0, 0, 0, .25); }
-.lp-win-go svg { position: absolute; right: 22px; top: 50%; width: 22px; height: 22px; transform: translateY(-50%); fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.lp-win-login { border: 1.5px solid rgba(246, 239, 226, .8); background: rgba(30, 20, 14, .25); color: #fbf8ea; }
-.lp-win-go:focus-visible, .lp-win-login:focus-visible, .lp-win-join:focus-visible { outline: 3px solid #fbf8ea; outline-offset: 3px; }
-.lp-win-join { display: flex; align-items: center; gap: 14px; width: 100%; max-width: 340px; border: 0; background: none; color: #fbf8ea; cursor: pointer;
-  font-family: var(--font-title); font-style: italic; font-size: 1.2rem; padding: 6px 0; }
-.lp-win-join::before, .lp-win-join::after { content: ""; flex: 1; height: 1px; background: rgba(246, 239, 226, .55); }
-.lp-win-free { margin: -6px 0 0; font-size: .85rem; letter-spacing: .05em; opacity: .85; }
-.lp-win-mark { width: 34px; height: 34px; color: #f6efe2; opacity: .85; margin-top: 4px; }
-@media (min-width: 700px) { .lp-win-col { min-height: 0; } .lp-win-floor { padding-bottom: 40px; } }
-@media (prefers-reduced-motion: reduce) { .lp-bar { transition: none; } }
+.lp-win-text { display: none; }
+
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .lp-win-col { max-width: 1240px; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(32px, 6vw, 96px);
+    padding: 48px max(32px, env(safe-area-inset-right, 0px)) 56px max(32px, env(safe-area-inset-left, 0px)); box-sizing: border-box; }
+  .lp-win-text { display: block; color: #fbf8ea; min-width: 0; }
+  .lp-win-text .lp-win-word { font-size: clamp(3.4rem, 7vw, 6.4rem); margin-bottom: 28px; }
+  .lp-win-h1 { margin: 0 0 18px; max-width: 14ch; font-family: var(--font-title); font-weight: 400; font-size: clamp(2.2rem, 3.6vw, 3.4rem); line-height: 1.12; text-wrap: balance; }
+  .lp-win-lead { margin: 0; max-width: 40ch; font-size: 1.15rem; line-height: 1.6; color: rgba(251, 248, 234, .85); }
+  .lp-win-img img { width: auto; height: min(82vh, 900px); border-radius: 4px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); }
+  .lp-win-title { display: none; }
+}

@@ -17,20 +17,6 @@ Array.prototype.forEach.call(document.querySelectorAll("[data-join]"), function 
 $("lp-join-top").onclick = function () { goAuth("signup"); };
 $("lp-login").onclick = function () { goAuth("login"); };
 $("lp-login2").onclick = function () { goAuth("login"); };
-$("lp-login-hero").onclick = function () { goAuth("login"); };
-$("lp-discover").onclick = function () {
-  var top = $("lp-spirit").getBoundingClientRect().top + window.scrollY - 60;
-  window.scrollTo({ top: top, behavior: "smooth" });
-};
-
-// La barre du haut n'apparaît qu'une fois la photo d'ouverture dépassée
-(function () {
-  var hero = document.querySelector(".lp-win");
-  if (!hero || !("IntersectionObserver" in window)) { document.body.classList.add("lp-scrolled"); return; }
-  new IntersectionObserver(function (e) {
-    document.body.classList.toggle("lp-scrolled", !e[0].isIntersecting);
-  }, { rootMargin: "-120px 0px 0px 0px" }).observe(hero);
-})();
 $("lp-legal").onclick = function () { openLegal("auth"); window.scrollTo(0, 0); };
 
 // Les 12 langues en bas de page
