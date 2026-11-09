@@ -1,7 +1,7 @@
 // Photo obligatoire : chaque membre doit avoir au moins une photo de lui.
 // Sans photo, son accès à Jade est mis en pause tout de suite (il ne peut plus que modifier son profil)
-// jusqu'à ce qu'il ajoute une photo, et l'équipe Jade lui écrit dans Messages.
-// Le contrôle se fait côté Supabase avec la fonction jade_photo_check (fichier sql/photo-obligatoire.sql).
+// jusqu'à ce qu'il ajoute une photo, et l'équipe Jade le prévient dans sa messagerie (bouton J dans Messages).
+// Le contrôle se fait côté Supabase avec la fonction jade_photo_check (fichier sql/messagerie-jade.sql).
 
 var photoLocked = false;
 

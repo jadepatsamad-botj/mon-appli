@@ -307,5 +307,14 @@ I18N.en = {
   photo_req: "At least one photo of yourself is required.",
   e_photo_required: "Add at least one photo of yourself to continue.",
   photo_locked: "Your access to Jade is paused: add at least one photo of yourself to get it back.",
-  ev_local_time: "local time"
+  ev_local_time: "local time",
+  jbox_title: "Jade team",
+  jbox_sub: "Announcements and messages from the Jade team",
+  jbox_empty: "No messages from the Jade team yet.",
+  jn_event_t: "New activity",
+  jn_event_btn: "See the activity",
+  jn_cancelled: "This activity has been cancelled.",
+  jn_photo_t: "Add a photo of yourself",
+  jn_photo_b: "Your profile has no photo yet. On Jade, at least one photo of yourself is required so other members can recognise you. Your access is paused until you add a photo.",
+  jn_photo_btn: "Add a photo"
 };

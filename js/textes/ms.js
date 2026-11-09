@@ -367,5 +367,14 @@ I18N.ms = {
   photo_req: "Sekurang-kurangnya satu foto diri anda diwajibkan.",
   e_photo_required: "Tambah sekurang-kurangnya satu foto diri anda untuk meneruskan.",
   photo_locked: "Akses anda ke Jade dijeda: tambah sekurang-kurangnya satu foto diri anda untuk mendapatkannya semula.",
-  ev_local_time: "waktu tempatan"
+  ev_local_time: "waktu tempatan",
+  jbox_title: "Pasukan Jade",
+  jbox_sub: "Pengumuman dan mesej daripada pasukan Jade",
+  jbox_empty: "Belum ada mesej daripada pasukan Jade.",
+  jn_event_t: "Aktiviti baharu",
+  jn_event_btn: "Lihat aktiviti",
+  jn_cancelled: "Aktiviti ini telah dibatalkan.",
+  jn_photo_t: "Tambah foto diri anda",
+  jn_photo_b: "Profil anda belum mempunyai foto. Di Jade, sekurang-kurangnya satu foto diri anda diwajibkan supaya ahli lain dapat mengenali anda. Akses anda dijeda sehingga anda menambah foto.",
+  jn_photo_btn: "Tambah foto"
 };

@@ -307,5 +307,14 @@ I18N.fr = {
   photo_req: "Au moins une photo de vous est obligatoire.",
   e_photo_required: "Ajoutez au moins une photo de vous pour continuer.",
   photo_locked: "Votre accès à Jade est en pause : ajoutez au moins une photo de vous pour le retrouver.",
-  ev_local_time: "heure sur place"
+  ev_local_time: "heure sur place",
+  jbox_title: "Équipe Jade",
+  jbox_sub: "Annonces et messages de l'équipe Jade",
+  jbox_empty: "Aucun message de l'équipe Jade pour le moment.",
+  jn_event_t: "Nouvelle activité",
+  jn_event_btn: "Voir l'activité",
+  jn_cancelled: "Cette activité est annulée.",
+  jn_photo_t: "Ajoutez une photo de vous",
+  jn_photo_b: "Votre profil n'a pas encore de photo. Sur Jade, au moins une photo de vous est obligatoire pour que les autres membres puissent vous reconnaître. Votre accès est en pause jusqu'à l'ajout d'une photo.",
+  jn_photo_btn: "Ajouter une photo"
 };

@@ -367,5 +367,14 @@ I18N.tl = {
   photo_req: "Kailangan ng kahit isang larawan mo.",
   e_photo_required: "Magdagdag ng kahit isang larawan mo para magpatuloy.",
   photo_locked: "Naka-pause ang access mo sa Jade: magdagdag ng kahit isang larawan mo para maibalik ito.",
-  ev_local_time: "lokal na oras"
+  ev_local_time: "lokal na oras",
+  jbox_title: "Jade team",
+  jbox_sub: "Mga anunsyo at mensahe mula sa Jade team",
+  jbox_empty: "Wala pang mensahe mula sa Jade team.",
+  jn_event_t: "Bagong aktibidad",
+  jn_event_btn: "Tingnan ang aktibidad",
+  jn_cancelled: "Kinansela ang aktibidad na ito.",
+  jn_photo_t: "Magdagdag ng larawan mo",
+  jn_photo_b: "Wala pang larawan ang profile mo. Sa Jade, kailangan ng kahit isang larawan mo para makilala ka ng ibang miyembro. Naka-pause ang access mo hanggang magdagdag ka ng larawan.",
+  jn_photo_btn: "Magdagdag ng larawan"
 };

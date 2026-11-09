@@ -48,6 +48,8 @@ create table if not exists public.event_signups (
 
 -- Sécurité : tout le monde (connecté) voit les activités, seuls les admins les gèrent ;
 -- chacun gère ses propres inscriptions.
+grant select, insert, update, delete on public.events to authenticated;
+grant select, insert, delete on public.event_signups to authenticated;
 alter table public.events enable row level security;
 alter table public.event_signups enable row level security;
 

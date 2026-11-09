@@ -367,5 +367,14 @@ I18N.ko = {
   photo_req: "본인 사진이 최소 1장 필요합니다.",
   e_photo_required: "계속하려면 본인 사진을 최소 1장 추가하세요.",
   photo_locked: "Jade 이용이 일시 중지되었습니다. 본인 사진을 최소 1장 추가하면 다시 이용할 수 있습니다.",
-  ev_local_time: "현지 시간"
+  ev_local_time: "현지 시간",
+  jbox_title: "Jade 팀",
+  jbox_sub: "Jade 팀의 공지와 메시지",
+  jbox_empty: "아직 Jade 팀의 메시지가 없습니다.",
+  jn_event_t: "새 활동",
+  jn_event_btn: "활동 보기",
+  jn_cancelled: "이 활동은 취소되었습니다.",
+  jn_photo_t: "본인 사진을 추가하세요",
+  jn_photo_b: "프로필에 아직 사진이 없습니다. Jade에서는 다른 회원이 알아볼 수 있도록 본인 사진이 최소 1장 필요합니다. 사진을 추가할 때까지 이용이 일시 중지됩니다.",
+  jn_photo_btn: "사진 추가"
 };

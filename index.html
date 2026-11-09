@@ -340,13 +340,29 @@
   </section>
 
   <!-- Messages : boîte de réception -->
+  <!-- Messagerie de l'équipe Jade : annonces (nouvelles activités) et messages de l'équipe -->
+  <section id="jadebox" hidden>
+    <button class="back" id="jbox-back" type="button" data-i18n="back"></button>
+    <div class="jbox-head">
+      <span class="jbox-logo big" aria-hidden="true">J</span>
+      <div><h2 data-i18n="jbox_title"></h2><p class="sub" data-i18n="jbox_sub"></p></div>
+    </div>
+    <div id="jbox-list" class="jbox-list"></div>
+    <p class="empty" id="jbox-empty" data-i18n="jbox_empty" hidden></p>
+  </section>
+
   <section id="matches" hidden>
     <button class="back" id="matches-back" type="button" data-i18n="back"></button>
     <div class="ihead">
       <h2 data-i18n="inbox_title"></h2>
-      <button class="cicon isearch-btn" id="inbox-search-btn" type="button" data-i18n-aria="search_conv">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      </button>
+      <div class="ihead-btns">
+        <button class="jbox-btn" id="jbox-btn" type="button" data-i18n-aria="jbox_title">
+          <span class="jbox-logo" aria-hidden="true">J</span><b class="nbadge jbox-badge" id="nb-jade" hidden></b>
+        </button>
+        <button class="cicon isearch-btn" id="inbox-search-btn" type="button" data-i18n-aria="search_conv">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+      </div>
     </div>
     <input class="isearch" id="inbox-q" type="search" hidden autocomplete="off" data-i18n-ph="search_conv" data-i18n-aria="search_conv">
     <div class="itools" id="inbox-tools">
@@ -454,6 +470,15 @@
       <button id="admin-search" type="button">Chercher</button>
     </div>
     <div id="admin-members"></div>
+    <h3>📣 Messages de l'équipe Jade</h3>
+    <div class="evadmin" id="jn-admin">
+      <div class="jn-to">Pour : <b id="jn-to-name">tous les membres</b> <button class="linkbtn" id="jn-to-all" type="button" hidden>(envoyer à tous)</button></div>
+      <small class="sub" style="margin:0">Pour écrire à un seul membre, cherchez-le dans « Membres » puis touchez « ✉️ Message Jade ».</small>
+      <input id="jn-title" type="text" maxlength="200" placeholder="Titre (ex. Bienvenue sur Jade)">
+      <textarea id="jn-body" maxlength="4000" placeholder="Votre message"></textarea>
+      <button class="primary" id="jn-send" type="button">Envoyer de la part de l'équipe Jade</button>
+      <div id="jn-sent"></div>
+    </div>
     <h3>🎉 Activités</h3>
     <details>
       <summary>Créer une activité</summary>
@@ -696,6 +721,7 @@
 <script src="js/accueil.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/accueil-public.js"></script>
+<script src="js/messagerie-jade.js"></script>
 <script src="js/photo-obligatoire.js"></script>
 <script src="js/demarrage.js"></script>
 </body>

@@ -307,5 +307,14 @@ I18N.id = {
   photo_req: "Minimal satu foto diri Anda wajib ada.",
   e_photo_required: "Tambahkan minimal satu foto diri Anda untuk melanjutkan.",
   photo_locked: "Akses Anda ke Jade dijeda: tambahkan minimal satu foto diri Anda untuk memulihkannya.",
-  ev_local_time: "waktu setempat"
+  ev_local_time: "waktu setempat",
+  jbox_title: "Tim Jade",
+  jbox_sub: "Pengumuman dan pesan dari tim Jade",
+  jbox_empty: "Belum ada pesan dari tim Jade.",
+  jn_event_t: "Aktivitas baru",
+  jn_event_btn: "Lihat aktivitas",
+  jn_cancelled: "Aktivitas ini dibatalkan.",
+  jn_photo_t: "Tambahkan foto diri Anda",
+  jn_photo_b: "Profil Anda belum memiliki foto. Di Jade, minimal satu foto diri Anda wajib ada agar anggota lain dapat mengenali Anda. Akses Anda dijeda sampai Anda menambahkan foto.",
+  jn_photo_btn: "Tambahkan foto"
 };

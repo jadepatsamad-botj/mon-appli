@@ -307,5 +307,14 @@ I18N.vi = {
   photo_req: "Bắt buộc phải có ít nhất một ảnh của bạn.",
   e_photo_required: "Hãy thêm ít nhất một ảnh của bạn để tiếp tục.",
   photo_locked: "Quyền truy cập Jade của bạn đang tạm dừng: hãy thêm ít nhất một ảnh của bạn để sử dụng lại.",
-  ev_local_time: "giờ địa phương"
+  ev_local_time: "giờ địa phương",
+  jbox_title: "Đội ngũ Jade",
+  jbox_sub: "Thông báo và tin nhắn từ đội ngũ Jade",
+  jbox_empty: "Chưa có tin nhắn nào từ đội ngũ Jade.",
+  jn_event_t: "Hoạt động mới",
+  jn_event_btn: "Xem hoạt động",
+  jn_cancelled: "Hoạt động này đã bị hủy.",
+  jn_photo_t: "Thêm ảnh của bạn",
+  jn_photo_b: "Hồ sơ của bạn chưa có ảnh. Trên Jade, bắt buộc phải có ít nhất một ảnh của bạn để các thành viên khác nhận ra bạn. Quyền truy cập của bạn đang tạm dừng cho đến khi bạn thêm ảnh.",
+  jn_photo_btn: "Thêm ảnh"
 };

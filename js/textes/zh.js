@@ -307,5 +307,14 @@ I18N.zh = {
   photo_req: "至少需要一张您本人的照片。",
   e_photo_required: "请至少添加一张您本人的照片以继续。",
   photo_locked: "您的 Jade 使用已暂停：请至少添加一张您本人的照片以恢复。",
-  ev_local_time: "当地时间"
+  ev_local_time: "当地时间",
+  jbox_title: "Jade 团队",
+  jbox_sub: "来自 Jade 团队的公告和消息",
+  jbox_empty: "暂时还没有 Jade 团队的消息。",
+  jn_event_t: "新活动",
+  jn_event_btn: "查看活动",
+  jn_cancelled: "此活动已取消。",
+  jn_photo_t: "添加您的照片",
+  jn_photo_b: "您的资料还没有照片。在 Jade 上，至少需要一张您本人的照片，以便其他会员认出您。在您添加照片之前，您的使用已暂停。",
+  jn_photo_btn: "添加照片"
 };
