@@ -49,6 +49,8 @@ function setMode(m) {
   $("tab-signup").setAttribute("aria-selected", m === "signup");
   $("tab-login").setAttribute("aria-selected", m === "login");
   $("signup-only").hidden = m !== "signup";
+  // Titre de la fenêtre : « Créer un compte » ou « Se connecter » (les deux sont séparés, sans onglets)
+  var ti = $("auth-title"); if (ti) { ti.setAttribute("data-i18n", m === "signup" ? "tab_signup" : "tab_login"); ti.textContent = t(ti.getAttribute("data-i18n")); }
   $("submit").textContent = m === "signup" ? t("btn_signup") : t("btn_login");
   $("password").autocomplete = m === "signup" ? "new-password" : "current-password";
   $("forgot").hidden = m !== "login";

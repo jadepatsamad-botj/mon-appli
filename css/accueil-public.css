@@ -150,7 +150,10 @@ body.landing-on #auth .hero { display: none; }
 .auth-close { display: none; }
 body.landing-on .auth-close { display: grid; place-items: center; position: absolute; top: 10px; right: 10px; z-index: 2; width: 40px; height: 40px; border: 0; border-radius: 50%;
   background: var(--bg); color: var(--fg); font-size: 1.1rem; cursor: pointer; }
-body.landing-on #auth .tabs { margin-top: 36px; }
+/* Inscription et connexion séparées : pas d'onglets, juste le titre du formulaire ouvert */
+.auth-title { display: none; }
+body.landing-on #auth .tabs { display: none; }
+body.landing-on .auth-title { display: block; margin: 30px 0 20px; text-align: center; font-family: var(--font-title); font-weight: 500; font-size: 1.9rem; line-height: 1.15; }
 
 /* Les sorties en groupe, mises en avant juste après la photo */
 .lp-meet { padding-top: 76px; padding-bottom: 76px; }
