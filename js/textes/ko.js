@@ -366,5 +366,6 @@ I18N.ko = {
   lp_close: "닫기",
   photo_req: "본인 사진이 최소 1장 필요합니다.",
   e_photo_required: "계속하려면 본인 사진을 최소 1장 추가하세요.",
-  photo_locked: "Jade 이용이 일시 중지되었습니다. 본인 사진을 최소 1장 추가하면 다시 이용할 수 있습니다."
+  photo_locked: "Jade 이용이 일시 중지되었습니다. 본인 사진을 최소 1장 추가하면 다시 이용할 수 있습니다.",
+  ev_local_time: "현지 시간"
 };

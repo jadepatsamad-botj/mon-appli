@@ -306,5 +306,6 @@ I18N.fr = {
   lp_close: "Fermer",
   photo_req: "Au moins une photo de vous est obligatoire.",
   e_photo_required: "Ajoutez au moins une photo de vous pour continuer.",
-  photo_locked: "Votre accès à Jade est en pause : ajoutez au moins une photo de vous pour le retrouver."
+  photo_locked: "Votre accès à Jade est en pause : ajoutez au moins une photo de vous pour le retrouver.",
+  ev_local_time: "heure sur place"
 };

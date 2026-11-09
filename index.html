@@ -461,9 +461,17 @@
         <input id="ev-title" type="text" maxlength="120" placeholder="Titre (ex. Atelier cuisine thaïe à deux)">
         <textarea id="ev-desc" maxlength="3000" placeholder="Description : programme, lieu de rendez-vous, ce qu'il faut apporter…"></textarea>
         <div class="two"><input id="ev-city" type="text" maxlength="60" placeholder="Ville"><select id="ev-country"></select></div>
-        <small class="sub" style="margin:0">Date et heure dans le fuseau horaire de cet appareil (chaque membre la verra à son heure locale).</small>
-        <div class="two"><input id="ev-start" type="datetime-local"><input id="ev-dur" type="number" min="0.5" max="240" step="0.5" value="2" placeholder="Durée (h)"></div>
-        <div class="two"><input id="ev-cap" type="number" min="1" max="500" value="10" placeholder="Places"><input id="ev-price" type="number" min="0" step="0.01" value="0" placeholder="Prix (€)"></div>
+        <label class="evlab" for="ev-tz">Fuseau horaire du lieu</label>
+        <select id="ev-tz"></select>
+        <small class="sub" style="margin:0">Date et heure sur place, à l'heure du lieu de l'activité (les membres verront cette heure-là).</small>
+        <div class="two"><input id="ev-date" type="date" aria-label="Date sur place"><input id="ev-time" type="time" aria-label="Heure sur place" value="19:00"></div>
+        <small class="sub" id="ev-check" style="margin:0"></small>
+        <div class="two">
+          <label class="evlab" for="ev-dur">Durée (heures)</label><label class="evlab" for="ev-cap">Places</label>
+          <input id="ev-dur" type="number" min="0.5" max="240" step="0.5" value="2"><input id="ev-cap" type="number" min="1" max="500" value="10">
+        </div>
+        <label class="evlab" for="ev-price">Prix (€, 0 = gratuit)</label>
+        <input id="ev-price" type="number" min="0" step="0.01" value="0">
         <select id="ev-level">
           <option value="0">Ouverte à tous</option>
           <option value="1">Réservée Premium et plus</option>

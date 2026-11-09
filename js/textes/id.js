@@ -306,5 +306,6 @@ I18N.id = {
   lp_close: "Tutup",
   photo_req: "Minimal satu foto diri Anda wajib ada.",
   e_photo_required: "Tambahkan minimal satu foto diri Anda untuk melanjutkan.",
-  photo_locked: "Akses Anda ke Jade dijeda: tambahkan minimal satu foto diri Anda untuk memulihkannya."
+  photo_locked: "Akses Anda ke Jade dijeda: tambahkan minimal satu foto diri Anda untuk memulihkannya.",
+  ev_local_time: "waktu setempat"
 };

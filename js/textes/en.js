@@ -306,5 +306,6 @@ I18N.en = {
   lp_close: "Close",
   photo_req: "At least one photo of yourself is required.",
   e_photo_required: "Add at least one photo of yourself to continue.",
-  photo_locked: "Your access to Jade is paused: add at least one photo of yourself to get it back."
+  photo_locked: "Your access to Jade is paused: add at least one photo of yourself to get it back.",
+  ev_local_time: "local time"
 };

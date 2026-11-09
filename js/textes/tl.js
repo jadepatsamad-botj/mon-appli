@@ -366,5 +366,6 @@ I18N.tl = {
   lp_close: "Isara",
   photo_req: "Kailangan ng kahit isang larawan mo.",
   e_photo_required: "Magdagdag ng kahit isang larawan mo para magpatuloy.",
-  photo_locked: "Naka-pause ang access mo sa Jade: magdagdag ng kahit isang larawan mo para maibalik ito."
+  photo_locked: "Naka-pause ang access mo sa Jade: magdagdag ng kahit isang larawan mo para maibalik ito.",
+  ev_local_time: "lokal na oras"
 };

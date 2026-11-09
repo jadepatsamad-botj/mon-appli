@@ -306,5 +306,6 @@ I18N.vi = {
   lp_close: "Đóng",
   photo_req: "Bắt buộc phải có ít nhất một ảnh của bạn.",
   e_photo_required: "Hãy thêm ít nhất một ảnh của bạn để tiếp tục.",
-  photo_locked: "Quyền truy cập Jade của bạn đang tạm dừng: hãy thêm ít nhất một ảnh của bạn để sử dụng lại."
+  photo_locked: "Quyền truy cập Jade của bạn đang tạm dừng: hãy thêm ít nhất một ảnh của bạn để sử dụng lại.",
+  ev_local_time: "giờ địa phương"
 };
