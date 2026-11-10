@@ -57,7 +57,7 @@ body.landing-on #auth .hero { display: none; }
 .lp-map-grid article { background: #fff; padding: 26px 24px 30px; display: flex; flex-direction: column; gap: 12px; }
 .lp-map-top { display: flex; justify-content: space-between; align-items: flex-start; }
 .lp-map-top svg { width: 38px; height: 38px; color: var(--lp-peri); }
-.lp-n, .lp-step-n { font-family: var(--font); font-size: .78rem; font-weight: 700; letter-spacing: .14em; color: var(--lp-terra); }
+.lp-step-n { font-family: var(--font); font-size: .78rem; font-weight: 700; letter-spacing: .14em; color: var(--lp-terra); }
 .lp-map-grid h3 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 1.35rem; line-height: 1.2; }
 .lp-map-grid p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--lp-mute) !important; }
 
