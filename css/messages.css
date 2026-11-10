@@ -1,14 +1,14 @@
 /* Jade : écran de discussion (plein écran, bulles, en-tête) */
 
 :root {
-  --chat-bg: #2d5d52; --chat-head: rgba(27, 70, 61, .9); --bub-them: #f7f3e8; --bub-me: #e3ddc6; --bub-fg: #1b2622;
-  --chat-meta: #eee9dc; --chat-motif: rgba(251, 248, 234, .10); --chat-head-fg: #faf7ef;
-  --chat-lattice: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27250%27%20height=%27250%27%20viewBox=%27-40%20-40%20250%20250%27%3E%3Cg%20fill=%27none%27%20stroke=%27%23fbf8ea%27%20stroke-opacity=%27.18%27%20stroke-width=%272.2%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M66%2038h38l28%2028v38l-28%2028H66l-28-28V66z%27/%3E%3Cpath%20d=%27M68.5%2045h33L125%2068.5v33L101.5%20125h-33L45%20101.5v-33z%27/%3E%3Cpath%20d=%27M63%2063h44v44H63zM70%2070h30v30H70zM77%2077h16v16H77z%27/%3E%3Cpath%20d=%27M85%2045v18M85%20107v18M45%2085h18M107%2085h18M63%2063l-10-10M107%2063l10-10M63%20107l-10%2010M107%20107l10%2010M70%2085h7M93%2085h7M85%2070v7M85%2093v7%27/%3E%3C/g%3E%3C/svg%3E");
+  --chat-bg: #f3e7e0; --chat-head: rgba(255, 255, 255, .9); --bub-them: #ffffff; --bub-me: #e7e5f5; --bub-fg: #1f1c1b;
+  --chat-meta: #7a6f6a; --chat-motif: rgba(91, 93, 146, .06); --chat-head-fg: #1f1c1b;
+  --chat-lattice: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27250%27%20height=%27250%27%20viewBox=%27-40%20-40%20250%20250%27%3E%3Cg%20fill=%27none%27%20stroke=%27%235b5d92%27%20stroke-opacity=%27.10%27%20stroke-width=%272.2%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M66%2038h38l28%2028v38l-28%2028H66l-28-28V66z%27/%3E%3Cpath%20d=%27M68.5%2045h33L125%2068.5v33L101.5%20125h-33L45%20101.5v-33z%27/%3E%3Cpath%20d=%27M63%2063h44v44H63zM70%2070h30v30H70zM77%2077h16v16H77z%27/%3E%3Cpath%20d=%27M85%2045v18M85%20107v18M45%2085h18M107%2085h18M63%2063l-10-10M107%2063l10-10M63%20107l-10%2010M107%20107l10%2010M70%2085h7M93%2085h7M85%2070v7M85%2093v7%27/%3E%3C/g%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark) {
-  :root { --chat-bg: #12302a; --chat-head: rgba(13, 38, 32, .92); --bub-them: #1e4a40; --bub-me: #2c5f52; --bub-fg: #f1ece0;
-    --chat-meta: #b9c7c0; --chat-motif: rgba(243, 239, 217, .06); --chat-head-fg: #f1ece0;
-    --chat-lattice: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27250%27%20height=%27250%27%20viewBox=%27-40%20-40%20250%20250%27%3E%3Cg%20fill=%27none%27%20stroke=%27%23f3efd9%27%20stroke-opacity=%27.09%27%20stroke-width=%272.2%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M66%2038h38l28%2028v38l-28%2028H66l-28-28V66z%27/%3E%3Cpath%20d=%27M68.5%2045h33L125%2068.5v33L101.5%20125h-33L45%20101.5v-33z%27/%3E%3Cpath%20d=%27M63%2063h44v44H63zM70%2070h30v30H70zM77%2077h16v16H77z%27/%3E%3Cpath%20d=%27M85%2045v18M85%20107v18M45%2085h18M107%2085h18M63%2063l-10-10M107%2063l10-10M63%20107l-10%2010M107%20107l10%2010M70%2085h7M93%2085h7M85%2070v7M85%2093v7%27/%3E%3C/g%3E%3C/svg%3E"); }
+  :root { --chat-bg: #1f1c25; --chat-head: rgba(31, 28, 37, .92); --bub-them: #2f2c3a; --bub-me: #3f3d63; --bub-fg: #f3eeea;
+    --chat-meta: #c9bfba; --chat-motif: rgba(243, 239, 217, .06); --chat-head-fg: #f3eeea;
+    --chat-lattice: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27250%27%20height=%27250%27%20viewBox=%27-40%20-40%20250%20250%27%3E%3Cg%20fill=%27none%27%20stroke=%27%23aeb0e3%27%20stroke-opacity=%27.08%27%20stroke-width=%272.2%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M66%2038h38l28%2028v38l-28%2028H66l-28-28V66z%27/%3E%3Cpath%20d=%27M68.5%2045h33L125%2068.5v33L101.5%20125h-33L45%20101.5v-33z%27/%3E%3Cpath%20d=%27M63%2063h44v44H63zM70%2070h30v30H70zM77%2077h16v16H77z%27/%3E%3Cpath%20d=%27M85%2045v18M85%20107v18M45%2085h18M107%2085h18M63%2063l-10-10M107%2063l10-10M63%20107l-10%2010M107%20107l10%2010M70%2085h7M93%2085h7M85%2070v7M85%2093v7%27/%3E%3C/g%3E%3C/svg%3E"); }
 }
 
 /* Plein écran quand une discussion est ouverte */
@@ -30,7 +30,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .cicon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 #chat-more svg { fill: currentColor; stroke: none; }
 .cwho { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 2px 4px; cursor: pointer; text-align: left; color: inherit; font: inherit; }
-.cav, .bav { flex: none; border-radius: 12px; overflow: hidden; background: #1f4d43; color: #faf7ef; display: grid; place-items: center; font-weight: 700; }
+.cav, .bav { flex: none; border-radius: 12px; overflow: hidden; background: #5b5d92; color: #ffffff; display: grid; place-items: center; font-weight: 700; }
 .cav { width: 46px; height: 46px; }
 .cav img, .bav img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cav img[hidden] { display: none; }
@@ -87,7 +87,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .cbottom .msg:empty { display: none; }
 #chat .chat-form { margin-top: 0; align-items: center; }
 #chat .chat-form input { border-radius: 999px; padding: 12px 18px; background: var(--card); border: 1px solid var(--line); }
-#chat .chat-form button { width: 46px; height: 46px; padding: 0; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--cream); color: #1f4d43; }
+#chat .chat-form button { width: 46px; height: 46px; padding: 0; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--cream); color: #5b5d92; }
 #chat .chat-form button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 
 /* Photos dans la discussion */
@@ -104,14 +104,14 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .bphoto img:not([src]) { visibility: hidden; }
 .bphoto.missing { cursor: default; background: repeating-linear-gradient(45deg, var(--bub-them), var(--bub-them) 8px, var(--bub-me) 8px, var(--bub-me) 16px); }
 .bphoto + .bubble { margin-top: 4px; }
-.lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(6, 18, 15, .94); display: grid; place-items: center; padding: 16px; }
+.lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(15, 13, 20, .94); display: grid; place-items: center; padding: 16px; }
 .lightbox[hidden] { display: none; }
 .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
-.lightbox .cicon { position: absolute; top: calc(10px + env(safe-area-inset-top)); right: 10px; color: #faf7ef; background: rgba(255,255,255,.12); }
+.lightbox .cicon { position: absolute; top: calc(10px + env(safe-area-inset-top)); right: 10px; color: #ffffff; background: rgba(255,255,255,.12); }
 
 
 /* Boîte de réception (onglet Messages) */
-#matches { background: var(--card); border-radius: 18px; padding: 0 0 8px; overflow: hidden; box-shadow: 0 2px 14px rgba(10,30,25,.18); }
+#matches { background: var(--card); border-radius: 18px; padding: 0 0 8px; overflow: hidden; box-shadow: 0 2px 14px rgba(40,30,25,.18); }
 .itabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
 .itabs button { border: 0; background: none; font: inherit; font-size: .95rem; white-space: nowrap; padding: 14px 8px 12px; color: var(--muted); cursor: pointer;
   border-bottom: 3px solid transparent; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -135,7 +135,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .irow.unread .iunread { background: #b5452f; }
 .ipic { position: relative; flex: none; width: 82px; height: 82px; border-radius: 14px; overflow: hidden; background: var(--bg); }
 .ipic img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ipic.ph { display: grid; place-items: center; font-size: 2rem; font-weight: 700; color: #faf7ef; background: linear-gradient(160deg, #3f7a6a, #123229); }
+.ipic.ph { display: grid; place-items: center; font-size: 2rem; font-weight: 700; color: #ffffff; background: linear-gradient(160deg, #8486bd, #3d3f6b); }
 .ipcount { position: absolute; right: 5px; bottom: 5px; padding: 1px 6px; border-radius: 8px; background: rgba(0,0,0,.5); color: #fff; font-size: .72rem; font-weight: 600; }
 .iinfo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .il1 { display: flex; align-items: center; gap: 6px; min-width: 0; }
@@ -155,7 +155,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 @media (max-width: 360px) { .ipic { width: 72px; height: 72px; } .ihead h2 { font-size: 1.6rem; } }
 
 /* Intérêts : même panneau crème que la boîte de réception */
-#likes { background: var(--card); border-radius: 18px; padding: 0 0 8px; overflow: hidden; box-shadow: 0 2px 14px rgba(10,30,25,.18); }
+#likes { background: var(--card); border-radius: 18px; padding: 0 0 8px; overflow: hidden; box-shadow: 0 2px 14px rgba(40,30,25,.18); }
 .itabs.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .itabs.three button { display: block; font-size: .86rem; padding: 14px 6px 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; }
 .itabs.three button > span { overflow: hidden; text-overflow: ellipsis; }
@@ -166,15 +166,15 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .itime.right { flex: none; margin-left: auto; padding-left: 8px; }
 .ibtns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .ibtn { display: inline-flex; align-items: center; gap: 5px; padding: 7px 12px; border-radius: 999px; font: inherit; font-size: .86rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
-.ibtn.dark { background: #1b2622; color: #faf7ef; border: 1.5px solid #1b2622; }
+.ibtn.dark { background: #1f1c1b; color: #ffffff; border: 1.5px solid #1f1c1b; }
 .ibtn.outline, .ibtn.fav { background: none; color: var(--fg); border: 1.5px solid var(--fg); }
 .ibtn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
 .ibtn.fav.on svg { fill: #b5452f; stroke: #b5452f; }
 .ibtn:disabled { opacity: .6; }
 #likes .msg { margin: 0 16px; }
 #likes .msg:empty { display: none; }
-@media (prefers-color-scheme: dark) { .ibtn.dark { background: #f1ece0; color: #10261f; border-color: #f1ece0; } }
-.primary.msgbtn { background: #1b2622; color: #faf7ef; margin-top: 10px; }
+@media (prefers-color-scheme: dark) { .ibtn.dark { background: #f3eeea; color: #221f27; border-color: #f3eeea; } }
+.primary.msgbtn { background: #1f1c1b; color: #ffffff; margin-top: 10px; }
 
 /* Messages : « Écrire à un favori » */
 .ifavs { padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
@@ -193,7 +193,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .ihead-btns { display: flex; align-items: center; gap: 6px; }
 .jbox-btn { position: relative; flex: none; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; display: grid; place-items: center; }
 .jbox-logo { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; flex: none;
-  background: linear-gradient(160deg, #3f7a6a, #1f4d43); color: #faf7ef; font-family: var(--font-script); font-weight: 600; font-size: 1.3rem; line-height: 1; padding-top: 0; box-sizing: border-box;
+  background: linear-gradient(160deg, #8486bd, #5b5d92); color: #ffffff; font-family: var(--font-script); font-weight: 600; font-size: 1.3rem; line-height: 1; padding-top: 0; box-sizing: border-box;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .18); }
 .jbox-logo.big { width: 52px; height: 52px; font-size: 1.8rem; }
 .jbox-btn .jbox-badge { top: -2px; left: auto; right: -4px; }
@@ -211,7 +211,7 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 .jcard p { margin: 0 0 10px; white-space: pre-line; line-height: 1.5; }
 .jcard button { margin-top: 2px; }
 .jn-to { font-size: .95rem; }
-#jadebox { background: var(--bg); border-radius: 18px; padding: 16px 16px 18px; box-shadow: 0 2px 14px rgba(10,30,25,.18); }
+#jadebox { background: var(--bg); border-radius: 18px; padding: 16px 16px 18px; box-shadow: 0 2px 14px rgba(40,30,25,.18); }
 #jadebox .back { padding-bottom: 8px; }
 #jadebox .empty { padding: 20px 4px; }
 .scamwarn .trbtn { color: #7a3d00 !important; font-weight: 700; text-decoration: underline; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }

@@ -1,0 +1,66 @@
+/* Jade : style épuré (beaucoup d'air, fonds unis, textes à l'encre)
+   Couleurs : blanc cassé, violet pervenche (#5b5d92), rose poudré (#f1e2da), terracotta (#b5603f).
+   Ce fichier est chargé en dernier : il remplace le fond dégradé et les en-têtes foncés. */
+
+/* Fond uni, sans grain ni dégradé */
+html { background: var(--bg); }
+body { background: var(--bg) !important; background-image: none !important; }
+
+/* En-tête de l'appli : blanc, logo à l'encre, une fine ligne dessous */
+body.nav-on .topbar, body.setup-on .topbar { background: rgba(255, 255, 255, .88) !important; border-bottom: 1px solid var(--line) !important; }
+body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: var(--fg) !important; }
+.top-upgrade { background: var(--blush); color: var(--accent); }
+.top-me { border-color: var(--line); }
+
+/* Cartes : blanches, bord fin, ombre très légère */
+.card, .fcard, .evcard, .jcard, .irow, #jadebox, #matches, #likes { box-shadow: 0 1px 2px rgba(40, 30, 25, .04), 0 8px 24px rgba(40, 30, 25, .05) !important; }
+.card { border: 1px solid var(--line); }
+
+/* Boutons : violet plein, ou contour fin */
+button.primary, .primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+button.secondary, .secondary { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+
+/* Accents terracotta : badges, numéros, tags à mettre en valeur */
+.nbadge { background: #b5603f !important; }
+.tag.verified { color: var(--accent); border-color: rgba(91, 93, 146, .35); background: rgba(91, 93, 146, .07); }
+
+/* Page d'accueil publique : barre blanche, bandes alternées blanc / rose poudré / violet */
+.lp-bar { background: rgba(255, 255, 255, .92) !important; border-bottom: 1px solid var(--line); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.lp-login { color: var(--fg) !important; }
+#lp-join-top { background: var(--accent) !important; color: #fff !important; box-shadow: none !important; }
+.lp-band.cream { background: #fff; }
+.lp-band.paper { background: var(--blush); }
+.lp-band.olive { background: var(--accent); color: #fff; }
+.lp-band.olive .lp-h2, .lp-band.olive h3, .lp-band.olive p, .lp-band.olive b { color: #fff; }
+.lp-h2 { font-weight: 500 !important; }
+.lp-foot { background: var(--bg) !important; }
+.lp-foot .lp-logo { color: var(--fg) !important; }
+.lp-notes { box-shadow: none; border: 1px solid var(--line); }
+
+/* Ouverture sur la photo : « Jade » rose poudré, petit surtitre en capitales espacées */
+.lp-win-word { color: #f3dfd5 !important; }
+
+/* Discussion : en-tête blanc, fine ligne */
+.chead { border-bottom: 1px solid var(--line) !important; }
+.cbottom { border-top: 1px solid var(--line); }
+
+/* Messagerie de l'équipe Jade : rond violet, J rose poudré */
+.jbox-logo { background: var(--accent) !important; color: #f3dfd5 !important; box-shadow: none !important; }
+
+/* Textes posés directement sur le fond de page */
+#feed .msg, #feed .empty, #new-strip .ifavs-t, #new-strip .ifav { color: var(--fg); }
+
+@media (prefers-color-scheme: dark) {
+  body.nav-on .topbar, body.setup-on .topbar { background: rgba(24, 22, 29, .9) !important; }
+  .lp-bar { background: rgba(24, 22, 29, .92) !important; }
+  .lp-band.cream { background: var(--card); }
+  .top-upgrade { color: #e6e3ff; }
+}
+
+/* Membres sans photo : rond rose poudré, initiale violette */
+#new-strip .ifav-pic { background: var(--blush) !important; color: var(--accent) !important; border-color: #fff !important; }
+/* Encadré « Faites vérifier votre profil » : bord fin, l'accent terracotta reste sur le rond */
+.vnudge { border-color: var(--line) !important; }
+/* Nos valeurs : rond rose poudré, motif violet (plus léger) */
+.lp-ring { background: var(--blush) !important; color: var(--accent) !important; }
+@media (prefers-color-scheme: dark) { .lp-ring { color: #d9d7ff !important; } #new-strip .ifav-pic { border-color: var(--card) !important; } }

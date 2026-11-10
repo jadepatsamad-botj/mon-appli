@@ -5,16 +5,16 @@
     /* Polices de Jade : Playfair Display (logo « Jade », titres, prénoms) + DM Sans (textes) */
     --font-script: "Playfair Display", Georgia, "Times New Roman", serif;
     --font-title: "Playfair Display", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
-    /* Couleurs de Jade : vert jade profond, ivoire et or */
-    --olive: #1f4d43; --olive-light: #3f7a6a; --olive-dark: #123229; --cream: #faf7ef; --on-olive: #faf7ef;
-    --bg: #efebdf; --card: #faf7ef; --fg: #1b2622; --muted: #5d6b65;
-    --line: #ddd6c3; --accent: #1f4d43; --accent-fg: #faf7ef; --gold: #b8955a; --ok: #2f6b4f; --err: #a3332a;
+    /* Couleurs de Jade : épuré, blanc cassé, violet pervenche, rose poudré et terracotta */
+    --olive: #5b5d92; --olive-light: #8486bd; --olive-dark: #3d3f6b; --cream: #ffffff; --on-olive: #1f1c1b; --blush: #f1e2da;
+    --bg: #f7f3f0; --card: #ffffff; --fg: #1f1c1b; --muted: #6f6763;
+    --line: #ebe1db; --accent: #5b5d92; --accent-fg: #ffffff; --gold: #b5603f; --ok: #2f6b4f; --err: #a3332a;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --olive: #173a32; --olive-light: #23503f; --olive-dark: #0d211c; --cream: #f1ece0; --on-olive: #f1ece0;
-      --bg: #15302a; --card: #10261f; --fg: #eee9dc; --muted: #a9b8b0;
-      --line: #2c4a41; --accent: #d4b77e; --accent-fg: #10261f; --gold: #d4b77e; --ok: #9fd3b4; --err: #ff9b8f; color-scheme: dark; }
+    :root { --olive: #34365e; --olive-light: #4a4c7e; --olive-dark: #1b1a2b; --cream: #f3eeea; --on-olive: #f3eeea; --blush: #2c2630;
+      --bg: #18161d; --card: #221f27; --fg: #f1ebe7; --muted: #b5aca7;
+      --line: #38333d; --accent: #aeb0e3; --accent-fg: #221f27; --gold: #aeb0e3; --ok: #9fd3b4; --err: #ff9b8f; color-scheme: dark; }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
@@ -106,7 +106,7 @@
   .plans { display: grid; gap: 12px; margin: 12px 0; }
   .plan { border: 1.5px solid var(--line); border-radius: 14px; padding: 14px; background: var(--card); }
   .plan.gold { border-color: #c9a24a; }
-  .plan.diamond { border-color: var(--olive); background: linear-gradient(180deg, rgba(23,61,53,.12), transparent); }
+  .plan.diamond { border-color: var(--olive); background: linear-gradient(180deg, rgba(255,255,255,.12), transparent); }
   .plan.current { box-shadow: 0 0 0 3px rgba(201,162,74,.45); }
   .plan-name { font-weight: 700; font-size: 1.1rem; }
   .plan-price { margin: 4px 0 8px; color: var(--muted); }
@@ -214,14 +214,14 @@ body.nav-on .topbar h1 { font-size: 1.75rem !important; line-height: 1; }
 .ipwhen { margin-left: auto; white-space: nowrap; }
 .ipwarn { flex-basis: 100%; color: #9a3412; font-weight: 700; font-size: .85rem; }
 .bio-wc { font-weight: 700; color: #9a3412; }
-.bio-wc.ok { color: var(--olive-dark, #1f4d43); }
+.bio-wc.ok { color: var(--olive-dark, #5b5d92); }
 .bio-wc.ok::before { content: "✓ "; }
 
 /* Palette « Jade profond & or » : le logo « Jade » en or */
-body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: #d9bf86 !important; }
+body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: #1f1c1b !important; }
 .lp-foot .lp-logo { color: var(--gold) !important; }
-.lp-win-word { color: #e6cf98; }
-.jbox-logo { color: #e6cf98 !important; }
+.lp-win-word { color: #f3dfd5; }
+.jbox-logo { color: #f3dfd5 !important; }
 
 /* Messages d'erreur affichés juste sous le champ concerné */
 .field-err:empty { display: none; }
@@ -230,7 +230,7 @@ body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: #d9bf86 !im
 /* Création du profil (nouveau membre) : en-tête sobre, comme la page d'accueil */
 body.setup-on { place-items: start center; padding-top: 0; }
 body.setup-on .topbar { position: sticky; top: 0; z-index: 20; align-items: center; margin: 0 -16px 16px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
-  background: rgba(23,61,53,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251,248,234,.18); }
+  background: rgba(255,255,255,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251,248,234,.18); }
 body.setup-on .topbar h1 { font-size: 1.75rem; line-height: 1; margin: 0; }
 body.setup-on .topbar .sub, body.setup-on .hint { display: none; }
 body.setup-on .topbar select { margin-top: 0; }
@@ -245,7 +245,7 @@ body.setup-on .topbar select { margin-top: 0; }
 .evp { flex: none; width: 58px; text-align: center; font-size: .75rem; line-height: 1.2; }
 .evp span { display: block; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .evp-pic { width: 48px; height: 48px; margin: 0 auto; border-radius: 50%; overflow: hidden; display: grid; place-items: center; font-weight: 700;
-  background: linear-gradient(160deg, var(--olive-light), var(--olive-dark)); color: var(--cream); border: 2px solid var(--gold, #b8955a); }
+  background: linear-gradient(160deg, var(--olive-light), var(--olive-dark)); color: var(--cream); border: 2px solid var(--gold, #b5603f); }
 .evp-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .evchat-btn { width: 100%; }
 .evpast-t { margin: 22px 0 4px; font-family: var(--font-title); font-weight: 600; font-size: 1.3rem; }
@@ -256,10 +256,10 @@ body.setup-on .topbar select { margin-top: 0; }
 .evlike .evp-pic { margin: 0; width: 40px; height: 40px; }
 .evlike-n { flex: 1; min-width: 0; font-weight: 700; }
 .evlike-b { width: auto; padding: 8px 14px; font-size: .88rem; }
-.evlike-b.on { background: var(--gold, #b8955a); border-color: var(--gold, #b8955a); color: #fff; }
+.evlike-b.on { background: var(--gold, #b5603f); border-color: var(--gold, #b5603f); color: #fff; }
 .evpeople-row { display: flex; align-items: center; gap: 6px; font-size: .9rem; margin: 4px 0; font-weight: 400; }
-.tag.outings { background: rgba(184, 149, 90, .16); color: #7a5a22; border-color: rgba(184, 149, 90, .5); }
-@media (prefers-color-scheme: dark) { .tag.outings { color: #e6cf98; } }
+.tag.outings { background: rgba(181, 96, 63, .16); color: #8a4630; border-color: rgba(181, 96, 63, .5); }
+@media (prefers-color-scheme: dark) { .tag.outings { color: #f3dfd5; } }
 /* Discussion de groupe */
 .evchat-people { margin-bottom: 12px; }
 .evchat-box { display: flex; flex-direction: column; gap: 8px; max-height: 52vh; overflow-y: auto; padding: 10px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); }
@@ -275,12 +275,12 @@ body.setup-on .topbar select { margin-top: 0; }
 
 /* ---------- Confiance et sécurité (étape 3) ---------- */
 .vnudge { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; align-items: center; margin: 0 0 14px;
-  padding: 14px 40px 14px 14px; border-radius: 16px; background: var(--card); border: 1px solid var(--gold, #b8955a); box-shadow: 0 2px 10px rgba(10,30,25,.15); }
-.vnudge-i { grid-row: span 2; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; background: var(--gold, #b8955a); }
+  padding: 14px 40px 14px 14px; border-radius: 16px; background: var(--card); border: 1px solid var(--gold, #b5603f); box-shadow: 0 2px 10px rgba(40,30,25,.15); }
+.vnudge-i { grid-row: span 2; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; background: var(--gold, #b5603f); }
 .vnudge p { margin: 0; font-size: .92rem; line-height: 1.4; }
 .vnudge .primary { width: auto; justify-self: start; padding: 8px 14px; font-size: .9rem; }
 .vnudge-x { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; border: 0; background: none; color: var(--muted); font-size: 1rem; cursor: pointer; }
-.safemodal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 16px; background: rgba(6,18,15,.6); }
+.safemodal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 16px; background: rgba(15,13,20,.6); }
 .safebox { width: min(460px, 100%); max-height: calc(100svh - 32px); overflow-y: auto; background: var(--card); color: var(--fg); border-radius: 18px; padding: 22px; box-shadow: 0 12px 40px rgba(0,0,0,.3); }
 .safebox h2 { margin: 0 0 10px; font-family: var(--font-title); font-weight: 600; }
 .safebox .tips { margin: 0 0 16px; padding-left: 20px; }
