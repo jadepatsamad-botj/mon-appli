@@ -79,10 +79,12 @@ $("pform").addEventListener("submit", async function (e) {
     };
     var s = await db.from("profiles").upsert(row).select().single();
     // Colonnes facultatives pas encore créées dans Supabase : on enregistre sans elles
+    // ou pas encore autorisées (« permission denied for table profiles ») : on enregistre sans elles
     for (var tries = 0; tries < 2 && s.error; tries++) {
-      var miss = /(origins|mbti)/.exec(s.error.message || "");
-      if (!miss || !(miss[1] in row)) break;
-      delete row[miss[1]];
+      var em = s.error.message || "", miss = /(origins|mbti)/.exec(em);
+      var col = miss && (miss[1] in row) ? miss[1] : (/permission denied/i.test(em) ? ["mbti", "origins"].filter(function (c) { return c in row; })[0] : null);
+      if (!col) break;
+      delete row[col];
       s = await db.from("profiles").upsert(row).select().single();
     }
     if (s.error) throw s.error;

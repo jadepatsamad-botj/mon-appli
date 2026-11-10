@@ -736,6 +736,10 @@ alter table public.profiles drop constraint if exists profiles_mbti_check;
 alter table public.profiles add constraint profiles_mbti_check check (mbti is null or mbti in (
   'INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'));
 
+-- Les membres peuvent enregistrer eux-mêmes leur personnalité et leurs origines
+-- (dans Jade, les droits sur « profiles » sont donnés colonne par colonne)
+grant insert (mbti, origins), update (mbti, origins) on public.profiles to authenticated;
+
 -- ############################################################
 -- 7. Mise en route et résumé
 -- ############################################################
