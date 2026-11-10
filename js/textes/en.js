@@ -176,7 +176,7 @@ I18N.en = {
   verify_status_ok: "✓ Your profile is verified.", verify_status_pending: "Request sent: under review.",
   verify_sent: "Thank you! Your request has been sent.", e_verify_file: "Please choose a photo.", verified_tag: "✓ Verified",
   hint: "Prototype. The age check above is only a first step: identity verification will be required before any public launch.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Other"],
+  countries: ["Thailand", "Vietnam", "Indonesia", "Philippines", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "United States", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Luxembourg", "Austria", "Ireland", "Sweden", "Denmark", "Norway", "Poland", "Other"],
   // Barre du bas, en-tête et Accueil
   nav_home: "Home",
   nav_interests: "Interests",
@@ -319,5 +319,19 @@ I18N.en = {
   jn_photo_btn: "Add a photo",
   bio_req: "Required: at least 10 words to introduce yourself.",
   bio_wc: "{n} / 10 words",
-  e_bio_short: "Your bio must contain at least 10 words."
+  e_bio_short: "Your bio must contain at least 10 words.",
+  lp_hero_t: "Sincere dating for the Asian community in France and Europe",
+  lp_hero_p: "Find your other half, your precious one, at any age, and meet in person on small group outings.",
+  lp_spirit_p3: "Young professionals, single parents or newly retired: here, people who share the same culture get to know each other, meet in person on outings, and build something that lasts.",
+  tagline: "Dating for the Asian community in France and Europe.",
+  lp_foot: "Jade · Sincere dating for the Asian community in France and Europe. 18+ only.",
+  origins_label: "My origins (one or more)",
+  origins_req: "Jade is for the Asian community in France and Europe. Your origins are shown on your profile.",
+  e_origins: "Choose at least one origin.",
+  f_origin: "Origin",
+  all_origins: "All origins",
+  or_birmanie: "Myanmar (Burma)",
+  or_mongolie: "Mongolia",
+  or_asie_sud: "South Asia (India, Pakistan, Sri Lanka…)",
+  or_autre: "Other Asian origin"
 };

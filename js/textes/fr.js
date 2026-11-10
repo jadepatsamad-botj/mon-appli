@@ -176,7 +176,7 @@ I18N.fr = {
   verify_status_ok: "✓ Votre profil est vérifié.", verify_status_pending: "Demande envoyée : en cours d'examen.",
   verify_sent: "Merci ! Votre demande a été envoyée.", e_verify_file: "Choisissez une photo.", verified_tag: "✓ Vérifié",
   hint: "Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.",
-  countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Autre"],
+  countries: ["Thaïlande", "Vietnam", "Indonésie", "Philippines", "Cambodge", "Laos", "Malaisie", "Singapour", "Chine", "Taïwan", "Hong Kong", "Japon", "Corée du Sud", "États-Unis", "Canada", "France", "Belgique", "Suisse", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Australie", "Luxembourg", "Autriche", "Irlande", "Suède", "Danemark", "Norvège", "Pologne", "Autre"],
   // Barre du bas, en-tête et Accueil
   nav_home: "Accueil",
   nav_interests: "Intérêts",
@@ -319,5 +319,19 @@ I18N.fr = {
   jn_photo_btn: "Ajouter une photo",
   bio_req: "Obligatoire : au moins 10 mots pour vous présenter.",
   bio_wc: "{n} / 10 mots",
-  e_bio_short: "Votre présentation doit contenir au moins 10 mots."
+  e_bio_short: "Votre présentation doit contenir au moins 10 mots.",
+  lp_hero_t: "Des rencontres sincères pour la communauté asiatique de France et d'Europe",
+  lp_hero_p: "Trouvez votre moitié, votre précieux, à tout âge, et rencontrez-vous en vrai lors de sorties en petit groupe.",
+  lp_spirit_p3: "Jeunes actifs, parents solos ou jeunes retraités : ici, on se découvre entre personnes qui partagent la même culture, on se retrouve en vrai lors de sorties, et on construit quelque chose qui dure.",
+  tagline: "Rencontres pour la communauté asiatique de France et d'Europe.",
+  lp_foot: "Jade · Rencontres sincères pour la communauté asiatique de France et d'Europe. Réservé aux plus de 18 ans.",
+  origins_label: "Mes origines (une ou plusieurs)",
+  origins_req: "Jade est réservée à la communauté asiatique de France et d'Europe. Vos origines sont affichées sur votre profil.",
+  e_origins: "Choisissez au moins une origine.",
+  f_origin: "Origine",
+  all_origins: "Toutes les origines",
+  or_birmanie: "Birmanie",
+  or_mongolie: "Mongolie",
+  or_asie_sud: "Asie du Sud (Inde, Pakistan, Sri Lanka…)",
+  or_autre: "Autre origine asiatique"
 };

@@ -176,7 +176,7 @@ I18N.vi = {
   verify_status_ok: "✓ Hồ sơ của bạn đã được xác minh.", verify_status_pending: "Đã gửi yêu cầu: đang được xem xét.",
   verify_sent: "Cảm ơn! Yêu cầu của bạn đã được gửi.", e_verify_file: "Vui lòng chọn một ảnh.", verified_tag: "✓ Đã xác minh",
   hint: "Bản thử nghiệm. Việc kiểm tra tuổi ở trên chỉ là bước đầu: cần xác minh danh tính trước khi ra mắt công khai.",
-  countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Khác"],
+  countries: ["Thái Lan", "Việt Nam", "Indonesia", "Philippines", "Campuchia", "Lào", "Malaysia", "Singapore", "Trung Quốc", "Đài Loan", "Hồng Kông", "Nhật Bản", "Hàn Quốc", "Hoa Kỳ", "Canada", "Pháp", "Bỉ", "Thụy Sĩ", "Đức", "Vương quốc Anh", "Hà Lan", "Ý", "Tây Ban Nha", "Bồ Đào Nha", "Úc", "Luxembourg", "Áo", "Ireland", "Thụy Điển", "Đan Mạch", "Na Uy", "Ba Lan", "Khác"],
   // Barre du bas, en-tête et Accueil
   nav_home: "Trang chủ",
   nav_interests: "Quan tâm",
@@ -319,5 +319,19 @@ I18N.vi = {
   jn_photo_btn: "Thêm ảnh",
   bio_req: "Bắt buộc: ít nhất 10 từ để giới thiệu bản thân.",
   bio_wc: "{n} / 10 từ",
-  e_bio_short: "Phần giới thiệu của bạn phải có ít nhất 10 từ."
+  e_bio_short: "Phần giới thiệu của bạn phải có ít nhất 10 từ.",
+  lp_hero_t: "Hẹn hò chân thành cho cộng đồng người châu Á tại Pháp và châu Âu",
+  lp_hero_p: "Tìm một nửa của bạn, người quý giá của bạn, ở mọi lứa tuổi, và gặp nhau ngoài đời trong những buổi đi chơi nhóm nhỏ.",
+  lp_spirit_p3: "Người trẻ đi làm, cha mẹ đơn thân hay người mới nghỉ hưu: tại đây, những người cùng chung văn hóa làm quen với nhau, gặp nhau ngoài đời và xây dựng một mối quan hệ lâu dài.",
+  tagline: "Hẹn hò cho cộng đồng người châu Á tại Pháp và châu Âu.",
+  lp_foot: "Jade · Hẹn hò chân thành cho cộng đồng người châu Á tại Pháp và châu Âu. Chỉ dành cho người từ 18 tuổi.",
+  origins_label: "Nguồn gốc của tôi (một hoặc nhiều)",
+  origins_req: "Jade dành cho cộng đồng người châu Á tại Pháp và châu Âu. Nguồn gốc của bạn sẽ hiển thị trên hồ sơ.",
+  e_origins: "Hãy chọn ít nhất một nguồn gốc.",
+  f_origin: "Nguồn gốc",
+  all_origins: "Mọi nguồn gốc",
+  or_birmanie: "Myanmar",
+  or_mongolie: "Mông Cổ",
+  or_asie_sud: "Nam Á (Ấn Độ, Pakistan, Sri Lanka…)",
+  or_autre: "Gốc Á khác"
 };

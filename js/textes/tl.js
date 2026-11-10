@@ -236,7 +236,7 @@ I18N.tl = {
   e_verify_file: "Pumili ng larawan.",
   verified_tag: "✓ Verified",
   hint: "Prototype. Unang hakbang pa lang ang pagsusuri ng edad sa itaas: kakailanganin ang pagpapatunay ng pagkakakilanlan bago ang pampublikong paglulunsad.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Iba pa"],
+  countries: ["Thailand", "Vietnam", "Indonesia", "Pilipinas", "Cambodia", "Laos", "Malaysia", "Singapore", "China", "Taiwan", "Hong Kong", "Japan", "South Korea", "Estados Unidos", "Canada", "France", "Belgium", "Switzerland", "Germany", "United Kingdom", "Netherlands", "Italy", "Spain", "Portugal", "Australia", "Luxembourg", "Austria", "Ireland", "Sweden", "Denmark", "Norway", "Poland", "Iba pa"],
   // Barre du bas, en-tête et Accueil
   nav_home: "Home",
   nav_interests: "Interes",
@@ -379,5 +379,19 @@ I18N.tl = {
   jn_photo_btn: "Magdagdag ng larawan",
   bio_req: "Kailangan: kahit 10 salita para ipakilala ang sarili mo.",
   bio_wc: "{n} / 10 salita",
-  e_bio_short: "Kailangang may kahit 10 salita ang pagpapakilala mo."
+  e_bio_short: "Kailangang may kahit 10 salita ang pagpapakilala mo.",
+  lp_hero_t: "Tapat na pakikipag-date para sa komunidad ng mga Asyano sa France at Europa",
+  lp_hero_p: "Hanapin ang iyong kalahati, ang iyong mahalagang tao, sa anumang edad, at magkita nang personal sa maliliit na group outing.",
+  lp_spirit_p3: "Mga batang propesyonal, single parent o bagong retirado: dito, nagkakakilala ang mga taong may iisang kultura, nagkikita nang personal, at bumubuo ng pangmatagalang relasyon.",
+  tagline: "Pakikipag-date para sa komunidad ng mga Asyano sa France at Europa.",
+  lp_foot: "Jade · Tapat na pakikipag-date para sa komunidad ng mga Asyano sa France at Europa. 18 pataas lamang.",
+  origins_label: "Aking pinagmulan (isa o higit pa)",
+  origins_req: "Ang Jade ay para sa komunidad ng mga Asyano sa France at Europa. Makikita sa profile mo ang iyong pinagmulan.",
+  e_origins: "Pumili ng kahit isang pinagmulan.",
+  f_origin: "Pinagmulan",
+  all_origins: "Lahat ng pinagmulan",
+  or_birmanie: "Myanmar",
+  or_mongolie: "Mongolia",
+  or_asie_sud: "Timog Asya (India, Pakistan, Sri Lanka…)",
+  or_autre: "Ibang pinagmulang Asyano"
 };

@@ -24,7 +24,11 @@ function fillCountries(sel, firstKey) {
   var keep = sel.value;
   sel.textContent = "";
   var o = document.createElement("option"); o.value = ""; o.textContent = t(firstKey); sel.appendChild(o);
-  COUNTRY_KEYS.forEach(function (c) { var x = document.createElement("option"); x.value = c; x.textContent = countryLabel(c); sel.appendChild(x); });
+  // L'Europe d'abord (Jade s'adresse à la communauté asiatique de France et d'Europe), puis le reste du monde
+  var europe = ["France", "Belgique", "Suisse", "Luxembourg", "Allemagne", "Royaume-Uni", "Pays-Bas", "Italie", "Espagne", "Portugal", "Autriche", "Irlande", "Suède", "Danemark", "Norvège", "Pologne"];
+  europe.concat(COUNTRY_KEYS.filter(function (c) { return europe.indexOf(c) === -1; })).forEach(function (c) {
+    var x = document.createElement("option"); x.value = c; x.textContent = countryLabel(c); sel.appendChild(x);
+  });
   sel.value = keep;
 }
 
@@ -38,6 +42,8 @@ function applyI18n() {
   fillCountries($("country"), "choose");
   fillCountries($("f-country"), "all_countries");
   fillLangFilter();
+  fillOriginFilter();
+  if ($("origins").childElementCount) buildOrigins();
   $("submit").textContent = mode === "signup" ? t("btn_signup") : t("btn_login");
   $("lang").value = lang;
 }
@@ -133,6 +139,21 @@ function renderComplete(p) {
   $("complete-bar").style.width = sc + "%";
 }
 
+function originLabel(k) { return /^or_/.test(k) ? t(k) : countryLabel(k); }
+function buildOrigins() {
+  var box = $("origins"), keep = Array.prototype.filter.call(box.querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; });
+  box.textContent = "";
+  ORIGIN_KEYS.forEach(function (k) {
+    var l = document.createElement("label"), c = document.createElement("input");
+    c.type = "checkbox"; c.value = k; c.checked = keep.indexOf(k) !== -1; l.appendChild(c); l.appendChild(document.createTextNode(originLabel(k))); box.appendChild(l);
+  });
+}
+function fillOriginFilter() {
+  var s = $("f-origin"), keep = s.value; s.textContent = "";
+  var o = document.createElement("option"); o.value = ""; o.textContent = t("all_origins"); s.appendChild(o);
+  ORIGIN_KEYS.forEach(function (k) { var x = document.createElement("option"); x.value = k; x.textContent = originLabel(k); s.appendChild(x); });
+  s.value = keep || "";
+}
 function buildSpoken() {
   var box = $("spoken"); if (box.childElementCount) return;
   Object.keys(LANG_NAMES).forEach(function (code) {
@@ -167,6 +188,7 @@ function tagsInto(el, p) {
   var act = activityTag(p); if (act) items.push([act, false, "online"]);
   items.push([p.city || "", false]);
   items.push([p.country ? countryLabel(p.country) : "", false]);
+  if (p.origins && p.origins.length) items.push(["🌏 " + p.origins.map(originLabel).join(" · "), false]);
   items.push([p.gender ? t("g_" + p.gender) : "", false]);
   items.push([p.looking_for ? t("l_" + p.looking_for) : "", false]);
   items.push([p.intention ? t("i_" + p.intention) : "", false]);

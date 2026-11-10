@@ -236,7 +236,7 @@ I18N.ms = {
   e_verify_file: "Sila pilih satu foto.",
   verified_tag: "✓ Disahkan",
   hint: "Prototaip. Semakan umur di atas hanyalah langkah pertama: pengesahan identiti diperlukan sebelum pelancaran awam.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Lain-lain"],
+  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kemboja", "Laos", "Malaysia", "Singapura", "China", "Taiwan", "Hong Kong", "Jepun", "Korea Selatan", "Amerika Syarikat", "Kanada", "Perancis", "Belgium", "Switzerland", "Jerman", "United Kingdom", "Belanda", "Itali", "Sepanyol", "Portugal", "Australia", "Luxembourg", "Austria", "Ireland", "Sweden", "Denmark", "Norway", "Poland", "Lain-lain"],
   // Barre du bas, en-tête et Accueil
   nav_home: "Utama",
   nav_interests: "Minat",
@@ -379,5 +379,19 @@ I18N.ms = {
   jn_photo_btn: "Tambah foto",
   bio_req: "Wajib: sekurang-kurangnya 10 perkataan untuk memperkenalkan diri.",
   bio_wc: "{n} / 10 perkataan",
-  e_bio_short: "Pengenalan anda mesti mengandungi sekurang-kurangnya 10 perkataan."
+  e_bio_short: "Pengenalan anda mesti mengandungi sekurang-kurangnya 10 perkataan.",
+  lp_hero_t: "Temu janji ikhlas untuk komuniti Asia di Perancis dan Eropah",
+  lp_hero_p: "Temui pasangan hidup anda, permata anda, pada usia apa pun, dan bertemu secara bersemuka dalam aktiviti kumpulan kecil.",
+  lp_spirit_p3: "Pekerja muda, ibu bapa tunggal atau pesara baharu: di sini, mereka yang berkongsi budaya yang sama saling mengenali, bertemu secara bersemuka dan membina hubungan yang kekal.",
+  tagline: "Temu janji untuk komuniti Asia di Perancis dan Eropah.",
+  lp_foot: "Jade · Temu janji ikhlas untuk komuniti Asia di Perancis dan Eropah. Untuk 18 tahun ke atas sahaja.",
+  origins_label: "Asal usul saya (satu atau lebih)",
+  origins_req: "Jade untuk komuniti Asia di Perancis dan Eropah. Asal usul anda dipaparkan pada profil.",
+  e_origins: "Pilih sekurang-kurangnya satu asal usul.",
+  f_origin: "Asal usul",
+  all_origins: "Semua asal usul",
+  or_birmanie: "Myanmar",
+  or_mongolie: "Mongolia",
+  or_asie_sud: "Asia Selatan (India, Pakistan, Sri Lanka…)",
+  or_autre: "Asal Asia lain"
 };

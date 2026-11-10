@@ -176,7 +176,7 @@ I18N.id = {
   verify_status_ok: "✓ Profil Anda telah terverifikasi.", verify_status_pending: "Permintaan terkirim: sedang ditinjau.",
   verify_sent: "Terima kasih! Permintaan Anda telah dikirim.", e_verify_file: "Pilih sebuah foto.", verified_tag: "✓ Terverifikasi",
   hint: "Prototipe. Pemeriksaan usia di atas hanyalah langkah pertama: verifikasi identitas diperlukan sebelum peluncuran publik.",
-  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Lainnya"],
+  countries: ["Thailand", "Vietnam", "Indonesia", "Filipina", "Kamboja", "Laos", "Malaysia", "Singapura", "Tiongkok", "Taiwan", "Hong Kong", "Jepang", "Korea Selatan", "Amerika Serikat", "Kanada", "Prancis", "Belgia", "Swiss", "Jerman", "Inggris Raya", "Belanda", "Italia", "Spanyol", "Portugal", "Australia", "Luksemburg", "Austria", "Irlandia", "Swedia", "Denmark", "Norwegia", "Polandia", "Lainnya"],
   // Barre du bas, en-tête et Accueil
   nav_home: "Beranda",
   nav_interests: "Minat",
@@ -319,5 +319,19 @@ I18N.id = {
   jn_photo_btn: "Tambahkan foto",
   bio_req: "Wajib: minimal 10 kata untuk memperkenalkan diri.",
   bio_wc: "{n} / 10 kata",
-  e_bio_short: "Perkenalan Anda harus berisi minimal 10 kata."
+  e_bio_short: "Perkenalan Anda harus berisi minimal 10 kata.",
+  lp_hero_t: "Kencan tulus untuk komunitas Asia di Prancis dan Eropa",
+  lp_hero_p: "Temukan belahan jiwa Anda, permata Anda, di usia berapa pun, dan bertemu langsung dalam acara kelompok kecil.",
+  lp_spirit_p3: "Pekerja muda, orang tua tunggal, atau pensiunan baru: di sini, orang-orang dengan budaya yang sama saling mengenal, bertemu langsung, dan membangun hubungan yang langgeng.",
+  tagline: "Kencan untuk komunitas Asia di Prancis dan Eropa.",
+  lp_foot: "Jade · Kencan tulus untuk komunitas Asia di Prancis dan Eropa. Khusus 18 tahun ke atas.",
+  origins_label: "Asal-usul saya (satu atau lebih)",
+  origins_req: "Jade untuk komunitas Asia di Prancis dan Eropa. Asal-usul Anda ditampilkan di profil.",
+  e_origins: "Pilih minimal satu asal-usul.",
+  f_origin: "Asal-usul",
+  all_origins: "Semua asal-usul",
+  or_birmanie: "Myanmar",
+  or_mongolie: "Mongolia",
+  or_asie_sud: "Asia Selatan (India, Pakistan, Sri Lanka…)",
+  or_autre: "Asal Asia lainnya"
 };

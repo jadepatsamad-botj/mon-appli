@@ -35,6 +35,9 @@ $("pform").addEventListener("submit", async function (e) {
   var name = $("first_name").value.trim();
   if (!name) return say(msg, t("e_name"), "err");
   if (!$("gender").value || !$("looking_for").value) return say(msg, t("e_gender"), "err");
+  // Origines obligatoires : Jade est réservée à la communauté asiatique
+  var origins = Array.prototype.filter.call($("origins").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; });
+  if (!origins.length) { say(msg, t("e_origins"), "err"); $("origins").scrollIntoView({ block: "center" }); return; }
   // Présentation obligatoire : au moins 10 mots
   if (countWords($("bio").value) < BIO_MIN_WORDS) { say(msg, t("e_bio_short"), "err"); $("bio").focus(); $("bio").scrollIntoView({ block: "center" }); return; }
   // Au moins une photo de soi est obligatoire (à l'inscription comme en modifiant son profil)
@@ -63,6 +66,7 @@ $("pform").addEventListener("submit", async function (e) {
       city: $("city").value.trim() || null,
       intention: $("intention").value || null,
       interests: Array.prototype.filter.call($("interests").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
+      origins: origins,
       spoken: Array.prototype.filter.call($("spoken").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
       photo_path: photoPath,
       photos: paths,
@@ -70,6 +74,7 @@ $("pform").addEventListener("submit", async function (e) {
       updated_at: new Date().toISOString()
     };
     var s = await db.from("profiles").upsert(row).select().single();
+    if (s.error && /origins/.test(s.error.message || "")) { delete row.origins; s = await db.from("profiles").upsert(row).select().single(); }   // colonne pas encore créée
     if (s.error) throw s.error;
     if (removedPaths.length) { try { await db.storage.from("photos").remove(removedPaths); } catch (e2) {} }
     currentProfile = s.data;

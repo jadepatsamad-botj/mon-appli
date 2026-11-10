@@ -76,6 +76,9 @@ function fillForm(p) {
   $("city").value = (p && p.city) || "";
   $("intention").value = (p && p.intention) || "";
   buildInterests();
+  buildOrigins();
+  var orr = (p && p.origins) || [];
+  Array.prototype.forEach.call($("origins").querySelectorAll("input"), function (c) { c.checked = orr.indexOf(c.value) !== -1; });
   var it = (p && p.interests) || [];
   Array.prototype.forEach.call($("interests").querySelectorAll("input"), function (c) { c.checked = it.indexOf(c.value) !== -1; });
   buildSpoken();

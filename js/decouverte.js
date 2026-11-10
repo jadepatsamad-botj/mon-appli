@@ -21,6 +21,7 @@ function discoverQuery(seen) {
   if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
   if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
   if ($("f-country").value) q = q.eq("country", $("f-country").value);
+  if ($("f-origin").value && !MISSING_COLS.origins) q = q.contains("origins", [$("f-origin").value]);
   if (myLevel() < 1) { $("f-intent").value = ""; $("f-lang").value = ""; }
   if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
   if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
@@ -107,13 +108,14 @@ $("undo").onclick = async function () {
 
 $("go-discover").onclick = function () { loadFilters(); fromLikes = false; fromFeed = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
 function saveFilters() {
-  try { localStorage.setItem("filters", JSON.stringify({ min: $("f-min").value, max: $("f-max").value, country: $("f-country").value, intent: $("f-intent").value, lang: $("f-lang").value })); } catch (e) {}
+  try { localStorage.setItem("filters", JSON.stringify({ min: $("f-min").value, max: $("f-max").value, country: $("f-country").value, origin: $("f-origin").value, intent: $("f-intent").value, lang: $("f-lang").value })); } catch (e) {}
 }
 function loadFilters() {
   try {
     var f = JSON.parse(localStorage.getItem("filters") || "null"); if (!f) return;
     $("f-min").value = f.min || 18; $("f-max").value = f.max || 99;
-    $("f-country").value = f.country || ""; $("f-intent").value = f.intent || ""; $("f-lang").value = f.lang || "";
+    if (!$("f-origin").childElementCount) fillOriginFilter();
+    $("f-country").value = f.country || ""; $("f-origin").value = f.origin || ""; $("f-intent").value = f.intent || ""; $("f-lang").value = f.lang || "";
   } catch (e) {}
 }
 $("f-apply").onclick = function () { saveFilters(); $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
