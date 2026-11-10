@@ -206,3 +206,14 @@ body.nav-on .topbar h1 { font-size: 2.3rem !important; line-height: 1; }
 .topbar #app-name { font-family: var(--font-script) !important; font-weight: 400 !important; letter-spacing: 0 !important; }
 /* Administration : formulaire d'activité */
 .evadmin .evlab { margin: 6px 0 0; font-size: .85rem; font-weight: 700; }
+/* Administration : connexions (adresses IP) */
+.ipbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+.ipbar #ip-who { font-weight: 700; }
+.ipbar #ip-refresh { margin-left: auto; width: auto; padding: 8px 14px; }
+.iplist { display: grid; gap: 6px; max-height: 420px; overflow-y: auto; margin-bottom: 18px; }
+.iprow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font-size: .9rem; }
+.iprow code { font-family: ui-monospace, Menlo, monospace; font-size: .88rem; }
+.ipname { font-weight: 700; }
+.ipdev, .ipwhen { color: var(--muted); }
+.ipwhen { margin-left: auto; white-space: nowrap; }
+.ipwarn { flex-basis: 100%; color: #9a3412; font-weight: 700; font-size: .85rem; }

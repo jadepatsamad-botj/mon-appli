@@ -157,6 +157,7 @@ async function adminSearch() {
     ["premium", "gold", "diamond"].forEach(function (k) {
       btns.push(abtn("+30 j " + k.charAt(0).toUpperCase() + k.slice(1), async function () { var x = await db.rpc("admin_add_premium", { uid: p.id, days: 30, p: k }); if (x.error) throw x.error; adminSearch(); }));
     });
+    if (typeof ipFor === "function") btns.push(abtn("🌐 IP", async function () { ipFor(p); }));
     if (typeof jnTarget === "function") btns.push(abtn("✉️ Message Jade", async function () { jnTarget(p); }));
     if (p.under_review) btns.push(abtn("Lever la revue", async function () { var x = await db.rpc("admin_set_review", { uid: p.id, flag: false }); if (x.error) throw x.error; adminSearch(); }));
     box.appendChild(arow(p, [nameWithAge(p), [p.city, p.country ? countryLabel(p.country) : ""].filter(Boolean).join(", "), flags, last].filter(Boolean), btns));

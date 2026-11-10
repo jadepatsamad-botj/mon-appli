@@ -470,6 +470,13 @@
       <button id="admin-search" type="button">Chercher</button>
     </div>
     <div id="admin-members"></div>
+    <h3>🌐 Connexions (adresses IP)</h3>
+    <div class="ipbar">
+      <span id="ip-who">Toutes les connexions récentes</span>
+      <button class="linkbtn" id="ip-all" type="button" hidden>(voir tout le monde)</button>
+      <button class="secondary" id="ip-refresh" type="button">Rafraîchir</button>
+    </div>
+    <div id="admin-ips" class="iplist"></div>
     <h3>📣 Messages de l'équipe Jade</h3>
     <div class="evadmin" id="jn-admin">
       <div class="jn-to">Pour : <b id="jn-to-name">tous les membres</b> <button class="linkbtn" id="jn-to-all" type="button" hidden>(envoyer à tous)</button></div>
@@ -722,6 +729,7 @@
 <script src="js/navigation.js"></script>
 <script src="js/accueil-public.js"></script>
 <script src="js/messagerie-jade.js"></script>
+<script src="js/connexions.js"></script>
 <script src="js/photo-obligatoire.js"></script>
 <script src="js/demarrage.js"></script>
 </body>
