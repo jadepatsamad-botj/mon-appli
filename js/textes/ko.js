@@ -411,5 +411,10 @@ I18N.ko = {
   jn_meet_btn: "{name}님에게 쓰기",
   jn_remind_t: "알림: 모임이 다가오고 있어요",
   outings_tag: "Jade 모임 {n}회",
-  you: "나"
+  you: "나",
+  verify_nudge: "프로필을 인증하세요: 인증된 ✓ 프로필이 먼저 표시되고 더 신뢰받습니다.",
+  verify_nudge_btn: "인증하기",
+  scam_contact: "⚠️ 주의: 이 사람이 다른 곳(WhatsApp, Telegram, 전화번호 등)으로 옮기자고 합니다. 영상 통화로 만나기 전까지는 Jade에서 대화하세요.",
+  safety_first_t: "만나기 전에",
+  safety_ok: "알겠어요"
 };

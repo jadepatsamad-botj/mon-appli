@@ -351,5 +351,10 @@ I18N.zh = {
   jn_meet_btn: "写信给 {name}",
   jn_remind_t: "提醒：您的活动快到了",
   outings_tag: "{n} 次 Jade 活动",
-  you: "您"
+  you: "您",
+  verify_nudge: "验证您的资料：已验证 ✓ 的资料会优先显示，更值得信赖。",
+  verify_nudge_btn: "去验证",
+  scam_contact: "⚠️ 请小心：此人建议转到其他平台（WhatsApp、Telegram、电话号码…）。在视频通话见到对方之前，请留在 Jade 上交流。",
+  safety_first_t: "见面之前",
+  safety_ok: "我知道了"
 };

@@ -351,5 +351,10 @@ I18N.id = {
   jn_meet_btn: "Tulis ke {name}",
   jn_remind_t: "Pengingat: acara Anda sudah dekat",
   outings_tag: "{n} acara Jade",
-  you: "Anda"
+  you: "Anda",
+  verify_nudge: "Verifikasi profil Anda: profil terverifikasi ✓ tampil lebih dulu dan lebih dipercaya.",
+  verify_nudge_btn: "Verifikasi sekarang",
+  scam_contact: "⚠️ Hati-hati: orang ini mengajak pindah ke aplikasi lain (WhatsApp, Telegram, nomor telepon…). Tetap di Jade sampai Anda melihatnya lewat panggilan video.",
+  safety_first_t: "Sebelum bertemu",
+  safety_ok: "Saya mengerti"
 };

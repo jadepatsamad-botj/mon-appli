@@ -411,5 +411,10 @@ I18N.ja = {
   jn_meet_btn: "{name} さんに書く",
   jn_remind_t: "リマインダー：イベントが近づいています",
   outings_tag: "Jadeイベント {n} 回",
-  you: "あなた"
+  you: "あなた",
+  verify_nudge: "プロフィールを認証しましょう：認証済み ✓ のプロフィールは優先的に表示され、信頼されます。",
+  verify_nudge_btn: "認証する",
+  scam_contact: "⚠️ 注意：この人は別のアプリ（WhatsApp、Telegram、電話番号など）への移動を提案しています。ビデオ通話で会うまではJadeでやり取りしましょう。",
+  safety_first_t: "会う前に",
+  safety_ok: "わかりました"
 };

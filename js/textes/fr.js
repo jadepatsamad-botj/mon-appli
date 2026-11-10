@@ -351,5 +351,10 @@ I18N.fr = {
   jn_meet_btn: "Écrire à {name}",
   jn_remind_t: "Rappel : votre sortie approche",
   outings_tag: "{n} sortie(s) Jade",
-  you: "vous"
+  you: "vous",
+  verify_nudge: "Faites vérifier votre profil : les profils vérifiés ✓ apparaissent en premier et inspirent confiance.",
+  verify_nudge_btn: "Me faire vérifier",
+  scam_contact: "⚠️ Prudence : cette personne propose de continuer ailleurs (WhatsApp, Telegram, numéro…). Restez sur Jade tant que vous ne l'avez pas vue en appel vidéo.",
+  safety_first_t: "Avant de vous rencontrer",
+  safety_ok: "J'ai compris"
 };

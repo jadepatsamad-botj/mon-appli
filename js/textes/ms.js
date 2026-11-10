@@ -411,5 +411,10 @@ I18N.ms = {
   jn_meet_btn: "Tulis kepada {name}",
   jn_remind_t: "Peringatan: aktiviti anda semakin hampir",
   outings_tag: "{n} aktiviti Jade",
-  you: "anda"
+  you: "anda",
+  verify_nudge: "Sahkan profil anda: profil yang disahkan ✓ dipaparkan dahulu dan lebih dipercayai.",
+  verify_nudge_btn: "Sahkan sekarang",
+  scam_contact: "⚠️ Berhati-hati: orang ini mengajak berpindah ke tempat lain (WhatsApp, Telegram, nombor telefon…). Kekal di Jade sehingga anda melihatnya melalui panggilan video.",
+  safety_first_t: "Sebelum bertemu",
+  safety_ok: "Saya faham"
 };

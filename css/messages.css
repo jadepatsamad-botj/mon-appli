@@ -214,3 +214,4 @@ body.chat-on .topbar, body.chat-on .hint { display: none; }
 #jadebox { background: var(--bg); border-radius: 18px; padding: 16px 16px 18px; box-shadow: 0 2px 14px rgba(10,30,25,.18); }
 #jadebox .back { padding-bottom: 8px; }
 #jadebox .empty { padding: 20px 4px; }
+.scamwarn .trbtn { color: #7a3d00 !important; font-weight: 700; text-decoration: underline; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }

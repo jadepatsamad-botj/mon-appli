@@ -43,8 +43,9 @@ async function refreshChat() {
       jb.onclick = (function (u) { return function () { window.open(u, "_blank", "noopener"); }; })(vm[0]);
       w.appendChild(jb);
     }
-    if (!mine && looksRisky(m.body)) {
-      var wv = document.createElement("div"); wv.className = "scamwarn"; wv.textContent = t("scam_warn") + " ";
+    var riskKey = mine ? null : looksRisky(m.body) ? "scam_warn" : (typeof looksOffsite === "function" && looksOffsite(m.body)) ? "scam_contact" : null;
+    if (riskKey) {
+      var wv = document.createElement("div"); wv.className = "scamwarn"; wv.textContent = t(riskKey) + " ";
       var rb = document.createElement("button"); rb.type = "button"; rb.className = "trbtn"; rb.textContent = t("report");
       rb.onclick = function () { if (chatWith) openReport(chatWith, "chat"); };
       wv.appendChild(rb); w.appendChild(wv);

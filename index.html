@@ -255,6 +255,12 @@
 
   <!-- Accueil : recherche et profils -->
   <section id="feed" hidden>
+    <div class="vnudge" id="vnudge" hidden>
+      <span class="vnudge-i" aria-hidden="true">✓</span>
+      <p data-i18n="verify_nudge"></p>
+      <button class="primary" id="vnudge-go" type="button" data-i18n="verify_nudge_btn"></button>
+      <button class="vnudge-x" id="vnudge-x" type="button" data-i18n-aria="lp_close">✕</button>
+    </div>
     <div class="searchbar">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       <input id="feed-q" type="search" enterkeyhint="search" autocomplete="off" data-i18n-ph="search_ph" data-i18n-aria="search_ph">
@@ -421,6 +427,17 @@
     <div class="msg" id="evchat-msg" role="status" aria-live="polite"></div>
   </section>
 
+  <!-- Conseils de sécurité affichés une fois, avant de se rencontrer -->
+  <div class="safemodal" id="safemodal" role="dialog" aria-modal="true" aria-labelledby="safemodal-t" hidden>
+    <div class="safebox">
+      <h2 id="safemodal-t" data-i18n="safety_first_t"></h2>
+      <ul class="tips">
+        <li data-i18n-rich="s1"></li><li data-i18n-rich="s2"></li><li data-i18n-rich="s3"></li><li data-i18n-rich="s4"></li><li data-i18n-rich="s5"></li>
+      </ul>
+      <button class="primary" id="safemodal-ok" type="button" data-i18n="safety_ok"></button>
+    </div>
+  </div>
+
   <!-- Abonnements -->
   <section class="card" id="premium" hidden>
     <button class="back" id="premium-back" type="button" data-i18n="back"></button>
@@ -552,6 +569,9 @@
     <div id="admin-concierge"></div>
     <h3>Vérifications en attente</h3>
     <div id="admin-verifs"></div>
+    <h3>🚩 Messages suspects</h3>
+    <p class="sub" style="margin:0 0 8px">Messages qui parlent d'argent ou proposent de continuer ailleurs (WhatsApp, numéro…). Ils sont quand même envoyés ; à toi de juger.</p>
+    <div id="admin-flags"></div>
     <h3>Signalements à traiter</h3>
     <div id="admin-reports"></div>
     <div class="msg" id="admsg" role="status" aria-live="polite"></div>
@@ -765,6 +785,7 @@
 <script src="js/messagerie-jade.js"></script>
 <script src="js/connexions.js"></script>
 <script src="js/sorties.js"></script>
+<script src="js/securite.js"></script>
 <script src="js/photo-obligatoire.js"></script>
 <script src="js/demarrage.js"></script>
 </body>

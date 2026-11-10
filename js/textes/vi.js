@@ -351,5 +351,10 @@ I18N.vi = {
   jn_meet_btn: "Nhắn cho {name}",
   jn_remind_t: "Nhắc nhở: buổi đi chơi của bạn sắp đến",
   outings_tag: "{n} buổi đi chơi Jade",
-  you: "bạn"
+  you: "bạn",
+  verify_nudge: "Hãy xác minh hồ sơ: hồ sơ đã xác minh ✓ được hiển thị trước và đáng tin cậy hơn.",
+  verify_nudge_btn: "Xác minh ngay",
+  scam_contact: "⚠️ Cẩn thận: người này đề nghị chuyển sang nơi khác (WhatsApp, Telegram, số điện thoại…). Hãy ở lại Jade cho đến khi bạn gặp họ qua cuộc gọi video.",
+  safety_first_t: "Trước khi gặp mặt",
+  safety_ok: "Tôi đã hiểu"
 };

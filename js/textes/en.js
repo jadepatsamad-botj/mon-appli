@@ -351,5 +351,10 @@ I18N.en = {
   jn_meet_btn: "Write to {name}",
   jn_remind_t: "Reminder: your outing is coming up",
   outings_tag: "{n} Jade outing(s)",
-  you: "you"
+  you: "you",
+  verify_nudge: "Get your profile verified: verified ✓ profiles appear first and inspire trust.",
+  verify_nudge_btn: "Get verified",
+  scam_contact: "⚠️ Be careful: this person suggests moving elsewhere (WhatsApp, Telegram, phone number…). Stay on Jade until you have seen them on a video call.",
+  safety_first_t: "Before you meet",
+  safety_ok: "Got it"
 };
