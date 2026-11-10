@@ -441,5 +441,18 @@ I18N.en = {
   rpw_save: "Save the new password",
   rpw_mismatch: "The two passwords do not match.",
   rpw_short: "The password must be at least 8 characters.",
-  pw_reset_done: "Your password has been changed. Sign in with your new password."
+  pw_reset_done: "Your password has been changed. Sign in with your new password.",
+  lpq_kicker: "Jade's 16 personalities",
+  lpq_t: "Which one are you?",
+  lpq_p: "Each type has its own little character. Take the 4-question test to find yours.",
+  lpq_btn: "Take the test (4 questions)",
+  lpq_free: "Free, no sign-up. 30 seconds.",
+  lpq_q: "Question {n}",
+  lpq_prev: "← Previous",
+  lpq_noacc: "No sign-up needed",
+  lpq_you: "You are",
+  lpq_join: "Create my account with this character",
+  lpq_again: "Take the test again",
+  lpq_close: "Close the test",
+  lpq_kept: "Your character will already be chosen in your profile."
 };

@@ -65,6 +65,60 @@
     </div>
   </section>
 
+  <!-- Les 16 personnalités : galerie des petits personnages + test en 4 questions, sans inscription (js/test-personnalite.js) -->
+  <section class="lp-sec lp-types" id="lp-types" aria-labelledby="lp-types-t">
+    <div class="lp-wrap lp-types-in">
+      <div class="lp-types-text">
+        <p class="lp-kicker" data-i18n="lpq_kicker">Les 16 personnalités de Jade</p>
+        <h2 class="lp-h2" id="lp-types-t" data-i18n="lpq_t">Lequel êtes-vous ?</h2>
+        <p class="lp-types-p" data-i18n="lpq_p">Chaque type a son petit personnage. Faites le test en 4 questions pour découvrir le vôtre.</p>
+      </div>
+      <div class="lp-types-grid" id="lpq-grid" role="list"></div>
+      <div class="lp-types-cta">
+        <button type="button" class="lp-btn" id="lpq-start" data-i18n="lpq_btn">Faire le test (4 questions)</button>
+        <p class="lp-small" data-i18n="lpq_free">Gratuit, sans inscription. 30 secondes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Le test plein écran -->
+  <div class="lpq" id="lpq" hidden>
+    <div class="lpq-sheet" role="dialog" aria-modal="true" aria-label="Les 16 personnalités de Jade">
+      <div class="lpq-top">
+        <button type="button" class="lpq-x" id="lpq-close" data-i18n-aria="lpq_close" aria-label="Fermer le test">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16"/></svg>
+        </button>
+        <div class="lpq-bar" aria-hidden="true"><span id="lpq-fill"></span></div>
+        <span class="lpq-count" id="lpq-count">1 / 4</span>
+      </div>
+      <div class="lpq-view" id="lpq-q-view">
+        <p class="lp-kicker" id="lpq-step"></p>
+        <h2 class="lpq-title" id="lpq-title"></h2>
+        <div class="lpq-ans">
+          <button type="button" class="lpq-card a" id="lpq-a"><span class="lpq-av" id="lpq-a-av" aria-hidden="true"></span><span class="lpq-t" id="lpq-a-t"></span></button>
+          <button type="button" class="lpq-card b" id="lpq-b"><span class="lpq-av" id="lpq-b-av" aria-hidden="true"></span><span class="lpq-t" id="lpq-b-t"></span></button>
+        </div>
+        <div class="lpq-foot">
+          <button type="button" class="lpq-link" id="lpq-prev" data-i18n="lpq_prev">← Précédente</button>
+          <span data-i18n="lpq_noacc">Sans inscription</span>
+        </div>
+      </div>
+      <div class="lpq-view lpq-result" id="lpq-r-view" hidden>
+        <div class="lpq-mini" id="lpq-mini" aria-hidden="true"></div>
+        <p class="lp-kicker" data-i18n="lpq_you">Vous êtes</p>
+        <span class="lpq-big" id="lpq-big" aria-hidden="true"></span>
+        <p class="lpq-code" id="lpq-code"></p>
+        <h2 class="lpq-name" id="lpq-name"></h2>
+        <p class="lpq-desc" id="lpq-desc"></p>
+        <div class="lpq-btns">
+          <button type="button" class="lp-btn" id="lpq-join" data-i18n="lpq_join">Créer mon compte avec ce personnage</button>
+          <button type="button" class="lpq-again" id="lpq-again" data-i18n="lpq_again">Refaire le test</button>
+        </div>
+        <p class="lp-small" data-i18n="lpq_kept">Votre personnage sera déjà choisi dans votre profil.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- L'esprit de Jade : la pierre précieuse, et la personne précieuse que l'on cherche -->
   <section class="lp-sec" id="lp-spirit" aria-labelledby="lp-spirit-t">
     <div class="lp-wrap lp-spirit-in">
@@ -897,6 +951,7 @@
 <script src="js/photo-obligatoire.js"></script>
 <script src="js/recherche.js"></script>
 <script src="js/personnalite.js"></script>
+<script src="js/test-personnalite.js"></script>
 <script src="js/activite-jour.js"></script>
 <script src="js/mot-de-passe.js"></script>
 <script src="js/inactivite.js"></script>

@@ -441,5 +441,18 @@ I18N.vi = {
   rpw_save: "Lưu mật khẩu mới",
   rpw_mismatch: "Hai mật khẩu không khớp.",
   rpw_short: "Mật khẩu phải có ít nhất 8 ký tự.",
-  pw_reset_done: "Mật khẩu đã được đổi. Hãy đăng nhập bằng mật khẩu mới."
+  pw_reset_done: "Mật khẩu đã được đổi. Hãy đăng nhập bằng mật khẩu mới.",
+  lpq_kicker: "16 tính cách của Jade",
+  lpq_t: "Bạn là ai trong số này?",
+  lpq_p: "Mỗi nhóm có một nhân vật nhỏ riêng. Làm bài trắc nghiệm 4 câu để tìm ra nhân vật của bạn.",
+  lpq_btn: "Làm bài trắc nghiệm (4 câu)",
+  lpq_free: "Miễn phí, không cần đăng ký. 30 giây.",
+  lpq_q: "Câu {n}",
+  lpq_prev: "← Câu trước",
+  lpq_noacc: "Không cần đăng ký",
+  lpq_you: "Bạn là",
+  lpq_join: "Tạo tài khoản với nhân vật này",
+  lpq_again: "Làm lại bài trắc nghiệm",
+  lpq_close: "Đóng bài trắc nghiệm",
+  lpq_kept: "Nhân vật của bạn sẽ được chọn sẵn trong hồ sơ."
 };

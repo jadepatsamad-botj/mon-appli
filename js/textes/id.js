@@ -441,5 +441,18 @@ I18N.id = {
   rpw_save: "Simpan kata sandi baru",
   rpw_mismatch: "Kedua kata sandi tidak sama.",
   rpw_short: "Kata sandi minimal 8 karakter.",
-  pw_reset_done: "Kata sandi Anda sudah diubah. Masuk dengan kata sandi baru."
+  pw_reset_done: "Kata sandi Anda sudah diubah. Masuk dengan kata sandi baru.",
+  lpq_kicker: "16 kepribadian Jade",
+  lpq_t: "Anda yang mana?",
+  lpq_p: "Setiap tipe punya karakter kecilnya sendiri. Ikuti tes 4 pertanyaan untuk menemukan karakter Anda.",
+  lpq_btn: "Ikuti tes (4 pertanyaan)",
+  lpq_free: "Gratis, tanpa daftar. 30 detik.",
+  lpq_q: "Pertanyaan {n}",
+  lpq_prev: "← Sebelumnya",
+  lpq_noacc: "Tanpa daftar",
+  lpq_you: "Anda adalah",
+  lpq_join: "Buat akun dengan karakter ini",
+  lpq_again: "Ulangi tes",
+  lpq_close: "Tutup tes",
+  lpq_kept: "Karakter Anda akan sudah terpilih di profil."
 };

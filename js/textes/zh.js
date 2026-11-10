@@ -441,5 +441,18 @@ I18N.zh = {
   rpw_save: "保存新密码",
   rpw_mismatch: "两次输入的密码不一致。",
   rpw_short: "密码至少需要 8 个字符。",
-  pw_reset_done: "密码已修改。请用新密码登录。"
+  pw_reset_done: "密码已修改。请用新密码登录。",
+  lpq_kicker: "Jade 的 16 种性格",
+  lpq_t: "你是哪一种？",
+  lpq_p: "每种类型都有自己的小角色。做 4 道题的小测试，找到属于你的那个。",
+  lpq_btn: "开始测试（4 题）",
+  lpq_free: "免费，无需注册，只要 30 秒。",
+  lpq_q: "第 {n} 题",
+  lpq_prev: "← 上一题",
+  lpq_noacc: "无需注册",
+  lpq_you: "你是",
+  lpq_join: "用这个角色创建账户",
+  lpq_again: "重新测试",
+  lpq_close: "关闭测试",
+  lpq_kept: "你的角色会预先选在你的资料里。"
 };

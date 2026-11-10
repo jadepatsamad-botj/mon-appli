@@ -441,5 +441,18 @@ I18N.fr = {
   rpw_save: "Enregistrer le nouveau mot de passe",
   rpw_mismatch: "Les deux mots de passe ne sont pas identiques.",
   rpw_short: "Le mot de passe doit faire au moins 8 caractères.",
-  pw_reset_done: "Votre mot de passe a été modifié. Connectez-vous avec votre nouveau mot de passe."
+  pw_reset_done: "Votre mot de passe a été modifié. Connectez-vous avec votre nouveau mot de passe.",
+  lpq_kicker: "Les 16 personnalités de Jade",
+  lpq_t: "Lequel êtes-vous ?",
+  lpq_p: "Chaque type a son petit personnage. Faites le test en 4 questions pour découvrir le vôtre.",
+  lpq_btn: "Faire le test (4 questions)",
+  lpq_free: "Gratuit, sans inscription. 30 secondes.",
+  lpq_q: "Question {n}",
+  lpq_prev: "← Précédente",
+  lpq_noacc: "Sans inscription",
+  lpq_you: "Vous êtes",
+  lpq_join: "Créer mon compte avec ce personnage",
+  lpq_again: "Refaire le test",
+  lpq_close: "Fermer le test",
+  lpq_kept: "Votre personnage sera déjà choisi dans votre profil."
 };

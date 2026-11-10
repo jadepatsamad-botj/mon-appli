@@ -501,5 +501,18 @@ I18N.tl = {
   rpw_save: "I-save ang bagong password",
   rpw_mismatch: "Hindi magkapareho ang dalawang password.",
   rpw_short: "Dapat hindi bababa sa 8 character ang password.",
-  pw_reset_done: "Napalitan na ang password mo. Mag-log in gamit ang bagong password."
+  pw_reset_done: "Napalitan na ang password mo. Mag-log in gamit ang bagong password.",
+  lpq_kicker: "Ang 16 na personalidad ng Jade",
+  lpq_t: "Alin ka rito?",
+  lpq_p: "May sariling maliit na karakter ang bawat uri. Sagutan ang 4 na tanong para malaman ang sa iyo.",
+  lpq_btn: "Sagutan ang test (4 tanong)",
+  lpq_free: "Libre, walang sign-up. 30 segundo.",
+  lpq_q: "Tanong {n}",
+  lpq_prev: "← Nakaraan",
+  lpq_noacc: "Walang sign-up",
+  lpq_you: "Ikaw ay",
+  lpq_join: "Gumawa ng account gamit ang karakter na ito",
+  lpq_again: "Ulitin ang test",
+  lpq_close: "Isara ang test",
+  lpq_kept: "Nakapili na ang karakter mo sa iyong profile."
 };

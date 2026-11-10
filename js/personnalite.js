@@ -124,6 +124,8 @@ var _fillFormMbti = fillForm;
 fillForm = function (p) {
   var r = _fillFormMbti.apply(this, arguments);
   mbtiChoice = (p && MBTI_TYPES.indexOf(p.mbti) !== -1) ? p.mbti : "";
+  // Nouveau profil : on reprend le résultat du test fait sur la page d'accueil (js/test-personnalite.js)
+  if (!mbtiChoice && !(p && p.id)) { try { var g = localStorage.getItem("jade_mbti_guess"); if (MBTI_TYPES.indexOf(g) !== -1) mbtiChoice = g; } catch (e) {} }
   $("mbti-quiz").hidden = true;
   paintMbtiGrid();
   return r;

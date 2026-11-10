@@ -501,5 +501,18 @@ I18N.ms = {
   rpw_save: "Simpan kata laluan baharu",
   rpw_mismatch: "Kedua-dua kata laluan tidak sama.",
   rpw_short: "Kata laluan mesti sekurang-kurangnya 8 aksara.",
-  pw_reset_done: "Kata laluan anda telah ditukar. Log masuk dengan kata laluan baharu."
+  pw_reset_done: "Kata laluan anda telah ditukar. Log masuk dengan kata laluan baharu.",
+  lpq_kicker: "16 personaliti Jade",
+  lpq_t: "Anda yang mana?",
+  lpq_p: "Setiap jenis ada watak kecilnya sendiri. Ambil ujian 4 soalan untuk mengetahui watak anda.",
+  lpq_btn: "Ambil ujian (4 soalan)",
+  lpq_free: "Percuma, tanpa daftar. 30 saat.",
+  lpq_q: "Soalan {n}",
+  lpq_prev: "← Sebelumnya",
+  lpq_noacc: "Tanpa daftar",
+  lpq_you: "Anda ialah",
+  lpq_join: "Cipta akaun dengan watak ini",
+  lpq_again: "Ulang ujian",
+  lpq_close: "Tutup ujian",
+  lpq_kept: "Watak anda akan sudah dipilih dalam profil."
 };
