@@ -190,6 +190,7 @@
       <button role="tab" id="tab-login" aria-selected="false" type="button" data-i18n="tab_login">Se connecter</button>
     </div>
     <form id="form" novalidate>
+      <p class="forgot-intro" id="forgot-intro" data-i18n="forgot_intro" hidden>Saisissez votre adresse e-mail : l'équipe Jade vous envoie un lien pour choisir un nouveau mot de passe.</p>
       <label for="email" data-i18n="email">E-mail</label>
       <input id="email" type="email" autocomplete="email" required>
       <label for="password" data-i18n="password">Mot de passe (8 caractères minimum)</label>
@@ -212,7 +213,24 @@
       </div>
       <button class="primary" id="submit" type="submit"></button>
       <div style="text-align:center"><button class="linkbtn" id="forgot" type="button" data-i18n="forgot" hidden>Mot de passe oublié ?</button></div>
+      <div style="text-align:center"><button class="linkbtn" id="forgot-back" type="button" data-i18n="forgot_back" hidden>← Retour à la connexion</button></div>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- Nouveau mot de passe : ouvert par le lien de l'e-mail « mot de passe oublié » (js/mot-de-passe.js) -->
+  <section class="card" id="reset" hidden>
+    <h2 class="auth-title rpw-title" data-i18n="rpw_t">Nouveau mot de passe</h2>
+    <p class="sub" data-i18n="rpw_intro">Choisissez un nouveau mot de passe pour votre compte Jade.</p>
+    <form id="rpw-form" novalidate>
+      <label for="rpw" data-i18n="new_pw">Nouveau mot de passe (8 caractères minimum)</label>
+      <div class="pw-wrap" id="rpw-wrap">
+        <input id="rpw" type="password" minlength="8" autocomplete="new-password" required>
+      </div>
+      <label for="rpw2" data-i18n="rpw2_label">Confirmez le mot de passe</label>
+      <input id="rpw2" type="password" minlength="8" autocomplete="new-password" required>
+      <button class="primary" id="rpw-save" type="submit" data-i18n="rpw_save">Enregistrer le nouveau mot de passe</button>
+      <div class="msg" id="rpw-msg" role="status" aria-live="polite"></div>
     </form>
   </section>
 

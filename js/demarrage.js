@@ -4,7 +4,7 @@ applyI18n();
 setMode("signup");
 
 if (db.auth.onAuthStateChange) {
-  db.auth.onAuthStateChange(function (ev) { if (ev === "PASSWORD_RECOVERY") { recovering = true; setTimeout(function () { openSettings(t("recovery_msg")); }, 600); } });
+  db.auth.onAuthStateChange(function (ev) { if (ev === "PASSWORD_RECOVERY") { recovering = true; setTimeout(function () { if (typeof openRecovery === "function") openRecovery(); else openSettings(t("recovery_msg")); }, 600); } });
 }
 
 // Fin du chargement : on retire l'écran « Jade » de départ (voir le début de index.html)
@@ -17,5 +17,5 @@ db.auth.getSession().then(async function (r) {
   if (u && !recovering && typeof idleExpired === "function" && idleExpired()) { await idleLogout(); bootDone(); return; }
   show(u);
   bootDone();
-  if (u && recovering) setTimeout(function () { openSettings(t("recovery_msg")); }, 900);
+  if (u && recovering) setTimeout(function () { if (typeof openRecovery === "function") openRecovery(); else openSettings(t("recovery_msg")); }, 900);
 });

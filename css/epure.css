@@ -154,3 +154,10 @@ body.boot-app::before { content: "Jade"; position: fixed; inset: 0; display: gri
 .pw-eye.on .eye-on { display: none; }
 .pw-eye.on .eye-off { display: block; }
 .pw-eye:hover { background: var(--blush); }
+
+/* Mot de passe oublié : texte d'explication, écran « Nouveau mot de passe » */
+.forgot-intro { margin: 0 0 6px; color: var(--muted); line-height: 1.5; text-align: center; }
+#forgot-back { margin-top: 6px; }
+#reset .rpw-title { display: block; margin: 8px 0 6px; text-align: center; font-family: var(--font-title); font-weight: 400; font-size: 1.9rem; }
+#reset .sub { text-align: center; }
+main:has(> #reset:not([hidden])) .topbar .sub, main:has(> #reset:not([hidden])) .top-actions { display: none !important; }
