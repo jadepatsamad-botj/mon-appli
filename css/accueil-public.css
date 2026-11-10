@@ -61,6 +61,20 @@ body.landing-on #auth .hero { display: none; }
 .lp-map-grid h3 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 1.35rem; line-height: 1.2; }
 .lp-map-grid p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--lp-mute) !important; }
 
+/* Ordinateur : l'ouverture occupe tout le premier écran, « Pourquoi Jade » vient en dessous,
+   comme une deuxième page (sur téléphone et tablette, rien ne change) */
+@media (min-width: 900px) {
+  .lp-hero { padding-top: 0; padding-bottom: 0; overflow-x: clip; }
+  .lp-hero-in { flex-direction: column; align-items: stretch; gap: 0; }
+  .lp-hero-text { flex: none; min-height: calc(100svh - 77px); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; padding: 56px 0 72px; }
+  .lp-hero-t { max-width: 15ch; font-size: clamp(3.4rem, 5.6vw, 5.2rem); }
+  .lp-map { flex: none; position: relative; padding: clamp(80px, 9vw, 112px) 0; }
+  .lp-map::before { content: ""; position: absolute; top: 0; left: 50%; width: 100vw; transform: translateX(-50%); border-top: 1px solid var(--lp-line); }
+  .lp-map-t { margin-bottom: 40px; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.12; }
+  .lp-map-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lp-map-grid article { padding: 32px 28px 36px; }
+}
+
 /* Sections */
 .lp-sec { border-top: 1px solid var(--lp-line); padding-top: clamp(64px, 9vw, 112px); padding-bottom: clamp(64px, 9vw, 112px); }
 .lp-soft { background: var(--lp-blush); }
