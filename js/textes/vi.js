@@ -316,5 +316,8 @@ I18N.vi = {
   jn_cancelled: "Hoạt động này đã bị hủy.",
   jn_photo_t: "Thêm ảnh của bạn",
   jn_photo_b: "Hồ sơ của bạn chưa có ảnh. Trên Jade, bắt buộc phải có ít nhất một ảnh của bạn để các thành viên khác nhận ra bạn. Quyền truy cập của bạn đang tạm dừng cho đến khi bạn thêm ảnh.",
-  jn_photo_btn: "Thêm ảnh"
+  jn_photo_btn: "Thêm ảnh",
+  bio_req: "Bắt buộc: ít nhất 10 từ để giới thiệu bản thân.",
+  bio_wc: "{n} / 10 từ",
+  e_bio_short: "Phần giới thiệu của bạn phải có ít nhất 10 từ."
 };

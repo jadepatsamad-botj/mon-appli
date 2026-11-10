@@ -376,5 +376,8 @@ I18N.ms = {
   jn_cancelled: "Aktiviti ini telah dibatalkan.",
   jn_photo_t: "Tambah foto diri anda",
   jn_photo_b: "Profil anda belum mempunyai foto. Di Jade, sekurang-kurangnya satu foto diri anda diwajibkan supaya ahli lain dapat mengenali anda. Akses anda dijeda sehingga anda menambah foto.",
-  jn_photo_btn: "Tambah foto"
+  jn_photo_btn: "Tambah foto",
+  bio_req: "Wajib: sekurang-kurangnya 10 perkataan untuk memperkenalkan diri.",
+  bio_wc: "{n} / 10 perkataan",
+  e_bio_short: "Pengenalan anda mesti mengandungi sekurang-kurangnya 10 perkataan."
 };

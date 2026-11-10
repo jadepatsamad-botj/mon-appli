@@ -376,5 +376,8 @@ I18N.tl = {
   jn_cancelled: "Kinansela ang aktibidad na ito.",
   jn_photo_t: "Magdagdag ng larawan mo",
   jn_photo_b: "Wala pang larawan ang profile mo. Sa Jade, kailangan ng kahit isang larawan mo para makilala ka ng ibang miyembro. Naka-pause ang access mo hanggang magdagdag ka ng larawan.",
-  jn_photo_btn: "Magdagdag ng larawan"
+  jn_photo_btn: "Magdagdag ng larawan",
+  bio_req: "Kailangan: kahit 10 salita para ipakilala ang sarili mo.",
+  bio_wc: "{n} / 10 salita",
+  e_bio_short: "Kailangang may kahit 10 salita ang pagpapakilala mo."
 };

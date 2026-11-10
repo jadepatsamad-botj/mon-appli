@@ -81,7 +81,7 @@ function fillForm(p) {
   buildSpoken();
   var sp = (p && p.spoken) || [];
   Array.prototype.forEach.call($("spoken").querySelectorAll("input"), function (c) { c.checked = sp.indexOf(c.value) !== -1; });
-  $("bio-count").textContent = $("bio").value.length;
+  if (typeof paintBio === "function") paintBio(); else $("bio-count").textContent = $("bio").value.length;
   initSlots(p);
   $("pcancel").hidden = !p;
   say($("pmsg"), "", "");

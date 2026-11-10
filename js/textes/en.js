@@ -316,5 +316,8 @@ I18N.en = {
   jn_cancelled: "This activity has been cancelled.",
   jn_photo_t: "Add a photo of yourself",
   jn_photo_b: "Your profile has no photo yet. On Jade, at least one photo of yourself is required so other members can recognise you. Your access is paused until you add a photo.",
-  jn_photo_btn: "Add a photo"
+  jn_photo_btn: "Add a photo",
+  bio_req: "Required: at least 10 words to introduce yourself.",
+  bio_wc: "{n} / 10 words",
+  e_bio_short: "Your bio must contain at least 10 words."
 };

@@ -316,5 +316,8 @@ I18N.id = {
   jn_cancelled: "Aktivitas ini dibatalkan.",
   jn_photo_t: "Tambahkan foto diri Anda",
   jn_photo_b: "Profil Anda belum memiliki foto. Di Jade, minimal satu foto diri Anda wajib ada agar anggota lain dapat mengenali Anda. Akses Anda dijeda sampai Anda menambahkan foto.",
-  jn_photo_btn: "Tambahkan foto"
+  jn_photo_btn: "Tambahkan foto",
+  bio_req: "Wajib: minimal 10 kata untuk memperkenalkan diri.",
+  bio_wc: "{n} / 10 kata",
+  e_bio_short: "Perkenalan Anda harus berisi minimal 10 kata."
 };

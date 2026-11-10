@@ -316,5 +316,8 @@ I18N.fr = {
   jn_cancelled: "Cette activité est annulée.",
   jn_photo_t: "Ajoutez une photo de vous",
   jn_photo_b: "Votre profil n'a pas encore de photo. Sur Jade, au moins une photo de vous est obligatoire pour que les autres membres puissent vous reconnaître. Votre accès est en pause jusqu'à l'ajout d'une photo.",
-  jn_photo_btn: "Ajouter une photo"
+  jn_photo_btn: "Ajouter une photo",
+  bio_req: "Obligatoire : au moins 10 mots pour vous présenter.",
+  bio_wc: "{n} / 10 mots",
+  e_bio_short: "Votre présentation doit contenir au moins 10 mots."
 };
