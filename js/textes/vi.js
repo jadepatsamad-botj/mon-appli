@@ -427,5 +427,7 @@ I18N.vi = {
   reset_spam: "Hãy xem cả thư mục thư rác. Liên kết có hiệu lực trong 1 giờ.",
   reset_rate: "Quá nhiều yêu cầu trong thời gian ngắn. Hãy đợi vài phút rồi thử lại.",
   reset_smtp: "Không gửi được email: hệ thống gửi email của Jade đang được cài đặt. Hãy liên hệ đội ngũ Jade.",
-  link_expired: "Liên kết này không còn hiệu lực (đã hết hạn hoặc đã dùng). Hãy yêu cầu email mới bằng « Quên mật khẩu? »."
+  link_expired: "Liên kết này không còn hiệu lực (đã hết hạn hoặc đã dùng). Hãy yêu cầu email mới bằng « Quên mật khẩu? ».",
+  pw_show_s: "Hiện",
+  pw_hide_s: "Ẩn"
 };

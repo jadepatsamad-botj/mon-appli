@@ -487,5 +487,7 @@ I18N.tl = {
   reset_spam: "Tingnan din ang spam folder. Valid ang link sa loob ng 1 oras.",
   reset_rate: "Masyadong maraming request sa maikling oras. Maghintay ng ilang minuto at subukang muli.",
   reset_smtp: "Hindi naipadala ang email: inaayos pa ang pagpapadala ng email ng Jade. Makipag-ugnayan sa Jade team.",
-  link_expired: "Hindi na valid ang link na ito (nag-expire o nagamit na). Humingi ng bagong email gamit ang « Nakalimutan ang password? »."
+  link_expired: "Hindi na valid ang link na ito (nag-expire o nagamit na). Humingi ng bagong email gamit ang « Nakalimutan ang password? ».",
+  pw_show_s: "Ipakita",
+  pw_hide_s: "Itago"
 };

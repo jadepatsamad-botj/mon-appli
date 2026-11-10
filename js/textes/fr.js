@@ -427,5 +427,7 @@ I18N.fr = {
   reset_spam: "Regarde aussi dans tes spams. Le lien est valable 1 heure.",
   reset_rate: "Trop de demandes en peu de temps. Attends quelques minutes puis réessaie.",
   reset_smtp: "L'e-mail n'a pas pu partir : l'envoi d'e-mails de Jade est en cours de réglage. Contacte l'équipe Jade.",
-  link_expired: "Ce lien n'est plus valable (il a expiré ou a déjà servi). Redemande un e-mail avec « Mot de passe oublié ? »."
+  link_expired: "Ce lien n'est plus valable (il a expiré ou a déjà servi). Redemande un e-mail avec « Mot de passe oublié ? ».",
+  pw_show_s: "Afficher",
+  pw_hide_s: "Masquer"
 };

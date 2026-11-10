@@ -427,5 +427,7 @@ I18N.id = {
   reset_spam: "Periksa juga folder spam. Tautan berlaku 1 jam.",
   reset_rate: "Terlalu banyak permintaan dalam waktu singkat. Tunggu beberapa menit lalu coba lagi.",
   reset_smtp: "Email tidak dapat dikirim: pengiriman email Jade sedang diatur. Hubungi tim Jade.",
-  link_expired: "Tautan ini sudah tidak berlaku (kedaluwarsa atau sudah dipakai). Minta email baru lewat « Lupa kata sandi? »."
+  link_expired: "Tautan ini sudah tidak berlaku (kedaluwarsa atau sudah dipakai). Minta email baru lewat « Lupa kata sandi? ».",
+  pw_show_s: "Tampilkan",
+  pw_hide_s: "Sembunyikan"
 };

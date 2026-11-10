@@ -487,5 +487,7 @@ I18N.ms = {
   reset_spam: "Semak juga folder spam. Pautan sah selama 1 jam.",
   reset_rate: "Terlalu banyak permintaan dalam masa singkat. Tunggu beberapa minit dan cuba lagi.",
   reset_smtp: "E-mel tidak dapat dihantar: penghantaran e-mel Jade sedang disediakan. Hubungi pasukan Jade.",
-  link_expired: "Pautan ini tidak lagi sah (tamat tempoh atau sudah digunakan). Minta e-mel baharu melalui « Lupa kata laluan? »."
+  link_expired: "Pautan ini tidak lagi sah (tamat tempoh atau sudah digunakan). Minta e-mel baharu melalui « Lupa kata laluan? ».",
+  pw_show_s: "Tunjuk",
+  pw_hide_s: "Sembunyi"
 };

@@ -69,11 +69,13 @@ $("change-pw").onclick = async function () {
   var input = $("newpw"), wrap = document.createElement("div"); wrap.className = "pw-wrap";
   input.parentNode.insertBefore(wrap, input); wrap.appendChild(input);
   var b = $("pw-eye").cloneNode(true); b.id = "newpw-eye"; b.classList.remove("on"); wrap.appendChild(b);
+  var bt = b.querySelector(".pw-eye-t"); if (bt) { bt.setAttribute("data-i18n", "pw_show_s"); bt.textContent = t("pw_show_s"); }
   b.onclick = function () {
     var show = input.type === "password";
     input.type = show ? "text" : "password";
     b.classList.toggle("on", show);
     b.setAttribute("aria-pressed", show ? "true" : "false");
     b.setAttribute("aria-label", t(show ? "pw_hide" : "pw_show"));
+    var tx = b.querySelector(".pw-eye-t"); if (tx) { tx.setAttribute("data-i18n", show ? "pw_hide_s" : "pw_show_s"); tx.textContent = t(show ? "pw_hide_s" : "pw_show_s"); }
   };
 })();

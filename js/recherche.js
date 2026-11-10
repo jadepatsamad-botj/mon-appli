@@ -45,6 +45,7 @@ $("pw-eye").onclick = function () {
   this.setAttribute("data-i18n-aria", show ? "pw_hide" : "pw_show");
   this.setAttribute("aria-label", t(show ? "pw_hide" : "pw_show"));
   this.classList.toggle("on", show);
+  var tx = this.querySelector(".pw-eye-t"); if (tx) { tx.setAttribute("data-i18n", show ? "pw_hide_s" : "pw_show_s"); tx.textContent = t(show ? "pw_hide_s" : "pw_show_s"); }
   try { input.focus({ preventScroll: true }); } catch (e) {}
 };
 // À chaque ouverture du formulaire, le mot de passe redevient masqué
