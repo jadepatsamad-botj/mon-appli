@@ -409,9 +409,6 @@ I18N.en = {
   mbti_d_ISFP: "Quiet and sensitive, lives in the moment.",
   mbti_d_ESTP: "Energetic and bold, always up for it.",
   mbti_d_ESFP: "Joyful and spontaneous, brings fun everywhere.",
-  online_d: "Online · {d} today",
-  active_today_d: "Active today · {d}",
-  dur_min: "{m} min",
-  dur_h: "{h} h",
-  dur_hm: "{h} h {m} min"
+  seen_min_ago: "Online {n} min ago",
+  seen_h_ago: "Online {n} h ago"
 };

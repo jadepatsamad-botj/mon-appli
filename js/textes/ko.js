@@ -469,9 +469,6 @@ I18N.ko = {
   mbti_d_ISFP: "조용하고 섬세하며, 지금 이 순간을 살아요.",
   mbti_d_ESTP: "에너지 넘치고 대담하며, 언제나 준비돼 있어요.",
   mbti_d_ESFP: "밝고 자유로우며, 어디서나 분위기를 띄워요.",
-  online_d: "온라인 · 오늘 {d}",
-  active_today_d: "오늘 활동 · {d}",
-  dur_min: "{m}분",
-  dur_h: "{h}시간",
-  dur_hm: "{h}시간 {m}분"
+  seen_min_ago: "{n}분 전 접속",
+  seen_h_ago: "{n}시간 전 접속"
 };

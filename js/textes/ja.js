@@ -469,9 +469,6 @@ I18N.ja = {
   mbti_d_ISFP: "控えめで繊細、今この瞬間を生きる。",
   mbti_d_ESTP: "エネルギッシュで大胆、いつでも乗り気。",
   mbti_d_ESFP: "明るく自由、どこでも場を盛り上げる。",
-  online_d: "オンライン・今日 {d}",
-  active_today_d: "今日アクティブ・{d}",
-  dur_min: "{m}分",
-  dur_h: "{h}時間",
-  dur_hm: "{h}時間{m}分"
+  seen_min_ago: "{n}分前にオンライン",
+  seen_h_ago: "{n}時間前にオンライン"
 };

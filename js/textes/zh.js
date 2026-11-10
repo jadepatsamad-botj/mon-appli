@@ -409,9 +409,6 @@ I18N.zh = {
   mbti_d_ISFP: "低调、敏感，活在当下。",
   mbti_d_ESTP: "精力充沛、大胆，随时出发。",
   mbti_d_ESFP: "快乐、率真，走到哪里都带来欢乐。",
-  online_d: "在线 · 今天 {d}",
-  active_today_d: "今天活跃 · {d}",
-  dur_min: "{m} 分钟",
-  dur_h: "{h} 小时",
-  dur_hm: "{h} 小时 {m} 分钟"
+  seen_min_ago: "{n} 分钟前在线",
+  seen_h_ago: "{n} 小时前在线"
 };

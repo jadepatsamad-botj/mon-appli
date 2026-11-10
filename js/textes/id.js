@@ -409,9 +409,6 @@ I18N.id = {
   mbti_d_ISFP: "Pendiam dan peka, menikmati saat ini.",
   mbti_d_ESTP: "Energik dan berani, selalu siap.",
   mbti_d_ESFP: "Ceria dan spontan, membawa keseruan ke mana saja.",
-  online_d: "Online · {d} hari ini",
-  active_today_d: "Aktif hari ini · {d}",
-  dur_min: "{m} mnt",
-  dur_h: "{h} jam",
-  dur_hm: "{h} jam {m} mnt"
+  seen_min_ago: "Online {n} mnt lalu",
+  seen_h_ago: "Online {n} jam lalu"
 };

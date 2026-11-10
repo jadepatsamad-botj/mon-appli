@@ -409,9 +409,6 @@ I18N.fr = {
   mbti_d_ISFP: "Discret et sensible, vit l'instant présent.",
   mbti_d_ESTP: "Énergique et audacieux, toujours partant.",
   mbti_d_ESFP: "Joyeux et spontané, met de l'ambiance partout.",
-  online_d: "En ligne · {d} aujourd'hui",
-  active_today_d: "Actif aujourd'hui · {d}",
-  dur_min: "{m} min",
-  dur_h: "{h} h",
-  dur_hm: "{h} h {m}"
+  seen_min_ago: "En ligne il y a {n} min",
+  seen_h_ago: "En ligne il y a {n} h"
 };

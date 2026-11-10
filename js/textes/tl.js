@@ -469,9 +469,6 @@ I18N.tl = {
   mbti_d_ISFP: "Tahimik at sensitibo, namumuhay sa kasalukuyan.",
   mbti_d_ESTP: "Masigla at matapang, laging game.",
   mbti_d_ESFP: "Masayahin at kusang-loob, nagbibigay-saya kahit saan.",
-  online_d: "Online · {d} ngayong araw",
-  active_today_d: "Aktibo ngayong araw · {d}",
-  dur_min: "{m} min",
-  dur_h: "{h} oras",
-  dur_hm: "{h} oras {m} min"
+  seen_min_ago: "Online {n} min ang nakalipas",
+  seen_h_ago: "Online {n} oras ang nakalipas"
 };

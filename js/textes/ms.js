@@ -469,9 +469,6 @@ I18N.ms = {
   mbti_d_ISFP: "Pendiam dan sensitif, hidup untuk saat ini.",
   mbti_d_ESTP: "Bertenaga dan berani, sentiasa bersedia.",
   mbti_d_ESFP: "Ceria dan spontan, menghidupkan suasana di mana-mana.",
-  online_d: "Dalam talian · {d} hari ini",
-  active_today_d: "Aktif hari ini · {d}",
-  dur_min: "{m} min",
-  dur_h: "{h} jam",
-  dur_hm: "{h} jam {m} min"
+  seen_min_ago: "Dalam talian {n} min lalu",
+  seen_h_ago: "Dalam talian {n} jam lalu"
 };

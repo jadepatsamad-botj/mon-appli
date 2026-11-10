@@ -409,9 +409,6 @@ I18N.vi = {
   mbti_d_ISFP: "Kín đáo, nhạy cảm, sống cho hiện tại.",
   mbti_d_ESTP: "Năng động, táo bạo, luôn sẵn sàng.",
   mbti_d_ESFP: "Vui vẻ, tự nhiên, mang niềm vui đến mọi nơi.",
-  online_d: "Đang trực tuyến · hôm nay {d}",
-  active_today_d: "Hoạt động hôm nay · {d}",
-  dur_min: "{m} phút",
-  dur_h: "{h} giờ",
-  dur_hm: "{h} giờ {m} phút"
+  seen_min_ago: "Trực tuyến {n} phút trước",
+  seen_h_ago: "Trực tuyến {n} giờ trước"
 };
