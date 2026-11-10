@@ -4,7 +4,7 @@
 
 /* Quand on est connecté : contenu en haut de l'écran, place pour la barre du bas */
 body.nav-on { place-items: start center; padding: 12px 16px calc(84px + env(safe-area-inset-bottom)); }
-body.nav-on .topbar { position: sticky; top: 0; z-index: 20; align-items: center; background: rgba(110,117,72,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+body.nav-on .topbar { position: sticky; top: 0; z-index: 20; align-items: center; background: rgba(23,61,53,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   margin: -12px -16px 12px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; border-bottom: 1px solid rgba(251,248,234,.18); }
 body.nav-on .topbar h1 { font-size: 1.5rem; margin: 0; color: var(--on-olive); font-family: var(--font-title); font-weight: 400; letter-spacing: .32em; text-transform: uppercase; }
 body.nav-on .topbar .sub { display: none; }
@@ -16,7 +16,7 @@ body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back { d
 
 .top-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .top-upgrade { border: 0; border-radius: 999px; padding: 9px 16px; font: inherit; font-size: .9rem; font-weight: 700;
-  background: var(--cream); color: #4f5631; cursor: pointer; white-space: nowrap; }
+  background: var(--cream); color: #1f4d43; cursor: pointer; white-space: nowrap; }
 .top-me { width: 42px; height: 42px; padding: 0; border-radius: 50%; border: 2px solid var(--cream); overflow: hidden;
   background: var(--card); color: var(--muted); font: inherit; font-weight: 700; cursor: pointer; flex: none; display: grid; place-items: center; }
 .top-me img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -37,7 +37,7 @@ body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back { d
 .fcard { position: relative; width: 100%; height: clamp(380px, calc(100svh - 390px), 520px); border-radius: 18px; overflow: hidden; background: #2a2f3a; cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,.12); }
 .fcard img, .fcard .fph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.fcard .fph { display: grid; place-items: center; font-size: 5rem; font-weight: 700; color: rgba(255,255,255,.55); background: linear-gradient(160deg, #8a9063, #464b2a); }
+.fcard .fph { display: grid; place-items: center; font-size: 5rem; font-weight: 700; color: rgba(255,255,255,.55); background: linear-gradient(160deg, #3f7a6a, #123229); }
 .fcard::after { content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 32%, rgba(0,0,0,0) 55%); }
 .fcount { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; border-radius: 999px;
@@ -66,7 +66,7 @@ body.nav-on #events-back, body.nav-on #matches-back, body.nav-on #likes-back { d
 
 /* Barre du bas */
 .tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; justify-content: center;
-  background: var(--card); border-top: 1px solid var(--line); padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 18px rgba(30,33,18,.18); }
+  background: var(--card); border-top: 1px solid var(--line); padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 18px rgba(10,30,25,.18); }
 .tabbar button { flex: 1; max-width: 120px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px;
   border: 0; background: none; padding: 6px 2px; font: inherit; font-size: .75rem; color: var(--muted); cursor: pointer; }
 .tabbar svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; stroke-linecap: round; }
@@ -82,7 +82,7 @@ body.nav-on { grid-template-columns: minmax(0, 1fr); }
 .fname .cdot { width: 13px; height: 13px; box-shadow: 0 0 0 2px rgba(255,255,255,.85); margin-right: 2px; }
 #cand-name .cdot, #peer-name .cdot { width: 13px; height: 13px; margin: 0 8px 4px 0; }
 .fonline { font-weight: 600; }
-.fonline.today { color: #f3efd9; font-weight: 400; opacity: .9; }
+.fonline.today { color: #f1ece0; font-weight: 400; opacity: .9; }
 
 /* Accueil : rangée « Nouveaux membres » (sur le fond olive) */
 #new-strip { border: 0; padding: 2px 0 12px; margin: 0 -16px; }

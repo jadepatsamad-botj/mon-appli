@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#6e7548">
+<meta name="theme-color" content="#1f4d43">
 <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
@@ -195,6 +195,7 @@
       <label data-i18n="photos_label"></label>
       <div id="slots" class="slots"></div>
       <p class="photo-req" data-i18n="photo_req"></p>
+      <div class="msg err field-err" id="err-photo" role="alert"></div>
 
       <label for="first_name" data-i18n="first_name"></label>
       <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
@@ -205,6 +206,7 @@
       <label data-i18n="origins_label"></label>
       <div id="origins" class="langs"></div>
       <p class="photo-req" data-i18n="origins_req"></p>
+      <div class="msg err field-err" id="err-origins" role="alert"></div>
 
       <label for="gender" data-i18n="i_am"></label>
       <select id="gender">
@@ -243,6 +245,7 @@
       <textarea id="bio" maxlength="500" data-i18n-ph="bio_ph"></textarea>
       <div class="count"><span id="bio-wc" class="bio-wc"></span> · <span id="bio-count">0</span> / 500</div>
       <p class="photo-req" data-i18n="bio_req"></p>
+      <div class="msg err field-err" id="err-bio" role="alert"></div>
 
       <button class="primary" id="psave" type="submit" data-i18n="save_profile"></button>
       <button class="secondary" id="pcancel" type="button" hidden data-i18n="cancel"></button>

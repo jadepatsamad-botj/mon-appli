@@ -11,6 +11,7 @@ function updateNav(name) {
   document.body.classList.toggle("nav-on", logged && NO_TABBAR.indexOf(name) === -1);
   document.body.classList.toggle("chat-on", name === "chat");
   document.body.classList.toggle("landing-on", !logged && (name === "auth" || name === "legal"));
+  document.body.classList.toggle("setup-on", !!currentUser && !currentProfile && name === "profile");
   if (logged) document.body.classList.remove("auth-open");
   if (name !== "chat" && typeof closeLightbox === "function") closeLightbox();
   $("tabbar").hidden = !logged || NO_TABBAR.indexOf(name) !== -1;

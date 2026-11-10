@@ -59,6 +59,7 @@ function renderSlots() {
       if (f.size > 5 * 1024 * 1024) return say($("pmsg"), t("e_photo_size"), "err");
       say($("pmsg"), "", "");
       slots[i] = { path: s.path || null, file: f, url: URL.createObjectURL(f) };
+      say($("err-photo"), "", "err field-err");
       removedPaths = removedPaths.filter(function (p) { return p !== slotPath(i); });
       renderSlots();
     };

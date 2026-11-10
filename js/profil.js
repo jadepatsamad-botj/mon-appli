@@ -32,16 +32,19 @@ $("pcancel").onclick = function () { renderView(currentUser, currentProfile); };
 $("pform").addEventListener("submit", async function (e) {
   e.preventDefault();
   var msg = $("pmsg");
+  ["photo", "origins", "bio"].forEach(function (k) { say($("err-" + k), "", "err field-err"); });
+  // Le message s'affiche à la fois près du champ concerné et en bas, près du bouton
+  function fieldErr(k, key, el) { say($("err-" + k), t(key), "err field-err"); say(msg, t(key), "err"); el.scrollIntoView({ block: "center" }); }
   var name = $("first_name").value.trim();
   if (!name) return say(msg, t("e_name"), "err");
   if (!$("gender").value || !$("looking_for").value) return say(msg, t("e_gender"), "err");
   // Origines obligatoires : Jade est réservée à la communauté asiatique
   var origins = Array.prototype.filter.call($("origins").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; });
-  if (!origins.length) { say(msg, t("e_origins"), "err"); $("origins").scrollIntoView({ block: "center" }); return; }
+  if (!origins.length) return fieldErr("origins", "e_origins", $("origins"));
   // Présentation obligatoire : au moins 10 mots
-  if (countWords($("bio").value) < BIO_MIN_WORDS) { say(msg, t("e_bio_short"), "err"); $("bio").focus(); $("bio").scrollIntoView({ block: "center" }); return; }
+  if (countWords($("bio").value) < BIO_MIN_WORDS) { fieldErr("bio", "e_bio_short", $("bio")); $("bio").focus({ preventScroll: true }); return; }
   // Au moins une photo de soi est obligatoire (à l'inscription comme en modifiant son profil)
-  if (!slots.some(function (s) { return s.path || s.file; })) { say(msg, t("e_photo_required"), "err"); $("slots").scrollIntoView({ block: "center" }); return; }
+  if (!slots.some(function (s) { return s.path || s.file; })) return fieldErr("photo", "e_photo_required", $("slots"));
   $("psave").disabled = true; say(msg, t("saving"), "");
   try {
     for (var i = 0; i < 5; i++) {
@@ -83,3 +86,5 @@ $("pform").addEventListener("submit", async function (e) {
   $("psave").disabled = false;
 });
 $("lang").addEventListener("change", paintBio);
+$("origins").addEventListener("change", function () { say($("err-origins"), "", "err field-err"); });
+$("bio").addEventListener("input", function () { if (countWords($("bio").value) >= BIO_MIN_WORDS) say($("err-bio"), "", "err field-err"); });

@@ -11,7 +11,7 @@ body.landing-on main { display: none; }
 body.landing-on.auth-open { overflow: hidden; }
 body.landing-on.auth-open main { display: block; position: fixed; inset: 0; z-index: 60; max-width: none; margin: 0; overflow-y: auto; overscroll-behavior: contain;
   padding: max(28px, calc(env(safe-area-inset-top, 0px) + 16px)) max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px));
-  background: rgba(24, 26, 14, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-sizing: border-box; }
+  background: rgba(8, 24, 20, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-sizing: border-box; }
 body.landing-on.auth-open main > section { max-width: 440px; margin: 0 auto; }
 body.landing-on #landing > .lp-foot { order: 2; }
 body.landing-on main > .topbar, body.landing-on .hint { display: none; }
@@ -25,14 +25,14 @@ body.landing-on #auth .hero { display: none; }
 /* Barre du haut */
 .lp-bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 10px;
   padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
-  background: rgba(84, 90, 51, .82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251, 248, 234, .16); }
+  background: rgba(18, 50, 41, .82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251, 248, 234, .16); }
 .lp-logo { font-family: var(--font-title); font-size: 1.45rem; letter-spacing: .34em; text-transform: uppercase; color: var(--on-olive); margin-right: auto; }
 .lp-login { border: 0; background: none; color: var(--on-olive); font: inherit; font-weight: 600; padding: 9px 6px; cursor: pointer; }
-.lp-join-s { border: 0; border-radius: 999px; background: var(--cream); color: #4f5631; font: inherit; font-weight: 700; padding: 9px 16px; cursor: pointer; white-space: nowrap; }
+.lp-join-s { border: 0; border-radius: 999px; background: var(--cream); color: #1f4d43; font: inherit; font-weight: 700; padding: 9px 16px; cursor: pointer; white-space: nowrap; }
 
 /* Boutons d'inscription */
 .lp-cta { border: 0; border-radius: 999px; background: var(--cream); color: #3d4226; font: inherit; font-size: 1.05rem; font-weight: 700;
-  padding: 16px 30px; cursor: pointer; box-shadow: 0 6px 22px rgba(30, 33, 18, .25); transition: transform .15s ease; }
+  padding: 16px 30px; cursor: pointer; box-shadow: 0 6px 22px rgba(10, 30, 25, .25); transition: transform .15s ease; }
 .lp-cta:hover { transform: translateY(-1px); }
 .lp-cta:focus-visible, .lp-login:focus-visible, .lp-join-s:focus-visible { outline: 3px solid var(--on-olive); outline-offset: 3px; }
 .lp-cta.dark { background: var(--accent); color: var(--accent-fg); box-shadow: none; }
@@ -106,7 +106,7 @@ body.landing-on #auth .hero { display: none; }
    Téléphone et iPad vertical : la photo en grand en haut, qui se fond dans le bois sombre,
    puis « Jade » calligraphié et le texte crème, sur tout l'écran (même esprit que l'ordinateur).
    Ordinateur / iPad paysage : la photo large en plein écran, texte sur le panneau de bois (plus bas). */
-.lp-win { position: relative; overflow: hidden; padding: 0 !important; color: #fbf8ea;
+.lp-win { position: relative; overflow: hidden; padding: 0 !important; color: #faf7ef;
   background: radial-gradient(120% 60% at 50% 100%, #3a2a1f 0%, #23170f 70%), #23170f; }
 .lp-win-bg { display: none; }
 .lp-win-col { position: relative; display: flex; flex-direction: column; min-height: calc(100svh - 56px); }
@@ -138,7 +138,7 @@ body.landing-on #auth .hero { display: none; }
   .lp-win-bg, .lp-win-img { display: none; }
   .lp-win-col { max-width: none; min-height: calc(100vh - 64px); display: flex; flex-direction: row; align-items: center; box-sizing: border-box;
     padding: 56px max(32px, env(safe-area-inset-right, 0px)) 64px max(5vw, env(safe-area-inset-left, 0px)); }
-  .lp-win-text { display: block; flex: none; margin-top: 0; padding: 0; text-align: left; position: relative; width: min(34vw, 520px); color: #fbf8ea; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
+  .lp-win-text { display: block; flex: none; margin-top: 0; padding: 0; text-align: left; position: relative; width: min(34vw, 520px); color: #faf7ef; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
   .lp-win-text::after { display: none; }
   .lp-win-text .lp-win-word { font-size: clamp(3rem, 5.6vw, 6rem); margin-bottom: 26px; }
   .lp-win-h1 { margin: 0 0 18px; max-width: none; font-family: var(--font-title); font-weight: 400; font-size: clamp(2rem, 3.1vw, 3.3rem); line-height: 1.12; text-wrap: balance; }
