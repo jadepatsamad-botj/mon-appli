@@ -166,3 +166,18 @@ body.landing-on .auth-title { display: block; margin: 30px 0 20px; text-align: c
 .lp-steps h3 { margin: 4px 0 0; font-family: var(--font-title); font-weight: 600; font-size: 1.45rem; }
 .lp-steps p { margin: 0; font-size: 1rem !important; opacity: .88; max-width: 30ch; }
 .lp-meet .lp-acts { margin-top: 10px; }
+
+/* « Pourquoi Jade » : les 4 raisons écrites sur les 4 feuilles pincées (img/pourquoi-jade.jpg).
+   Les zones de texte suivent l'image en pourcentages ; la taille du texte s'ajuste à la feuille (js/accueil-public.js). */
+.lp-notes { position: relative; width: min(100%, 600px); margin: 26px auto 0; container-type: inline-size;
+  border-radius: 18px; overflow: hidden; background: #f6f4f1; box-shadow: 0 10px 30px rgba(10, 30, 25, .12); }
+.lp-notes img { display: block; width: 100%; height: auto; }
+.lp-sheet { position: absolute; display: flex; flex-direction: column; overflow: hidden; color: #1b2622; text-align: left; }
+.lp-sheet.n1 { left: 7.1%; top: 13.7%; width: 34.2%; height: 35.4%; }
+.lp-sheet.n2 { left: 56.8%; top: 13.7%; width: 35.5%; height: 35.4%; }
+.lp-sheet.n3 { left: 7.1%; top: 59.4%; width: 34.2%; height: 34.9%; }
+.lp-sheet.n4 { left: 57.4%; top: 59.4%; width: 35.5%; height: 34.9%; }
+.lp-sheet-n { font-family: var(--font-title); font-weight: 600; font-size: 1em; letter-spacing: .08em; color: #a8833f; margin-bottom: .35em; }
+.lp-sheet h3 { margin: 0 0 .45em; font-family: var(--font-title); font-style: normal; font-weight: 600; font-size: 1.45em; line-height: 1.15; color: #1b2622; text-wrap: balance; }
+.lp-sheet p { margin: 0; font-size: 1em; line-height: 1.45; color: #4a5550; }
+.lp-sheet { font-size: clamp(10px, 3.1cqw, 18px); }
