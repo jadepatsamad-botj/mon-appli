@@ -357,5 +357,6 @@ I18N.fr = {
   scam_contact: "⚠️ Prudence : cette personne propose de continuer ailleurs (WhatsApp, Telegram, numéro…). Restez sur Jade tant que vous ne l'avez pas vue en appel vidéo.",
   safety_first_t: "Avant de vous rencontrer",
   safety_ok: "J'ai compris",
-  lp_kicker: "Rencontres · Communauté asiatique · France & Europe"
+  lp_kicker: "Rencontres · Communauté asiatique · France & Europe",
+  idle_logout: "Pour votre sécurité, vous avez été déconnecté·e après 30 minutes d'inactivité. Reconnectez-vous pour continuer."
 };

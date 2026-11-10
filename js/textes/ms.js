@@ -417,5 +417,6 @@ I18N.ms = {
   scam_contact: "⚠️ Berhati-hati: orang ini mengajak berpindah ke tempat lain (WhatsApp, Telegram, nombor telefon…). Kekal di Jade sehingga anda melihatnya melalui panggilan video.",
   safety_first_t: "Sebelum bertemu",
   safety_ok: "Saya faham",
-  lp_kicker: "Temu janji · Komuniti Asia · Perancis & Eropah"
+  lp_kicker: "Temu janji · Komuniti Asia · Perancis & Eropah",
+  idle_logout: "Demi keselamatan anda, anda telah dilog keluar selepas 30 minit tidak aktif. Sila log masuk semula untuk meneruskan."
 };

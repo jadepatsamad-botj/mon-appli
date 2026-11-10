@@ -357,5 +357,6 @@ I18N.en = {
   scam_contact: "⚠️ Be careful: this person suggests moving elsewhere (WhatsApp, Telegram, phone number…). Stay on Jade until you have seen them on a video call.",
   safety_first_t: "Before you meet",
   safety_ok: "Got it",
-  lp_kicker: "Dating · Asian community · France & Europe"
+  lp_kicker: "Dating · Asian community · France & Europe",
+  idle_logout: "For your security, you were signed out after 30 minutes of inactivity. Please sign in again to continue."
 };

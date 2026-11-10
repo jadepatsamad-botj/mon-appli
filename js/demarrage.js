@@ -9,6 +9,8 @@ if (db.auth.onAuthStateChange) {
 
 db.auth.getSession().then(async function (r) {
   var u = r.data.session ? r.data.session.user : null;
+  // Plus de 30 minutes sans activité depuis la dernière visite : il faut se reconnecter (js/inactivite.js)
+  if (u && !recovering && typeof idleExpired === "function" && idleExpired()) { await idleLogout(); return; }
   show(u);
   if (u && recovering) setTimeout(function () { openSettings(t("recovery_msg")); }, 900);
 });

@@ -357,5 +357,6 @@ I18N.zh = {
   scam_contact: "⚠️ 请小心：此人建议转到其他平台（WhatsApp、Telegram、电话号码…）。在视频通话见到对方之前，请留在 Jade 上交流。",
   safety_first_t: "见面之前",
   safety_ok: "我知道了",
-  lp_kicker: "交友 · 亚裔社区 · 法国与欧洲"
+  lp_kicker: "交友 · 亚裔社区 · 法国与欧洲",
+  idle_logout: "为了您的安全，您在 30 分钟无操作后已被退出登录。请重新登录以继续。"
 };

@@ -357,5 +357,6 @@ I18N.id = {
   scam_contact: "⚠️ Hati-hati: orang ini mengajak pindah ke aplikasi lain (WhatsApp, Telegram, nomor telepon…). Tetap di Jade sampai Anda melihatnya lewat panggilan video.",
   safety_first_t: "Sebelum bertemu",
   safety_ok: "Saya mengerti",
-  lp_kicker: "Kencan · Komunitas Asia · Prancis & Eropa"
+  lp_kicker: "Kencan · Komunitas Asia · Prancis & Eropa",
+  idle_logout: "Demi keamanan Anda, Anda telah keluar setelah 30 menit tidak aktif. Silakan masuk kembali untuk melanjutkan."
 };
