@@ -85,12 +85,14 @@ async function loadEvents() {
   var lv = myLevel();
   evs.forEach(function (e) {
     var card = document.createElement("div"); card.className = "evcard";
+    if (e.photo_url) { var ph = document.createElement("img"); ph.className = "evphoto"; ph.src = e.photo_url; ph.alt = ""; ph.loading = "lazy"; card.appendChild(ph); }
     var h3 = document.createElement("h3"); h3.textContent = e.title; card.appendChild(h3);
     var meta = document.createElement("div"); meta.className = "evmeta";
     var where = [e.city, e.country ? countryLabel(e.country) : ""].filter(Boolean).join(", ");
     meta.textContent = "📅 " + evWhen(e) + " · ⏱ " + t("ev_hours", { n: String(e.duration_hours).replace(/\.0$/, "") }) + (where ? " · 📍 " + where : "") +
       " · " + (Number(e.price_eur) > 0 ? t("ev_price", { p: money(Number(e.price_eur)) }) : t("ev_free"));
     card.appendChild(meta);
+    if (e.address) card.appendChild(evMapLine(e));
     if (e.description) { var p = document.createElement("p"); p.className = "evdesc"; p.textContent = e.description; card.appendChild(p); }
     var foot = document.createElement("div"); foot.className = "evfoot";
     var left = Math.max(0, e.capacity - (counts[e.id] || 0));
@@ -99,7 +101,15 @@ async function loadEvents() {
     if (joined[e.id]) {
       b.className = "secondary"; b.textContent = t("ev_leave");
       b.onclick = async function () { b.disabled = true; var d = await db.from("event_signups").delete().eq("event_id", e.id).eq("user_id", currentUser.id); if (d.error) say($("evmsg"), d.error.message, "err"); loadEvents(); };
-      var ok = document.createElement("span"); ok.className = "tag verified"; ok.textContent = t("ev_joined"); foot.insertBefore(ok, b);
+      var ok = document.createElement("span"); ok.className = "tag verified"; ok.textContent = t("ev_joined"); foot.appendChild(ok);
+      // Participant : on voit qui vient, et la discussion du groupe
+      var extra = document.createElement("div"); extra.className = "evjoined";
+      var people = document.createElement("div"); people.className = "evpeople"; extra.appendChild(people);
+      var chat = document.createElement("button"); chat.type = "button"; chat.className = "secondary evchat-btn"; chat.textContent = "💬 " + t("ev_chat");
+      chat.onclick = function () { openEvChat(e); };
+      extra.appendChild(chat);
+      card.appendChild(extra);
+      fillEvPeople(e.id, people);
     } else if (lv < e.min_level) {
       b.className = "secondary"; b.textContent = "🔒 " + t("ev_locked", { plan: LEVEL_NAME[e.min_level] }); b.onclick = openPremium;
     } else if (left <= 0) {
@@ -135,10 +145,7 @@ async function loadAdminEvents() {
       (counts[e.id] || 0) + " / " + e.capacity + " inscrits" + (e.min_level ? " · réservée " + LEVEL_NAME[e.min_level] : "")];
     var out = document.createElement("div");
     var btns = [
-      abtn("Voir les inscrits", async function () {
-        var p = await db.rpc("admin_event_participants", { eid: e.id }); if (p.error) throw p.error;
-        out.textContent = (p.data || []).map(function (x) { return x.first_name + (x.country ? " (" + countryLabel(x.country) + ")" : "") + (x.gender ? " · " + t("g_" + x.gender) : ""); }).join(" · ") || "Aucun inscrit.";
-      }),
+      abtn("Voir les inscrits", async function () { await adminPeople(e, out); }),
       abtn(e.cancelled ? "Rétablir" : "Annuler", async function () {
         if (!e.cancelled && !confirm("Annuler cette activité ?")) return;
         var u = await db.from("events").update({ cancelled: !e.cancelled }).eq("id", e.id); if (u.error) throw u.error; loadAdminEvents();
@@ -156,7 +163,19 @@ $("ev-create").onclick = async function () {
   if (title.length < 3 || !day || !hour) return say($("admsg"), "Indique au moins un titre, une date et une heure.", "err");
   var start = zonedToDate(day, hour, tz);
   if (start.getTime() < Date.now()) return say($("admsg"), "Cette date est déjà passée à l'heure du lieu.", "err");
+  // Photo de l'activité (facultative), déposée dans l'espace public « event-photos »
+  var photoUrl = null, pf = $("ev-photo").files[0];
+  if (pf) {
+    try {
+      var small = await compressImage(pf, 1600);
+      var ppath = Date.now() + "-" + Math.random().toString(36).slice(2, 8) + ".jpg";
+      var upl = await db.storage.from("event-photos").upload(ppath, small, { contentType: small.type || "image/jpeg" });
+      if (upl.error) return say($("admsg"), "Photo : " + upl.error.message + " (lance sql/activites-plus.sql)", "err");
+      photoUrl = db.storage.from("event-photos").getPublicUrl(ppath).data.publicUrl;
+    } catch (x) { return say($("admsg"), "Photo : " + (x.message || x), "err"); }
+  }
   var row = {
+    address: $("ev-address").value.trim() || null, photo_url: photoUrl,
     title: title, description: $("ev-desc").value.trim() || null, city: $("ev-city").value.trim() || null,
     country: $("ev-country").value || null, starts_at: start.toISOString(), tz: tz,
     duration_hours: parseFloat($("ev-dur").value) || 2, capacity: parseInt($("ev-cap").value, 10) || 10,
@@ -164,10 +183,37 @@ $("ev-create").onclick = async function () {
   };
   $("ev-create").disabled = true;
   var r = await db.from("events").insert(row), noTz = false;
+  if (r.error && /address|photo_url/.test(r.error.message || "")) { delete row.address; delete row.photo_url; r = await db.from("events").insert(row); }   // colonnes pas encore créées
   if (r.error && /tz/.test(r.error.message || "")) { delete row.tz; noTz = true; r = await db.from("events").insert(row); }   // colonne tz pas encore créée
   $("ev-create").disabled = false;
   if (r.error) return say($("admsg"), r.error.message, "err");
-  ["ev-title", "ev-desc", "ev-city", "ev-date"].forEach(function (id) { $(id).value = ""; });
+  ["ev-title", "ev-desc", "ev-city", "ev-date", "ev-address", "ev-photo"].forEach(function (id) { $(id).value = ""; });
   $("ev-check").textContent = "";
   say($("admsg"), noTz ? "Activité publiée ✓ (lance sql/activites-heure-locale.sql dans Supabase pour afficher l'heure du lieu)" : "Activité publiée ✓", "ok"); loadAdminEvents();
 };
+
+// Inscrits d'une activité pour l'admin : une fois la sortie commencée, on coche qui était présent·e
+// (le badge « sorties Jade » du membre est recalculé)
+async function adminPeople(e, out) {
+  var p = await db.rpc("admin_event_people", { eid: e.id });
+  if (p.error) p = await db.rpc("admin_event_participants", { eid: e.id });   // SQL de l'étape 2 pas encore lancé
+  if (p.error) throw p.error;
+  out.textContent = "";
+  if (!(p.data || []).length) { out.textContent = "Aucun inscrit."; return; }
+  var started = new Date(e.starts_at).getTime() < Date.now();
+  (p.data || []).forEach(function (x) {
+    var line = document.createElement("label"); line.className = "evpeople-row";
+    var txt = x.first_name + (x.country ? " (" + countryLabel(x.country) + ")" : "") + (x.gender ? " · " + t("g_" + x.gender) : "");
+    if (started && "attended" in x) {
+      var c = document.createElement("input"); c.type = "checkbox"; c.checked = !!x.attended;
+      c.onchange = async function () {
+        c.disabled = true;
+        var r = await db.rpc("admin_set_attended", { eid: e.id, uid: x.user_id, flag: c.checked });
+        c.disabled = false;
+        if (r.error) { c.checked = !c.checked; say($("admsg"), r.error.message, "err"); }
+      };
+      line.appendChild(c); line.appendChild(document.createTextNode(" " + txt + " · présent·e"));
+    } else line.textContent = txt;
+    out.appendChild(line);
+  });
+}

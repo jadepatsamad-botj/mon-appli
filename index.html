@@ -398,7 +398,27 @@
     <p class="sub" style="font-size:.85rem" data-i18n="ev_safety"></p>
     <div id="events-list"></div>
     <p class="empty" id="events-empty" hidden></p>
+    <div id="events-past" hidden>
+      <h3 class="evpast-t" data-i18n="ev_past_t"></h3>
+      <p class="sub" style="margin:0 0 10px" data-i18n="ev_liked_hint"></p>
+      <div id="events-past-list"></div>
+    </div>
     <div class="msg" id="evmsg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Discussion de groupe d'une activité (réservée aux participants) -->
+  <section class="card" id="evchat" hidden>
+    <button class="back" id="evchat-back" type="button" data-i18n="back"></button>
+    <h2 id="evchat-title"></h2>
+    <p class="sub" id="evchat-when" style="margin:0 0 12px"></p>
+    <div class="evchat-people" id="evchat-people"></div>
+    <div class="evchat-box" id="evchat-box"></div>
+    <p class="empty" id="evchat-empty" data-i18n="ev_chat_empty" hidden></p>
+    <form class="evchat-form" id="evchat-form">
+      <input id="evchat-input" type="text" maxlength="1000" autocomplete="off" data-i18n-ph="ev_chat_ph" data-i18n-aria="ev_chat_ph">
+      <button class="primary" type="submit" data-i18n="ev_chat_send"></button>
+    </form>
+    <div class="msg" id="evchat-msg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Abonnements -->
@@ -503,6 +523,10 @@
         <input id="ev-title" type="text" maxlength="120" placeholder="Titre (ex. Atelier cuisine thaïe à deux)">
         <textarea id="ev-desc" maxlength="3000" placeholder="Description : programme, lieu de rendez-vous, ce qu'il faut apporter…"></textarea>
         <div class="two"><input id="ev-city" type="text" maxlength="60" placeholder="Ville"><select id="ev-country"></select></div>
+        <label class="evlab" for="ev-address">Adresse du lieu (pour la carte)</label>
+        <input id="ev-address" type="text" maxlength="200" placeholder="ex. 12 rue de Belleville, 75020 Paris">
+        <label class="evlab" for="ev-photo">Photo de l'activité (facultatif)</label>
+        <input id="ev-photo" type="file" accept="image/jpeg,image/png,image/webp">
         <label class="evlab" for="ev-tz">Fuseau horaire du lieu</label>
         <select id="ev-tz"></select>
         <small class="sub" style="margin:0">Date et heure sur place, à l'heure du lieu de l'activité (les membres verront cette heure-là).</small>
@@ -740,6 +764,7 @@
 <script src="js/accueil-public.js"></script>
 <script src="js/messagerie-jade.js"></script>
 <script src="js/connexions.js"></script>
+<script src="js/sorties.js"></script>
 <script src="js/photo-obligatoire.js"></script>
 <script src="js/demarrage.js"></script>
 </body>
