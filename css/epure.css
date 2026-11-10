@@ -64,3 +64,8 @@ input[type=email], input[type=password], input[type=date], input[type=text], inp
   #tabbar { background: rgba(20, 19, 22, .95) !important; }
   #chat, .chat { --chat-bg: #141316; --chat-head: rgba(20, 19, 22, .94); --bub-them: #1c1a1f; --bub-me: #2a2a3d; --bub-fg: #f2eeeb; --chat-meta: #b3aca8; --chat-head-fg: #f2eeeb; }
 }
+
+/* Écran de départ pour un membre déjà connecté : « Jade » au centre le temps que l'appli charge */
+body.boot-app main, body.boot-app #landing { display: none !important; }
+body.boot-app::before { content: "Jade"; position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg);
+  font-family: var(--font-title); font-size: 2.6rem; font-weight: 500; color: var(--fg); }

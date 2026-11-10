@@ -22,33 +22,43 @@
 <link rel="stylesheet" href="css/epure.css">
 </head>
 <body>
+<!-- Avant même le chargement des scripts : on choisit tout de suite le bon écran, pour ne jamais voir
+     l'ancien formulaire une seconde. Visiteur → page d'accueil ; membre déjà connecté → écran « Jade » le temps de charger. -->
+<script>
+(function () {
+  var logged = false;
+  try { for (var i = 0; i < localStorage.length; i++) { if (/^sb-.+-auth-token$/.test(localStorage.key(i) || "")) { logged = true; break; } } } catch (e) {}
+  document.body.classList.add(logged ? "boot-app" : "landing-on");
+  setTimeout(function () { document.body.classList.remove("boot-app"); }, 10000);
+})();
+</script>
 <!-- Page d'accueil publique (visiteurs non connectés) -->
 <div id="landing">
   <header class="lp-bar">
     <span class="lp-logo">Jade</span>
-    <button type="button" class="lp-login" id="lp-login" data-i18n="lp_login"></button>
-    <button type="button" class="lp-join-s" id="lp-join-top" data-i18n="lp_join_short"></button>
+    <button type="button" class="lp-login" id="lp-login" data-i18n="lp_login">Se connecter</button>
+    <button type="button" class="lp-join-s" id="lp-join-top" data-i18n="lp_join_short">S'inscrire</button>
   </header>
 
   <!-- Ouverture : le titre à gauche, « Pourquoi Jade » en carte à droite -->
   <section class="lp-hero" aria-labelledby="lp-hero-t">
     <div class="lp-wrap lp-hero-in">
       <div class="lp-hero-text">
-        <p class="lp-kicker" data-i18n="lp_kicker"></p>
-        <h1 class="lp-hero-t" id="lp-hero-t" data-i18n="lp_hero_t"></h1>
-        <p class="lp-hero-p" data-i18n="lp_hero_p"></p>
+        <p class="lp-kicker" data-i18n="lp_kicker">Rencontres · Communauté asiatique · France &amp; Europe</p>
+        <h1 class="lp-hero-t" id="lp-hero-t" data-i18n="lp_hero_t">Des rencontres sincères pour la communauté asiatique de France et d'Europe</h1>
+        <p class="lp-hero-p" data-i18n="lp_hero_p">Trouvez votre moitié, votre précieux, à tout âge, et rencontrez-vous en vrai lors de sorties en petit groupe.</p>
         <div class="lp-hero-cta">
-          <button type="button" class="lp-btn lp-join-any" data-i18n="lp_join"></button>
-          <span class="lp-kicker" data-i18n="lp_free"></span>
+          <button type="button" class="lp-btn lp-join-any" data-i18n="lp_join">Créer mon compte gratuit</button>
+          <span class="lp-kicker" data-i18n="lp_free">Inscription 100 % gratuite</span>
         </div>
       </div>
       <figure class="lp-map">
-        <figcaption><h2 class="lp-map-t" data-i18n="lp_adv_t"></h2></figcaption>
+        <figcaption><h2 class="lp-map-t" data-i18n="lp_adv_t">Pourquoi Jade</h2></figcaption>
         <div class="lp-map-grid" role="list">
-          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 9h20v13H14l-6 5v-5H5z"/><path d="M29 15h6v13h-3v4l-5-4h-9v-3"/><path d="M10 15h10"/></svg></div><h3 data-i18n="lp_adv1_t"></h3><p data-i18n="lp_adv1_p"></p></article>
-          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4l13 5v10c0 8-6 14-13 17C13 33 7 27 7 19V9z"/><path d="M14 20l4 4 8-9"/></svg></div><h3 data-i18n="lp_adv2_t"></h3><p data-i18n="lp_adv2_p"></p></article>
-          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36s11-10 11-19a11 11 0 0 0-22 0c0 9 11 19 11 19z"/><circle cx="20" cy="17" r="4"/></svg></div><h3 data-i18n="lp_adv3_t"></h3><p data-i18n="lp_adv3_p"></p></article>
-          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 33S6 25 6 15a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 10-14 18-14 18z"/></svg></div><h3 data-i18n="lp_adv4_t"></h3><p data-i18n="lp_adv4_p"></p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 9h20v13H14l-6 5v-5H5z"/><path d="M29 15h6v13h-3v4l-5-4h-9v-3"/><path d="M10 15h10"/></svg></div><h3 data-i18n="lp_adv1_t">Se comprendre, enfin</h3><p data-i18n="lp_adv1_p">Chaque message se traduit en un geste, dans 12 langues.</p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4l13 5v10c0 8-6 14-13 17C13 33 7 27 7 19V9z"/><path d="M14 20l4 4 8-9"/></svg></div><h3 data-i18n="lp_adv2_t">Des profils vrais</h3><p data-i18n="lp_adv2_p">Chaque membre peut faire vérifier son profil par selfie. Le badge ✓ vous le montre.</p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36s11-10 11-19a11 11 0 0 0-22 0c0 9 11 19 11 19z"/><circle cx="20" cy="17" r="4"/></svg></div><h3 data-i18n="lp_adv3_t">Se rencontrer pour de vrai</h3><p data-i18n="lp_adv3_p">Cuisine, randonnée, sorties : des activités en petit groupe pour faire connaissance dans un cadre sûr.</p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 33S6 25 6 15a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 10-14 18-14 18z"/></svg></div><h3 data-i18n="lp_adv4_t">Moins de swipe, plus de sens</h3><p data-i18n="lp_adv4_p">Favoris, visites de profil et messages libres : vous choisissez qui vous intéresse vraiment.</p></article>
         </div>
       </figure>
     </div>
@@ -58,14 +68,14 @@
   <section class="lp-sec" id="lp-spirit" aria-labelledby="lp-spirit-t">
     <div class="lp-wrap lp-spirit-in">
       <div class="lp-spirit-side">
-        <h2 class="lp-kicker" id="lp-spirit-t" data-i18n="lp_spirit_t"></h2>
+        <h2 class="lp-kicker" id="lp-spirit-t" data-i18n="lp_spirit_t">L'esprit de Jade</h2>
         <svg class="lp-stone" viewBox="0 0 96 96" aria-hidden="true"><path d="M33 6h30l27 27v30L63 90H33L6 63V33z"/><path d="M28 28h40v40H28z"/><path d="M40 40h16v16H40z"/><path d="M48 6v22M48 68v22M6 48h22M68 48h22"/></svg>
       </div>
       <div class="lp-spirit-main">
-        <p class="lp-quote" data-i18n="lp_spirit_p2"></p>
+        <p class="lp-quote" data-i18n="lp_spirit_p2">Mais chez Jade, le plus précieux n'est pas une pierre : c'est la personne que l'on cherche toute une vie. Votre moitié. Votre précieux.</p>
         <div class="lp-cols">
-          <p data-i18n="lp_spirit_p1"></p>
-          <p data-i18n="lp_spirit_p3"></p>
+          <p data-i18n="lp_spirit_p1">Le jade est une pierre précieuse, rare et durable. En Asie, on l'offre depuis des siècles à ceux qu'on aime, comme un symbole de pureté et de longévité.</p>
+          <p data-i18n="lp_spirit_p3">Jeunes actifs, parents solos ou jeunes retraités : ici, on se découvre entre personnes qui partagent la même culture, on se retrouve en vrai lors de sorties, et on construit quelque chose qui dure.</p>
         </div>
       </div>
     </div>
@@ -75,20 +85,20 @@
   <section class="lp-sec lp-soft" id="lp-meet" aria-labelledby="lp-meet-t">
     <div class="lp-wrap">
       <div class="lp-head">
-        <h2 class="lp-h2" id="lp-meet-t" data-i18n="lp_act_t"></h2>
-        <p data-i18n="lp_act_p"></p>
+        <h2 class="lp-h2" id="lp-meet-t" data-i18n="lp_act_t">Se rencontrer en vrai</h2>
+        <p data-i18n="lp_act_p">Chez Jade, on ne reste pas derrière un écran. Nous organisons des sorties en petit groupe pour faire connaissance dans un cadre détendu et sûr.</p>
       </div>
       <ol class="lp-steps">
-        <li><span class="lp-step-n">1</span><h3 data-i18n="lp_step1_t"></h3><p data-i18n="lp_step1_p"></p></li>
-        <li><span class="lp-step-n">2</span><h3 data-i18n="lp_step2_t"></h3><p data-i18n="lp_step2_p"></p></li>
-        <li><span class="lp-step-n">3</span><h3 data-i18n="lp_step3_t"></h3><p data-i18n="lp_step3_p"></p></li>
+        <li><span class="lp-step-n">1</span><h3 data-i18n="lp_step1_t">Choisissez une sortie</h3><p data-i18n="lp_step1_p">Cuisine, randonnée, café des langues… près de chez vous.</p></li>
+        <li><span class="lp-step-n">2</span><h3 data-i18n="lp_step2_t">Rejoignez le groupe</h3><p data-i18n="lp_step2_p">Quelques membres, accompagnés par l'équipe Jade.</p></li>
+        <li><span class="lp-step-n">3</span><h3 data-i18n="lp_step3_t">Rencontrez-vous</h3><p data-i18n="lp_step3_p">Le courant passe ? Continuez la conversation dans l'appli.</p></li>
       </ol>
       <ul class="lp-menu">
-        <li><b data-i18n="lp_act1"></b><i aria-hidden="true"></i><span data-i18n="lp_act1_d"></span></li>
-        <li><b data-i18n="lp_act2"></b><i aria-hidden="true"></i><span data-i18n="lp_act2_d"></span></li>
-        <li><b data-i18n="lp_act3"></b><i aria-hidden="true"></i><span data-i18n="lp_act3_d"></span></li>
+        <li><b data-i18n="lp_act1">Cours de cuisine thaïe</b><i aria-hidden="true"></i><span data-i18n="lp_act1_d">2 h</span></li>
+        <li><b data-i18n="lp_act2">Randonnée</b><i aria-hidden="true"></i><span data-i18n="lp_act2_d">Demi-journée</span></li>
+        <li><b data-i18n="lp_act3">Café des langues</b><i aria-hidden="true"></i><span data-i18n="lp_act3_d">1 h 30</span></li>
       </ul>
-      <p class="lp-small" data-i18n="lp_act_note"></p>
+      <p class="lp-small" data-i18n="lp_act_note">Exemples d'activités. Le programme dépend de votre ville.</p>
     </div>
   </section>
 
@@ -96,20 +106,20 @@
   <section class="lp-sec" aria-label="Jade">
     <div class="lp-wrap lp-two">
       <div>
-        <h2 class="lp-h3" data-i18n="lp_rules_t"></h2>
+        <h2 class="lp-h3" data-i18n="lp_rules_t">Nos règles</h2>
         <ul class="lp-rules">
-          <li data-i18n="lp_rule1"></li>
-          <li data-i18n="lp_rule2"></li>
-          <li class="lp-em" data-i18n="lp_rule3"></li>
-          <li data-i18n="lp_rule4"></li>
+          <li data-i18n="lp_rule1">Réservé aux plus de 18 ans</li>
+          <li data-i18n="lp_rule2">Profils vérifiés par notre équipe</li>
+          <li class="lp-em" data-i18n="lp_rule3">Aucune relation d'argent n'est tolérée</li>
+          <li data-i18n="lp_rule4">Signaler ou bloquer quelqu'un en un geste</li>
         </ul>
       </div>
       <div>
-        <h2 class="lp-h3" data-i18n="lp_val_t"></h2>
+        <h2 class="lp-h3" data-i18n="lp_val_t">Nos valeurs</h2>
         <div class="lp-vals">
-          <article><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4l16 18-16 18L6 22z"/><path d="M6 22h32M22 4l-6 18 6 18 6-18z"/></svg><h3 data-i18n="lp_val1"></h3><p data-i18n="lp_val1_p"></p></article>
-          <article><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="15" cy="16" r="6"/><circle cx="29" cy="16" r="6"/><path d="M4 38c1-7 6-11 11-11s9 3 10 7M19 34c1-4 5-7 10-7s10 4 11 11"/></svg><h3 data-i18n="lp_val2"></h3><p data-i18n="lp_val2_p"></p></article>
-          <article><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="2"/><path d="M15 19v-6a7 7 0 0 1 14 0v6"/><path d="M22 27v4"/></svg><h3 data-i18n="lp_val3"></h3><p data-i18n="lp_val3_p"></p></article>
+          <article><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4l16 18-16 18L6 22z"/><path d="M6 22h32M22 4l-6 18 6 18 6-18z"/></svg><h3 data-i18n="lp_val1">Sincérité</h3><p data-i18n="lp_val1_p">On vient sur Jade pour une vraie relation.</p></article>
+          <article><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="15" cy="16" r="6"/><circle cx="29" cy="16" r="6"/><path d="M4 38c1-7 6-11 11-11s9 3 10 7M19 34c1-4 5-7 10-7s10 4 11 11"/></svg><h3 data-i18n="lp_val2">Respect</h3><p data-i18n="lp_val2_p">De chaque personne et de chaque culture.</p></article>
+          <article><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="2"/><path d="M15 19v-6a7 7 0 0 1 14 0v6"/><path d="M22 27v4"/></svg><h3 data-i18n="lp_val3">Sécurité</h3><p data-i18n="lp_val3_p">Vérification, modération et outils de signalement.</p></article>
         </div>
       </div>
     </div>
@@ -118,8 +128,8 @@
   <!-- Dernier appel -->
   <section class="lp-sec lp-final" aria-labelledby="lp-final-t">
     <div class="lp-wrap">
-      <h2 class="lp-h2" id="lp-final-t" data-i18n="lp_final_t"></h2>
-      <button type="button" class="lp-btn lp-join-any" data-i18n="lp_join"></button>
+      <h2 class="lp-h2" id="lp-final-t" data-i18n="lp_final_t">Vous savez ce que vous cherchez. Trouvez-le sur Jade.</h2>
+      <button type="button" class="lp-btn lp-join-any" data-i18n="lp_join">Créer mon compte gratuit</button>
     </div>
   </section>
 
@@ -128,9 +138,9 @@
       <div class="lp-logo">Jade</div>
       <div class="lp-langs" id="lp-langs"></div>
       <div class="lp-links">
-        <button type="button" class="linkbtn" id="lp-legal" data-i18n="lp_legal"></button>
+        <button type="button" class="linkbtn" id="lp-legal" data-i18n="lp_legal">Conditions et confidentialité</button>
       </div>
-      <p data-i18n="lp_foot"></p>
+      <p data-i18n="lp_foot">Jade · Rencontres sincères pour la communauté asiatique de France et d'Europe. Réservé aux plus de 18 ans.</p>
     </div>
   </footer>
 </div>
@@ -139,10 +149,10 @@
   <div class="topbar">
     <div>
       <h1 id="app-name">Jade</h1>
-      <p class="sub" data-i18n="tagline"></p>
+      <p class="sub" data-i18n="tagline">Rencontres pour la communauté asiatique de France et d'Europe.</p>
     </div>
     <div class="top-actions" id="top-actions" hidden>
-      <button class="top-upgrade" id="top-upgrade" type="button" data-i18n="upgrade"></button>
+      <button class="top-upgrade" id="top-upgrade" type="button" data-i18n="upgrade">Mise à niveau</button>
       <button class="top-me" id="top-me" type="button" data-i18n-aria="my_profile"><img id="top-avatar" alt=""><span id="top-initial"></span></button>
     </div>
     <select id="lang" aria-label="Langue / Language / ภาษา / Ngôn ngữ">
@@ -164,103 +174,103 @@
   <!-- Connexion / inscription -->
   <section class="card" id="auth">
     <button type="button" class="auth-close" id="auth-close" data-i18n-aria="lp_close">✕</button>
-    <h2 class="auth-title" id="auth-title" data-i18n="tab_signup"></h2>
+    <h2 class="auth-title" id="auth-title" data-i18n="tab_signup">Créer un compte</h2>
     <div class="hero">
       <img src="icon-180.png" alt="" class="hero-logo">
-      <h2 class="hero-title" data-i18n="hero_title"></h2>
+      <h2 class="hero-title" data-i18n="hero_title">Des rencontres sincères entre l'Asie et le monde</h2>
       <ul class="hero-list">
-        <li data-i18n="hero_f1"></li>
-        <li data-i18n="hero_f2"></li>
-        <li data-i18n="hero_f3"></li>
+        <li data-i18n="hero_f1">Profils vérifiés par notre équipe ✓</li>
+        <li data-i18n="hero_f2">Disponible en 12 langues</li>
+        <li data-i18n="hero_f3">Signalement et blocage en un geste</li>
       </ul>
     </div>
     <div class="tabs" role="tablist">
-      <button role="tab" id="tab-signup" aria-selected="true" type="button" data-i18n="tab_signup"></button>
-      <button role="tab" id="tab-login" aria-selected="false" type="button" data-i18n="tab_login"></button>
+      <button role="tab" id="tab-signup" aria-selected="true" type="button" data-i18n="tab_signup">Créer un compte</button>
+      <button role="tab" id="tab-login" aria-selected="false" type="button" data-i18n="tab_login">Se connecter</button>
     </div>
     <form id="form" novalidate>
-      <label for="email" data-i18n="email"></label>
+      <label for="email" data-i18n="email">E-mail</label>
       <input id="email" type="email" autocomplete="email" required>
-      <label for="password" data-i18n="password"></label>
+      <label for="password" data-i18n="password">Mot de passe (8 caractères minimum)</label>
       <input id="password" type="password" autocomplete="new-password" minlength="8" required>
       <div id="signup-only">
-        <label for="birth" data-i18n="birth"></label>
+        <label for="birth" data-i18n="birth">Date de naissance</label>
         <input id="birth" type="date">
         <label class="check" for="adult">
           <input id="adult" type="checkbox">
-          <span data-i18n="adult"></span>
+          <span data-i18n="adult">Je confirme avoir 18 ans ou plus et j'accepte les conditions d'utilisation.</span>
         </label>
-        <button class="linkbtn" id="legal-link-auth" type="button" data-i18n="legal_btn"></button>
+        <button class="linkbtn" id="legal-link-auth" type="button" data-i18n="legal_btn">Conditions et confidentialité</button>
       </div>
       <button class="primary" id="submit" type="submit"></button>
-      <div style="text-align:center"><button class="linkbtn" id="forgot" type="button" data-i18n="forgot" hidden></button></div>
+      <div style="text-align:center"><button class="linkbtn" id="forgot" type="button" data-i18n="forgot" hidden>Mot de passe oublié ?</button></div>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
     </form>
   </section>
 
   <!-- Formulaire de profil -->
   <section class="card" id="profile" hidden>
-    <h2 data-i18n="profile_title"></h2>
-    <p class="sub" style="margin-bottom:8px" data-i18n="profile_sub"></p>
-    <p class="photo-lock" id="photo-lock" role="alert" data-i18n="photo_locked" hidden></p>
+    <h2 data-i18n="profile_title">Mon profil</h2>
+    <p class="sub" style="margin-bottom:8px" data-i18n="profile_sub">Quelques informations pour commencer.</p>
+    <p class="photo-lock" id="photo-lock" role="alert" data-i18n="photo_locked" hidden>Votre accès à Jade est en pause : ajoutez au moins une photo de vous pour le retrouver.</p>
     <form id="pform" novalidate>
-      <label data-i18n="photos_label"></label>
+      <label data-i18n="photos_label">Photos (jusqu'à 5 · JPG, PNG ou WebP · 5 Mo max chacune)</label>
       <div id="slots" class="slots"></div>
-      <p class="photo-req" data-i18n="photo_req"></p>
+      <p class="photo-req" data-i18n="photo_req">Au moins une photo de vous est obligatoire.</p>
       <div class="msg err field-err" id="err-photo" role="alert"></div>
 
-      <label for="first_name" data-i18n="first_name"></label>
+      <label for="first_name" data-i18n="first_name">Prénom</label>
       <input id="first_name" type="text" maxlength="40" autocomplete="given-name" required>
 
-      <label for="country" data-i18n="country"></label>
+      <label for="country" data-i18n="country">Pays</label>
       <select id="country"></select>
 
-      <label data-i18n="origins_label"></label>
+      <label data-i18n="origins_label">Mes origines (une ou plusieurs)</label>
       <div id="origins" class="langs"></div>
-      <p class="photo-req" data-i18n="origins_req"></p>
+      <p class="photo-req" data-i18n="origins_req">Jade est réservée à la communauté asiatique de France et d'Europe. Vos origines sont affichées sur votre profil.</p>
       <div class="msg err field-err" id="err-origins" role="alert"></div>
 
-      <label for="gender" data-i18n="i_am"></label>
+      <label for="gender" data-i18n="i_am">Je suis</label>
       <select id="gender">
-        <option value="" data-i18n="choose"></option>
-        <option value="homme" data-i18n="opt_man"></option>
-        <option value="femme" data-i18n="opt_woman"></option>
-        <option value="autre" data-i18n="opt_other"></option>
+        <option value="" data-i18n="choose">Choisir…</option>
+        <option value="homme" data-i18n="opt_man">Un homme</option>
+        <option value="femme" data-i18n="opt_woman">Une femme</option>
+        <option value="autre" data-i18n="opt_other">Autre</option>
       </select>
 
-      <label for="looking_for" data-i18n="looking"></label>
+      <label for="looking_for" data-i18n="looking">Je cherche</label>
       <select id="looking_for">
-        <option value="" data-i18n="choose"></option>
-        <option value="homme" data-i18n="opt_man"></option>
-        <option value="femme" data-i18n="opt_woman"></option>
+        <option value="" data-i18n="choose">Choisir…</option>
+        <option value="homme" data-i18n="opt_man">Un homme</option>
+        <option value="femme" data-i18n="opt_woman">Une femme</option>
       </select>
 
-      <label for="city" data-i18n="city"></label>
+      <label for="city" data-i18n="city">Ville</label>
       <input id="city" type="text" maxlength="40" autocomplete="address-level2">
 
-      <label for="intention" data-i18n="intent"></label>
+      <label for="intention" data-i18n="intent">Ce que je recherche</label>
       <select id="intention">
-        <option value="" data-i18n="choose"></option>
-        <option value="serieux" data-i18n="i_serieux"></option>
-        <option value="mariage" data-i18n="i_mariage"></option>
-        <option value="amitie" data-i18n="i_amitie"></option>
-        <option value="voir" data-i18n="i_voir"></option>
+        <option value="" data-i18n="choose">Choisir…</option>
+        <option value="serieux" data-i18n="i_serieux">Une relation sérieuse</option>
+        <option value="mariage" data-i18n="i_mariage">Le mariage</option>
+        <option value="amitie" data-i18n="i_amitie">De l'amitié</option>
+        <option value="voir" data-i18n="i_voir">Je verrai bien</option>
       </select>
 
-      <label data-i18n="spoken"></label>
+      <label data-i18n="spoken">Langues parlées</label>
       <div id="spoken" class="langs"></div>
 
-      <label data-i18n="interests"></label>
+      <label data-i18n="interests">Centres d'intérêt</label>
       <div id="interests" class="langs"></div>
 
-      <label for="bio" data-i18n="bio"></label>
+      <label for="bio" data-i18n="bio">Présentation</label>
       <textarea id="bio" maxlength="500" data-i18n-ph="bio_ph"></textarea>
       <div class="count"><span id="bio-wc" class="bio-wc"></span> · <span id="bio-count">0</span> / 500</div>
-      <p class="photo-req" data-i18n="bio_req"></p>
+      <p class="photo-req" data-i18n="bio_req">Obligatoire : au moins 10 mots pour vous présenter.</p>
       <div class="msg err field-err" id="err-bio" role="alert"></div>
 
-      <button class="primary" id="psave" type="submit" data-i18n="save_profile"></button>
-      <button class="secondary" id="pcancel" type="button" hidden data-i18n="cancel"></button>
+      <button class="primary" id="psave" type="submit" data-i18n="save_profile">Enregistrer mon profil</button>
+      <button class="secondary" id="pcancel" type="button" hidden data-i18n="cancel">Annuler</button>
       <div class="msg" id="pmsg" role="status" aria-live="polite"></div>
     </form>
   </section>
@@ -269,8 +279,8 @@
   <section id="feed" hidden>
     <div class="vnudge" id="vnudge" hidden>
       <span class="vnudge-i" aria-hidden="true">✓</span>
-      <p data-i18n="verify_nudge"></p>
-      <button class="primary" id="vnudge-go" type="button" data-i18n="verify_nudge_btn"></button>
+      <p data-i18n="verify_nudge">Faites vérifier votre profil : les profils vérifiés ✓ apparaissent en premier et inspirent confiance.</p>
+      <button class="primary" id="vnudge-go" type="button" data-i18n="verify_nudge_btn">Me faire vérifier</button>
       <button class="vnudge-x" id="vnudge-x" type="button" data-i18n-aria="lp_close">✕</button>
     </div>
     <div class="searchbar">
@@ -278,14 +288,14 @@
       <input id="feed-q" type="search" enterkeyhint="search" autocomplete="off" data-i18n-ph="search_ph" data-i18n-aria="search_ph">
     </div>
     <div class="ifavs newstrip" id="new-strip" hidden>
-      <div class="ifavs-t" data-i18n="new_members"></div>
+      <div class="ifavs-t" data-i18n="new_members">Nouveaux membres</div>
       <div class="ifavs-row" id="new-row"></div>
     </div>
     <div id="feed-filter-slot"></div>
     <div class="msg" id="fmsg" role="status" aria-live="polite"></div>
     <div id="feed-list" class="feed"></div>
-    <p class="empty" id="feed-empty" hidden data-i18n="feed_empty"></p>
-    <button class="secondary" id="feed-more" type="button" hidden data-i18n="feed_more"></button>
+    <p class="empty" id="feed-empty" hidden data-i18n="feed_empty">Aucun profil trouvé. Essaie une autre recherche ou d'autres filtres.</p>
+    <button class="secondary" id="feed-more" type="button" hidden data-i18n="feed_more">Voir plus</button>
   </section>
 
   <!-- Mon profil (ouvert depuis la photo en haut à droite) -->
@@ -297,92 +307,92 @@
     <div class="complete" id="complete" hidden>
       <div class="complete-t" id="complete-t"></div>
       <div class="bar"><span id="complete-bar"></span></div>
-      <div class="complete-h" data-i18n="complete_hint"></div>
+      <div class="complete-h" data-i18n="complete_hint">Ajoute des photos, ta ville, tes langues et tes centres d'intérêt pour avoir plus de matchs.</div>
     </div>
     <p class="sub" id="who" style="margin:16px 0 0;font-size:.85rem"></p>
-    <button class="primary" id="go-discover" type="button" data-i18n="discover"></button>
-    <button class="secondary" id="go-matches" type="button" data-i18n="matches"></button>
-    <button class="secondary" id="go-events" type="button" data-i18n="events_btn"></button>
-    <button class="secondary" id="go-likes" type="button" data-i18n="likes_btn"></button>
-    <button class="secondary" id="go-views" type="button" data-i18n="views_btn"></button>
-    <button class="secondary goldbtn" id="go-premium" type="button" data-i18n="premium_btn"></button>
-    <button class="secondary goldbtn" id="go-concierge" type="button" data-i18n="concierge_btn" hidden></button>
-    <button class="secondary" id="edit" type="button" data-i18n="edit"></button>
-    <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn"></button>
-    <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn"></button>
-    <button class="secondary" id="go-settings" type="button" data-i18n="settings_btn"></button>
-    <button class="secondary" id="go-legal" type="button" data-i18n="legal_btn"></button>
+    <button class="primary" id="go-discover" type="button" data-i18n="discover">Découvrir des profils</button>
+    <button class="secondary" id="go-matches" type="button" data-i18n="matches">Mes matchs</button>
+    <button class="secondary" id="go-events" type="button" data-i18n="events_btn">🎉 Activités</button>
+    <button class="secondary" id="go-likes" type="button" data-i18n="likes_btn">Qui m'a liké</button>
+    <button class="secondary" id="go-views" type="button" data-i18n="views_btn">Qui a vu mon profil</button>
+    <button class="secondary goldbtn" id="go-premium" type="button" data-i18n="premium_btn">★ Abonnements</button>
+    <button class="secondary goldbtn" id="go-concierge" type="button" data-i18n="concierge_btn" hidden>💎 Mon assistant Jade</button>
+    <button class="secondary" id="edit" type="button" data-i18n="edit">Modifier mon profil</button>
+    <button class="secondary" id="go-verify" type="button" data-i18n="verify_btn">Faire vérifier mon profil</button>
+    <button class="secondary" id="go-safety" type="button" data-i18n="safety_btn">Conseils de sécurité</button>
+    <button class="secondary" id="go-settings" type="button" data-i18n="settings_btn">Paramètres</button>
+    <button class="secondary" id="go-legal" type="button" data-i18n="legal_btn">Conditions et confidentialité</button>
     <button class="secondary" id="go-admin" type="button" hidden>Administration</button>
-    <button class="secondary" id="logout" type="button" data-i18n="logout"></button>
+    <button class="secondary" id="logout" type="button" data-i18n="logout">Se déconnecter</button>
     <div style="text-align:center;margin-top:8px">
-      <button class="linkbtn danger" id="delete-account" type="button" data-i18n="delete"></button>
+      <button class="linkbtn danger" id="delete-account" type="button" data-i18n="delete">Supprimer mon compte</button>
     </div>
     <div class="msg" id="hmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Découverte -->
   <section class="card" id="discover" hidden>
-    <button class="back" id="discover-back" type="button" data-i18n="back"></button>
+    <button class="back" id="discover-back" type="button" data-i18n="back">← Retour</button>
     <details class="filters" id="filters">
-      <summary data-i18n="filters"></summary>
+      <summary data-i18n="filters">Filtres</summary>
       <div class="two">
-        <div><label for="f-min" data-i18n="age_min"></label><input id="f-min" type="number" min="18" max="99" value="18"></div>
-        <div><label for="f-max" data-i18n="age_max"></label><input id="f-max" type="number" min="18" max="99" value="99"></div>
+        <div><label for="f-min" data-i18n="age_min">Âge min.</label><input id="f-min" type="number" min="18" max="99" value="18"></div>
+        <div><label for="f-max" data-i18n="age_max">Âge max.</label><input id="f-max" type="number" min="18" max="99" value="99"></div>
       </div>
-      <label for="f-country" data-i18n="country"></label>
+      <label for="f-country" data-i18n="country">Pays</label>
       <select id="f-country"></select>
-      <label for="f-origin" data-i18n="f_origin"></label>
+      <label for="f-origin" data-i18n="f_origin">Origine</label>
       <select id="f-origin"></select>
       <div class="two">
-        <div><label for="f-intent" data-i18n="intent"></label>
+        <div><label for="f-intent" data-i18n="intent">Ce que je recherche</label>
           <select id="f-intent">
-            <option value="" data-i18n="all_intents"></option>
-            <option value="serieux" data-i18n="i_serieux"></option>
-            <option value="mariage" data-i18n="i_mariage"></option>
-            <option value="amitie" data-i18n="i_amitie"></option>
-            <option value="voir" data-i18n="i_voir"></option>
+            <option value="" data-i18n="all_intents">Toutes les intentions</option>
+            <option value="serieux" data-i18n="i_serieux">Une relation sérieuse</option>
+            <option value="mariage" data-i18n="i_mariage">Le mariage</option>
+            <option value="amitie" data-i18n="i_amitie">De l'amitié</option>
+            <option value="voir" data-i18n="i_voir">Je verrai bien</option>
           </select></div>
-        <div><label for="f-lang" data-i18n="filter_lang"></label><select id="f-lang"></select></div>
+        <div><label for="f-lang" data-i18n="filter_lang">Parle</label><select id="f-lang"></select></div>
       </div>
-      <button class="secondary" id="f-apply" type="button" data-i18n="apply"></button>
+      <button class="secondary" id="f-apply" type="button" data-i18n="apply">Appliquer</button>
     </details>
     <div class="match-banner" id="match-banner" hidden></div>
-    <div style="text-align:right"><button class="linkbtn" id="undo" type="button" data-i18n="undo" hidden></button></div>
+    <div style="text-align:right"><button class="linkbtn" id="undo" type="button" data-i18n="undo" hidden>↩ Revenir</button></div>
     <div id="cand" hidden>
       <img id="cand-photo" class="view-photo" alt="" hidden>
       <h2 id="cand-name"></h2>
       <div id="cand-tags"></div>
       <p class="bio" id="cand-bio"></p>
       <div class="row">
-        <button class="secondary" id="pass" type="button" data-i18n="pass"></button>
-        <button class="primary" id="like" type="button" data-i18n="fav_btn"></button>
+        <button class="secondary" id="pass" type="button" data-i18n="pass">Passer</button>
+        <button class="primary" id="like" type="button" data-i18n="fav_btn">♥ Favori</button>
       </div>
-      <button class="primary msgbtn" id="cand-msg" type="button" data-i18n="btn_message"></button>
-      <button class="secondary superbtn" id="superlike" type="button" data-i18n="super_like"></button>
+      <button class="primary msgbtn" id="cand-msg" type="button" data-i18n="btn_message">Message</button>
+      <button class="secondary superbtn" id="superlike" type="button" data-i18n="super_like">⭐ Super like</button>
       <div style="text-align:center;margin-top:8px">
-        <button class="linkbtn" id="cand-report" type="button" data-i18n="report_profile"></button>
+        <button class="linkbtn" id="cand-report" type="button" data-i18n="report_profile">Signaler ce profil</button>
       </div>
     </div>
-    <p class="empty" id="cand-empty" hidden data-i18n="no_more"></p>
+    <p class="empty" id="cand-empty" hidden data-i18n="no_more">Plus de profils pour le moment. Revenez plus tard !</p>
     <div class="msg" id="dmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Messages : boîte de réception -->
   <!-- Messagerie de l'équipe Jade : annonces (nouvelles activités) et messages de l'équipe -->
   <section id="jadebox" hidden>
-    <button class="back" id="jbox-back" type="button" data-i18n="back"></button>
+    <button class="back" id="jbox-back" type="button" data-i18n="back">← Retour</button>
     <div class="jbox-head">
       <span class="jbox-logo big" aria-hidden="true">J</span>
-      <div><h2 data-i18n="jbox_title"></h2><p class="sub" data-i18n="jbox_sub"></p></div>
+      <div><h2 data-i18n="jbox_title">Équipe Jade</h2><p class="sub" data-i18n="jbox_sub">Annonces et messages de l'équipe Jade</p></div>
     </div>
     <div id="jbox-list" class="jbox-list"></div>
-    <p class="empty" id="jbox-empty" data-i18n="jbox_empty" hidden></p>
+    <p class="empty" id="jbox-empty" data-i18n="jbox_empty" hidden>Aucun message de l'équipe Jade pour le moment.</p>
   </section>
 
   <section id="matches" hidden>
-    <button class="back" id="matches-back" type="button" data-i18n="back"></button>
+    <button class="back" id="matches-back" type="button" data-i18n="back">← Retour</button>
     <div class="ihead">
-      <h2 data-i18n="inbox_title"></h2>
+      <h2 data-i18n="inbox_title">Messages</h2>
       <div class="ihead-btns">
         <button class="jbox-btn" id="jbox-btn" type="button" data-i18n-aria="jbox_title">
           <span class="jbox-logo" aria-hidden="true">J</span><b class="nbadge jbox-badge" id="nb-jade" hidden></b>
@@ -394,15 +404,15 @@
     </div>
     <input class="isearch" id="inbox-q" type="search" hidden autocomplete="off" data-i18n-ph="search_conv" data-i18n-aria="search_conv">
     <div class="itools" id="inbox-tools">
-      <label class="check icheck" for="only-unread"><input id="only-unread" type="checkbox"><span data-i18n="only_unread"></span></label>
+      <label class="check icheck" for="only-unread"><input id="only-unread" type="checkbox"><span data-i18n="only_unread">Afficher uniquement les non lus</span></label>
       <select id="inbox-sort" data-i18n-aria="sort_label">
-        <option value="new" data-i18n="sort_new"></option>
-        <option value="unread" data-i18n="sort_unread"></option>
-        <option value="online" data-i18n="sort_online"></option>
+        <option value="new" data-i18n="sort_new">Plus récents</option>
+        <option value="unread" data-i18n="sort_unread">Non lus d'abord</option>
+        <option value="online" data-i18n="sort_online">En ligne d'abord</option>
       </select>
     </div>
     <div class="ifavs" id="inbox-favs" hidden>
-      <div class="ifavs-t" data-i18n="write_fav"></div>
+      <div class="ifavs-t" data-i18n="write_fav">Écrire à un favori</div>
       <div class="ifavs-row" id="inbox-favs-row"></div>
     </div>
     <div id="matches-list" class="ilist"></div>
@@ -411,14 +421,14 @@
 
   <!-- Activités -->
   <section class="card" id="events" hidden>
-    <button class="back" id="events-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="events_title"></h2>
-    <p class="sub" style="font-size:.85rem" data-i18n="ev_safety"></p>
+    <button class="back" id="events-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="events_title">Activités à venir</h2>
+    <p class="sub" style="font-size:.85rem" data-i18n="ev_safety">Activités encadrées par l'équipe Jade, dans des lieux publics. Respecte les autres participants.</p>
     <div id="events-list"></div>
     <p class="empty" id="events-empty" hidden></p>
     <div id="events-past" hidden>
-      <h3 class="evpast-t" data-i18n="ev_past_t"></h3>
-      <p class="sub" style="margin:0 0 10px" data-i18n="ev_liked_hint"></p>
+      <h3 class="evpast-t" data-i18n="ev_past_t">Mes sorties passées</h3>
+      <p class="sub" style="margin:0 0 10px" data-i18n="ev_liked_hint">C'est discret : l'autre personne ne le saura que si c'est réciproque.</p>
       <div id="events-past-list"></div>
     </div>
     <div class="msg" id="evmsg" role="status" aria-live="polite"></div>
@@ -426,15 +436,15 @@
 
   <!-- Discussion de groupe d'une activité (réservée aux participants) -->
   <section class="card" id="evchat" hidden>
-    <button class="back" id="evchat-back" type="button" data-i18n="back"></button>
+    <button class="back" id="evchat-back" type="button" data-i18n="back">← Retour</button>
     <h2 id="evchat-title"></h2>
     <p class="sub" id="evchat-when" style="margin:0 0 12px"></p>
     <div class="evchat-people" id="evchat-people"></div>
     <div class="evchat-box" id="evchat-box"></div>
-    <p class="empty" id="evchat-empty" data-i18n="ev_chat_empty" hidden></p>
+    <p class="empty" id="evchat-empty" data-i18n="ev_chat_empty" hidden>Pas encore de message. Dites bonjour au groupe !</p>
     <form class="evchat-form" id="evchat-form">
       <input id="evchat-input" type="text" maxlength="1000" autocomplete="off" data-i18n-ph="ev_chat_ph" data-i18n-aria="ev_chat_ph">
-      <button class="primary" type="submit" data-i18n="ev_chat_send"></button>
+      <button class="primary" type="submit" data-i18n="ev_chat_send">Envoyer</button>
     </form>
     <div class="msg" id="evchat-msg" role="status" aria-live="polite"></div>
   </section>
@@ -442,65 +452,65 @@
   <!-- Conseils de sécurité affichés une fois, avant de se rencontrer -->
   <div class="safemodal" id="safemodal" role="dialog" aria-modal="true" aria-labelledby="safemodal-t" hidden>
     <div class="safebox">
-      <h2 id="safemodal-t" data-i18n="safety_first_t"></h2>
+      <h2 id="safemodal-t" data-i18n="safety_first_t">Avant de vous rencontrer</h2>
       <ul class="tips">
         <li data-i18n-rich="s1"></li><li data-i18n-rich="s2"></li><li data-i18n-rich="s3"></li><li data-i18n-rich="s4"></li><li data-i18n-rich="s5"></li>
       </ul>
-      <button class="primary" id="safemodal-ok" type="button" data-i18n="safety_ok"></button>
+      <button class="primary" id="safemodal-ok" type="button" data-i18n="safety_ok">J'ai compris</button>
     </div>
   </div>
 
   <!-- Abonnements -->
   <section class="card" id="premium" hidden>
-    <button class="back" id="premium-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="premium_title"></h2>
+    <button class="back" id="premium-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="premium_title">Abonnements Jade</h2>
     <div class="msg ok" id="premium-status"></div>
     <div class="plans">
       <div class="plan" data-plan="premium">
-        <div class="plan-name">★ Premium</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month"></span></div>
-        <ul><li data-i18n="f_p1"></li><li data-i18n="f_p2"></li><li data-i18n="f_p3"></li><li data-i18n="f_p4"></li></ul>
-        <button class="primary buy" type="button" data-i18n="choose_plan"></button>
+        <div class="plan-name">★ Premium</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month">/ mois</span></div>
+        <ul><li data-i18n="f_p1">Voir qui t'a liké</li><li data-i18n="f_p2">Voir qui a vu ton profil</li><li data-i18n="f_p3">200 likes et 5 super likes par jour</li><li data-i18n="f_p4">Filtres avancés et badge ★ Premium</li></ul>
+        <button class="primary buy" type="button" data-i18n="choose_plan">Choisir</button>
       </div>
       <div class="plan gold" data-plan="gold">
-        <div class="plan-name">✦ Gold</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month"></span></div>
-        <ul><li class="lead" data-i18n="f_g0"></li><li data-i18n="f_g1"></li><li data-i18n="f_g2"></li><li data-i18n="f_g3"></li></ul>
-        <button class="primary buy" type="button" data-i18n="choose_plan"></button>
+        <div class="plan-name">✦ Gold</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month">/ mois</span></div>
+        <ul><li class="lead" data-i18n="f_g0">Tout Premium, plus :</li><li data-i18n="f_g1">Ton profil mis en avant dans la découverte</li><li data-i18n="f_g2">10 super likes par jour</li><li data-i18n="f_g3">Vérification de profil prioritaire</li></ul>
+        <button class="primary buy" type="button" data-i18n="choose_plan">Choisir</button>
       </div>
       <div class="plan diamond" data-plan="diamond">
-        <div class="plan-name">💎 Diamond</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month"></span></div>
-        <ul><li class="lead" data-i18n="f_d0"></li><li data-i18n="f_d1"></li><li data-i18n="f_d2"></li></ul>
-        <button class="primary buy" type="button" data-i18n="choose_plan"></button>
+        <div class="plan-name">💎 Diamond</div><div class="plan-price"><b class="pp"></b> <span data-i18n="per_month">/ mois</span></div>
+        <ul><li class="lead" data-i18n="f_d0">Tout Gold, plus :</li><li data-i18n="f_d1">Assistant IA personnel (profil, messages, conseils)</li><li data-i18n="f_d2">Une personne de notre équipe pour t'accompagner et organiser tes rendez-vous</li></ul>
+        <button class="primary buy" type="button" data-i18n="choose_plan">Choisir</button>
       </div>
     </div>
-    <div style="text-align:center"><button class="linkbtn" id="manage-sub" type="button" data-i18n="manage_sub" hidden></button></div>
-    <p class="sub" style="font-size:.8rem;margin:10px 0 0" data-i18n="sub_note"></p>
+    <div style="text-align:center"><button class="linkbtn" id="manage-sub" type="button" data-i18n="manage_sub" hidden>Gérer ou résilier mon abonnement</button></div>
+    <p class="sub" style="font-size:.8rem;margin:10px 0 0" data-i18n="sub_note">Renouvellement automatique chaque mois, résiliable à tout moment. Paiement sécurisé par Stripe.</p>
     <div class="msg" id="pmmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Assistant Jade (Diamond) -->
   <section class="card" id="concierge" hidden>
-    <button class="back" id="concierge-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="concierge_title"></h2>
-    <p data-i18n="concierge_text"></p>
+    <button class="back" id="concierge-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="concierge_title">Assistant Jade (Diamond)</h2>
+    <p data-i18n="concierge_text">Dis-nous ce que tu souhaites (rendez-vous, conseils, organisation) et tes disponibilités. Un membre de notre équipe te répond sous 48 h.</p>
     <textarea id="concierge-msg" maxlength="2000" data-i18n-ph="concierge_ph"></textarea>
-    <button class="primary" id="concierge-send" type="button" data-i18n="concierge_send"></button>
-    <p class="sub" style="font-size:.85rem;margin-top:10px" data-i18n="ai_soon"></p>
+    <button class="primary" id="concierge-send" type="button" data-i18n="concierge_send">Envoyer ma demande</button>
+    <p class="sub" style="font-size:.85rem;margin-top:10px" data-i18n="ai_soon">L'assistant IA arrive bientôt.</p>
     <div class="msg" id="cgmsg" role="status" aria-live="polite"></div>
     <div id="concierge-list"></div>
   </section>
 
   <!-- Intérêts : a consulté mon profil, favoris, m'a ajouté en favori -->
   <section id="likes" hidden>
-    <button class="back" id="likes-back" type="button" data-i18n="back"></button>
+    <button class="back" id="likes-back" type="button" data-i18n="back">← Retour</button>
     <div class="itabs three" role="tablist">
-      <button role="tab" type="button" id="ftab-views" aria-selected="true" data-i18n="tab_views"></button>
-      <button role="tab" type="button" id="ftab-favs" aria-selected="false" data-i18n="tab_favs"></button>
-      <button role="tab" type="button" id="ftab-favme" aria-selected="false"><span data-i18n="tab_favme"></span> <b class="icount" id="favme-count" hidden></b></button>
+      <button role="tab" type="button" id="ftab-views" aria-selected="true" data-i18n="tab_views">A consulté mon profil</button>
+      <button role="tab" type="button" id="ftab-favs" aria-selected="false" data-i18n="tab_favs">Favoris</button>
+      <button role="tab" type="button" id="ftab-favme" aria-selected="false"><span data-i18n="tab_favme">M'ont ajouté en favori</span> <b class="icount" id="favme-count" hidden></b></button>
     </div>
     <div class="itools">
       <select id="fav-sort" class="isort-wide" data-i18n-aria="sort_label">
-        <option value="new" data-i18n="sort_recent_int"></option>
-        <option value="online" data-i18n="sort_online"></option>
+        <option value="new" data-i18n="sort_recent_int">Trier par : les plus récents</option>
+        <option value="online" data-i18n="sort_online">En ligne d'abord</option>
       </select>
     </div>
     <div id="likes-list" class="ilist"></div>
@@ -510,8 +520,8 @@
 
   <!-- Conditions et confidentialité -->
   <section class="card" id="legal" hidden>
-    <button class="back" id="legal-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="legal_btn"></h2>
+    <button class="back" id="legal-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="legal_btn">Conditions et confidentialité</h2>
     <div id="legal-body" class="tips"></div>
   </section>
 
@@ -608,25 +618,25 @@
 
   <!-- Paramètres -->
   <section class="card" id="settings" hidden>
-    <button class="back" id="settings-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="settings_btn"></h2>
+    <button class="back" id="settings-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="settings_btn">Paramètres</h2>
     <label class="check" for="pause">
       <input id="pause" type="checkbox">
-      <span data-i18n="pause_label"></span>
+      <span data-i18n="pause_label">Mettre mon profil en pause (je n'apparais plus dans la découverte)</span>
     </label>
-    <label for="newpw" data-i18n="new_pw"></label>
+    <label for="newpw" data-i18n="new_pw">Nouveau mot de passe (8 caractères minimum)</label>
     <input id="newpw" type="password" minlength="8" autocomplete="new-password">
-    <button class="secondary" id="change-pw" type="button" data-i18n="change_pw"></button>
+    <button class="secondary" id="change-pw" type="button" data-i18n="change_pw">Changer le mot de passe</button>
     <div class="msg" id="smsg" role="status" aria-live="polite"></div>
-    <button class="secondary" id="notif-btn" type="button" data-i18n="notif_btn" style="margin-top:16px"></button>
+    <button class="secondary" id="notif-btn" type="button" data-i18n="notif_btn" style="margin-top:16px">🔔 Activer les notifications</button>
     <div class="msg" id="nmsg" role="status" aria-live="polite"></div>
-    <h3 data-i18n="blocked_title" style="margin-top:22px"></h3>
+    <h3 data-i18n="blocked_title" style="margin-top:22px">Personnes bloquées</h3>
     <div id="blocked-list"></div>
   </section>
 
   <!-- Fiche d'un profil (depuis la discussion) -->
   <section class="card" id="peer" hidden>
-    <button class="back" id="peer-back" type="button" data-i18n="back"></button>
+    <button class="back" id="peer-back" type="button" data-i18n="back">← Retour</button>
     <img id="peer-photo" class="view-photo" alt="" hidden>
     <h2 id="peer-name"></h2>
     <div id="peer-tags"></div>
@@ -654,29 +664,29 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
         </button>
         <div class="cmenu" id="chat-menu" hidden>
-          <button id="chat-profile" type="button" data-i18n="view_profile"></button>
-          <button id="chat-report" type="button" data-i18n="report"></button>
-          <button id="chat-block" type="button" class="danger" data-i18n="block"></button>
+          <button id="chat-profile" type="button" data-i18n="view_profile">Voir le profil</button>
+          <button id="chat-report" type="button" data-i18n="report">Signaler</button>
+          <button id="chat-block" type="button" class="danger" data-i18n="block">Bloquer</button>
         </div>
       </div>
     </header>
     <button class="cpeek" id="chat-peek" type="button" aria-expanded="false" aria-controls="chat-peek-body">
-      <span data-i18n="quick_profile"></span>
+      <span data-i18n="quick_profile">Aperçu rapide du profil</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
     </button>
     <div class="cpeek-body" id="chat-peek-body" hidden>
       <div class="cpeek-photos" id="chat-peek-photos"></div>
       <div id="chat-peek-tags"></div>
       <p class="bio" id="chat-peek-bio"></p>
-      <button class="linkbtn" id="chat-peek-full" type="button" data-i18n="full_profile"></button>
+      <button class="linkbtn" id="chat-peek-full" type="button" data-i18n="full_profile">Voir le profil complet</button>
     </div>
     <div class="chat-box" id="chat-box" aria-live="polite"></div>
     <div class="cbottom">
       <div class="ice" id="ice" hidden>
-        <div class="ice-t" data-i18n="ice_title"></div>
-        <button type="button" class="chip" data-i18n="ice1"></button>
-        <button type="button" class="chip" data-i18n="ice2"></button>
-        <button type="button" class="chip" data-i18n="ice3"></button>
+        <div class="ice-t" data-i18n="ice_title">Pour briser la glace :</div>
+        <button type="button" class="chip" data-i18n="ice1">Bonjour ! Ton profil m'a beaucoup plu 😊</button>
+        <button type="button" class="chip" data-i18n="ice2">Qu'est-ce que tu aimes faire le week-end ?</button>
+        <button type="button" class="chip" data-i18n="ice3">Tu as déjà voyagé dans mon pays ?</button>
       </div>
       <div class="msg" id="cmsg" role="status" aria-live="polite"></div>
       <form class="chat-form" id="chat-form">
@@ -702,45 +712,45 @@
 
   <!-- Signalement -->
   <section class="card" id="report" hidden>
-    <button class="back" id="report-back" type="button" data-i18n="back"></button>
-    <h2><span data-i18n="report_title"></span> <span id="report-name"></span></h2>
-    <p class="sub" style="margin-bottom:0" data-i18n="report_sub"></p>
+    <button class="back" id="report-back" type="button" data-i18n="back">← Retour</button>
+    <h2><span data-i18n="report_title">Signaler</span> <span id="report-name"></span></h2>
+    <p class="sub" style="margin-bottom:0" data-i18n="report_sub">Votre signalement est confidentiel. Il est examiné par l'équipe.</p>
     <form id="report-form" novalidate>
-      <label for="report-reason" data-i18n="reason"></label>
+      <label for="report-reason" data-i18n="reason">Motif</label>
       <select id="report-reason">
-        <option value="" data-i18n="choose"></option>
-        <option value="faux_profil" data-i18n="r_fake"></option>
-        <option value="arnaque" data-i18n="r_scam"></option>
-        <option value="harcelement" data-i18n="r_harass"></option>
-        <option value="contenu_inapproprie" data-i18n="r_content"></option>
-        <option value="mineur" data-i18n="r_minor"></option>
-        <option value="autre" data-i18n="r_other"></option>
+        <option value="" data-i18n="choose">Choisir…</option>
+        <option value="faux_profil" data-i18n="r_fake">Faux profil / photos volées</option>
+        <option value="arnaque" data-i18n="r_scam">Demande d'argent ou arnaque</option>
+        <option value="harcelement" data-i18n="r_harass">Harcèlement ou menaces</option>
+        <option value="contenu_inapproprie" data-i18n="r_content">Contenu inapproprié</option>
+        <option value="mineur" data-i18n="r_minor">Personne qui semble mineure</option>
+        <option value="autre" data-i18n="r_other">Autre</option>
       </select>
-      <label for="report-details" data-i18n="details"></label>
+      <label for="report-details" data-i18n="details">Détails (facultatif)</label>
       <textarea id="report-details" maxlength="1000"></textarea>
-      <button class="primary" id="report-send" type="submit" data-i18n="send_report"></button>
+      <button class="primary" id="report-send" type="submit" data-i18n="send_report">Envoyer le signalement</button>
       <div class="msg" id="rmsg" role="status" aria-live="polite"></div>
     </form>
   </section>
 
   <!-- Vérification -->
   <section class="card" id="verify" hidden>
-    <button class="back" id="verify-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="verify_title"></h2>
-    <p class="sub" style="margin-bottom:8px" data-i18n="verify_text"></p>
+    <button class="back" id="verify-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="verify_title">Vérifier mon profil</h2>
+    <p class="sub" style="margin-bottom:8px" data-i18n="verify_text">Un profil vérifié rassure les autres. Envoyez un selfie où l'on voit clairement votre visage et une feuille sur laquelle vous avez écrit le nom de l'appli et la date du jour. L'équipe le compare à vos photos. Le selfie reste privé et n'est jamais montré aux autres.</p>
     <p id="verify-status" style="font-weight:600"></p>
     <form id="verify-form" novalidate>
-      <label for="verify-file" data-i18n="verify_file"></label>
+      <label for="verify-file" data-i18n="verify_file">Votre selfie</label>
       <input id="verify-file" type="file" accept="image/jpeg,image/png,image/webp">
-      <button class="primary" id="verify-send" type="submit" data-i18n="verify_send"></button>
+      <button class="primary" id="verify-send" type="submit" data-i18n="verify_send">Envoyer pour vérification</button>
     </form>
     <div class="msg" id="vmsg" role="status" aria-live="polite"></div>
   </section>
 
   <!-- Sécurité -->
   <section class="card" id="safety" hidden>
-    <button class="back" id="safety-back" type="button" data-i18n="back"></button>
-    <h2 data-i18n="safety_title"></h2>
+    <button class="back" id="safety-back" type="button" data-i18n="back">← Retour</button>
+    <h2 data-i18n="safety_title">Conseils de sécurité</h2>
     <ul class="tips">
       <li data-i18n-rich="s1"></li>
       <li data-i18n-rich="s2"></li>
@@ -751,26 +761,26 @@
     </ul>
   </section>
 
-  <p class="hint" data-i18n="hint"></p>
+  <p class="hint" data-i18n="hint">Prototype. La vérification de l'âge ci-dessus est une première étape : une vérification d'identité sera nécessaire avant tout lancement public.</p>
 </main>
 
 <!-- Barre du bas : Accueil, Intérêts, Activités, Messages -->
 <nav class="tabbar" id="tabbar" hidden>
   <button type="button" id="nav-home" data-tab="home">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
-    <span data-i18n="nav_home"></span>
+    <span data-i18n="nav_home">Accueil</span>
   </button>
   <button type="button" id="nav-interests" data-tab="interests">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
-    <span data-i18n="nav_interests"></span><b class="nbadge" id="nb-interests" hidden></b>
+    <span data-i18n="nav_interests">Intérêts</span><b class="nbadge" id="nb-interests" hidden></b>
   </button>
   <button type="button" id="nav-events" data-tab="events">
     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-    <span data-i18n="nav_events"></span>
+    <span data-i18n="nav_events">Activités</span>
   </button>
   <button type="button" id="nav-messages" data-tab="messages">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
-    <span data-i18n="nav_messages"></span><b class="nbadge" id="nb-messages" hidden></b>
+    <span data-i18n="nav_messages">Messages</span><b class="nbadge" id="nb-messages" hidden></b>
   </button>
 </nav>
 
