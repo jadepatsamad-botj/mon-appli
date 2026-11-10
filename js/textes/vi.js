@@ -410,5 +410,17 @@ I18N.vi = {
   mbti_d_ESTP: "Năng động, táo bạo, luôn sẵn sàng.",
   mbti_d_ESFP: "Vui vẻ, tự nhiên, mang niềm vui đến mọi nơi.",
   seen_min_ago: "Trực tuyến {n} phút trước",
-  seen_h_ago: "Trực tuyến {n} giờ trước"
+  seen_h_ago: "Trực tuyến {n} giờ trước",
+  nav_search: "Tìm kiếm",
+  search_title: "Tìm kiếm",
+  sort_recent: "Hoạt động gần đây",
+  sort_newest: "Thành viên mới",
+  sort_trust: "Đã xác minh trước",
+  f_gender: "Tôi muốn xem",
+  g_everyone: "Mọi người",
+  g_women: "Phụ nữ",
+  g_men: "Đàn ông",
+  f_reset: "Đặt lại bộ lọc",
+  pw_show: "Hiện mật khẩu",
+  pw_hide: "Ẩn mật khẩu"
 };

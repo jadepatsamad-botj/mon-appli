@@ -193,7 +193,13 @@
       <label for="email" data-i18n="email">E-mail</label>
       <input id="email" type="email" autocomplete="email" required>
       <label for="password" data-i18n="password">Mot de passe (8 caractères minimum)</label>
-      <input id="password" type="password" autocomplete="new-password" minlength="8" required>
+      <div class="pw-wrap">
+        <input id="password" type="password" autocomplete="new-password" minlength="8" required>
+        <button class="pw-eye" id="pw-eye" type="button" aria-pressed="false" data-i18n-aria="pw_show">
+          <svg class="eye-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+        </button>
+      </div>
       <div id="signup-only">
         <label for="birth" data-i18n="birth">Date de naissance</label>
         <input id="birth" type="date">
@@ -294,19 +300,25 @@
 
   <!-- Accueil : recherche et profils -->
   <section id="feed" hidden>
-    <div class="vnudge" id="vnudge" hidden>
-      <span class="vnudge-i" aria-hidden="true">✓</span>
-      <p data-i18n="verify_nudge">Faites vérifier votre profil : les profils vérifiés ✓ apparaissent en premier et inspirent confiance.</p>
-      <button class="primary" id="vnudge-go" type="button" data-i18n="verify_nudge_btn">Me faire vérifier</button>
-      <button class="vnudge-x" id="vnudge-x" type="button" data-i18n-aria="lp_close">✕</button>
+    <!-- Recherche : tous les membres, avec filtres, tri et origine -->
+    <div class="srch-head">
+      <h2 class="srch-title" data-i18n="search_title">Recherche</h2>
+      <button class="srch-filter" id="f-toggle" type="button" aria-expanded="false" aria-controls="filters" data-i18n-aria="filters">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+        <i class="srch-dot" id="f-dot" hidden></i>
+      </button>
+      <select class="srch-sort" id="f-sort" data-i18n-aria="sort_label">
+        <option value="recent" data-i18n="sort_recent">Activité récente</option>
+        <option value="new" data-i18n="sort_newest">Nouveaux membres</option>
+        <option value="trust" data-i18n="sort_trust">Vérifiés d'abord</option>
+      </select>
     </div>
-    <div class="searchbar">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="feed-q" type="search" enterkeyhint="search" autocomplete="off" data-i18n-ph="search_ph" data-i18n-aria="search_ph">
-    </div>
-    <div class="ifavs newstrip" id="new-strip" hidden>
-      <div class="ifavs-t" data-i18n="new_members">Nouveaux membres</div>
-      <div class="ifavs-row" id="new-row"></div>
+    <div class="srch-bar">
+      <div class="searchbar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="feed-q" type="search" enterkeyhint="search" autocomplete="off" data-i18n-ph="search_ph" data-i18n-aria="search_ph">
+      </div>
+      <div class="srch-origin" id="srch-origin-slot"></div>
     </div>
     <div id="feed-filter-slot"></div>
     <div class="msg" id="fmsg" role="status" aria-live="polite"></div>
@@ -356,6 +368,12 @@
         <div><label for="f-min" data-i18n="age_min">Âge min.</label><input id="f-min" type="number" min="18" max="99" value="18"></div>
         <div><label for="f-max" data-i18n="age_max">Âge max.</label><input id="f-max" type="number" min="18" max="99" value="99"></div>
       </div>
+      <label for="f-gender" data-i18n="f_gender">Je veux voir</label>
+      <select id="f-gender">
+        <option value="" data-i18n="g_everyone">Tout le monde</option>
+        <option value="femme" data-i18n="g_women">Des femmes</option>
+        <option value="homme" data-i18n="g_men">Des hommes</option>
+      </select>
       <label for="f-country" data-i18n="country">Pays</label>
       <select id="f-country"></select>
       <label for="f-origin" data-i18n="f_origin">Origine</label>
@@ -371,7 +389,8 @@
           </select></div>
         <div><label for="f-lang" data-i18n="filter_lang">Parle</label><select id="f-lang"></select></div>
       </div>
-      <button class="secondary" id="f-apply" type="button" data-i18n="apply">Appliquer</button>
+      <button class="primary" id="f-apply" type="button" data-i18n="apply">Appliquer</button>
+      <button class="linkbtn" id="f-reset" type="button" data-i18n="f_reset">Réinitialiser les filtres</button>
     </details>
     <div class="match-banner" id="match-banner" hidden></div>
     <div style="text-align:right"><button class="linkbtn" id="undo" type="button" data-i18n="undo" hidden>↩ Revenir</button></div>
@@ -437,18 +456,31 @@
   </section>
 
   <!-- Activités -->
-  <section class="card" id="events" hidden>
-    <button class="back" id="events-back" type="button" data-i18n="back">← Retour</button>
-    <h2 data-i18n="events_title">Activités à venir</h2>
-    <p class="sub" style="font-size:.85rem" data-i18n="ev_safety">Activités encadrées par l'équipe Jade, dans des lieux publics. Respecte les autres participants.</p>
-    <div id="events-list"></div>
-    <p class="empty" id="events-empty" hidden></p>
-    <div id="events-past" hidden>
-      <h3 class="evpast-t" data-i18n="ev_past_t">Mes sorties passées</h3>
-      <p class="sub" style="margin:0 0 10px" data-i18n="ev_liked_hint">C'est discret : l'autre personne ne le saura que si c'est réciproque.</p>
-      <div id="events-past-list"></div>
+  <section id="events" hidden>
+    <!-- Accueil : se faire vérifier, nouveaux membres, puis les activités proposées -->
+    <button class="back" id="events-back" type="button" hidden data-i18n="back">← Retour</button>
+    <div class="vnudge" id="vnudge" hidden>
+      <span class="vnudge-i" aria-hidden="true">✓</span>
+      <p data-i18n="verify_nudge">Faites vérifier votre profil : les profils vérifiés ✓ apparaissent en premier et inspirent confiance.</p>
+      <button class="primary" id="vnudge-go" type="button" data-i18n="verify_nudge_btn">Me faire vérifier</button>
+      <button class="vnudge-x" id="vnudge-x" type="button" data-i18n-aria="lp_close">✕</button>
     </div>
-    <div class="msg" id="evmsg" role="status" aria-live="polite"></div>
+    <div class="ifavs newstrip" id="new-strip" hidden>
+      <div class="ifavs-t" data-i18n="new_members">Nouveaux membres</div>
+      <div class="ifavs-row" id="new-row"></div>
+    </div>
+    <div class="card ev-home">
+      <h2 data-i18n="events_title">Activités à venir</h2>
+      <p class="sub" style="font-size:.85rem" data-i18n="ev_safety">Activités encadrées par l'équipe Jade, dans des lieux publics. Respecte les autres participants.</p>
+      <div id="events-list"></div>
+      <p class="empty" id="events-empty" hidden></p>
+      <div id="events-past" hidden>
+        <h3 class="evpast-t" data-i18n="ev_past_t">Mes sorties passées</h3>
+        <p class="sub" style="margin:0 0 10px" data-i18n="ev_liked_hint">C'est discret : l'autre personne ne le saura que si c'est réciproque.</p>
+        <div id="events-past-list"></div>
+      </div>
+      <div class="msg" id="evmsg" role="status" aria-live="polite"></div>
+    </div>
   </section>
 
   <!-- Discussion de groupe d'une activité (réservée aux participants) -->
@@ -787,13 +819,13 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
     <span data-i18n="nav_home">Accueil</span>
   </button>
+  <button type="button" id="nav-search" data-tab="search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
+    <span data-i18n="nav_search">Recherche</span>
+  </button>
   <button type="button" id="nav-interests" data-tab="interests">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
     <span data-i18n="nav_interests">Intérêts</span><b class="nbadge" id="nb-interests" hidden></b>
-  </button>
-  <button type="button" id="nav-events" data-tab="events">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-    <span data-i18n="nav_events">Activités</span>
   </button>
   <button type="button" id="nav-messages" data-tab="messages">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
@@ -844,6 +876,7 @@
 <script src="js/securite.js"></script>
 <script src="js/reglages-abonnements.js"></script>
 <script src="js/photo-obligatoire.js"></script>
+<script src="js/recherche.js"></script>
 <script src="js/personnalite.js"></script>
 <script src="js/activite-jour.js"></script>
 <script src="js/inactivite.js"></script>

@@ -410,5 +410,17 @@ I18N.fr = {
   mbti_d_ESTP: "Énergique et audacieux, toujours partant.",
   mbti_d_ESFP: "Joyeux et spontané, met de l'ambiance partout.",
   seen_min_ago: "En ligne il y a {n} min",
-  seen_h_ago: "En ligne il y a {n} h"
+  seen_h_ago: "En ligne il y a {n} h",
+  nav_search: "Recherche",
+  search_title: "Recherche",
+  sort_recent: "Activité récente",
+  sort_newest: "Nouveaux membres",
+  sort_trust: "Vérifiés d'abord",
+  f_gender: "Je veux voir",
+  g_everyone: "Tout le monde",
+  g_women: "Des femmes",
+  g_men: "Des hommes",
+  f_reset: "Réinitialiser les filtres",
+  pw_show: "Afficher le mot de passe",
+  pw_hide: "Masquer le mot de passe"
 };

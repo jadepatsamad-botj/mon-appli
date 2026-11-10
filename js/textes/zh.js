@@ -410,5 +410,17 @@ I18N.zh = {
   mbti_d_ESTP: "精力充沛、大胆，随时出发。",
   mbti_d_ESFP: "快乐、率真，走到哪里都带来欢乐。",
   seen_min_ago: "{n} 分钟前在线",
-  seen_h_ago: "{n} 小时前在线"
+  seen_h_ago: "{n} 小时前在线",
+  nav_search: "搜索",
+  search_title: "搜索",
+  sort_recent: "最近活跃",
+  sort_newest: "新会员",
+  sort_trust: "已认证优先",
+  f_gender: "我想看",
+  g_everyone: "所有人",
+  g_women: "女性",
+  g_men: "男性",
+  f_reset: "重置筛选",
+  pw_show: "显示密码",
+  pw_hide: "隐藏密码"
 };

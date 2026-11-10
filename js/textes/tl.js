@@ -470,5 +470,17 @@ I18N.tl = {
   mbti_d_ESTP: "Masigla at matapang, laging game.",
   mbti_d_ESFP: "Masayahin at kusang-loob, nagbibigay-saya kahit saan.",
   seen_min_ago: "Online {n} min ang nakalipas",
-  seen_h_ago: "Online {n} oras ang nakalipas"
+  seen_h_ago: "Online {n} oras ang nakalipas",
+  nav_search: "Hanapin",
+  search_title: "Hanapin",
+  sort_recent: "Kamakailang aktibidad",
+  sort_newest: "Mga bagong miyembro",
+  sort_trust: "Beripikado muna",
+  f_gender: "Ipakita ang",
+  g_everyone: "Lahat",
+  g_women: "Mga babae",
+  g_men: "Mga lalaki",
+  f_reset: "I-reset ang mga filter",
+  pw_show: "Ipakita ang password",
+  pw_hide: "Itago ang password"
 };

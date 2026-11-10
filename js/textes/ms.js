@@ -470,5 +470,17 @@ I18N.ms = {
   mbti_d_ESTP: "Bertenaga dan berani, sentiasa bersedia.",
   mbti_d_ESFP: "Ceria dan spontan, menghidupkan suasana di mana-mana.",
   seen_min_ago: "Dalam talian {n} min lalu",
-  seen_h_ago: "Dalam talian {n} jam lalu"
+  seen_h_ago: "Dalam talian {n} jam lalu",
+  nav_search: "Cari",
+  search_title: "Cari",
+  sort_recent: "Aktiviti terkini",
+  sort_newest: "Ahli baharu",
+  sort_trust: "Disahkan dahulu",
+  f_gender: "Tunjukkan",
+  g_everyone: "Semua orang",
+  g_women: "Wanita",
+  g_men: "Lelaki",
+  f_reset: "Set semula penapis",
+  pw_show: "Tunjukkan kata laluan",
+  pw_hide: "Sembunyikan kata laluan"
 };

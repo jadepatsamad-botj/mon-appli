@@ -410,5 +410,17 @@ I18N.id = {
   mbti_d_ESTP: "Energik dan berani, selalu siap.",
   mbti_d_ESFP: "Ceria dan spontan, membawa keseruan ke mana saja.",
   seen_min_ago: "Online {n} mnt lalu",
-  seen_h_ago: "Online {n} jam lalu"
+  seen_h_ago: "Online {n} jam lalu",
+  nav_search: "Cari",
+  search_title: "Cari",
+  sort_recent: "Aktivitas terbaru",
+  sort_newest: "Anggota baru",
+  sort_trust: "Terverifikasi dulu",
+  f_gender: "Tampilkan",
+  g_everyone: "Semua orang",
+  g_women: "Perempuan",
+  g_men: "Laki-laki",
+  f_reset: "Atur ulang filter",
+  pw_show: "Tampilkan kata sandi",
+  pw_hide: "Sembunyikan kata sandi"
 };

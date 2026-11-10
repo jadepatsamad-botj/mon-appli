@@ -410,5 +410,17 @@ I18N.en = {
   mbti_d_ESTP: "Energetic and bold, always up for it.",
   mbti_d_ESFP: "Joyful and spontaneous, brings fun everywhere.",
   seen_min_ago: "Online {n} min ago",
-  seen_h_ago: "Online {n} h ago"
+  seen_h_ago: "Online {n} h ago",
+  nav_search: "Search",
+  search_title: "Search",
+  sort_recent: "Recent activity",
+  sort_newest: "New members",
+  sort_trust: "Verified first",
+  f_gender: "Show me",
+  g_everyone: "Everyone",
+  g_women: "Women",
+  g_men: "Men",
+  f_reset: "Reset filters",
+  pw_show: "Show password",
+  pw_hide: "Hide password"
 };

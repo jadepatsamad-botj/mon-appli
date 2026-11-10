@@ -1,7 +1,8 @@
-// Navigation : barre du bas (Accueil, Intérêts, Activités, Messages) et en-tête (Mise à niveau, mon profil)
+// Navigation : barre du bas (Accueil, Recherche, Intérêts, Messages) et en-tête (Mise à niveau, mon profil)
+// Accueil = se faire vérifier, nouveaux membres et activités proposées ; Recherche = tous les membres.
 
 // Quel onglet du bas est allumé pour chaque écran
-var TAB_OF = { feed: "home", discover: "home", likes: "interests", events: "events", matches: "messages", chat: "messages" };
+var TAB_OF = { feed: "search", discover: "search", likes: "interests", events: "home", evchat: "home", matches: "messages", chat: "messages" };
 // Écrans où la barre du bas est cachée (formulaires plein écran)
 var NO_TABBAR = ["auth", "profile", "chat"];
 var navStarted = false;
@@ -61,12 +62,14 @@ show = function (user) {
 };
 
 function goTab(tab) {
+  if (tab === "events") tab = "home";   // les activités sont maintenant sur l'Accueil
   if (tab === "home") {
+    showSection("events"); loadEvents(); loadNewStrip();
+  } else if (tab === "search") {
     if ($("filters").parentNode.id !== "feed-filter-slot") { loadFilters(); $("feed-filter-slot").appendChild($("filters")); }
     showSection("feed");
     if (!$("feed-list").children.length || tab === goTab.last) loadFeed(true);
   } else if (tab === "interests") { fromLikes = false; showSection("likes"); loadLikes(); }
-  else if (tab === "events") { showSection("events"); loadEvents(); }
   else if (tab === "messages") { showSection("matches"); loadMatches(); }
   goTab.last = tab;
   window.scrollTo(0, 0);
@@ -105,5 +108,5 @@ $("chat-back").onclick = function () { goTab("messages"); };
 $("lang").addEventListener("change", function () {
   if (!$("feed").hidden) loadFeed(true);
   else if (!$("likes").hidden) loadLikes();
-  else if (!$("events").hidden) loadEvents();
+  else if (!$("events").hidden) { loadEvents(); loadNewStrip(); }
 });

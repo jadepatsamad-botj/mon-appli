@@ -7,25 +7,33 @@ var fromFeed = false;   // vrai quand le profil a été ouvert depuis l'Accueil
 // Colonnes optionnelles absentes de la base (on les découvre au premier essai et on s'en passe)
 var MISSING_COLS = {};
 
-// Requête des profils à montrer : tous les inscrits du genre que je cherche + filtres choisis
-// (utilisée par l'Accueil et la découverte)
-function discoverQuery(seen) {
-  var q = db.from("profiles").select("*").not("id", "in", "(" + seen.join(",") + ")");
+// Les membres visibles : avec photo, ni suspendus ni cachés (sauf ceux de la liste « exclure »)
+function membersQuery(exclude) {
+  var q = db.from("profiles").select("*");
+  if (exclude && exclude.length) q = q.not("id", "in", "(" + exclude.join(",") + ")");
   q = q.not("photo_path", "is", null);
   ["suspended", "hidden", "under_review"].forEach(function (c) { if (!MISSING_COLS[c]) q = q.not(c, "is", true); });
-  // Confiance d'abord : profils vérifiés, puis membres venus aux sorties Jade, puis mises en avant
-  if (!MISSING_COLS.verified) q = q.order("verified", { ascending: false, nullsFirst: false });
-  if (!MISSING_COLS.outings) q = q.order("outings", { ascending: false, nullsFirst: false });
-  if (!MISSING_COLS.boost) q = q.order("boost", { ascending: false, nullsFirst: false });
+  return q;
+}
+
+// Requête de la Recherche (et de la découverte) : tous les membres + filtres choisis + tri
+function discoverQuery(seen) {
+  var q = membersQuery(seen);
+  var sort = $("f-sort").value || "recent";
+  if (sort === "recent" && !MISSING_COLS.last_seen) q = q.order("last_seen", { ascending: false, nullsFirst: false });
+  if (sort === "trust") {
+    // Confiance d'abord : profils vérifiés, puis membres venus aux sorties Jade, puis mises en avant
+    if (!MISSING_COLS.verified) q = q.order("verified", { ascending: false, nullsFirst: false });
+    if (!MISSING_COLS.outings) q = q.order("outings", { ascending: false, nullsFirst: false });
+    if (!MISSING_COLS.boost) q = q.order("boost", { ascending: false, nullsFirst: false });
+  }
   q = q.order("created_at", { ascending: false });
-  var want = currentProfile.looking_for;
-  if (want === "homme" || want === "femme") q = q.eq("gender", want);
+  if ($("f-gender").value) q = q.eq("gender", $("f-gender").value);
   var amin = parseInt($("f-min").value, 10), amax = parseInt($("f-max").value, 10);
   if (amin > 18) q = q.lte("birthdate", dateYearsAgo(amin));
   if (amax < 99) q = q.gt("birthdate", dateYearsAgo(amax + 1));
   if ($("f-country").value) q = q.eq("country", $("f-country").value);
   if ($("f-origin").value && !MISSING_COLS.origins) q = q.contains("origins", [$("f-origin").value]);
-  if (myLevel() < 1) { $("f-intent").value = ""; $("f-lang").value = ""; }
   if ($("f-intent").value) q = q.eq("intention", $("f-intent").value);
   if ($("f-lang").value) q = q.contains("spoken", [$("f-lang").value]);
   return q;
@@ -111,15 +119,26 @@ $("undo").onclick = async function () {
 
 $("go-discover").onclick = function () { loadFilters(); fromLikes = false; fromFeed = false; lastPassed = null; $("undo").hidden = true; $("match-banner").hidden = true; showSection("discover"); nextCandidate(); };
 function saveFilters() {
-  try { localStorage.setItem("filters", JSON.stringify({ min: $("f-min").value, max: $("f-max").value, country: $("f-country").value, origin: $("f-origin").value, intent: $("f-intent").value, lang: $("f-lang").value })); } catch (e) {}
+  try { localStorage.setItem("filters", JSON.stringify({ min: $("f-min").value, max: $("f-max").value, gender: $("f-gender").value, country: $("f-country").value,
+    origin: $("f-origin").value, intent: $("f-intent").value, lang: $("f-lang").value, sort: $("f-sort").value })); } catch (e) {}
+  paintFilterDot();
 }
 function loadFilters() {
+  if (!$("f-origin").childElementCount) fillOriginFilter();
   try {
-    var f = JSON.parse(localStorage.getItem("filters") || "null"); if (!f) return;
-    $("f-min").value = f.min || 18; $("f-max").value = f.max || 99;
-    if (!$("f-origin").childElementCount) fillOriginFilter();
-    $("f-country").value = f.country || ""; $("f-origin").value = f.origin || ""; $("f-intent").value = f.intent || ""; $("f-lang").value = f.lang || "";
+    var f = JSON.parse(localStorage.getItem("filters") || "null");
+    if (f) {
+      $("f-min").value = f.min || 18; $("f-max").value = f.max || 99; $("f-gender").value = f.gender || "";
+      $("f-country").value = f.country || ""; $("f-origin").value = f.origin || ""; $("f-intent").value = f.intent || ""; $("f-lang").value = f.lang || "";
+      $("f-sort").value = f.sort || "recent";
+    }
   } catch (e) {}
+  paintFilterDot();
+}
+// Petit point sur l'icône des filtres quand au moins un filtre est actif
+function paintFilterDot() {
+  var on = parseInt($("f-min").value, 10) > 18 || parseInt($("f-max").value, 10) < 99 || !!($("f-gender").value || $("f-country").value || $("f-intent").value || $("f-lang").value);
+  $("f-dot").hidden = !on;
 }
 $("f-apply").onclick = function () { saveFilters(); $("filters").open = false; $("match-banner").hidden = true; nextCandidate(); };
 $("discover-back").onclick = function () {

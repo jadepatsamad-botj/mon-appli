@@ -470,5 +470,17 @@ I18N.ko = {
   mbti_d_ESTP: "에너지 넘치고 대담하며, 언제나 준비돼 있어요.",
   mbti_d_ESFP: "밝고 자유로우며, 어디서나 분위기를 띄워요.",
   seen_min_ago: "{n}분 전 접속",
-  seen_h_ago: "{n}시간 전 접속"
+  seen_h_ago: "{n}시간 전 접속",
+  nav_search: "검색",
+  search_title: "검색",
+  sort_recent: "최근 활동",
+  sort_newest: "새 회원",
+  sort_trust: "인증된 회원 먼저",
+  f_gender: "보고 싶은 상대",
+  g_everyone: "모두",
+  g_women: "여성",
+  g_men: "남성",
+  f_reset: "필터 초기화",
+  pw_show: "비밀번호 보기",
+  pw_hide: "비밀번호 숨기기"
 };

@@ -19,7 +19,9 @@ function withSearch(q) {
   return q.or(parts.join(","));
 }
 
-function isNewMember(p) { return p.created_at && (Date.now() - new Date(p.created_at).getTime()) < 7 * 86400000; }
+// Nouveau membre = inscrit depuis moins d'un mois (le badge disparaît ensuite)
+var NEW_MEMBER_DAYS = 30;
+function isNewMember(p) { return p.created_at && (Date.now() - new Date(p.created_at).getTime()) < NEW_MEMBER_DAYS * 86400000; }
 
 function feedCard(p) {
   var card = document.createElement("article"); card.className = "fcard"; card.dataset.id = p.id;
@@ -76,14 +78,13 @@ async function loadFeed(reset) {
     var s = await db.from("swipes").select("to_id,liked").eq("from_id", currentUser.id);
     if (s.error) { feedLoading = false; return say(fmsg, s.error.message, "err"); }
     myFavs = {}; (s.data || []).forEach(function (x) { if (x.liked) myFavs[x.to_id] = true; });
-    feedSeen = (s.data || []).filter(function (x) { return !x.liked; }).map(function (x) { return x.to_id; });
-    feedSeen.push(currentUser.id);
+    feedSeen = [currentUser.id];   // Recherche : on voit tous les membres inscrits (sauf soi-même)
   }
   var from = feedPage * FEED_SIZE;
   var r = await fetchProfiles(function () { return withSearch(discoverQuery(feedSeen)).range(from, from + FEED_SIZE - 1); });
   feedLoading = false;
   if (r.error) return say(fmsg, r.error.message, "err");
-  if (reset) { say(fmsg, ""); loadNewStrip(); }
+  if (reset) say(fmsg, "");
   var rows = r.data || [];
   rows.forEach(function (p) { list.appendChild(feedCard(p)); });
   feedPage++;
@@ -97,12 +98,12 @@ async function feedLike(p, btn) {
   else say($("fmsg"), $("lmsg").textContent, "err");
 }
 
-// Rangée « Nouveaux membres » : inscrits des 14 derniers jours, compatibles et selon les filtres
+// Rangée « Nouveaux membres » sur l'Accueil : inscrits depuis moins d'un mois
 async function loadNewStrip() {
+  if (!currentUser || !currentProfile) return;
   var strip = $("new-strip"), row = $("new-row");
-  if ($("feed-q").value.trim()) { strip.hidden = true; return; }
-  var since = new Date(Date.now() - 14 * 86400000).toISOString();
-  var r = await fetchProfiles(function () { return discoverQuery(feedSeen).gte("created_at", since).limit(20); });
+  var since = new Date(Date.now() - NEW_MEMBER_DAYS * 86400000).toISOString();
+  var r = await fetchProfiles(function () { return membersQuery([currentUser.id]).gte("created_at", since).order("created_at", { ascending: false }).limit(20); });
   var list = ((r && r.data) || []).sort(function (a, b) { return (a.created_at || "") < (b.created_at || "") ? 1 : -1; });
   row.textContent = "";
   strip.hidden = !list.length;

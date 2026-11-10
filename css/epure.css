@@ -97,3 +97,60 @@ body.boot-app::before { content: "Jade"; position: fixed; inset: 0; display: gri
   .mbti-opt[aria-pressed="true"] { background: #25243a; }
   .mbti-quiz { background: var(--card); }
 }
+
+/* ---------- Recherche : en-tête « Recherche » + filtres + tri, barre de recherche + origine ---------- */
+.srch-head { display: flex; align-items: center; gap: 10px; margin: 4px 0 12px; }
+.srch-title { flex: 1 1 auto; min-width: 0; margin: 0 !important; font-family: var(--font-title); font-size: 1.85rem; line-height: 1.1; }
+.srch-filter { position: relative; flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--fg); cursor: pointer; display: grid; place-items: center; }
+.srch-filter svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+.srch-filter[aria-expanded="true"] { background: var(--blush); }
+.srch-dot { position: absolute; top: 8px; right: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 1.5px solid var(--card); }
+.srch-sort { flex: 0 1 44%; min-width: 0; width: auto !important; padding: 10px 10px !important; border-radius: 12px !important; font-size: .9rem !important; }
+.srch-bar { display: flex; gap: 8px; align-items: stretch; margin-bottom: 14px; }
+.srch-bar .searchbar { flex: 1 1 auto; min-width: 0; margin: 0 !important; }
+.srch-origin { flex: 0 0 40%; min-width: 0; }
+.srch-origin-sel { width: 100% !important; height: 100%; padding: 10px 12px !important; border-radius: 999px !important; font-size: .92rem !important; }
+#feed .filters { margin: 0 0 14px; }
+#feed .filters > summary { display: none; }
+#feed .filters:not([open]) { display: none; }
+#feed .filters[open] { padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+#f-reset { display: block; margin: 10px auto 0; }
+
+/* ---------- Recherche : grille de 2 colonnes, comme une galerie ---------- */
+#feed .feed { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+#feed .fcard { height: auto; aspect-ratio: 3 / 4.7; border-radius: 16px; background: var(--card); border: 1px solid var(--line); box-shadow: none !important; }
+#feed .fcard img, #feed .fcard .fph { bottom: 52px; height: calc(100% - 52px); border-radius: 15px 15px 0 0; }
+#feed .fcard .fph { font-size: 3rem; }
+#feed .fcard::after { bottom: 52px; border-radius: 15px 15px 0 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.2) 38%, rgba(0,0,0,0) 60%); }
+#feed .fcount { top: 8px; left: 8px; padding: 2px 8px; font-size: .75rem; }
+#feed .fnew { top: 8px; right: 8px; left: auto; padding: 2px 7px; font-size: .66rem; border-width: 1px; border-radius: 6px; white-space: nowrap; }
+#feed .finfo { left: 10px; right: 10px; bottom: 60px; }
+#feed .fname { font-size: 1.2rem; gap: 5px; flex-wrap: wrap; }
+#feed .fname .cdot { width: 10px; height: 10px; }
+#feed .fcheck { width: 18px; height: 18px; font-size: .65rem; line-height: 18px; }
+#feed .fname .mbti-av.card { width: 22px; height: 22px; margin-left: 0; }
+#feed .fmeta { font-size: .78rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#feed .fonline { font-size: .7rem; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#feed .fbtns { left: 0; right: 0; bottom: 0; height: 52px; gap: 0; justify-content: space-around; align-items: center; border-top: 1px solid var(--line); }
+#feed .fbtn { width: 44px; height: 44px; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+#feed .fbtn svg { width: 24px; height: 24px; stroke: #8a8380; }
+#feed .fbtn.like.on { background: transparent; }
+#feed .fbtn.like.on svg { fill: #c4473a; stroke: #c4473a; }
+#feed .fbtn:hover svg { stroke: var(--fg); }
+
+/* ---------- Accueil : vérification, nouveaux membres, activités proposées ---------- */
+#events-back { display: none !important; }
+#events > .vnudge { margin-bottom: 14px; }
+#events > .newstrip { margin-bottom: 14px; }
+.ev-home h2 { font-family: var(--font-title); }
+
+/* ---------- Œil du mot de passe ---------- */
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 52px !important; }
+.pw-eye { position: absolute; top: 50%; right: 4px; transform: translateY(-50%); width: 44px; height: 44px; border: 0; background: transparent; color: var(--muted);
+  cursor: pointer; display: grid; place-items: center; border-radius: 10px; }
+.pw-eye svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.pw-eye .eye-off { display: none; }
+.pw-eye.on .eye-on { display: none; }
+.pw-eye.on .eye-off { display: block; }
+.pw-eye:hover { color: var(--fg); }

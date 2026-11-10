@@ -470,5 +470,17 @@ I18N.ja = {
   mbti_d_ESTP: "エネルギッシュで大胆、いつでも乗り気。",
   mbti_d_ESFP: "明るく自由、どこでも場を盛り上げる。",
   seen_min_ago: "{n}分前にオンライン",
-  seen_h_ago: "{n}時間前にオンライン"
+  seen_h_ago: "{n}時間前にオンライン",
+  nav_search: "検索",
+  search_title: "検索",
+  sort_recent: "最近のアクティビティ",
+  sort_newest: "新しいメンバー",
+  sort_trust: "認証済みを優先",
+  f_gender: "表示する相手",
+  g_everyone: "すべての人",
+  g_women: "女性",
+  g_men: "男性",
+  f_reset: "フィルターをリセット",
+  pw_show: "パスワードを表示",
+  pw_hide: "パスワードを隠す"
 };
