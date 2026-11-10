@@ -524,6 +524,23 @@
       <button class="secondary" id="ip-refresh" type="button">Rafraîchir</button>
     </div>
     <div id="admin-ips" class="iplist"></div>
+    <h3>💶 Abonnements</h3>
+    <div class="evadmin" id="sub-admin">
+      <label class="check" for="set-free"><input id="set-free" type="checkbox"><span>Tout est gratuit pour tout le monde (période de lancement)</span></label>
+      <label class="evlab" for="set-payers">Quand ce ne sera plus gratuit, qui paie ?</label>
+      <select id="set-payers">
+        <option value="hommes">Les hommes (femmes : Premium offert)</option>
+        <option value="tous">Tout le monde</option>
+        <option value="personne">Seulement Gold et Diamond</option>
+      </select>
+      <label class="evlab">Liens de paiement Stripe (Stripe → Payment Links)</label>
+      <input id="set-l-premium" type="url" placeholder="Premium 15,99 € : https://buy.stripe.com/…">
+      <input id="set-l-gold" type="url" placeholder="Gold 45,99 € : https://buy.stripe.com/…">
+      <input id="set-l-diamond" type="url" placeholder="Diamond 149,99 € : https://buy.stripe.com/…">
+      <input id="set-l-portal" type="url" placeholder="Portail client (gérer / résilier) : https://billing.stripe.com/…">
+      <button class="primary" id="set-save" type="button">Enregistrer les réglages</button>
+      <div class="msg" id="set-msg" role="status" aria-live="polite"></div>
+    </div>
     <h3>📣 Messages de l'équipe Jade</h3>
     <div class="evadmin" id="jn-admin">
       <div class="jn-to">Pour : <b id="jn-to-name">tous les membres</b> <button class="linkbtn" id="jn-to-all" type="button" hidden>(envoyer à tous)</button></div>
@@ -786,6 +803,7 @@
 <script src="js/connexions.js"></script>
 <script src="js/sorties.js"></script>
 <script src="js/securite.js"></script>
+<script src="js/reglages-abonnements.js"></script>
 <script src="js/photo-obligatoire.js"></script>
 <script src="js/demarrage.js"></script>
 </body>

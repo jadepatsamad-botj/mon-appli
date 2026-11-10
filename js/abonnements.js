@@ -5,14 +5,17 @@
 var STRIPE = { premium: "", gold: "", diamond: "", portal: "" };
 var PRICES = { premium: 15.99, gold: 45.99, diamond: 149.99 };
 var PLAN_LEVEL = { premium: 1, gold: 2, diamond: 3 };
-var PAYS = "homme";   // choix actuel : seuls les hommes paient ; les autres ont Premium offert
+// Qui paie quand ce n'est plus gratuit : "hommes" (les autres ont Premium offert), "tous", ou "personne"
+// (Premium offert à tous, seuls Gold et Diamond sont payants). Réglable dans l'Administration (sql/abonnements.sql).
+var PAYERS = "hommes";
 function paidPlan(p) {
   return p && p.premium_until && new Date(p.premium_until) > new Date() ? (p.plan || "premium") : null;
 }
 function levelOf(p) {
   if (!p) return 0;
   var paid = paidPlan(p) ? PLAN_LEVEL[paidPlan(p)] || 1 : 0;
-  return Math.max(p.gender !== PAYS ? 1 : 0, paid);
+  var free = PAYERS === "personne" ? 1 : PAYERS === "tous" ? 0 : (p.gender !== "homme" ? 1 : 0);
+  return Math.max(free, paid);
 }
 function myLevel() { return FREE_FOR_ALL ? PLAN_LEVEL.diamond : levelOf(currentProfile); }
 function lockedBox(text) {
