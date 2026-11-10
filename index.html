@@ -95,9 +95,9 @@
         <li><span class="lp-step-n">3</span><h3 data-i18n="lp_step3_t">Rencontrez-vous</h3><p data-i18n="lp_step3_p">Le courant passe ? Continuez la conversation dans l'appli.</p></li>
       </ol>
       <ul class="lp-menu">
-        <li><b data-i18n="lp_act1">Cours de cuisine thaïe</b><i aria-hidden="true"></i><span data-i18n="lp_act1_d">2 h</span></li>
-        <li><b data-i18n="lp_act2">Randonnée</b><i aria-hidden="true"></i><span data-i18n="lp_act2_d">Demi-journée</span></li>
-        <li><b data-i18n="lp_act3">Café des langues</b><i aria-hidden="true"></i><span data-i18n="lp_act3_d">1 h 30</span></li>
+        <li><svg class="lp-act-i" viewBox="0 0 28 28" aria-hidden="true"><path d="M6 13h16v3a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z"/><path d="M4 13h20M10 9.5c0-1.5 1.5-1.5 1.5-3M15 9.5c0-1.5 1.5-1.5 1.5-3"/></svg><b data-i18n="lp_act1">Cours de cuisine thaïe</b><i aria-hidden="true"></i><span data-i18n="lp_act1_d">2 h</span></li>
+        <li><svg class="lp-act-i" viewBox="0 0 28 28" aria-hidden="true"><path d="M3 22l7-11 4 6 3-4 8 9z"/><path d="M8.5 13.5l1.5 1 1.5-1"/></svg><b data-i18n="lp_act2">Randonnée</b><i aria-hidden="true"></i><span data-i18n="lp_act2_d">Demi-journée</span></li>
+        <li><svg class="lp-act-i" viewBox="0 0 28 28" aria-hidden="true"><path d="M5 11h14v6a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5z"/><path d="M19 13h1.5a2.5 2.5 0 0 1 0 5H19"/><path d="M10 7.5c0-1.2 1.2-1.2 1.2-2.5M14 7.5c0-1.2 1.2-1.2 1.2-2.5"/></svg><b data-i18n="lp_act3">Café des langues</b><i aria-hidden="true"></i><span data-i18n="lp_act3_d">1 h 30</span></li>
       </ul>
       <p class="lp-small" data-i18n="lp_act_note">Exemples d'activités. Le programme dépend de votre ville.</p>
     </div>
@@ -111,8 +111,8 @@
         <ul class="lp-rules">
           <li data-i18n="lp_rule1">Réservé aux plus de 18 ans</li>
           <li data-i18n="lp_rule2">Profils vérifiés par notre équipe</li>
-          <li class="lp-em" data-i18n="lp_rule3">Aucune relation d'argent n'est tolérée</li>
           <li data-i18n="lp_rule4">Signaler ou bloquer quelqu'un en un geste</li>
+          <li class="lp-em lp-no" data-i18n="lp_rule3">Aucune relation d'argent n'est tolérée</li>
         </ul>
       </div>
       <div>
@@ -263,6 +263,22 @@
 
       <label data-i18n="interests">Centres d'intérêt</label>
       <div id="interests" class="langs"></div>
+
+      <!-- Personnalité MBTI (16 types), avec un petit personnage par type (js/personnalite.js) -->
+      <label data-i18n="mbti_label">Ma personnalité (MBTI, 16 types)</label>
+      <p class="hint mbti-hint" data-i18n="mbti_hint">Facultatif : choisissez votre type, ou faites le petit test.</p>
+      <button class="secondary mbti-quiz-btn" id="mbti-quiz-btn" type="button" data-i18n="mbti_quiz_btn">Faire le petit test (4 questions)</button>
+      <div class="mbti-quiz" id="mbti-quiz" hidden>
+        <p class="mbti-step" id="mbti-step"></p>
+        <p class="mbti-q" id="mbti-q" aria-live="polite"></p>
+        <div class="mbti-ans">
+          <button class="secondary" id="mbti-a" type="button"></button>
+          <button class="secondary" id="mbti-b" type="button"></button>
+        </div>
+        <button class="linkbtn" id="mbti-again" type="button" hidden data-i18n="mbti_again">Refaire le test</button>
+      </div>
+      <div class="mbti-grid" id="mbti-grid" role="group" data-i18n-aria="mbti_label"></div>
+      <p class="mbti-desc" id="mbti-desc" aria-live="polite"></p>
 
       <label for="bio" data-i18n="bio">Présentation</label>
       <textarea id="bio" maxlength="500" data-i18n-ph="bio_ph"></textarea>
@@ -828,6 +844,8 @@
 <script src="js/securite.js"></script>
 <script src="js/reglages-abonnements.js"></script>
 <script src="js/photo-obligatoire.js"></script>
+<script src="js/personnalite.js"></script>
+<script src="js/activite-jour.js"></script>
 <script src="js/inactivite.js"></script>
 <script src="js/demarrage.js"></script>
 </body>

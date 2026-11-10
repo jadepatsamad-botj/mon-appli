@@ -70,6 +70,7 @@ $("pform").addEventListener("submit", async function (e) {
       intention: $("intention").value || null,
       interests: Array.prototype.filter.call($("interests").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
       origins: origins,
+      mbti: (typeof mbtiChoice !== "undefined" && mbtiChoice) || null,
       spoken: Array.prototype.filter.call($("spoken").querySelectorAll("input"), function (c) { return c.checked; }).map(function (c) { return c.value; }),
       photo_path: photoPath,
       photos: paths,
@@ -77,7 +78,13 @@ $("pform").addEventListener("submit", async function (e) {
       updated_at: new Date().toISOString()
     };
     var s = await db.from("profiles").upsert(row).select().single();
-    if (s.error && /origins/.test(s.error.message || "")) { delete row.origins; s = await db.from("profiles").upsert(row).select().single(); }   // colonne pas encore créée
+    // Colonnes facultatives pas encore créées dans Supabase : on enregistre sans elles
+    for (var tries = 0; tries < 2 && s.error; tries++) {
+      var miss = /(origins|mbti)/.exec(s.error.message || "");
+      if (!miss || !(miss[1] in row)) break;
+      delete row[miss[1]];
+      s = await db.from("profiles").upsert(row).select().single();
+    }
     if (s.error) throw s.error;
     if (removedPaths.length) { try { await db.storage.from("photos").remove(removedPaths); } catch (e2) {} }
     currentProfile = s.data;
