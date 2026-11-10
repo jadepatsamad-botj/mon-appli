@@ -1,13 +1,10 @@
 /* Jade : apparence de l'appli (couleurs, tailles, mise en page) */
 
-/* La calligraphie du logo « Jade » est hébergée avec l'appli : même écriture sur ordinateur, téléphone et iPad,
-   même si Google Fonts ne se charge pas (police libre Great Vibes, licence OFL dans fonts/). */
-@font-face { font-family: "Jade Script"; src: url("../fonts/GreatVibes-Regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: block; }
 
   :root {
-    /* Polices de Jade : Great Vibes (logo « Jade »), Cormorant Garamond (titres, prénoms), Lato (textes) */
-    --font-script: "Jade Script", "Great Vibes", "Cormorant Garamond", Georgia, cursive;
-    --font-title: "Cormorant Garamond", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
+    /* Polices de Jade : Playfair Display (logo « Jade », titres, prénoms) + DM Sans (textes) */
+    --font-script: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-title: "Playfair Display", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
     /* Couleurs de Jade : vert jade profond, ivoire et or */
     --olive: #1f4d43; --olive-light: #3f7a6a; --olive-dark: #123229; --cream: #faf7ef; --on-olive: #faf7ef;
     --bg: #efebdf; --card: #faf7ef; --fg: #1b2622; --muted: #5d6b65;
@@ -21,7 +18,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 "Lato", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Thai", "Noto Sans Lao", "Noto Sans Khmer", "Khmer Sangam MN", "Lao Sangam MN", "Noto Sans", sans-serif;
+    font: 16px/1.5 "DM Sans", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Thai", "Noto Sans Lao", "Noto Sans Khmer", "Khmer Sangam MN", "Lao Sangam MN", "Noto Sans", sans-serif;
     min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
   main { width: 100%; max-width: 420px; }
   .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -184,26 +181,25 @@ body {
 .topbar .sub { opacity: .85; }
 
 /* Titres et logo en Playfair Display */
-h1, h2, .hero-title { font-family: var(--font-title); font-weight: 600; letter-spacing: 0; }
+h1, h2, .hero-title { font-family: var(--font-title); font-weight: 500; letter-spacing: -.005em; }
 
-/* Le logo « Jade » en écriture calligraphiée (Great Vibes), partout où il apparaît */
+/* Le logo « Jade » en Playfair Display, partout où il apparaît */
 body.nav-on .topbar h1, .lp-logo, .lp-word, .lp-win-word {
-  font-family: var(--font-script) !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none !important; margin-right: 0 !important;
+  font-family: var(--font-script) !important; font-weight: 600 !important; letter-spacing: .01em !important; text-transform: none !important; margin-right: 0 !important;
 }
-body.nav-on .topbar h1 { font-size: 2.3rem !important; line-height: 1; }
-.lp-logo { font-size: 2.1rem !important; line-height: 1; }
-.lp-foot .lp-logo { font-size: 2.8rem !important; }
-.lp-word { font-size: clamp(5rem, 24vw, 10rem) !important; }
-@media (min-width: 900px) and (min-aspect-ratio: 1/1) { .lp-win-text .lp-win-word { font-size: clamp(5rem, 9vw, 9rem) !important; margin-bottom: 14px !important; } }
-/* Cormorant est plus fin que Playfair : on renforce un peu les titres et les prénoms */
+body.nav-on .topbar h1 { font-size: 1.75rem !important; line-height: 1; }
+.lp-logo { font-size: 1.6rem !important; line-height: 1; }
+.lp-foot .lp-logo { font-size: 2.1rem !important; }
+.lp-word { font-size: clamp(3.6rem, 18vw, 7.5rem) !important; }
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) { .lp-win-text .lp-win-word { font-size: clamp(3.4rem, 5.6vw, 6rem) !important; margin-bottom: 18px !important; } }
 .fname, .iname, .cname, #cand-name, #peer-name { font-weight: 600; }
 .lp-h2, .lp-h3, .lp-vals h3, .lp-win-h1, .lp-h1, .ihead h2, .lp-acts b { font-weight: 500 !important; }
 
 /* Photo obligatoire : petit rappel sous les emplacements de photos */
 .photo-req { margin: 6px 0 4px; font-size: .88rem; color: var(--muted); }
 .photo-lock { margin: 4px 0 16px; padding: 12px 14px; border-radius: 12px; background: #f6e3d6; color: #6b2e17; border: 1px solid #e7c3ad; font-weight: 700; line-height: 1.45; }
-/* Le nom « Jade » en haut de l'appli est toujours en calligraphie, aussi sur l'écran du profil */
-.topbar #app-name { font-family: var(--font-script) !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+/* Le nom « Jade » en haut de l'appli, aussi sur l'écran du profil */
+.topbar #app-name { font-family: var(--font-script) !important; font-weight: 600 !important; letter-spacing: .01em !important; }
 /* Administration : formulaire d'activité */
 .evadmin .evlab { margin: 6px 0 0; font-size: .85rem; font-weight: 700; }
 /* Administration : connexions (adresses IP) */
@@ -235,7 +231,7 @@ body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: #d9bf86 !im
 body.setup-on { place-items: start center; padding-top: 0; }
 body.setup-on .topbar { position: sticky; top: 0; z-index: 20; align-items: center; margin: 0 -16px 16px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
   background: rgba(23,61,53,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251,248,234,.18); }
-body.setup-on .topbar h1 { font-size: 2.3rem; line-height: 1; margin: 0; }
+body.setup-on .topbar h1 { font-size: 1.75rem; line-height: 1; margin: 0; }
 body.setup-on .topbar .sub, body.setup-on .hint { display: none; }
 body.setup-on .topbar select { margin-top: 0; }
 
