@@ -111,7 +111,7 @@ body.landing-on #auth .hero { display: none; }
 .lp-win-bg { display: none; }
 .lp-win-col { position: relative; display: flex; flex-direction: column; min-height: calc(100svh - 56px); }
 .lp-win-img { order: 0; position: relative; flex: none; height: 60svh; min-height: 330px; max-height: 760px; }
-.lp-win-img img { display: block; width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: center 38%; }
+.lp-win-img img { display: block; width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: center 62%; }
 .lp-win-img::after { content: ""; position: absolute; inset: auto 0 0 0; height: 42%; pointer-events: none;
   background: linear-gradient(180deg, rgba(35, 23, 15, 0) 0%, rgba(35, 23, 15, .75) 60%, #23170f 100%); }
 .lp-win-title { display: none; }
@@ -132,7 +132,7 @@ body.landing-on #auth .hero { display: none; }
 
 @media (min-width: 900px) and (min-aspect-ratio: 1/1) {
   /* Ordinateur : la photo large en plein écran, le texte sur le panneau de bois à gauche */
-  .lp-win { background: #1d140e url("../img/accueil-large.jpg") 70% center / cover no-repeat; }
+  .lp-win { background: #1d140e url("../img/accueil-mer-large.jpg") center 55% / cover no-repeat; }
   .lp-win::before { content: ""; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(90deg, rgba(18, 11, 7, .78) 0%, rgba(18, 11, 7, .5) 26%, rgba(18, 11, 7, 0) 46%); }
   .lp-win-bg, .lp-win-img { display: none; }
