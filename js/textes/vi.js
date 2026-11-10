@@ -422,5 +422,10 @@ I18N.vi = {
   g_men: "Đàn ông",
   f_reset: "Đặt lại bộ lọc",
   pw_show: "Hiện mật khẩu",
-  pw_hide: "Ẩn mật khẩu"
+  pw_hide: "Ẩn mật khẩu",
+  forgot_need_email: "Trước tiên hãy nhập email vào ô « Email », rồi nhấn « Quên mật khẩu? ».",
+  reset_spam: "Hãy xem cả thư mục thư rác. Liên kết có hiệu lực trong 1 giờ.",
+  reset_rate: "Quá nhiều yêu cầu trong thời gian ngắn. Hãy đợi vài phút rồi thử lại.",
+  reset_smtp: "Không gửi được email: hệ thống gửi email của Jade đang được cài đặt. Hãy liên hệ đội ngũ Jade.",
+  link_expired: "Liên kết này không còn hiệu lực (đã hết hạn hoặc đã dùng). Hãy yêu cầu email mới bằng « Quên mật khẩu? »."
 };

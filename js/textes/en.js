@@ -422,5 +422,10 @@ I18N.en = {
   g_men: "Men",
   f_reset: "Reset filters",
   pw_show: "Show password",
-  pw_hide: "Hide password"
+  pw_hide: "Hide password",
+  forgot_need_email: "First type your email address in the « Email » field, then tap « Forgot password? ».",
+  reset_spam: "Also check your spam folder. The link is valid for 1 hour.",
+  reset_rate: "Too many requests in a short time. Wait a few minutes and try again.",
+  reset_smtp: "The email could not be sent: Jade's email sending is being set up. Please contact the Jade team.",
+  link_expired: "This link is no longer valid (it expired or was already used). Request a new email with « Forgot password? »."
 };

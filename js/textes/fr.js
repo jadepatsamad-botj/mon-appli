@@ -422,5 +422,10 @@ I18N.fr = {
   g_men: "Des hommes",
   f_reset: "Réinitialiser les filtres",
   pw_show: "Afficher le mot de passe",
-  pw_hide: "Masquer le mot de passe"
+  pw_hide: "Masquer le mot de passe",
+  forgot_need_email: "Écris d'abord ton adresse e-mail dans le champ « E-mail », puis appuie sur « Mot de passe oublié ? ».",
+  reset_spam: "Regarde aussi dans tes spams. Le lien est valable 1 heure.",
+  reset_rate: "Trop de demandes en peu de temps. Attends quelques minutes puis réessaie.",
+  reset_smtp: "L'e-mail n'a pas pu partir : l'envoi d'e-mails de Jade est en cours de réglage. Contacte l'équipe Jade.",
+  link_expired: "Ce lien n'est plus valable (il a expiré ou a déjà servi). Redemande un e-mail avec « Mot de passe oublié ? »."
 };
