@@ -416,5 +416,6 @@ I18N.ko = {
   verify_nudge_btn: "인증하기",
   scam_contact: "⚠️ 주의: 이 사람이 다른 곳(WhatsApp, Telegram, 전화번호 등)으로 옮기자고 합니다. 영상 통화로 만나기 전까지는 Jade에서 대화하세요.",
   safety_first_t: "만나기 전에",
-  safety_ok: "알겠어요"
+  safety_ok: "알겠어요",
+  lp_kicker: "만남 · 아시아 커뮤니티 · 프랑스 & 유럽"
 };

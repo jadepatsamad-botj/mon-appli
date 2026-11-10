@@ -356,5 +356,6 @@ I18N.id = {
   verify_nudge_btn: "Verifikasi sekarang",
   scam_contact: "⚠️ Hati-hati: orang ini mengajak pindah ke aplikasi lain (WhatsApp, Telegram, nomor telepon…). Tetap di Jade sampai Anda melihatnya lewat panggilan video.",
   safety_first_t: "Sebelum bertemu",
-  safety_ok: "Saya mengerti"
+  safety_ok: "Saya mengerti",
+  lp_kicker: "Kencan · Komunitas Asia · Prancis & Eropa"
 };

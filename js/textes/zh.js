@@ -356,5 +356,6 @@ I18N.zh = {
   verify_nudge_btn: "去验证",
   scam_contact: "⚠️ 请小心：此人建议转到其他平台（WhatsApp、Telegram、电话号码…）。在视频通话见到对方之前，请留在 Jade 上交流。",
   safety_first_t: "见面之前",
-  safety_ok: "我知道了"
+  safety_ok: "我知道了",
+  lp_kicker: "交友 · 亚裔社区 · 法国与欧洲"
 };

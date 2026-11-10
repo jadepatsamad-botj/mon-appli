@@ -416,5 +416,6 @@ I18N.tl = {
   verify_nudge_btn: "Magpa-verify",
   scam_contact: "⚠️ Mag-ingat: inaaya ka ng taong ito na lumipat sa ibang app (WhatsApp, Telegram, numero…). Manatili sa Jade hangga't hindi mo pa siya nakikita sa video call.",
   safety_first_t: "Bago kayo magkita",
-  safety_ok: "Naiintindihan ko"
+  safety_ok: "Naiintindihan ko",
+  lp_kicker: "Pakikipag-date · Komunidad ng mga Asyano · France at Europa"
 };

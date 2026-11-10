@@ -416,5 +416,6 @@ I18N.ja = {
   verify_nudge_btn: "認証する",
   scam_contact: "⚠️ 注意：この人は別のアプリ（WhatsApp、Telegram、電話番号など）への移動を提案しています。ビデオ通話で会うまではJadeでやり取りしましょう。",
   safety_first_t: "会う前に",
-  safety_ok: "わかりました"
+  safety_ok: "わかりました",
+  lp_kicker: "出会い · アジア系コミュニティ · フランスとヨーロッパ"
 };

@@ -18,6 +18,8 @@ function closeAuth() {
 
 $("lp-join-top").onclick = function () { goAuth("signup"); };
 $("lp-login").onclick = function () { goAuth("login"); };
+// Les boutons « Créer mon compte gratuit » de la page
+Array.prototype.forEach.call(document.querySelectorAll(".lp-join-any"), function (b) { b.onclick = function () { goAuth("signup"); }; });
 $("auth-close").onclick = closeAuth;
 $("lp-legal").onclick = function () { document.body.classList.add("auth-open"); openLegal("auth"); };
 document.addEventListener("keydown", function (e) {
@@ -42,18 +44,3 @@ document.querySelector("main").addEventListener("click", function (e) {
     box.appendChild(b);
   });
 })();
-
-// « Pourquoi Jade » : le texte de chaque feuille rapetisse si besoin pour tenir dedans
-// (selon la langue et la taille de l'écran)
-function fitNotes() {
-  Array.prototype.forEach.call(document.querySelectorAll(".lp-sheet"), function (n) {
-    n.style.fontSize = "";
-    var size = parseFloat(getComputedStyle(n).fontSize), min = 8;
-    while (n.scrollHeight > n.clientHeight + 1 && size > min) { size -= 0.5; n.style.fontSize = size + "px"; }
-  });
-}
-window.addEventListener("resize", function () { clearTimeout(fitNotes.t); fitNotes.t = setTimeout(fitNotes, 150); });
-window.addEventListener("load", fitNotes);
-$("lang").addEventListener("change", function () { setTimeout(fitNotes, 60); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNotes);
-(function () { var im = document.querySelector(".lp-notes img"); if (im) { if (im.complete) setTimeout(fitNotes, 0); else im.addEventListener("load", fitNotes); } })();

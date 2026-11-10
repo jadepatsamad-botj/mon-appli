@@ -30,98 +30,108 @@
     <button type="button" class="lp-join-s" id="lp-join-top" data-i18n="lp_join_short"></button>
   </header>
 
-  <section class="lp-win" aria-label="Jade">
-    <div class="lp-win-bg" aria-hidden="true"></div>
-    <div class="lp-win-col">
-      <div class="lp-win-text">
-        <div class="lp-win-word">Jade</div>
-        <h1 class="lp-win-h1" data-i18n="lp_hero_t"></h1>
-        <p class="lp-win-lead" data-i18n="lp_hero_p"></p>
+  <!-- Ouverture : le titre à gauche, « Pourquoi Jade » en carte à droite -->
+  <section class="lp-hero" aria-labelledby="lp-hero-t">
+    <div class="lp-wrap lp-hero-in">
+      <div class="lp-hero-text">
+        <p class="lp-kicker" data-i18n="lp_kicker"></p>
+        <h1 class="lp-hero-t" id="lp-hero-t" data-i18n="lp_hero_t"></h1>
+        <p class="lp-hero-p" data-i18n="lp_hero_p"></p>
+        <div class="lp-hero-cta">
+          <button type="button" class="lp-btn lp-join-any" data-i18n="lp_join"></button>
+          <span class="lp-kicker" data-i18n="lp_free"></span>
+        </div>
       </div>
-      <div class="lp-win-img">
-        <img src="img/accueil-mer.jpg" alt="" width="1080" height="1440" fetchpriority="high">
-        <div class="lp-win-title">
-          <div class="lp-win-word">Jade</div>
-          <p data-i18n="lp_hero_t"></p>
+      <figure class="lp-map">
+        <figcaption><h2 class="lp-map-t" data-i18n="lp_adv_t"></h2></figcaption>
+        <div class="lp-map-grid" role="list">
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 9h20v13H14l-6 5v-5H5z"/><path d="M29 15h6v13h-3v4l-5-4h-9v-3"/><path d="M10 15h10"/></svg><span class="lp-n">01</span></div><h3 data-i18n="lp_adv1_t"></h3><p data-i18n="lp_adv1_p"></p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4l13 5v10c0 8-6 14-13 17C13 33 7 27 7 19V9z"/><path d="M14 20l4 4 8-9"/></svg><span class="lp-n">02</span></div><h3 data-i18n="lp_adv2_t"></h3><p data-i18n="lp_adv2_p"></p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36s11-10 11-19a11 11 0 0 0-22 0c0 9 11 19 11 19z"/><circle cx="20" cy="17" r="4"/></svg><span class="lp-n">03</span></div><h3 data-i18n="lp_adv3_t"></h3><p data-i18n="lp_adv3_p"></p></article>
+          <article role="listitem"><div class="lp-map-top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 33S6 25 6 15a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 10-14 18-14 18z"/></svg><span class="lp-n">04</span></div><h3 data-i18n="lp_adv4_t"></h3><p data-i18n="lp_adv4_p"></p></article>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- L'esprit de Jade : la pierre précieuse, et la personne précieuse que l'on cherche -->
+  <section class="lp-sec" id="lp-spirit" aria-labelledby="lp-spirit-t">
+    <div class="lp-wrap lp-spirit-in">
+      <div class="lp-spirit-side">
+        <h2 class="lp-kicker" id="lp-spirit-t" data-i18n="lp_spirit_t"></h2>
+        <svg class="lp-stone" viewBox="0 0 96 96" aria-hidden="true"><path d="M33 6h30l27 27v30L63 90H33L6 63V33z"/><path d="M28 28h40v40H28z"/><path d="M40 40h16v16H40z"/><path d="M48 6v22M48 68v22M6 48h22M68 48h22"/></svg>
+      </div>
+      <div class="lp-spirit-main">
+        <p class="lp-quote" data-i18n="lp_spirit_p2"></p>
+        <div class="lp-cols">
+          <p data-i18n="lp_spirit_p1"></p>
+          <p data-i18n="lp_spirit_p3"></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- L'esprit de Jade : la pierre précieuse, et la personne précieuse que l'on cherche -->
-  <section class="lp-band cream" id="lp-spirit">
-    <div class="lp-in narrow">
-      <h2 class="lp-h2" data-i18n="lp_spirit_t"></h2>
-      <div class="lp-hands" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div>
-      <p data-i18n="lp_spirit_p1"></p>
-      <p class="lp-strong" data-i18n="lp_spirit_p2"></p>
-      <p data-i18n="lp_spirit_p3"></p>
-    </div>
-  </section>
-
-  <!-- Les sorties en groupe : la différence de Jade, juste après l'esprit de Jade -->
-  <section class="lp-band olive lp-meet" id="lp-meet">
-    <div class="lp-in">
-      <h2 class="lp-h2" data-i18n="lp_act_t"></h2>
-      <p class="lp-meet-lead" data-i18n="lp_act_p"></p>
+  <!-- Se rencontrer en vrai : les 3 étapes, puis les activités présentées comme un menu -->
+  <section class="lp-sec lp-soft" id="lp-meet" aria-labelledby="lp-meet-t">
+    <div class="lp-wrap">
+      <div class="lp-head">
+        <h2 class="lp-h2" id="lp-meet-t" data-i18n="lp_act_t"></h2>
+        <p data-i18n="lp_act_p"></p>
+      </div>
       <ol class="lp-steps">
-        <li><span class="lp-num">1</span><h3 data-i18n="lp_step1_t"></h3><p data-i18n="lp_step1_p"></p></li>
-        <li><span class="lp-num">2</span><h3 data-i18n="lp_step2_t"></h3><p data-i18n="lp_step2_p"></p></li>
-        <li><span class="lp-num">3</span><h3 data-i18n="lp_step3_t"></h3><p data-i18n="lp_step3_p"></p></li>
+        <li><span class="lp-step-n">1</span><h3 data-i18n="lp_step1_t"></h3><p data-i18n="lp_step1_p"></p></li>
+        <li><span class="lp-step-n">2</span><h3 data-i18n="lp_step2_t"></h3><p data-i18n="lp_step2_p"></p></li>
+        <li><span class="lp-step-n">3</span><h3 data-i18n="lp_step3_t"></h3><p data-i18n="lp_step3_p"></p></li>
       </ol>
-      <ul class="lp-acts">
-        <li><b data-i18n="lp_act1"></b><span data-i18n="lp_act1_d"></span></li>
-        <li><b data-i18n="lp_act2"></b><span data-i18n="lp_act2_d"></span></li>
-        <li><b data-i18n="lp_act3"></b><span data-i18n="lp_act3_d"></span></li>
+      <ul class="lp-menu">
+        <li><b data-i18n="lp_act1"></b><i aria-hidden="true"></i><span data-i18n="lp_act1_d"></span></li>
+        <li><b data-i18n="lp_act2"></b><i aria-hidden="true"></i><span data-i18n="lp_act2_d"></span></li>
+        <li><b data-i18n="lp_act3"></b><i aria-hidden="true"></i><span data-i18n="lp_act3_d"></span></li>
       </ul>
-      <p class="lp-note" data-i18n="lp_act_note"></p>
+      <p class="lp-small" data-i18n="lp_act_note"></p>
     </div>
   </section>
 
-  <section class="lp-band paper">
-    <div class="lp-in narrow">
-      <h2 class="lp-h3" data-i18n="lp_rules_t"></h2>
-      <ul class="lp-rules">
-        <li data-i18n="lp_rule1"></li>
-        <li data-i18n="lp_rule2"></li>
-        <li class="lp-em" data-i18n="lp_rule3"></li>
-        <li data-i18n="lp_rule4"></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="lp-band cream">
-    <div class="lp-in">
-      <h2 class="lp-h2" data-i18n="lp_adv_t"></h2>
-      <!-- Les 4 raisons, écrites sur les 4 feuilles pincées de l'image -->
-      <div class="lp-notes" role="list">
-        <img src="img/pourquoi-jade.jpg" alt="" width="775" height="1060" loading="lazy">
-        <article class="lp-sheet n1" role="listitem"><span class="lp-sheet-n" aria-hidden="true">01</span><h3 data-i18n="lp_adv1_t"></h3><p data-i18n="lp_adv1_p"></p></article>
-        <article class="lp-sheet n2" role="listitem"><span class="lp-sheet-n" aria-hidden="true">02</span><h3 data-i18n="lp_adv2_t"></h3><p data-i18n="lp_adv2_p"></p></article>
-        <article class="lp-sheet n3" role="listitem"><span class="lp-sheet-n" aria-hidden="true">03</span><h3 data-i18n="lp_adv3_t"></h3><p data-i18n="lp_adv3_p"></p></article>
-        <article class="lp-sheet n4" role="listitem"><span class="lp-sheet-n" aria-hidden="true">04</span><h3 data-i18n="lp_adv4_t"></h3><p data-i18n="lp_adv4_p"></p></article>
+  <!-- Règles et valeurs, côte à côte -->
+  <section class="lp-sec" aria-label="Jade">
+    <div class="lp-wrap lp-two">
+      <div>
+        <h2 class="lp-h3" data-i18n="lp_rules_t"></h2>
+        <ul class="lp-rules">
+          <li data-i18n="lp_rule1"></li>
+          <li data-i18n="lp_rule2"></li>
+          <li class="lp-em" data-i18n="lp_rule3"></li>
+          <li data-i18n="lp_rule4"></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="lp-h3" data-i18n="lp_val_t"></h2>
+        <div class="lp-vals">
+          <article><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4l16 18-16 18L6 22z"/><path d="M6 22h32M22 4l-6 18 6 18 6-18z"/></svg><h3 data-i18n="lp_val1"></h3><p data-i18n="lp_val1_p"></p></article>
+          <article><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="15" cy="16" r="6"/><circle cx="29" cy="16" r="6"/><path d="M4 38c1-7 6-11 11-11s9 3 10 7M19 34c1-4 5-7 10-7s10 4 11 11"/></svg><h3 data-i18n="lp_val2"></h3><p data-i18n="lp_val2_p"></p></article>
+          <article><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="2"/><path d="M15 19v-6a7 7 0 0 1 14 0v6"/><path d="M22 27v4"/></svg><h3 data-i18n="lp_val3"></h3><p data-i18n="lp_val3_p"></p></article>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="lp-band cream">
-    <div class="lp-in">
-      <h2 class="lp-h2" data-i18n="lp_val_t"></h2>
-      <div class="lp-vals">
-        <article><div class="lp-ring" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div><h3 data-i18n="lp_val1"></h3><p data-i18n="lp_val1_p"></p></article>
-        <article><div class="lp-ring" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div><h3 data-i18n="lp_val2"></h3><p data-i18n="lp_val2_p"></p></article>
-        <article><div class="lp-ring" aria-hidden="true"><svg class="lp-lattice" viewBox="0 0 170 170" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M66 38h38l28 28v38l-28 28H66l-28-28V66z"/><path d="M68.5 45h33L125 68.5v33L101.5 125h-33L45 101.5v-33z"/><path d="M63 63h44v44H63zM70 70h30v30H70zM77 77h16v16H77z"/><path d="M85 45v18M85 107v18M45 85h18M107 85h18M63 63l-10-10M107 63l10-10M63 107l-10 10M107 107l10 10M70 85h7M93 85h7M85 70v7M85 93v7"/></g></svg></div><h3 data-i18n="lp_val3"></h3><p data-i18n="lp_val3_p"></p></article>
-      </div>
+  <!-- Dernier appel -->
+  <section class="lp-sec lp-final" aria-labelledby="lp-final-t">
+    <div class="lp-wrap">
+      <h2 class="lp-h2" id="lp-final-t" data-i18n="lp_final_t"></h2>
+      <button type="button" class="lp-btn lp-join-any" data-i18n="lp_join"></button>
     </div>
   </section>
 
   <footer class="lp-foot">
-    <div class="lp-logo">Jade</div>
-    <div class="lp-langs" id="lp-langs"></div>
-    <div class="lp-links">
-      <button type="button" class="linkbtn" id="lp-legal" data-i18n="lp_legal"></button>
+    <div class="lp-wrap lp-foot-in">
+      <div class="lp-logo">Jade</div>
+      <div class="lp-langs" id="lp-langs"></div>
+      <div class="lp-links">
+        <button type="button" class="linkbtn" id="lp-legal" data-i18n="lp_legal"></button>
+      </div>
+      <p data-i18n="lp_foot"></p>
     </div>
-    <p data-i18n="lp_foot"></p>
   </footer>
 </div>
 

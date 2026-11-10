@@ -1,5 +1,6 @@
 /* Jade : page d'accueil publique (visiteurs non connectés)
-   Bandes alternées olive / crème, grandes typographies Playfair, motif de fenêtre à treillis. */
+   Style épuré : fond blanc, beaucoup d'espace, titres Playfair, filets fins, icônes au trait.
+   Palette discrète : encre, violet pervenche, rose poudré, une touche de terracotta. */
 
 #landing { display: none; }
 /* Le formulaire d'inscription se place entre la dernière section et le pied de page */
@@ -11,139 +12,112 @@ body.landing-on main { display: none; }
 body.landing-on.auth-open { overflow: hidden; }
 body.landing-on.auth-open main { display: block; position: fixed; inset: 0; z-index: 60; max-width: none; margin: 0; overflow-y: auto; overscroll-behavior: contain;
   padding: max(28px, calc(env(safe-area-inset-top, 0px) + 16px)) max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px));
-  background: rgba(20, 18, 26, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-sizing: border-box; }
+  background: rgba(31, 28, 27, .42); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-sizing: border-box; }
 body.landing-on.auth-open main > section { max-width: 440px; margin: 0 auto; }
 body.landing-on #landing > .lp-foot { order: 2; }
 body.landing-on main > .topbar, body.landing-on .hint { display: none; }
 body.landing-on #auth { scroll-margin-top: 76px; }
 body.landing-on #auth .hero { display: none; }
 
-.lp-in { max-width: 980px; margin: 0 auto; }
-.lp-in.narrow { max-width: 640px; }
-#landing section, .lp-foot { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#landing { --lp-ink: #1f1c1b; --lp-mute: #5e5856; --lp-line: #ebe5e1; --lp-peri: #5d5f94; --lp-blush: #faf4f1; --lp-terra: #b5603f; }
+.lp-wrap { max-width: 1200px; margin: 0 auto; box-sizing: border-box; }
+#landing section, .lp-foot { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+#landing, #landing p { color: var(--lp-ink); }
+#landing h1, #landing h2, #landing h3 { color: var(--lp-ink); }
+#landing svg { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Petites étiquettes en capitales espacées */
+.lp-kicker { margin: 0; font-family: var(--font); font-size: .75rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--lp-mute) !important; }
 
 /* Barre du haut */
-.lp-bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 10px;
-  padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
-  background: rgba(45, 45, 80, .82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251, 248, 234, .16); }
-.lp-logo { font-family: var(--font-title); font-size: 1.45rem; letter-spacing: .34em; text-transform: uppercase; color: var(--on-olive); margin-right: auto; }
-.lp-login { border: 0; background: none; color: var(--on-olive); font: inherit; font-weight: 600; padding: 9px 6px; cursor: pointer; }
-.lp-join-s { border: 0; border-radius: 999px; background: var(--cream); color: #5b5d92; font: inherit; font-weight: 700; padding: 9px 16px; cursor: pointer; white-space: nowrap; }
+.lp-bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 14px;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 14px max(20px, env(safe-area-inset-left, 0px));
+  background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--lp-line); }
+.lp-logo { font-family: var(--font-title); font-size: 1.85rem; font-weight: 500; line-height: 1; color: var(--lp-ink); margin-right: auto; }
+.lp-login { border: 0; background: none; color: var(--lp-ink); font: inherit; font-weight: 500; padding: 10px 6px; min-height: 44px; cursor: pointer; }
+.lp-login:hover { color: var(--lp-peri); }
+.lp-join-s, .lp-btn { border: 0; border-radius: 999px; background: var(--lp-peri); color: #fff; font: inherit; font-weight: 700; cursor: pointer; min-height: 44px; }
+.lp-join-s { padding: 10px 20px; }
+.lp-btn { padding: 15px 28px; font-size: 1rem; }
+.lp-join-s:hover, .lp-btn:hover { background: #4b4d80; }
+.lp-join-s:focus-visible, .lp-btn:focus-visible, .lp-login:focus-visible { outline: 2px solid var(--lp-peri); outline-offset: 3px; }
 
-/* Boutons d'inscription */
-.lp-cta { border: 0; border-radius: 999px; background: var(--cream); color: #3d4226; font: inherit; font-size: 1.05rem; font-weight: 700;
-  padding: 16px 30px; cursor: pointer; box-shadow: 0 6px 22px rgba(10, 30, 25, .25); transition: transform .15s ease; }
-.lp-cta:hover { transform: translateY(-1px); }
-.lp-cta:focus-visible, .lp-login:focus-visible, .lp-join-s:focus-visible { outline: 3px solid var(--on-olive); outline-offset: 3px; }
-.lp-cta.dark { background: var(--accent); color: var(--accent-fg); box-shadow: none; }
+/* Ouverture */
+.lp-hero { padding-top: clamp(48px, 9vw, 104px); padding-bottom: clamp(56px, 9vw, 112px); }
+.lp-hero-in { display: flex; flex-wrap: wrap; align-items: center; gap: 56px 64px; }
+.lp-hero-text { flex: 1 1 420px; min-width: 0; }
+.lp-hero-t { margin: 22px 0 0; font-family: var(--font-title); font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.2rem); line-height: 1.08; letter-spacing: -.01em; text-wrap: balance; }
+.lp-hero-p { margin: 28px 0 0; max-width: 36ch; font-size: 1.12rem; line-height: 1.6; color: var(--lp-mute) !important; }
+.lp-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 36px; }
 
-/* Grande ouverture */
-.lp-hero, .lp-final { position: relative; overflow: hidden; text-align: center; color: var(--on-olive);
-  padding-top: 72px; padding-bottom: 72px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.lp-hero .lp-lattice, .lp-final .lp-lattice { position: absolute; width: min(520px, 120vw); left: 50%; top: 50%; transform: translate(-50%, -54%);
-  color: var(--cream); opacity: .14; pointer-events: none; }
-.lp-word { position: relative; font-family: var(--font-title); font-weight: 400; font-size: clamp(3.6rem, 19vw, 8rem); line-height: 1;
-  letter-spacing: .28em; margin-right: -.28em; text-transform: uppercase; }
-.lp-h1 { position: relative; margin: 0; max-width: 18ch; font-family: var(--font-title); font-weight: 400; font-size: clamp(1.7rem, 6.5vw, 2.8rem); line-height: 1.15; text-wrap: balance; }
-.lp-lead { position: relative; margin: 0; max-width: 34ch; font-size: 1.08rem; line-height: 1.55; opacity: .92; }
-.lp-free { position: relative; margin: 0; font-size: .95rem; letter-spacing: .06em; opacity: .9; }
-.lp-free.big { font-family: var(--font-title); font-size: 1.35rem; letter-spacing: 0; opacity: 1; }
+/* « Pourquoi Jade » : une carte en 4 cases séparées par des filets */
+.lp-map { flex: 1 1 420px; min-width: 0; margin: 0; }
+.lp-map-t { margin: 0 0 16px; font-family: var(--font-title); font-weight: 400; font-size: 1.6rem; }
+.lp-map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1px; background: var(--lp-line); border: 1px solid var(--lp-line); }
+.lp-map-grid article { background: #fff; padding: 26px 24px 30px; display: flex; flex-direction: column; gap: 12px; }
+.lp-map-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.lp-map-top svg { width: 38px; height: 38px; color: var(--lp-peri); }
+.lp-n, .lp-step-n { font-family: var(--font); font-size: .78rem; font-weight: 700; letter-spacing: .14em; color: var(--lp-terra); }
+.lp-map-grid h3 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 1.35rem; line-height: 1.2; }
+.lp-map-grid p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--lp-mute) !important; }
 
-/* Bandes */
-.lp-band { padding-top: 68px; padding-bottom: 68px; }
-.lp-band.cream { background: var(--card); color: var(--fg); }
-.lp-band.paper { background: var(--bg); color: var(--fg); }
-.lp-band.olive { background: var(--olive-dark); color: var(--on-olive); }
-.lp-band .narrow { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.lp-band p { margin: 0; font-size: 1.05rem; line-height: 1.65; max-width: 60ch; }
-.lp-h2 { margin: 0 0 8px; font-family: var(--font-title); font-weight: 400; font-size: clamp(1.9rem, 7vw, 2.8rem); line-height: 1.1; text-align: center; text-wrap: balance; }
-.lp-h3 { margin: 0 0 4px; font-family: var(--font-title); font-weight: 500; font-size: 1.6rem; }
-.lp-strong { font-family: var(--font-title); font-size: 1.3rem !important; }
-.lp-hands { width: 120px; color: var(--olive); opacity: .55; }
-.lp-hands svg { width: 100%; display: block; }
+/* Sections */
+.lp-sec { border-top: 1px solid var(--lp-line); padding-top: clamp(64px, 9vw, 112px); padding-bottom: clamp(64px, 9vw, 112px); }
+.lp-soft { background: var(--lp-blush); }
+.lp-h2 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.12; text-wrap: balance; }
+.lp-h3 { margin: 0 0 26px; font-family: var(--font-title); font-weight: 400; font-size: 2rem; }
+.lp-small { margin: 14px 0 0; font-size: .85rem; color: var(--lp-mute) !important; }
 
-/* Règles */
-.lp-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; width: 100%; max-width: 520px; text-align: left; }
-.lp-rules li { position: relative; padding: 12px 16px 12px 46px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; font-size: 1rem; }
-.lp-rules li::before { content: "✓"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%;
-  background: var(--olive); color: var(--cream); font-size: .75rem; font-weight: 700; display: grid; place-items: center; }
+/* L'esprit de Jade */
+.lp-spirit-in { display: flex; flex-wrap: wrap; gap: 36px 80px; }
+.lp-spirit-side { flex: 1 1 220px; display: flex; flex-direction: column; gap: 26px; }
+.lp-stone { width: 92px; height: 92px; color: var(--lp-peri); stroke-width: 1 !important; }
+.lp-spirit-main { flex: 3 1 520px; min-width: 0; }
+.lp-quote { margin: 0; font-family: var(--font-title); font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.3; text-wrap: pretty; }
+.lp-cols { display: flex; flex-wrap: wrap; gap: 20px 48px; margin-top: 36px; }
+.lp-cols p { flex: 1 1 280px; margin: 0; line-height: 1.7; color: var(--lp-mute) !important; }
+
+/* Se rencontrer en vrai */
+.lp-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px 48px; }
+.lp-head p { margin: 0; max-width: 46ch; line-height: 1.65; color: var(--lp-mute) !important; }
+.lp-steps { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 36px 40px; }
+.lp-steps li { border-top: 1px solid var(--lp-ink); padding-top: 22px; }
+.lp-step-n { font-family: var(--font-title); font-size: 2.6rem; font-weight: 400; letter-spacing: 0; line-height: 1; }
+.lp-steps h3 { margin: 16px 0 6px; font-family: var(--font); font-size: 1.1rem; font-weight: 700; }
+.lp-steps p { margin: 0; line-height: 1.6; color: var(--lp-mute) !important; }
+.lp-menu { list-style: none; margin: 72px 0 0; padding: 0; max-width: 720px; }
+.lp-menu li { display: flex; align-items: baseline; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--lp-line); }
+.lp-menu b { font-family: var(--font-title); font-weight: 400; font-size: 1.45rem; }
+.lp-menu i { flex: 1 1 auto; min-width: 16px; border-bottom: 1px dotted #a8a09b; transform: translateY(-6px); }
+.lp-menu span { font-size: .9rem; letter-spacing: .06em; color: var(--lp-mute); white-space: nowrap; }
+
+/* Règles et valeurs */
+.lp-two { display: flex; flex-wrap: wrap; gap: 56px 96px; }
+.lp-two > div { flex: 1 1 380px; min-width: 0; }
+.lp-rules { list-style: none; margin: 0; padding: 0; }
+.lp-rules li { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-top: 1px solid var(--lp-line); line-height: 1.45; }
+.lp-rules li:last-child { border-bottom: 1px solid var(--lp-line); }
+.lp-rules li::before { content: ""; flex: none; width: 22px; height: 22px; border: 1.2px solid var(--lp-peri); border-radius: 50%;
+  background: no-repeat center / 12px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' fill='none' stroke='%235d5f94' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .lp-rules li.lp-em { font-weight: 700; }
-.lp-rules li.lp-em::before { content: "!"; background: #b5452f; }
+.lp-rules li.lp-em::before { border-color: var(--lp-terra);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 2.5v4.2M6 9.2v.01' fill='none' stroke='%23b5603f' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.lp-vals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 32px; }
+.lp-vals svg { width: 42px; height: 42px; color: var(--lp-peri); stroke-width: 1.1 !important; }
+.lp-vals h3 { margin: 12px 0 6px; font-family: var(--font-title); font-weight: 400; font-size: 1.4rem; }
+.lp-vals p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--lp-mute) !important; }
 
-/* Avantages */
-.lp-adv { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 28px 32px; margin-top: 28px; }
-.lp-adv article { min-width: 0; }
-.lp-adv h3 { margin: 0 0 8px; font-family: var(--font-title); font-style: italic; font-weight: 400; font-size: 1.55rem; line-height: 1.15; }
-.lp-adv p { font-size: 1rem; color: var(--muted); }
-
-/* Activités */
-.lp-acts { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; width: 100%; max-width: 480px; }
-.lp-acts li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 18px; border-radius: 14px;
-  background: rgba(251, 248, 234, .1); border: 1px solid rgba(251, 248, 234, .22); text-align: left; }
-.lp-acts b { font-family: var(--font-title); font-weight: 500; font-size: 1.15rem; }
-.lp-acts span { font-size: .92rem; opacity: .85; white-space: nowrap; }
-.lp-note { font-size: .85rem !important; opacity: .75; }
-
-/* Valeurs */
-.lp-vals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 32px; margin-top: 28px; text-align: center; }
-.lp-ring { width: 120px; height: 120px; margin: 0 auto 14px; border-radius: 50%; display: grid; place-items: center;
-  background: radial-gradient(circle at 35% 30%, var(--olive-light), var(--olive) 70%); color: var(--cream); }
-.lp-ring svg { width: 84%; }
-.lp-vals h3 { margin: 0 0 6px; font-family: var(--font-title); font-weight: 400; font-size: 1.5rem; }
-.lp-vals p { margin: 0 auto; max-width: 28ch; color: var(--muted); }
+/* Dernier appel */
+.lp-final .lp-wrap { max-width: 860px; display: flex; flex-direction: column; align-items: center; gap: 34px; text-align: center; }
 
 /* Pied de page */
-.lp-foot { background: var(--bg); color: var(--fg); text-align: center; padding-top: 44px; padding-bottom: 36px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.lp-foot .lp-logo { color: var(--olive); margin: 0; font-size: 1.6rem; }
-.lp-langs { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; max-width: 560px; }
-.lp-langs .linkbtn, .lp-links .linkbtn { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; font-size: .95rem; padding: 4px 2px; }
-.lp-links { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
-.lp-foot p { margin: 0; color: var(--muted); font-size: .88rem; max-width: 46ch; }
-
-@media (prefers-reduced-motion: reduce) { .lp-cta { transition: none; } }
-
-/* Ouverture : la photo de la fenêtre.
-   Téléphone et iPad vertical : la photo en grand en haut, qui se fond dans le bois sombre,
-   puis « Jade » calligraphié et le texte crème, sur tout l'écran (même esprit que l'ordinateur).
-   Ordinateur / iPad paysage : la photo large en plein écran, texte sur le panneau de bois (plus bas). */
-.lp-win { position: relative; overflow: hidden; padding: 0 !important; color: #ffffff;
-  background: radial-gradient(120% 60% at 50% 100%, #3a3a5c 0%, #26263f 70%), #26263f; }
-.lp-win-bg { display: none; }
-.lp-win-col { position: relative; display: flex; flex-direction: column; min-height: calc(100svh - 56px); }
-.lp-win-img { order: 0; position: relative; flex: none; height: 60svh; min-height: 330px; max-height: 760px; }
-.lp-win-img img { display: block; width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: center 62%; }
-.lp-win-img::after { content: ""; position: absolute; inset: auto 0 0 0; height: 42%; pointer-events: none;
-  background: linear-gradient(180deg, rgba(38, 38, 63, 0) 0%, rgba(38, 38, 63, .75) 60%, #26263f 100%); }
-.lp-win-title { display: none; }
-.lp-win-text { order: 1; z-index: 1; position: relative; flex: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; text-align: left;
-  margin-top: -13svh; padding: 0 max(24px, env(safe-area-inset-right, 0px)) 44px max(28px, env(safe-area-inset-left, 0px)); text-shadow: 0 2px 16px rgba(0, 0, 0, .45); }
-.lp-win-word { font-family: var(--font-script); font-size: clamp(3.4rem, 17vw, 5.6rem); line-height: 1; margin-bottom: 14px; }
-.lp-win-h1 { margin: 6px 0 14px; max-width: 18ch; font-family: var(--font-title); font-weight: 500; font-size: clamp(1.6rem, 7vw, 2.3rem); line-height: 1.15; text-wrap: balance; }
-.lp-win-lead { margin: 0; max-width: 34ch; font-size: 1.02rem; line-height: 1.6; color: rgba(251, 248, 234, .85); }
-.lp-win-text::after { content: ""; display: block; width: 42px; height: 1px; margin-top: 26px; background: rgba(251, 248, 234, .5); }
-/* iPad vertical : la photo descend plus bas pour ne pas laisser de grand vide */
-@media (min-width: 600px) {
-  .lp-win-img { height: 72svh; max-height: none; }
-  .lp-win-text { margin-top: -16svh; padding-left: max(6vw, env(safe-area-inset-left, 0px)); padding-right: 6vw; }
-  .lp-win-word { font-size: clamp(4.6rem, 11vw, 6.6rem); }
-  .lp-win-h1 { font-size: clamp(2.2rem, 4.6vw, 3rem); max-width: 20ch; }
-  .lp-win-lead { font-size: 1.15rem; }
-}
-
-@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
-  /* Ordinateur : la photo large en plein écran, le texte sur le panneau de bois à gauche */
-  .lp-win { background: #22223a url("../img/accueil-mer-large.jpg") center 55% / cover no-repeat; }
-  .lp-win::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(90deg, rgba(30, 30, 52, .78) 0%, rgba(30, 30, 52, .5) 26%, rgba(30, 30, 52, 0) 46%); }
-  .lp-win-bg, .lp-win-img { display: none; }
-  .lp-win-col { max-width: none; min-height: calc(100vh - 64px); display: flex; flex-direction: row; align-items: center; box-sizing: border-box;
-    padding: 56px max(32px, env(safe-area-inset-right, 0px)) 64px max(5vw, env(safe-area-inset-left, 0px)); }
-  .lp-win-text { display: block; flex: none; margin-top: 0; padding: 0; text-align: left; position: relative; width: min(34vw, 520px); color: #ffffff; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
-  .lp-win-text::after { display: none; }
-  .lp-win-text .lp-win-word { font-size: clamp(3rem, 5.6vw, 6rem); margin-bottom: 26px; }
-  .lp-win-h1 { margin: 0 0 18px; max-width: none; font-family: var(--font-title); font-weight: 400; font-size: clamp(2rem, 3.1vw, 3.3rem); line-height: 1.12; text-wrap: balance; }
-  .lp-win-lead { margin: 0; max-width: 34ch; font-size: clamp(1rem, 1.2vw, 1.2rem); line-height: 1.6; color: rgba(251, 248, 234, .88); }
-}
+.lp-foot { border-top: 1px solid var(--lp-line); background: #fff; padding-top: 40px; padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); }
+.lp-foot-in { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.lp-foot .lp-logo { font-size: 1.6rem; margin: 0; color: var(--lp-ink) !important; }
+.lp-langs { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.lp-langs .linkbtn, .lp-links .linkbtn { color: var(--lp-mute); font-size: .9rem; text-decoration: none; padding: 6px 0; }
+.lp-langs .linkbtn:hover, .lp-links .linkbtn:hover { color: var(--lp-ink); text-decoration: underline; }
+.lp-foot p { margin: 0; font-size: .82rem; color: var(--lp-mute) !important; max-width: 60ch; }
 
 /* Bouton ✕ de la fenêtre d'inscription */
 #auth { position: relative; }
@@ -155,29 +129,12 @@ body.landing-on .auth-close { display: grid; place-items: center; position: abso
 body.landing-on #auth .tabs { display: none; }
 body.landing-on .auth-title { display: block; margin: 30px 0 20px; text-align: center; font-family: var(--font-title); font-weight: 500; font-size: 1.9rem; line-height: 1.15; }
 
-/* Les sorties en groupe, mises en avant juste après la photo */
-.lp-meet { padding-top: 76px; padding-bottom: 76px; }
-.lp-meet .lp-in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; }
-.lp-meet-lead { max-width: 56ch; font-size: 1.12rem !important; }
-.lp-steps { list-style: none; margin: 12px 0 4px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 26px 32px; width: 100%; max-width: 920px; }
-.lp-steps li { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
-.lp-num { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid rgba(251, 248, 234, .7); display: grid; place-items: center;
-  font-family: var(--font-title); font-size: 1.4rem; font-weight: 600; }
-.lp-steps h3 { margin: 4px 0 0; font-family: var(--font-title); font-weight: 600; font-size: 1.45rem; }
-.lp-steps p { margin: 0; font-size: 1rem !important; opacity: .88; max-width: 30ch; }
-.lp-meet .lp-acts { margin-top: 10px; }
-
-/* « Pourquoi Jade » : les 4 raisons écrites sur les 4 feuilles pincées (img/pourquoi-jade.jpg).
-   Les zones de texte suivent l'image en pourcentages ; la taille du texte s'ajuste à la feuille (js/accueil-public.js). */
-.lp-notes { position: relative; width: min(100%, 600px); margin: 26px auto 0; container-type: inline-size;
-  border-radius: 18px; overflow: hidden; background: #f6f4f1; box-shadow: 0 10px 30px rgba(10, 30, 25, .12); }
-.lp-notes img { display: block; width: 100%; height: auto; }
-.lp-sheet { position: absolute; display: flex; flex-direction: column; overflow: hidden; color: #1f1c1b; text-align: left; }
-.lp-sheet.n1 { left: 7.1%; top: 13.7%; width: 34.2%; height: 35.4%; }
-.lp-sheet.n2 { left: 56.8%; top: 13.7%; width: 35.5%; height: 35.4%; }
-.lp-sheet.n3 { left: 7.1%; top: 59.4%; width: 34.2%; height: 34.9%; }
-.lp-sheet.n4 { left: 57.4%; top: 59.4%; width: 35.5%; height: 34.9%; }
-.lp-sheet-n { font-family: var(--font-title); font-weight: 600; font-size: 1em; letter-spacing: .08em; color: #b5603f; margin-bottom: .35em; }
-.lp-sheet h3 { margin: 0 0 .45em; font-family: var(--font-title); font-style: normal; font-weight: 600; font-size: 1.45em; line-height: 1.15; color: #1f1c1b; text-wrap: balance; }
-.lp-sheet p { margin: 0; font-size: 1em; line-height: 1.45; color: #4a5550; }
-.lp-sheet { font-size: clamp(10px, 3.1cqw, 18px); }
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  #landing { --lp-ink: #f2eeeb; --lp-mute: #b3aca8; --lp-line: #2d2a30; --lp-peri: #a9abe0; --lp-blush: #1c1a1f; --lp-terra: #e0957a; }
+  body.landing-on { background: #141316; }
+  .lp-bar { background: rgba(20, 19, 22, .92); }
+  .lp-map-grid article, .lp-foot { background: #141316; }
+  .lp-join-s, .lp-btn { color: #141316; }
+  .lp-join-s:hover, .lp-btn:hover { background: #c3c5ef; }
+}

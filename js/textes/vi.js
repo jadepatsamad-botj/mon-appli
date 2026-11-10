@@ -356,5 +356,6 @@ I18N.vi = {
   verify_nudge_btn: "Xác minh ngay",
   scam_contact: "⚠️ Cẩn thận: người này đề nghị chuyển sang nơi khác (WhatsApp, Telegram, số điện thoại…). Hãy ở lại Jade cho đến khi bạn gặp họ qua cuộc gọi video.",
   safety_first_t: "Trước khi gặp mặt",
-  safety_ok: "Tôi đã hiểu"
+  safety_ok: "Tôi đã hiểu",
+  lp_kicker: "Hẹn hò · Cộng đồng châu Á · Pháp & châu Âu"
 };

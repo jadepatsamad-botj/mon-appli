@@ -5,16 +5,18 @@
     /* Polices de Jade : Playfair Display (logo « Jade », titres, prénoms) + DM Sans (textes) */
     --font-script: "Playfair Display", Georgia, "Times New Roman", serif;
     --font-title: "Playfair Display", Georgia, "Times New Roman", "Noto Serif Thai", "Noto Serif SC", serif;
-    /* Couleurs de Jade : épuré, blanc cassé, violet pervenche, rose poudré et terracotta */
-    --olive: #5b5d92; --olive-light: #8486bd; --olive-dark: #3d3f6b; --cream: #ffffff; --on-olive: #1f1c1b; --blush: #f1e2da;
-    --bg: #f7f3f0; --card: #ffffff; --fg: #1f1c1b; --muted: #6f6763;
-    --line: #ebe1db; --accent: #5b5d92; --accent-fg: #ffffff; --gold: #b5603f; --ok: #2f6b4f; --err: #a3332a;
+    --font: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* Couleurs de Jade : épuré. Fond blanc, encre, filets fins ;
+       accents discrets violet pervenche, rose poudré et une touche de terracotta */
+    --olive: #5d5f94; --olive-light: #8a8cbd; --olive-dark: #43456f; --cream: #ffffff; --on-olive: #1f1c1b; --blush: #f8f0ec;
+    --bg: #ffffff; --card: #ffffff; --fg: #1f1c1b; --muted: #645e5b;
+    --line: #ece6e2; --accent: #5d5f94; --accent-fg: #ffffff; --gold: #b5603f; --ok: #2f6b4f; --err: #a3332a;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --olive: #34365e; --olive-light: #4a4c7e; --olive-dark: #1b1a2b; --cream: #f3eeea; --on-olive: #f3eeea; --blush: #2c2630;
-      --bg: #18161d; --card: #221f27; --fg: #f1ebe7; --muted: #b5aca7;
-      --line: #38333d; --accent: #aeb0e3; --accent-fg: #221f27; --gold: #aeb0e3; --ok: #9fd3b4; --err: #ff9b8f; color-scheme: dark; }
+    :root { --olive: #3a3c63; --olive-light: #4d4f80; --olive-dark: #1d1c2a; --cream: #f2eeeb; --on-olive: #f2eeeb; --blush: #221e23;
+      --bg: #141316; --card: #1c1a1f; --fg: #f2eeeb; --muted: #b3aca8;
+      --line: #2d2a30; --accent: #a9abe0; --accent-fg: #141316; --gold: #e0957a; --ok: #9fd3b4; --err: #ff9b8f; color-scheme: dark; }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
@@ -184,12 +186,11 @@ body {
 h1, h2, .hero-title { font-family: var(--font-title); font-weight: 500; letter-spacing: -.005em; }
 
 /* Le logo « Jade » en Playfair Display, partout où il apparaît */
-body.nav-on .topbar h1, .lp-logo, .lp-word, .lp-win-word {
-  font-family: var(--font-script) !important; font-weight: 600 !important; letter-spacing: .01em !important; text-transform: none !important; margin-right: 0 !important;
+body.nav-on .topbar h1, .lp-logo {
+  font-family: var(--font-script) !important; font-weight: 500 !important; letter-spacing: .01em !important; text-transform: none !important;
 }
 body.nav-on .topbar h1 { font-size: 1.75rem !important; line-height: 1; }
-.lp-logo { font-size: 1.6rem !important; line-height: 1; }
-.lp-foot .lp-logo { font-size: 2.1rem !important; }
+.lp-logo { line-height: 1; }
 .lp-word { font-size: clamp(3.6rem, 18vw, 7.5rem) !important; }
 @media (min-width: 900px) and (min-aspect-ratio: 1/1) { .lp-win-text .lp-win-word { font-size: clamp(3.4rem, 5.6vw, 6rem) !important; margin-bottom: 18px !important; } }
 .fname, .iname, .cname, #cand-name, #peer-name { font-weight: 600; }
@@ -217,11 +218,8 @@ body.nav-on .topbar h1 { font-size: 1.75rem !important; line-height: 1; }
 .bio-wc.ok { color: var(--olive-dark, #5b5d92); }
 .bio-wc.ok::before { content: "✓ "; }
 
-/* Palette « Jade profond & or » : le logo « Jade » en or */
-body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: #1f1c1b !important; }
-.lp-foot .lp-logo { color: var(--gold) !important; }
-.lp-win-word { color: #f3dfd5; }
-.jbox-logo { color: #f3dfd5 !important; }
+/* Le logo « Jade » à l'encre */
+body.nav-on .topbar h1, .topbar #app-name { color: var(--fg) !important; }
 
 /* Messages d'erreur affichés juste sous le champ concerné */
 .field-err:empty { display: none; }

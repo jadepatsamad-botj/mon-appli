@@ -1,66 +1,66 @@
-/* Jade : style épuré (beaucoup d'air, fonds unis, textes à l'encre)
-   Couleurs : blanc cassé, violet pervenche (#5b5d92), rose poudré (#f1e2da), terracotta (#b5603f).
-   Ce fichier est chargé en dernier : il remplace le fond dégradé et les en-têtes foncés. */
+/* Jade : style épuré de l'appli (chargé en dernier)
+   Fond blanc, encre, filets fins, pas d'ombres ni de dégradés, beaucoup d'air.
+   Accents discrets : violet pervenche (boutons, onglet actif), rose poudré (fonds doux),
+   terracotta (pastilles et petits détails seulement). */
 
-/* Fond uni, sans grain ni dégradé */
+/* Fond uni */
 html { background: var(--bg); }
 body { background: var(--bg) !important; background-image: none !important; }
 
-/* En-tête de l'appli : blanc, logo à l'encre, une fine ligne dessous */
-body.nav-on .topbar, body.setup-on .topbar { background: rgba(255, 255, 255, .88) !important; border-bottom: 1px solid var(--line) !important; }
-body.nav-on .topbar h1, .topbar #app-name, .lp-bar .lp-logo { color: var(--fg) !important; }
-.top-upgrade { background: var(--blush); color: var(--accent); }
-.top-me { border-color: var(--line); }
+/* En-tête : blanc, logo à l'encre, un filet dessous */
+body.nav-on .topbar, body.setup-on .topbar { background: rgba(255, 255, 255, .92) !important; border-bottom: 1px solid var(--line) !important; box-shadow: none !important; }
+body.nav-on .topbar h1, .topbar #app-name { color: var(--fg) !important; font-weight: 500 !important; }
+.top-upgrade { background: transparent !important; color: var(--fg) !important; border: 1px solid var(--line) !important; box-shadow: none !important; }
+.top-upgrade:hover { border-color: var(--fg) !important; }
+.top-me { border: 1px solid var(--line) !important; box-shadow: none !important; }
 
-/* Cartes : blanches, bord fin, ombre très légère */
-.card, .fcard, .evcard, .jcard, .irow, #jadebox, #matches, #likes { box-shadow: 0 1px 2px rgba(40, 30, 25, .04), 0 8px 24px rgba(40, 30, 25, .05) !important; }
-.card { border: 1px solid var(--line); }
+/* Cartes et blocs : à plat, filet fin, aucune ombre */
+.card, .fcard, .evcard, .jcard, .irow, .vnudge, details, #jadebox, #matches, #likes, .safemodal > div { box-shadow: none !important; }
+.card, .vnudge, #matches, #likes, #jadebox { border: 1px solid var(--line) !important; }
+.searchbar { box-shadow: none !important; }
+.top-me { box-shadow: none !important; }
+.vnudge { background: var(--card) !important; }
 
-/* Boutons : violet plein, ou contour fin */
-button.primary, .primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-button.secondary, .secondary { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+/* Titres : Playfair, poids léger */
+h1, h2, .hero-title { font-weight: 400 !important; }
 
-/* Accents terracotta : badges, numéros, tags à mettre en valeur */
-.nbadge { background: #b5603f !important; }
-.tag.verified { color: var(--accent); border-color: rgba(91, 93, 146, .35); background: rgba(91, 93, 146, .07); }
+/* Boutons : violet plein en pilule, ou contour fin */
+.primary { border-radius: 999px !important; background: var(--accent) !important; color: var(--accent-fg) !important; box-shadow: none !important; }
+.primary:hover { filter: brightness(.94); }
+.secondary { border-radius: 999px !important; background: transparent !important; color: var(--fg) !important; border: 1px solid var(--line) !important; }
+.secondary:hover { border-color: var(--fg) !important; }
 
-/* Page d'accueil publique : barre blanche, bandes alternées blanc / rose poudré / violet */
-.lp-bar { background: rgba(255, 255, 255, .92) !important; border-bottom: 1px solid var(--line); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.lp-login { color: var(--fg) !important; }
-#lp-join-top { background: var(--accent) !important; color: #fff !important; box-shadow: none !important; }
-.lp-band.cream { background: #fff; }
-.lp-band.paper { background: var(--blush); }
-.lp-band.olive { background: var(--accent); color: #fff; }
-.lp-band.olive .lp-h2, .lp-band.olive h3, .lp-band.olive p, .lp-band.olive b { color: #fff; }
-.lp-h2 { font-weight: 500 !important; }
-.lp-foot { background: var(--bg) !important; }
-.lp-foot .lp-logo { color: var(--fg) !important; }
-.lp-notes { box-shadow: none; border: 1px solid var(--line); }
+/* Champs : blancs, filet fin */
+input[type=email], input[type=password], input[type=date], input[type=text], input[type=number], input[type=url], input[type=time], select, textarea { background: var(--card) !important; }
+#feed-q, #inbox-q { background: var(--card) !important; border: 1px solid var(--line) !important; box-shadow: none !important; }
 
-/* Ouverture sur la photo : « Jade » rose poudré, petit surtitre en capitales espacées */
-.lp-win-word { color: #f3dfd5 !important; }
+/* Pastilles et petits détails en terracotta */
+.nbadge { background: var(--gold) !important; color: #fff !important; }
+.tag { box-shadow: none !important; }
+.tag.verified { color: var(--accent) !important; border-color: var(--line) !important; background: transparent !important; }
 
-/* Discussion : en-tête blanc, fine ligne */
-.chead { border-bottom: 1px solid var(--line) !important; }
-.cbottom { border-top: 1px solid var(--line); }
+/* Membres sans photo : rond rose poudré, initiale violette */
+#new-strip .ifav-pic { background: var(--blush) !important; color: var(--accent) !important; border-color: var(--card) !important; }
 
-/* Messagerie de l'équipe Jade : rond violet, J rose poudré */
-.jbox-logo { background: var(--accent) !important; color: #f3dfd5 !important; box-shadow: none !important; }
+/* Barre d'onglets du bas : blanche, filet fin, onglet actif violet */
+#tabbar { background: rgba(255, 255, 255, .95) !important; border-top: 1px solid var(--line) !important; box-shadow: none !important; }
 
-/* Textes posés directement sur le fond de page */
+/* Discussions : fond très clair, bulles à plat */
+#chat, .chat { --chat-bg: #faf7f5; --chat-head: rgba(255, 255, 255, .94); --bub-them: #ffffff; --bub-me: #eeedf6; --bub-fg: #1f1c1b;
+  --chat-meta: #6e6764; --chat-motif: transparent; --chat-head-fg: #1f1c1b; --chat-lattice: none; }
+.chead { border-bottom: 1px solid var(--line) !important; box-shadow: none !important; }
+.cbottom { border-top: 1px solid var(--line) !important; }
+#chat .bubble { box-shadow: none !important; }
+#chat .bubble.them { border: 1px solid var(--line) !important; }
+
+/* Messagerie de l'équipe Jade : « J » à l'encre dans un rond fin */
+.jbox-logo { background: transparent !important; color: var(--fg) !important; border: 1px solid var(--fg) !important; box-shadow: none !important; font-weight: 400 !important; }
+
+/* Textes posés directement sur le fond */
 #feed .msg, #feed .empty, #new-strip .ifavs-t, #new-strip .ifav { color: var(--fg); }
 
 @media (prefers-color-scheme: dark) {
-  body.nav-on .topbar, body.setup-on .topbar { background: rgba(24, 22, 29, .9) !important; }
-  .lp-bar { background: rgba(24, 22, 29, .92) !important; }
-  .lp-band.cream { background: var(--card); }
-  .top-upgrade { color: #e6e3ff; }
+  body.nav-on .topbar, body.setup-on .topbar { background: rgba(20, 19, 22, .92) !important; }
+  #tabbar { background: rgba(20, 19, 22, .95) !important; }
+  #chat, .chat { --chat-bg: #141316; --chat-head: rgba(20, 19, 22, .94); --bub-them: #1c1a1f; --bub-me: #2a2a3d; --bub-fg: #f2eeeb; --chat-meta: #b3aca8; --chat-head-fg: #f2eeeb; }
 }
-
-/* Membres sans photo : rond rose poudré, initiale violette */
-#new-strip .ifav-pic { background: var(--blush) !important; color: var(--accent) !important; border-color: #fff !important; }
-/* Encadré « Faites vérifier votre profil » : bord fin, l'accent terracotta reste sur le rond */
-.vnudge { border-color: var(--line) !important; }
-/* Nos valeurs : rond rose poudré, motif violet (plus léger) */
-.lp-ring { background: var(--blush) !important; color: var(--accent) !important; }
-@media (prefers-color-scheme: dark) { .lp-ring { color: #d9d7ff !important; } #new-strip .ifav-pic { border-color: var(--card) !important; } }

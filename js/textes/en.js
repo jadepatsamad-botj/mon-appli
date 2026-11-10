@@ -356,5 +356,6 @@ I18N.en = {
   verify_nudge_btn: "Get verified",
   scam_contact: "⚠️ Be careful: this person suggests moving elsewhere (WhatsApp, Telegram, phone number…). Stay on Jade until you have seen them on a video call.",
   safety_first_t: "Before you meet",
-  safety_ok: "Got it"
+  safety_ok: "Got it",
+  lp_kicker: "Dating · Asian community · France & Europe"
 };
