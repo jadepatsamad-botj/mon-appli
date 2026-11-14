@@ -220,3 +220,38 @@ body.lpq-open { overflow: hidden; }
   .lpq-sheet, .lpq-again { background: #141316; }
   .lpq-cell.nt, .lpq-card.a { background: #1f1e2b; } .lpq-cell.nf, .lpq-card.b { background: #251f22; } .lpq-cell.sj { background: #24201b; } .lpq-cell.sp { background: #1d221c; }
 }
+
+/* ---------- Test : échelle de 7 ronds et barres des 4 axes ---------- */
+.lpq { --lp-ink: #1f1c1b; --lp-mute: #5e5856; --lp-line: #ebe5e1; --lp-peri: #5d5f94; --lp-blush: #faf4f1; --lp-terra: #b5603f; font-family: var(--font); }
+.lpq-kick { margin: 0; font-size: .75rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--lp-mute); text-align: center; }
+.lpq-qav { width: 96px; height: 96px; align-self: center; display: block; }
+.lpq-qav svg { width: 100%; height: 100%; display: block; }
+#lpq-q-view { align-items: stretch; text-align: center; }
+#lpq-q-view .lpq-title { text-align: center; min-height: 3.5em; display: flex; align-items: center; justify-content: center; text-wrap: balance; }
+.lpq-scale { margin-top: 10px; }
+.lpq-dots { display: flex; justify-content: space-between; align-items: center; }
+.lpq-dot { position: relative; flex: none; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.lpq-dot::before { content: ""; display: block; border-radius: 50%; border: 2px solid currentColor; box-sizing: border-box; transition: background .15s ease, transform .15s ease; }
+.lpq-dot.s3::before { width: 42px; height: 42px; } .lpq-dot.s2::before { width: 34px; height: 34px; }
+.lpq-dot.s1::before { width: 27px; height: 27px; } .lpq-dot.s0::before { width: 22px; height: 22px; }
+.lpq-dot.dis { color: var(--lp-terra); } .lpq-dot.agr { color: var(--lp-peri); } .lpq-dot.mid { color: #a8a09b; }
+.lpq-dot:hover::before { transform: scale(1.08); }
+.lpq-dot.on::before { background: currentColor; }
+.lpq-dot:focus-visible { outline: 2px solid var(--lp-peri); outline-offset: 2px; border-radius: 50%; }
+.lpq-ends { display: flex; justify-content: space-between; margin-top: 8px; font-size: .85rem; font-weight: 600; }
+.lpq-ends .dis { color: var(--lp-terra); } .lpq-ends .agr { color: var(--lp-peri); }
+.lpq-axes-t { margin-top: 10px; }
+.lpq-axes { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.lpq-axis { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr); align-items: center; column-gap: 8px; row-gap: 3px; }
+.lpq-apct { grid-column: 1 / -1; font-size: .82rem; color: var(--lp-peri); text-align: center; }
+.lpq-al, .lpq-ar { font-size: .78rem; color: var(--lp-mute); }
+.lpq-al { text-align: right; } .lpq-ar { text-align: left; }
+.lpq-al.win, .lpq-ar.win { color: var(--lp-ink); font-weight: 700; }
+.lpq-abar { height: 8px; border-radius: 8px; background: var(--lp-line); display: flex; overflow: hidden; }
+.lpq-abar i { display: block; height: 100%; background: var(--lp-peri); border-radius: 8px; }
+.lpq-abar i.right { margin-left: auto; }
+.lpq-small { margin: 4px 0 0; font-size: .85rem; color: var(--lp-mute); }
+@media (prefers-color-scheme: dark) {
+  .lpq { --lp-ink: #f2eeeb; --lp-mute: #b3aca8; --lp-line: #2d2a30; --lp-peri: #a9abe0; --lp-blush: #1c1a1f; --lp-terra: #e0957a; }
+  .lpq-sheet { color: var(--lp-ink); }
+}
